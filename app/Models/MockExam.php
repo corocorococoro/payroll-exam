@@ -21,4 +21,10 @@ class MockExam extends Model
     {
         return $this->hasMany(MockExamQuestion::class)->orderBy('position');
     }
+
+    /** @return HasMany<MockExamAttempt, $this> */
+    public function attempts(): HasMany
+    {
+        return $this->hasMany(MockExamAttempt::class);
+    }
 }

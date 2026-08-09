@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,10 +28,23 @@ use Illuminate\Support\Carbon;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $google_id
+ * @property string|null $avatar
+ * @property bool $is_admin
+ * @property int $daily_goal
+ * @property string|null $reminder_time
+ * @property bool $reminder_enabled
+ * @property Carbon|null $last_reminded_on
+ * @property Carbon|null $exam_date
+ * @property bool $sound_enabled
+ * @property bool $onboarded
  */
-#[Fillable(['name', 'email', 'password', 'google_id', 'avatar'])]
+#[Fillable([
+    'name', 'email', 'password', 'google_id', 'avatar',
+    'daily_goal', 'reminder_time', 'reminder_enabled', 'exam_date', 'sound_enabled', 'onboarded',
+])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -46,10 +61,16 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_admin' => 'boolean',
             'reminder_enabled' => 'boolean',
+            'last_reminded_on' => 'date',
             'sound_enabled' => 'boolean',
             'onboarded' => 'boolean',
             'exam_date' => 'date',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->is_admin;
     }
 
     /** @return HasOne<UserStat, $this> */
@@ -61,7 +82,10 @@ class User extends Authenticatable
     /** ユーザー統計を必ず取得する（無ければ作成） */
     public function statOrCreate(): UserStat
     {
-        return $this->stat ?? $this->stat()->create();
+        $stat = $this->stat()->firstOrCreate([]);
+        $this->setRelation('stat', $stat);
+
+        return $stat;
     }
 
     /** @return HasMany<QuestionAttempt, $this> */
@@ -92,6 +116,18 @@ class User extends Authenticatable
     public function dailyQuests(): HasMany
     {
         return $this->hasMany(DailyQuest::class);
+    }
+
+    /** @return HasMany<MockExamAttempt, $this> */
+    public function mockExamAttempts(): HasMany
+    {
+        return $this->hasMany(MockExamAttempt::class);
+    }
+
+    /** @return HasMany<LeagueScore, $this> */
+    public function leagueScores(): HasMany
+    {
+        return $this->hasMany(LeagueScore::class);
     }
 
     /** @return BelongsToMany<Badge, $this> */

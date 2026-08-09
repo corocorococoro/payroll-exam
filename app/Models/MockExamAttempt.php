@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property int $user_id
  * @property int $mock_exam_id
  * @property int $time_limit_minutes
- * @property Carbon $started_at
- * @property Carbon|null $finished_at
- * @property array<string, string>|null $answers
+ * @property CarbonInterface $started_at
+ * @property CarbonInterface|null $finished_at
+ * @property array<int, string>|null $answers
  * @property int|null $score
  * @property array<string, mixed>|null $section_scores
  */
@@ -46,7 +46,7 @@ class MockExamAttempt extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function deadline(): Carbon
+    public function deadline(): CarbonInterface
     {
         return $this->started_at->copy()->addMinutes($this->time_limit_minutes);
     }

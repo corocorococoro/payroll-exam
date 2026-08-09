@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['mock_exam_id', 'question_id', 'position', 'points'])]
 class MockExamQuestion extends Model
 {
+    /** @return BelongsTo<MockExam, $this> */
+    public function mockExam(): BelongsTo
+    {
+        return $this->belongsTo(MockExam::class);
+    }
+
     /** @return BelongsTo<Question, $this> */
     public function question(): BelongsTo
     {

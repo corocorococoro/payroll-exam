@@ -41,7 +41,36 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'stats' => fn () => $this->stats($request),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+        ];
+    }
+
+    /**
+     * 学習統計のヘッダー表示用共有データ。
+     *
+     * @return array<string, mixed>|null
+     */
+    private function stats(Request $request): ?array
+    {
+        $user = $request->user();
+
+        if ($user === null) {
+            return null;
+        }
+
+        $stat = $user->statOrCreate();
+        $activity = $user->dailyActivities()->whereDate('date', today())->first();
+
+        return [
+            'total_xp' => $stat->total_xp,
+            'current_streak' => $stat->current_streak,
+            'streak_freezes' => $stat->streak_freezes,
+            'today_xp' => $activity->xp ?? 0,
+            'goal_met' => $activity->goal_met ?? false,
+            'daily_goal' => $user->daily_goal,
+            'exam_date' => $user->exam_date?->toDateString() ?? '2026-11-22',
+            'days_to_exam' => (int) today()->diffInDays($user->exam_date ?? '2026-11-22', false),
         ];
     }
 }

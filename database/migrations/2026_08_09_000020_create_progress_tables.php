@@ -22,7 +22,7 @@ return new class extends Migration
             $table->index(['user_id', 'created_at']);
         });
 
-        Schema::create('lesson_progresses', function (Blueprint $table) {
+        Schema::create('lesson_progress', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('lesson_id')->constrained()->cascadeOnDelete();
@@ -72,7 +72,7 @@ return new class extends Migration
         Schema::dropIfExists('review_items');
         Schema::dropIfExists('daily_activities');
         Schema::dropIfExists('user_stats');
-        Schema::dropIfExists('lesson_progresses');
+        Schema::dropIfExists('lesson_progress');
         Schema::dropIfExists('question_attempts');
     }
 };
