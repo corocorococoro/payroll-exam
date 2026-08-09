@@ -6,7 +6,7 @@ import LearnLayout from '@/layouts/LearnLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
 
-const appName = import.meta.env.VITE_APP_NAME || '給与計算2級 合格クエスト';
+const appName = import.meta.env.VITE_APP_NAME || 'きゅーよ！';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

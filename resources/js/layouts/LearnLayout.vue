@@ -39,7 +39,7 @@ const isActive = (href: string) => page.url.startsWith(href);
                     ><span
                         class="flex size-8 items-center justify-center rounded-sm bg-[#2864f0] text-sm font-bold text-white"
                         >給</span
-                    ><span>給与検定2級</span></Link
+                    ><span>きゅーよ！</span></Link
                 >
 
                 <div

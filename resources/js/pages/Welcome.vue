@@ -12,7 +12,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
 </script>
 
 <template>
-    <Head title="給与計算実務能力検定2級 合格クエスト">
+    <Head title="給与計算実務能力検定2級">
         <meta
             name="description"
             content="給与計算実務能力検定2級の合格に向けて、短いレッスン・復習・本番形式模試を一つにした学習アプリ。"
@@ -36,7 +36,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         class="flex size-8 items-center justify-center rounded-sm bg-[#2864f0] text-sm font-bold text-white"
                         >給</span
                     >
-                    <span>給与検定2級</span>
+                    <span>きゅーよ！</span>
                 </Link>
                 <nav class="flex items-center gap-2" aria-label="アカウント">
                     <Link
