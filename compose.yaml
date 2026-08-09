@@ -1,0 +1,90 @@
+name: kyuyo
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    ports:
+      - '8000:80'
+    volumes:
+      - '.:/app'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  queue:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    command: php artisan queue:work --tries=3 --sleep=1
+    volumes:
+      - '.:/app'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    command: php artisan schedule:work
+    volumes:
+      - '.:/app'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: kyuyo
+      POSTGRES_USER: kyuyo
+      POSTGRES_PASSWORD: secret
+    ports:
+      - '5433:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U kyuyo -d kyuyo']
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - 'redisdata:/data'
+    restart: unless-stopped
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - '8025:8025'
+    restart: unless-stopped
+
+  # Vite はホストで `npm run dev` する運用が既定。コンテナで動かす場合:
+  # docker compose --profile vite up -d vite
+  vite:
+    profiles: [vite]
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host"
+    ports:
+      - '5173:5173'
+    volumes:
+      - '.:/app'
+
+volumes:
+  pgdata:
+  redisdata:
