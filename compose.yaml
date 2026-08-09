@@ -31,6 +31,9 @@ services:
       redis:
         condition: service_started
     restart: unless-stopped
+    # FrankenPHP ベースイメージの HTTP ヘルスチェックは worker では成立しない。
+    healthcheck:
+      disable: true
 
   scheduler:
     build:
@@ -44,6 +47,9 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
+    # scheduler は HTTP サーバーを起動しないため、基底イメージのチェックを無効化。
+    healthcheck:
+      disable: true
 
   postgres:
     image: postgres:17-alpine
