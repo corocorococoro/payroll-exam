@@ -25,6 +25,10 @@ class DevLoginController extends Controller
             ],
         );
 
+        if (! $user->is_admin) {
+            $user->forceFill(['is_admin' => true])->save();
+        }
+
         Auth::login($user, remember: true);
 
         return redirect()->intended(route('dashboard'));

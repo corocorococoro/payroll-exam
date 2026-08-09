@@ -22,6 +22,7 @@ defineOptions({
 defineProps<{
     status?: string;
     canResetPassword: boolean;
+    canGoogleLogin?: boolean;
     canDevLogin?: boolean;
 }>();
 </script>
@@ -37,7 +38,7 @@ defineProps<{
     </div>
 
     <div class="flex flex-col gap-4">
-        <Button variant="outline" class="w-full" as-child>
+        <Button v-if="canGoogleLogin" variant="outline" class="w-full" as-child>
             <a href="/auth/google/redirect">
                 <svg class="size-4" viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -65,13 +66,17 @@ defineProps<{
             <a href="/auth/dev-login">🛠 開発用ログイン（local のみ）</a>
         </Button>
 
-        <div class="flex items-center gap-3">
+        <div
+            v-if="canGoogleLogin || canDevLogin"
+            class="flex items-center gap-3"
+        >
             <div class="h-px flex-1 bg-border" />
-            <span class="text-xs text-muted-foreground">またはメールアドレスで</span>
+            <span class="text-xs text-muted-foreground"
+                >またはメールアドレスで</span
+            >
             <div class="h-px flex-1 bg-border" />
         </div>
     </div>
-
 
     <Form
         v-bind="store.form()"
@@ -81,7 +86,7 @@ defineProps<{
     >
         <div class="grid gap-6">
             <div class="grid gap-2">
-                <Label for="email">Email address</Label>
+                <Label for="email">メールアドレス</Label>
                 <Input
                     id="email"
                     type="email"
@@ -97,14 +102,14 @@ defineProps<{
 
             <div class="grid gap-2">
                 <div class="flex items-center justify-between">
-                    <Label for="password">Password</Label>
+                    <Label for="password">パスワード</Label>
                     <TextLink
                         v-if="canResetPassword"
                         :href="request()"
                         class="text-sm"
                         :tabindex="5"
                     >
-                        Forgot your password?
+                        パスワードを忘れた方
                     </TextLink>
                 </div>
                 <PasswordInput
@@ -121,7 +126,7 @@ defineProps<{
             <div class="flex items-center justify-between">
                 <Label for="remember" class="flex items-center space-x-3">
                     <Checkbox id="remember" name="remember" :tabindex="3" />
-                    <span>Remember me</span>
+                    <span>ログイン状態を保持する</span>
                 </Label>
             </div>
 
@@ -133,13 +138,13 @@ defineProps<{
                 data-test="login-button"
             >
                 <Spinner v-if="processing" />
-                Log in
+                ログイン
             </Button>
         </div>
 
         <div class="text-center text-sm text-muted-foreground">
-            Don't have an account?
-            <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+            アカウントをお持ちでない方
+            <TextLink :href="register()" :tabindex="5">新規登録</TextLink>
         </div>
     </Form>
 </template>

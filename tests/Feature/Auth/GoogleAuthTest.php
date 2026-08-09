@@ -8,6 +8,14 @@ use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertAuthenticatedAs;
 use function Pest\Laravel\get;
 
+beforeEach(function () {
+    config([
+        'services.google.client_id' => 'test-client-id',
+        'services.google.client_secret' => 'test-client-secret',
+        'services.google.redirect' => 'http://localhost:8000/auth/google/callback',
+    ]);
+});
+
 function fakeGoogleUser(string $id = 'google-123', string $email = 'taro@example.com', string $name = '検定 太郎'): SocialiteUser
 {
     $user = Mockery::mock(SocialiteUser::class);
@@ -23,12 +31,15 @@ function fakeGoogleUser(string $id = 'google-123', string $email = 'taro@example
 }
 
 test('google redirect はGoogleの認可画面へ飛ばす', function () {
-    config(['services.google.client_id' => 'test-client-id']);
-    config(['services.google.redirect' => 'http://localhost:8000/auth/google/callback']);
-
     get('/auth/google/redirect')
         ->assertRedirect()
         ->assertRedirectContains('accounts.google.com');
+});
+
+test('未設定環境ではGoogleログインを公開しない', function () {
+    config(['services.google.client_id' => null, 'services.google.client_secret' => null]);
+
+    get('/auth/google/redirect')->assertNotFound();
 });
 
 test('google callback で新規ユーザーが作成されログインする', function () {

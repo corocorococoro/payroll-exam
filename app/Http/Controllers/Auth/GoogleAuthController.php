@@ -13,11 +13,15 @@ class GoogleAuthController extends Controller
 {
     public function redirect(): SymfonyRedirect
     {
+        $this->ensureConfigured();
+
         return Socialite::driver('google')->redirect();
     }
 
     public function callback(): RedirectResponse
     {
+        $this->ensureConfigured();
+
         $googleUser = Socialite::driver('google')->user();
 
         $user = User::where('google_id', $googleUser->getId())->first();
@@ -45,5 +49,13 @@ class GoogleAuthController extends Controller
         Auth::login($user, remember: true);
 
         return redirect()->intended(route('dashboard'));
+    }
+
+    private function ensureConfigured(): void
+    {
+        abort_unless(
+            filled(config('services.google.client_id')) && filled(config('services.google.client_secret')),
+            404,
+        );
     }
 }

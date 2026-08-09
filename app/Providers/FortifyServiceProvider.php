@@ -49,7 +49,10 @@ class FortifyServiceProvider extends ServiceProvider
     private function configureViews(): void
     {
         Fortify::loginView(fn (Request $request) => Inertia::render('auth/Login', [
-            'canResetPassword' => Features::enabled(Features::resetPasswords()),
+            'canResetPassword' => Features::enabled(Features::resetPasswords())
+                && ! in_array(config('mail.default'), ['log', 'array'], true),
+            'canGoogleLogin' => filled(config('services.google.client_id'))
+                && filled(config('services.google.client_secret')),
             'canDevLogin' => app()->environment('local'),
             'status' => $request->session()->get('status'),
         ]));
