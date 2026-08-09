@@ -1,0 +1,512 @@
+[
+  {
+    "source_id": "r2-q22",
+    "unit": "shaho",
+    "lesson": "hyojun-hoshu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "標準報酬月額の基礎となる報酬に通常含まれるものはどれか。",
+    "choices": [
+      { "key": "A", "text": "基本給のみ" },
+      { "key": "B", "text": "基本給と役職手当のみ" },
+      { "key": "C", "text": "基本給・残業手当・通勤手当など" },
+      { "key": "D", "text": "課税対象賃金だけ" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "標準報酬月額の対象となる報酬には、基本給のほか残業手当・通勤手当なども含まれる。",
+    "common_mistake": "「固定給のみ」と覚えてしまう誤り。残業手当も通勤手当も報酬に含まれる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q23",
+    "unit": "shaho",
+    "lesson": "hyojun-hoshu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "定時決定について正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "1～3月の報酬で4月改定" },
+      { "key": "B", "text": "4～6月の報酬を基に原則9月から改定" },
+      { "key": "C", "text": "7～9月の報酬で10月改定" },
+      { "key": "D", "text": "毎月必ず改定" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "定時決定は毎年4〜6月に支払われた報酬を基礎に標準報酬月額を決め、原則その年の9月から適用する。",
+    "common_mistake": "「7月から変わる」と誤認しやすい。4〜6月の報酬→9月改定の流れを即答できるように。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q24",
+    "unit": "shaho",
+    "lesson": "zuiji-kaitei",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "随時改定の基本要件として最も適切なものはどれか。",
+    "choices": [
+      { "key": "A", "text": "残業が1か月増えただけで必ず改定" },
+      { "key": "B", "text": "固定的賃金の変動、3か月平均で2等級以上の差、支払基礎日数要件等を満たす" },
+      { "key": "C", "text": "賞与が増えれば必ず改定" },
+      { "key": "D", "text": "本人が希望すれば改定" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "随時改定（月変）は、①固定的賃金の変動、②変動月から3か月平均の標準報酬月額が従前と原則2等級以上異なる、③各月の支払基礎日数要件を満たす、の3点が基本要件。",
+    "common_mistake": "残業増（非固定的賃金）だけでは月変にならない。起点は固定的賃金の変動。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q25",
+    "unit": "shaho",
+    "lesson": "zuiji-kaitei",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "随時改定の支払基礎日数の原則的基準として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "一般10日・短時間5日" },
+      { "key": "B", "text": "一般11日・短時間11日" },
+      { "key": "C", "text": "一般17日・特定適用事業所の短時間労働者11日" },
+      { "key": "D", "text": "一般20日・短時間15日" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "支払基礎日数は原則17日以上、特定適用事業所の短時間労働者は11日以上が基準。",
+    "common_mistake": "「一律17日」と暗記してしまう誤り。短時間労働者の11日も覚えておく。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q26",
+    "unit": "shaho",
+    "lesson": "hyojun-hoshu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "2026年時点の厚生年金保険の標準報酬月額の範囲はどれか。",
+    "choices": [
+      { "key": "A", "text": "5万円～50万円" },
+      { "key": "B", "text": "8万8千円～65万円" },
+      { "key": "C", "text": "10万円～100万円" },
+      { "key": "D", "text": "上限なし" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "厚生年金の標準報酬月額は1等級88,000円から32等級650,000円まで。",
+    "common_mistake": "健康保険（1〜50等級、上限139万円）の等級と混同しないこと。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q27",
+    "unit": "shaho",
+    "lesson": "ryoritsu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "協会けんぽの介護保険第2号被保険者となる年齢層はどれか。",
+    "choices": [
+      { "key": "A", "text": "20～39歳" },
+      { "key": "B", "text": "30～59歳" },
+      { "key": "C", "text": "40～64歳" },
+      { "key": "D", "text": "65～74歳" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "介護保険第2号被保険者は40歳以上64歳以下。40歳到達月から介護保険料の徴収が始まる。",
+    "common_mistake": "「65歳まで含む」と誤認しやすい。65歳からは第1号被保険者となり給与からの徴収はなくなる。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q28",
+    "unit": "shaho",
+    "lesson": "ryoritsu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "協会けんぽ東京支部の2026年3月分からの健康保険料率（介護保険第2号に該当しない場合）はどれか。",
+    "choices": [
+      { "key": "A", "text": "9.85％" },
+      { "key": "B", "text": "10.00％" },
+      { "key": "C", "text": "11.47％" },
+      { "key": "D", "text": "18.30％" }
+    ],
+    "answer": { "choice": "A" },
+    "explanation": "2026年度の協会けんぽ東京支部の健康保険料率は9.85％。介護保険第2号該当者は介護保険料率と合わせて11.47％になる。",
+    "common_mistake": "11.47％を全員の健康保険料率と誤解しないこと。11.47％は介護保険込みの率。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q29",
+    "unit": "shaho",
+    "lesson": "ryoritsu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "hard",
+    "question_text": "2026年度の「子ども・子育て支援金」と「子ども・子育て拠出金」の説明として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "どちらも被保険者だけが負担" },
+      { "key": "B", "text": "支援金0.23％は原則労使折半、拠出金0.36％は事業主負担" },
+      { "key": "C", "text": "支援金0.36％は事業主のみ、拠出金0.23％は労使折半" },
+      { "key": "D", "text": "どちらも給与計算と無関係" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "子ども・子育て支援金（0.23％）は労使折半で被保険者負担があり、子ども・子育て拠出金（0.36％）は事業主のみが負担する。",
+    "common_mistake": "名前が似ているため負担者を逆にしやすい。「支援金＝折半、拠出金＝会社だけ」と覚える。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q30",
+    "unit": "shaho",
+    "lesson": "ryoritsu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "厚生年金保険料率はどれか。",
+    "choices": [
+      { "key": "A", "text": "9.15％" },
+      { "key": "B", "text": "13.50％" },
+      { "key": "C", "text": "18.30％" },
+      { "key": "D", "text": "36.60％" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "厚生年金保険料率は18.3％で固定されており、実務では原則労使折半（本人負担9.15％相当）。",
+    "common_mistake": "本人負担分の9.15％を「保険料率」そのものと答えてしまうミス。率は18.3％。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q31",
+    "unit": "shaho",
+    "lesson": "ryoritsu",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "easy",
+    "question_text": "2026年度、一般の事業の雇用保険料における労働者負担率はどれか。",
+    "choices": [
+      { "key": "A", "text": "3.5/1,000" },
+      { "key": "B", "text": "5/1,000" },
+      { "key": "C", "text": "8.5/1,000" },
+      { "key": "D", "text": "13.5/1,000" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "2026年度の一般の事業の雇用保険料率は、労働者5/1,000・事業主8.5/1,000・合計13.5/1,000。",
+    "common_mistake": "合計率13.5/1,000を本人負担と誤解しないこと。労働者負担は5/1,000。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["koyo-hoken"]
+  },
+  {
+    "source_id": "r2-q32",
+    "unit": "shaho",
+    "lesson": "taishoku-shoyo",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "3月15日退職、資格喪失日3月16日の者について、健康保険・厚生年金保険料が発生する最終月はどれか。",
+    "choices": [
+      { "key": "A", "text": "1月" },
+      { "key": "B", "text": "2月" },
+      { "key": "C", "text": "3月" },
+      { "key": "D", "text": "4月" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "保険料は資格喪失日の属する月の前月分まで発生する。3月16日喪失なら2月分まで。月途中退職の場合、退職月分の保険料はかからない。",
+    "common_mistake": "「退職月は必ず徴収」と考える誤り。月途中退職と月末退職で扱いが変わる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q33",
+    "unit": "shaho",
+    "lesson": "taishoku-shoyo",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "3月31日退職、資格喪失日4月1日の者について、健康保険・厚生年金保険料が発生する最終月はどれか。",
+    "choices": [
+      { "key": "A", "text": "1月" },
+      { "key": "B", "text": "2月" },
+      { "key": "C", "text": "3月" },
+      { "key": "D", "text": "4月" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "3月31日退職の場合、資格喪失日は4月1日となり、その前月＝3月分まで保険料が発生する。",
+    "common_mistake": "月末退職を月途中退職と同じ扱いにするミス。月末退職は退職月分まで保険料がかかる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q34",
+    "unit": "shaho",
+    "lesson": "taishoku-shoyo",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "社会保険の標準賞与額の算定方法はどれか。",
+    "choices": [
+      { "key": "A", "text": "賞与額を100円未満切捨て" },
+      { "key": "B", "text": "賞与額を1,000円未満切捨て" },
+      { "key": "C", "text": "賞与額を10,000円未満切捨て" },
+      { "key": "D", "text": "四捨五入" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "標準賞与額は賞与額の1,000円未満を切り捨てた額。上限は健康保険系が年度累計573万円、厚生年金が1か月150万円。",
+    "common_mistake": "保険料そのものを1,000円単位に丸めるのではない。丸めるのは「標準賞与額」。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q35",
+    "unit": "shaho",
+    "lesson": "taishoku-shoyo",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "hard",
+    "question_text": "2026年11月2級の法令基準日である9月1日を想定する。短時間労働者の適用拡大について誤っているものはどれか。",
+    "choices": [
+      { "key": "A", "text": "企業規模要件は原則51人以上の特定適用事業所" },
+      { "key": "B", "text": "週所定労働時間20時間以上が要件の一つ" },
+      { "key": "C", "text": "学生ではないことが要件の一つ" },
+      { "key": "D", "text": "企業規模要件はすでに36人以上へ変更済み" }
+    ],
+    "answer": { "choice": "D" },
+    "explanation": "2026年9月1日時点の企業規模要件は原則51人以上。36人以上への拡大は2027年10月からで、まだ変更されていない。",
+    "common_mistake": "「試験日」の制度ではなく「法令基準日（9月1日）」時点の制度で答える。改正の適用時期に注意。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q36",
+    "unit": "keisan",
+    "lesson": "kyuyo-keisan",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "月給制。基本給240,000円、役職手当30,000円、扶養人数に応じた家族手当20,000円、実費相当の通勤手当10,000円。1か月平均所定労働時間160時間。法定時間外労働12時間、そのうち2時間が深夜。月60時間超の時間外はない。家族手当・通勤手当は本問では割増賃金算定基礎から除外できるものとする。1時間単価は50銭未満切捨て・50銭以上切上げ。時間外・深夜分の割増賃金総額はどれか。",
+    "choices": [
+      { "key": "A", "text": "23,625円" },
+      { "key": "B", "text": "25,313円" },
+      { "key": "C", "text": "26,164円" },
+      { "key": "D", "text": "28,350円" }
+    ],
+    "answer": { "choice": "C", "value": 26164 },
+    "explanation": "算定基礎は基本給240,000＋役職手当30,000＝270,000円。270,000÷160＝1,687.5→1,688円。時間外のみ10時間: 1,688×1.25×10＝21,100円。深夜重複2時間: 1,688×1.50×2＝5,064円。合計26,164円。",
+    "common_mistake": "①家族手当・通勤手当を算定基礎に入れる、②深夜2時間を12時間と別に加算して14時間分計算する、③深夜を1.25×1.25と掛け合わせる、の3つが頻出ミス。",
+    "calc_params": {
+      "calc_type": "overtime_pay",
+      "included_wages": [240000, 30000],
+      "monthly_hours": 160,
+      "components": [
+        { "hours": 10, "rate": 1.25 },
+        { "hours": 2, "rate": 1.5 }
+      ]
+    },
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q37",
+    "unit": "keisan",
+    "lesson": "kyuyo-keisan",
+    "type": "choice",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "東京都、2026年5月以後の給与。35歳、標準報酬月額300,000円、協会けんぽ、厚生年金基金なし。健康保険、子ども・子育て支援金、厚生年金の被保険者負担額合計（雇用保険を除く）はどれか。",
+    "choices": [
+      { "key": "A", "text": "42,225円" },
+      { "key": "B", "text": "42,570円" },
+      { "key": "C", "text": "45,000円" },
+      { "key": "D", "text": "85,140円" }
+    ],
+    "answer": { "choice": "B", "value": 42570 },
+    "explanation": "35歳なので介護保険なし。健康保険300,000×9.85％÷2＝14,775円、子ども・子育て支援金300,000×0.23％÷2＝345円、厚生年金300,000×18.3％÷2＝27,450円。合計42,570円。",
+    "common_mistake": "2026年度から導入された子ども・子育て支援金345円を落とすと42,225円になる。35歳に介護保険を加えるのも誤り。",
+    "calc_params": {
+      "calc_type": "social_insurance_employee",
+      "standard_monthly": 300000,
+      "rates_percent": { "health": 9.85, "support": 0.23, "pension": 18.3 },
+      "employee_share": 0.5
+    },
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q38",
+    "unit": "keisan",
+    "lesson": "kyuyo-keisan",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "medium",
+    "question_text": "月給300,000円、社会保険料（健康保険・支援金・厚生年金）42,570円。一般事業の雇用保険料を労働者負担5/1,000で控除。扶養控除等申告書提出済み、扶養親族等1人。2026年分月額表による源泉所得税額はどれか。",
+    "choices": [
+      { "key": "A", "text": "4,590円" },
+      { "key": "B", "text": "4,710円" },
+      { "key": "C", "text": "6,320円" },
+      { "key": "D", "text": "7,930円" }
+    ],
+    "answer": { "choice": "B", "value": 4710 },
+    "explanation": "雇用保険料は300,000×5/1,000＝1,500円。社会保険料等控除後給与は300,000−42,570−1,500＝255,930円。月額表の254,000円以上257,000円未満の行、甲欄・扶養親族等1人で4,710円。",
+    "common_mistake": "①300,000円をそのまま税額表に当てる、②雇用保険料を控除し忘れる、③扶養0人欄の6,320円を見てしまう、が頻出。",
+    "calc_params": {
+      "calc_type": "withholding_tax_monthly",
+      "gross": 300000,
+      "social_insurance": 42570,
+      "employment_insurance": 1500,
+      "dependents": 1,
+      "table": "gensen-getsugaku"
+    },
+    "reference_sheet_slugs": ["gensen-getsugaku", "koyo-hoken"]
+  },
+  {
+    "source_id": "r2-q39",
+    "unit": "keisan",
+    "lesson": "shoyo-tedori",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "hard",
+    "question_text": "東京都、35歳。賞与500,000円。前月の社会保険料等控除後の普通給与240,000円、扶養親族等1人。標準賞与額500,000円として、健康保険9.85％、子ども・子育て支援金0.23％、厚生年金18.3％を労使折半、雇用保険労働者負担5/1,000。2026年分賞与算出率表を用いる。賞与の源泉所得税額はどれか。",
+    "choices": [
+      { "key": "A", "text": "4,265円" },
+      { "key": "B", "text": "8,710円" },
+      { "key": "C", "text": "10,210円" },
+      { "key": "D", "text": "14,625円" }
+    ],
+    "answer": { "choice": "B", "value": 8710 },
+    "explanation": "社会保険料等: 健保24,625＋支援金575＋厚年45,750＋雇用保険2,500＝73,450円。控除後500,000−73,450＝426,550円。前月給与240,000円・扶養1人→算出率2.042％。426,550×2.042％＝8,710.151→1円未満切捨てで8,710円。",
+    "common_mistake": "賞与500,000円に直接2.042％を掛けるミス。率の選択は前月給与、乗算対象は賞与の社会保険料等控除後額。",
+    "calc_params": {
+      "calc_type": "bonus_withholding",
+      "bonus": 500000,
+      "rates_percent": { "health": 9.85, "support": 0.23, "pension": 18.3 },
+      "employee_share": 0.5,
+      "employment_rate_per_mille": 5,
+      "rate_percent": 2.042
+    },
+    "reference_sheet_slugs": ["kenpo-tokyo", "shoyo-santei-ritsu", "koyo-hoken"]
+  },
+  {
+    "source_id": "r2-q40",
+    "unit": "keisan",
+    "lesson": "shoyo-tedori",
+    "type": "choice",
+    "category": "給与基礎・支給控除",
+    "difficulty": "medium",
+    "question_text": "月給300,000円、社会保険料42,570円、雇用保険料1,500円、源泉所得税4,710円。住民税その他の控除は0円とする。差引支給額はいくらか。",
+    "choices": [
+      { "key": "A", "text": "247,930円" },
+      { "key": "B", "text": "249,720円" },
+      { "key": "C", "text": "251,220円" },
+      { "key": "D", "text": "255,930円" }
+    ],
+    "answer": { "choice": "C", "value": 251220 },
+    "explanation": "300,000−42,570−1,500−4,710＝251,220円。",
+    "common_mistake": "255,930円は「税額表に当てる社会保険料等控除後給与」であり、最終手取りではない。所得税の控除を忘れないこと。",
+    "calc_params": {
+      "calc_type": "net_pay",
+      "gross": 300000,
+      "deductions": [42570, 1500, 4710]
+    },
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q42",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "medium",
+    "question_text": "2026年分、合計所得金額100万円の居住者の基礎控除額として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "58万円" },
+      { "key": "B", "text": "62万円" },
+      { "key": "C", "text": "88万円" },
+      { "key": "D", "text": "104万円" }
+    ],
+    "answer": { "choice": "D" },
+    "explanation": "2026・2027年分は、合計所得金額132万円以下の場合の基礎控除が104万円とされている。",
+    "common_mistake": "一律62万円と覚えないこと。2026・2027年は所得帯に応じた加算があり、低所得帯は104万円。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q43",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "easy",
+    "question_text": "2026・2027年分の給与所得控除の最低保障額はどれか。",
+    "choices": [
+      { "key": "A", "text": "55万円" },
+      { "key": "B", "text": "65万円" },
+      { "key": "C", "text": "69万円" },
+      { "key": "D", "text": "74万円" }
+    ],
+    "answer": { "choice": "D" },
+    "explanation": "2026年度改正で、給与所得控除の最低保障額は65万円から74万円に引き上げられた。",
+    "common_mistake": "改正前の65万円（さらに前は55万円）と混同しないこと。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q44",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "numeric",
+    "category": "年末調整",
+    "difficulty": "medium",
+    "question_text": "2026年、給与収入のみ130万円の親族について、給与所得控除の最低保障額74万円を用いた給与所得の金額はいくらか（円で答えよ）。この金額が扶養親族の所得要件62万円以下を満たすかも確認しよう。",
+    "choices": null,
+    "answer": { "value": 560000 },
+    "explanation": "給与所得＝1,300,000−740,000＝560,000円。560,000円≦620,000円なので、その他の条件を満たせば扶養親族の所得要件を満たす。",
+    "common_mistake": "収入と所得の混同に注意。所得要件の判定は「収入」ではなく給与所得控除後の「所得」で行う。",
+    "calc_params": {
+      "calc_type": "income_check",
+      "income": 1300000,
+      "deduction": 740000
+    },
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q46",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "medium",
+    "question_text": "2026年分の扶養親族の合計所得金額要件と、給与収入だけの場合の収入額の組合せとして正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "58万円以下（123万円以下）" },
+      { "key": "B", "text": "62万円以下（136万円以下）" },
+      { "key": "C", "text": "65万円以下（150万円以下）" },
+      { "key": "D", "text": "74万円以下（148万円以下）" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "2026・2027年分の扶養親族等の所得要件は合計所得62万円以下。給与収入だけの場合は136万円以下（62万＋給与所得控除74万）。",
+    "common_mistake": "所得要件と収入ベースの目安の対応関係（62万円⇔136万円）をセットで覚える。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q48",
+    "unit": "keisan",
+    "lesson": "shoyo-tedori",
+    "type": "numeric",
+    "category": "社会保険",
+    "difficulty": "medium",
+    "question_text": "東京都、45歳、標準報酬月額300,000円、2026年5月以後。健康保険＋介護保険11.47％、子ども・子育て支援金0.23％、厚生年金18.3％を労使折半とする。被保険者負担合計はいくらか（円で答えよ）。",
+    "choices": null,
+    "answer": { "value": 45000 },
+    "explanation": "45歳は介護保険第2号被保険者。健保＋介護300,000×11.47％÷2＝17,205円、支援金300,000×0.23％÷2＝345円、厚生年金300,000×18.3％÷2＝27,450円。合計45,000円。35歳の場合との差2,430円が介護保険本人負担分（300,000×1.62％÷2）。",
+    "common_mistake": "介護保険該当者は健康保険料率が9.85％から11.47％に変わる。年齢の確認を忘れずに。",
+    "calc_params": {
+      "calc_type": "social_insurance_employee",
+      "standard_monthly": 300000,
+      "rates_percent": { "health_care": 11.47, "support": 0.23, "pension": 18.3 },
+      "employee_share": 0.5
+    },
+    "reference_sheet_slugs": ["kenpo-tokyo"]
+  }
+]

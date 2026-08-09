@@ -1,0 +1,87 @@
+{
+  "slug": "kyuyo-2kyu",
+  "name": "給与計算実務能力検定 2級",
+  "description": "知識35問＋計算5問・120分・70点合格。2026年11月22日試験対応（法令基準日2026年9月1日）。",
+  "sort_order": 1,
+  "units": [
+    {
+      "slug": "roudou",
+      "name": "労働法・勤怠",
+      "description": "賃金支払5原則、法定労働時間・休日、割増賃金、年休、就業規則",
+      "icon": "⚖️",
+      "color": "pink",
+      "is_advanced": false,
+      "sort_order": 1,
+      "lessons": [
+        { "slug": "chingin-shiharai", "name": "賃金支払と就業規則", "description": "労基法24条の5原則と控除、就業規則のルール", "sort_order": 1 },
+        { "slug": "roudou-jikan", "name": "労働時間・休日・年休", "description": "法定労働時間、法定休日、年次有給休暇", "sort_order": 2 },
+        { "slug": "warimashi", "name": "割増賃金のルール", "description": "25/35/50％と深夜の重複、算定基礎の除外賃金", "sort_order": 3 }
+      ]
+    },
+    {
+      "slug": "shikyu",
+      "name": "給与基礎・支給控除",
+      "description": "通勤手当の非課税限度、支給項目と控除項目、給与明細のしくみ",
+      "icon": "💰",
+      "color": "amber",
+      "is_advanced": false,
+      "sort_order": 2,
+      "lessons": [
+        { "slug": "tsukin", "name": "通勤手当と非課税", "description": "距離別の非課税限度額と社会保険上の扱い", "sort_order": 1 }
+      ]
+    },
+    {
+      "slug": "zei",
+      "name": "税（所得税・住民税）",
+      "description": "源泉所得税の月額表、賞与算出率表、住民税の特別徴収",
+      "icon": "🧾",
+      "color": "sky",
+      "is_advanced": false,
+      "sort_order": 3,
+      "lessons": [
+        { "slug": "gensen", "name": "源泉所得税のきほん", "description": "甲欄・乙欄、月額表の引き方、扶養控除等申告書", "sort_order": 1 },
+        { "slug": "juminzei-shoyo", "name": "住民税と賞与の税", "description": "特別徴収の流れ、賞与の源泉徴収", "sort_order": 2 }
+      ]
+    },
+    {
+      "slug": "shaho",
+      "name": "社会保険",
+      "description": "標準報酬月額、定時決定・随時改定、料率、入退社、賞与の保険料",
+      "icon": "🏥",
+      "color": "emerald",
+      "is_advanced": false,
+      "sort_order": 4,
+      "lessons": [
+        { "slug": "hyojun-hoshu", "name": "標準報酬と定時決定", "description": "報酬の範囲、4〜6月→9月改定、等級", "sort_order": 1 },
+        { "slug": "zuiji-kaitei", "name": "随時改定", "description": "固定的賃金の変動、2等級差、支払基礎日数", "sort_order": 2 },
+        { "slug": "ryoritsu", "name": "保険料率と各制度", "description": "健保・介護・厚年・雇用保険・子育て支援金の料率", "sort_order": 3 },
+        { "slug": "taishoku-shoyo", "name": "入退社と賞与の保険料", "description": "資格喪失と保険料発生月、標準賞与額、適用拡大", "sort_order": 4 }
+      ]
+    },
+    {
+      "slug": "keisan",
+      "name": "実務計算",
+      "description": "割増賃金・保険料・源泉税・手取りの複合計算。本番の計算問題対策",
+      "icon": "🖩",
+      "color": "violet",
+      "is_advanced": false,
+      "sort_order": 5,
+      "lessons": [
+        { "slug": "kyuyo-keisan", "name": "給与計算の実践", "description": "割増賃金→社会保険料→源泉所得税の流れ", "sort_order": 1 },
+        { "slug": "shoyo-tedori", "name": "賞与と手取り計算", "description": "賞与の保険料・源泉税、差引支給額", "sort_order": 2 }
+      ]
+    },
+    {
+      "slug": "nencho",
+      "name": "年末調整（発展）",
+      "description": "1級範囲への橋渡し。2026年税制改正の基礎控除・給与所得控除",
+      "icon": "🎓",
+      "color": "rose",
+      "is_advanced": true,
+      "sort_order": 6,
+      "lessons": [
+        { "slug": "nencho-kiso", "name": "年末調整のきほん", "description": "基礎控除・給与所得控除・扶養親族の所得要件", "sort_order": 1 }
+      ]
+    }
+  ]
+}

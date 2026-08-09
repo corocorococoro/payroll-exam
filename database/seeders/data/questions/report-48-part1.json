@@ -1,0 +1,422 @@
+[
+  {
+    "source_id": "r2-q01",
+    "unit": "roudou",
+    "lesson": "chingin-shiharai",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "労働基準法第24条の「賃金支払の原則」に含まれないものはどれか。",
+    "choices": [
+      { "key": "A", "text": "通貨で支払う" },
+      { "key": "B", "text": "労働者本人に直接支払う" },
+      { "key": "C", "text": "全額を支払う" },
+      { "key": "D", "text": "毎週1回以上支払う" }
+    ],
+    "answer": { "choice": "D" },
+    "explanation": "労基法24条の賃金支払5原則は「通貨・直接・全額・毎月1回以上・一定期日」。毎「週」ではなく毎「月」1回以上が正しい。",
+    "common_mistake": "「一定期日払い」の原則を忘れやすい。5つセットで暗唱できるようにしておこう。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q02",
+    "unit": "roudou",
+    "lesson": "chingin-shiharai",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "賃金からの控除について最も適切なものはどれか。",
+    "choices": [
+      { "key": "A", "text": "税金・社会保険料以外は一切控除できない" },
+      { "key": "B", "text": "法令による控除のほか、適法な労使協定に基づく控除があり得る" },
+      { "key": "C", "text": "使用者が就業規則に書けば何でも控除できる" },
+      { "key": "D", "text": "本人の口頭同意だけで任意に全額控除できる" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "全額払いの原則の例外として、法令に基づく控除（税・社会保険料）のほか、適法な労使協定（賃金控除協定）に基づく控除が認められる。",
+    "common_mistake": "「就業規則に書けば控除できる」と考えるのは誤り。労使協定が必要。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q03",
+    "unit": "roudou",
+    "lesson": "roudou-jikan",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "原則的な法定労働時間の組合せとして正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "1日7時間・週35時間" },
+      { "key": "B", "text": "1日8時間・週40時間" },
+      { "key": "C", "text": "1日8時間・週44時間（すべての事業場）" },
+      { "key": "D", "text": "1日9時間・週45時間" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "労基法32条の原則は1日8時間・1週40時間。週44時間の特例は一部の特例措置対象事業場に限られ、「すべての事業場」ではない。",
+    "common_mistake": "会社が定める所定労働時間と、法律上の上限である法定労働時間を混同しないこと。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q04",
+    "unit": "roudou",
+    "lesson": "roudou-jikan",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "原則的な法定休日について正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "毎月1日以上" },
+      { "key": "B", "text": "2週間に1日以上のみ" },
+      { "key": "C", "text": "毎週1日以上（または4週間を通じ4日以上）" },
+      { "key": "D", "text": "年間105日以上" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "労基法35条は原則毎週1日以上の休日を要求し、例外として4週間を通じ4日以上（変形休日制）を認める。",
+    "common_mistake": "会社の所定休日（週休2日など）と法定休日は別物。割増賃金の率にも関わる重要な区別。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q05",
+    "unit": "roudou",
+    "lesson": "warimashi",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "月60時間以内の法定時間外労働が深夜労働にも該当する場合、通常賃金に対する割増部分の合計最低率はどれか。",
+    "choices": [
+      { "key": "A", "text": "25％" },
+      { "key": "B", "text": "35％" },
+      { "key": "C", "text": "50％" },
+      { "key": "D", "text": "60％" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "時間外25％＋深夜25％＝割増部分50％。支払率としては150％になる。",
+    "common_mistake": "「支払率150％」と「割増率50％」を混同しないこと。問われているのはどちらかを必ず確認。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q06",
+    "unit": "roudou",
+    "lesson": "warimashi",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "1か月60時間を超える法定時間外労働が深夜労働にも該当する場合、割増部分の合計最低率はどれか。",
+    "choices": [
+      { "key": "A", "text": "50％" },
+      { "key": "B", "text": "60％" },
+      { "key": "C", "text": "75％" },
+      { "key": "D", "text": "85％" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "月60時間超の時間外労働は50％以上、深夜労働は25％以上。両方に該当する場合は50％＋25％＝75％。",
+    "common_mistake": "60時間を超えても25％のまま計算してしまうミスが頻出。60時間超は50％に跳ね上がる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q07",
+    "unit": "roudou",
+    "lesson": "warimashi",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "法定休日労働が深夜労働にも該当する場合、割増部分の合計最低率はどれか。",
+    "choices": [
+      { "key": "A", "text": "35％" },
+      { "key": "B", "text": "50％" },
+      { "key": "C", "text": "60％" },
+      { "key": "D", "text": "75％" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "法定休日労働35％＋深夜25％＝60％。法定休日労働には「時間外」の概念がないため、時間外25％を重ねて加算しない。",
+    "common_mistake": "休日労働に時間外25％を重ねてしまう誤り。休日労働では35％がベースになる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q08",
+    "unit": "roudou",
+    "lesson": "warimashi",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "割増賃金の算定基礎から、名称だけで当然には除外できず、原則として算入すべきものはどれか。",
+    "choices": [
+      { "key": "A", "text": "扶養人数に応じて支給する家族手当" },
+      { "key": "B", "text": "実費相当の通勤手当" },
+      { "key": "C", "text": "役職手当" },
+      { "key": "D", "text": "臨時に支払われた賃金" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "割増賃金の算定基礎から除外できる賃金（家族手当・通勤手当・住宅手当・臨時の賃金など）は限定列挙。役職手当は除外対象に含まれず、原則算入する。",
+    "common_mistake": "手当の「名称」だけで除外判断しないこと。支給実態で判断する（例: 一律支給の家族手当は除外できない）。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q09",
+    "unit": "roudou",
+    "lesson": "roudou-jikan",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "一般の労働者が入社後6か月継続勤務し、全労働日の8割以上出勤した場合に原則付与される年次有給休暇の日数はどれか。",
+    "choices": [
+      { "key": "A", "text": "5日" },
+      { "key": "B", "text": "7日" },
+      { "key": "C", "text": "10日" },
+      { "key": "D", "text": "12日" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "労基法39条により、6か月継続勤務＋8割以上出勤で原則10日付与。以後、勤続年数に応じて増える。",
+    "common_mistake": "「年5日の取得義務」の5日と、付与日数の10日を混同しないこと。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q10",
+    "unit": "roudou",
+    "lesson": "roudou-jikan",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "medium",
+    "question_text": "使用者による年5日の年次有給休暇の時季指定義務の対象として最も適切なのはどれか。",
+    "choices": [
+      { "key": "A", "text": "年休が1日でも付与された全労働者" },
+      { "key": "B", "text": "年10日以上の年休が付与される労働者" },
+      { "key": "C", "text": "正社員だけ" },
+      { "key": "D", "text": "管理監督者を除く労働者だけ" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "年10日以上の年休が付与される労働者が対象で、管理監督者も含まれる。使用者は年5日の取得を確保する義務がある。",
+    "common_mistake": "「管理職は対象外」という思い込みに注意。管理監督者も対象に含まれる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q11",
+    "unit": "roudou",
+    "lesson": "chingin-shiharai",
+    "type": "choice",
+    "category": "労働法・勤怠",
+    "difficulty": "easy",
+    "question_text": "就業規則の作成・届出義務が原則として生じる事業場はどれか。",
+    "choices": [
+      { "key": "A", "text": "常時5人以上" },
+      { "key": "B", "text": "常時10人以上" },
+      { "key": "C", "text": "常時20人以上" },
+      { "key": "D", "text": "常時50人以上" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "労基法89条により、常時10人以上の労働者を使用する事業場では就業規則の作成・届出が必要。",
+    "common_mistake": "「企業全体」ではなく「事業場」単位で判断する点を忘れやすい。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q12",
+    "unit": "shikyu",
+    "lesson": "tsukin",
+    "type": "choice",
+    "category": "給与基礎・支給控除",
+    "difficulty": "easy",
+    "question_text": "2026年4月1日以後、マイカー通勤で片道1.5kmの者に支給する通勤手当の所得税上の扱いとして正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "全額非課税" },
+      { "key": "B", "text": "月4,200円まで非課税" },
+      { "key": "C", "text": "月7,300円まで非課税" },
+      { "key": "D", "text": "全額課税" }
+    ],
+    "answer": { "choice": "D" },
+    "explanation": "マイカー・自転車等の通勤で片道2km未満の場合は、通勤手当の全額が課税対象となる。",
+    "common_mistake": "2km未満に4,200円の非課税枠を適用してしまう誤り。2km未満は全額課税。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q13",
+    "unit": "shikyu",
+    "lesson": "tsukin",
+    "type": "choice",
+    "category": "給与基礎・支給控除",
+    "difficulty": "easy",
+    "question_text": "2026年4月1日以後、マイカー通勤で片道12kmの者の1か月当たり非課税限度額はどれか。",
+    "choices": [
+      { "key": "A", "text": "4,200円" },
+      { "key": "B", "text": "7,300円" },
+      { "key": "C", "text": "13,500円" },
+      { "key": "D", "text": "19,700円" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "2026年4月1日以後のマイカー通勤手当は、片道10km以上15km未満で月7,300円まで非課税。",
+    "common_mistake": "距離区分の境界（10km・15km）を取り違えるミスが多い。資料の表を正確に引く練習をしよう。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q14",
+    "unit": "shikyu",
+    "lesson": "tsukin",
+    "type": "choice",
+    "category": "給与基礎・支給控除",
+    "difficulty": "easy",
+    "question_text": "交通機関利用者の合理的な運賃等に係る通勤手当の1か月当たり所得税非課税の最高限度額はどれか。",
+    "choices": [
+      { "key": "A", "text": "100,000円" },
+      { "key": "B", "text": "120,000円" },
+      { "key": "C", "text": "150,000円" },
+      { "key": "D", "text": "上限なし" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "電車・バスなど公共交通機関の合理的な運賃等は、月150,000円が非課税の最高限度額。",
+    "common_mistake": "マイカー通勤の距離別限度額と混同しないこと。公共交通機関は一律150,000円が上限。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q15",
+    "unit": "shikyu",
+    "lesson": "tsukin",
+    "type": "choice",
+    "category": "給与基礎・支給控除",
+    "difficulty": "medium",
+    "question_text": "所得税上非課税となる通勤手当と社会保険の標準報酬月額との関係として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "非課税通勤手当は標準報酬にも必ず含まれない" },
+      { "key": "B", "text": "通勤手当は原則として社会保険上の報酬に含まれる" },
+      { "key": "C", "text": "通勤手当は賞与として扱う" },
+      { "key": "D", "text": "通勤手当は厚生年金だけに含まれない" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "標準報酬月額の対象となる報酬には基本給・残業手当・通勤手当等が含まれる。所得税上の非課税性と社会保険上の報酬該当性は別判定。",
+    "common_mistake": "「所得税非課税＝社会保険も対象外」と考える誤りが最頻出。税と社保で判定が異なる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q16",
+    "unit": "zei",
+    "lesson": "juminzei-shoyo",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "easy",
+    "question_text": "給与所得者の個人住民税の特別徴収について正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "原則1月から12月に徴収" },
+      { "key": "B", "text": "原則6月から翌年5月に徴収" },
+      { "key": "C", "text": "毎月、会社が所得税と同じ税額表で計算" },
+      { "key": "D", "text": "年末調整で精算" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "個人住民税の特別徴収は原則6月から翌年5月までの12回で行う。税額は市区町村が計算して会社に通知する。",
+    "common_mistake": "所得税と同じ1〜12月と考える誤り。住民税は前年所得に基づき6月スタート。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q17",
+    "unit": "zei",
+    "lesson": "gensen",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "easy",
+    "question_text": "主たる給与について扶養控除等申告書の提出がある場合、原則用いる月額表の欄はどれか。",
+    "choices": [
+      { "key": "A", "text": "甲欄" },
+      { "key": "B", "text": "乙欄" },
+      { "key": "C", "text": "丙欄" },
+      { "key": "D", "text": "住民税欄" }
+    ],
+    "answer": { "choice": "A" },
+    "explanation": "扶養控除等申告書の提出がある主たる給与には甲欄を使う。提出がない場合は乙欄。丙欄は日雇賃金用。",
+    "common_mistake": "甲欄・乙欄を扶養人数で選ぶと誤解しやすい。区分は申告書の提出の有無で決まる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q18",
+    "unit": "zei",
+    "lesson": "gensen",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "easy",
+    "question_text": "給与所得の源泉徴収税額表（月額表）で基本となる給与額はどれか。",
+    "choices": [
+      { "key": "A", "text": "総支給額そのもの" },
+      { "key": "B", "text": "社会保険料等控除後の給与等の金額" },
+      { "key": "C", "text": "手取り額" },
+      { "key": "D", "text": "基本給のみ" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "月額表は「社会保険料等控除後の給与等の金額」と扶養親族等の数から税額を求める。",
+    "common_mistake": "総支給額をそのまま税額表に当ててしまうミス。必ず社会保険料等を控除した後の額を使う。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q19",
+    "unit": "zei",
+    "lesson": "gensen",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "medium",
+    "question_text": "扶養控除等申告書の提出時期として最も適切なのはどれか。",
+    "choices": [
+      { "key": "A", "text": "年末調整時だけ" },
+      { "key": "B", "text": "その年最初の給与の支払を受ける日の前日までが原則" },
+      { "key": "C", "text": "退職時だけ" },
+      { "key": "D", "text": "提出期限はない" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "扶養控除等申告書は原則、その年最初の給与の支払を受ける日の前日までに提出する。",
+    "common_mistake": "「年末調整のときに出せばよい」という誤解。提出がないと乙欄適用になり源泉税額が大きく変わる。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q20",
+    "unit": "zei",
+    "lesson": "juminzei-shoyo",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "medium",
+    "question_text": "通常の賞与に対する源泉徴収税額の求め方として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "賞与総額に一律10％" },
+      { "key": "B", "text": "前月の社会保険料等控除後給与と扶養親族等の数で率を決め、賞与の社会保険料等控除後額に乗じる" },
+      { "key": "C", "text": "年収見込額だけで率を決める" },
+      { "key": "D", "text": "住民税の月割額を流用する" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "賞与算出率表では、前月給与の社会保険料等控除後額と扶養親族等の数により率を選び、その率を賞与の社会保険料等控除後額に乗じる。",
+    "common_mistake": "賞与総額にそのまま率を掛けるミス。率の選択も乗算対象も「社会保険料等控除後」の金額。",
+    "calc_params": null,
+    "reference_sheet_slugs": ["shoyo-santei-ritsu"]
+  },
+  {
+    "source_id": "r2-q21",
+    "unit": "zei",
+    "lesson": "juminzei-shoyo",
+    "type": "choice",
+    "category": "税",
+    "difficulty": "medium",
+    "question_text": "個人住民税の特別徴収税額について、通常の給与実務として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "毎月会社が税率から計算する" },
+      { "key": "B", "text": "区市町村から通知された月割額を給与から徴収する" },
+      { "key": "C", "text": "所得税の甲欄を使う" },
+      { "key": "D", "text": "賞与からのみ徴収する" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "住民税の特別徴収税額は区市町村が算定し、事業主に通知する。会社は通知された月割額を控除して納入するだけで、自ら計算しない。",
+    "common_mistake": "「会社が毎月計算する」と考える誤り。所得税（会社が計算）との違いを押さえよう。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  }
+]
