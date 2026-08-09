@@ -43,6 +43,7 @@ const answers = reactive<Record<string, string>>({ ...props.attempt.answers });
 const remaining = ref(props.attempt.remaining_seconds);
 const savedAt = ref<string | null>(null);
 const saving = ref(false);
+const saveError = ref<string | null>(null);
 const sheetsOpen = ref(false);
 const sheetOpen = ref(false);
 const calculatorOpen = ref(false);
@@ -51,6 +52,8 @@ const calcResult = ref<string | null>(null);
 const finishing = ref(false);
 let timer: ReturnType<typeof setInterval> | null = null;
 let autosave: ReturnType<typeof setInterval> | null = null;
+let saveRequested = false;
+let activeSave: Promise<void> | null = null;
 
 const current = computed(() => props.questions[index.value]);
 const answeredCount = computed(
@@ -61,27 +64,51 @@ const formattedTime = computed(
         `${String(Math.floor(remaining.value / 3600)).padStart(2, '0')}:${String(Math.floor((remaining.value % 3600) / 60)).padStart(2, '0')}:${String(remaining.value % 60).padStart(2, '0')}`,
 );
 
-async function save() {
-    if (saving.value || finishing.value) {
-        return;
+function save(): Promise<void> {
+    saveRequested = true;
+
+    if (activeSave) {
+        return activeSave;
     }
 
-    saving.value = true;
+    activeSave = (async () => {
+        saving.value = true;
+        saveError.value = null;
 
-    try {
-        const response = await patchJson<{ saved: boolean; saved_at: string }>(
-            `/mock-attempts/${props.attempt.id}`,
-            { answers: { ...answers } },
-        );
-        savedAt.value = response.saved_at;
-    } finally {
-        saving.value = false;
-    }
+        while (saveRequested) {
+            saveRequested = false;
+            const response = await patchJson<{
+                saved: boolean;
+                saved_at: string;
+            }>(`/mock-attempts/${props.attempt.id}`, {
+                answers: { ...answers },
+            });
+            savedAt.value = response.saved_at;
+        }
+    })()
+        .catch((error: unknown) => {
+            saveError.value =
+                error instanceof Error
+                    ? error.message
+                    : '解答を保存できませんでした';
+
+            throw error;
+        })
+        .finally(() => {
+            saving.value = false;
+            activeSave = null;
+        });
+
+    return activeSave;
+}
+
+function queueSave() {
+    void save().catch(() => undefined);
 }
 
 function selectAnswer(value: string) {
     answers[String(current.value.id)] = value;
-    void save();
+    queueSave();
 }
 function go(position: number) {
     index.value = Math.max(0, Math.min(props.questions.length - 1, position));
@@ -123,10 +150,14 @@ async function finish() {
     }
 
     finishing.value = true;
-    await patchJson(`/mock-attempts/${props.attempt.id}`, {
-        answers: { ...answers },
-    });
-    router.post(`/mock-attempts/${props.attempt.id}/finish`);
+    saveError.value = null;
+
+    try {
+        await save();
+        router.post(`/mock-attempts/${props.attempt.id}/finish`);
+    } catch {
+        finishing.value = false;
+    }
 }
 
 onMounted(() => {
@@ -137,7 +168,7 @@ onMounted(() => {
             void finish();
         }
     }, 1000);
-    autosave = setInterval(() => void save(), 15000);
+    autosave = setInterval(queueSave, 15000);
 });
 onBeforeUnmount(() => {
     if (timer) {
@@ -170,7 +201,13 @@ onBeforeUnmount(() => {
                 </p>
                 <span class="flex items-center gap-1 text-xs text-gray-400"
                     ><Save class="size-3" />{{
-                        saving ? '保存中' : savedAt ? '保存済み' : '自動保存'
+                        saveError
+                            ? '保存エラー'
+                            : saving
+                              ? '保存中'
+                              : savedAt
+                                ? '保存済み'
+                                : '自動保存'
                     }}</span
                 ><span
                     :class="[
@@ -290,9 +327,15 @@ onBeforeUnmount(() => {
                                 $event.target as HTMLInputElement
                             ).value
                         "
-                        @blur="save"
+                        @blur="queueSave"
                     />
                 </div>
+                <p
+                    v-if="saveError"
+                    class="mt-3 text-center text-xs font-bold text-rose-600"
+                >
+                    {{ saveError }}。通信を確認して、もう一度解答してください。
+                </p>
                 <div class="mt-5 flex justify-between">
                     <button
                         :disabled="index === 0"

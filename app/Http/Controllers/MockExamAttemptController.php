@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
 use App\Models\ReferenceSheet;
+use App\Models\User;
 use App\Services\MockExamService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -23,26 +25,29 @@ class MockExamAttemptController extends Controller
             'mode' => ['required', Rule::in(['standard', 'compressed'])],
         ]);
 
-        $existing = $request->user()->mockExamAttempts()
-            ->where('mock_exam_id', $mockExam->id)
-            ->whereNull('finished_at')
-            ->latest('started_at')
-            ->first();
+        $attempt = DB::transaction(function () use ($request, $mockExam, $validated): MockExamAttempt {
+            $user = User::query()->lockForUpdate()->findOrFail($request->user()->id);
+            $existing = $user->mockExamAttempts()
+                ->where('mock_exam_id', $mockExam->id)
+                ->whereNull('finished_at')
+                ->latest('started_at')
+                ->first();
 
-        if ($existing !== null && $existing->remainingSeconds() > 0) {
-            return to_route('mock-attempts.show', $existing);
-        }
+            if ($existing !== null && $existing->remainingSeconds() > 0) {
+                return $existing;
+            }
 
-        if ($existing !== null) {
-            app(MockExamService::class)->finish($existing);
-        }
+            if ($existing !== null) {
+                app(MockExamService::class)->finish($existing);
+            }
 
-        $attempt = $request->user()->mockExamAttempts()->create([
-            'mock_exam_id' => $mockExam->id,
-            'time_limit_minutes' => $validated['mode'] === 'compressed' ? 90 : $mockExam->time_limit_minutes,
-            'started_at' => now(),
-            'answers' => [],
-        ]);
+            return $user->mockExamAttempts()->create([
+                'mock_exam_id' => $mockExam->id,
+                'time_limit_minutes' => $validated['mode'] === 'compressed' ? 90 : $mockExam->time_limit_minutes,
+                'started_at' => now(),
+                'answers' => [],
+            ]);
+        });
 
         return to_route('mock-attempts.show', $attempt);
     }
@@ -94,34 +99,42 @@ class MockExamAttemptController extends Controller
     public function update(Request $request, MockExamAttempt $attempt, MockExamService $service): JsonResponse
     {
         $this->authorizeOwner($request, $attempt);
-        abort_if($attempt->finished_at !== null, 422, 'この模試は終了しています。');
-
-        if ($attempt->remainingSeconds() <= 0) {
-            $service->finish($attempt);
-
-            return response()->json(['message' => '制限時間を過ぎたため、自動採点しました。'], 422);
-        }
-
-        $questionIds = $attempt->mockExam->examQuestions()->pluck('question_id')->map(fn ($id) => (int) $id)->all();
         $validated = $request->validate([
             'answers' => ['required', 'array'],
             'answers.*' => ['nullable', 'string', 'max:100'],
         ]);
-        /** @var array<array-key, mixed> $submitted */
-        $submitted = $validated['answers'];
-        $answers = [];
 
-        foreach ($questionIds as $questionId) {
-            $answer = $submitted[$questionId] ?? null;
+        return DB::transaction(function () use ($request, $attempt, $service, $validated): JsonResponse {
+            $attempt = MockExamAttempt::query()->lockForUpdate()->findOrFail($attempt->id);
+            $this->authorizeOwner($request, $attempt);
+            abort_if($attempt->finished_at !== null, 422, 'この模試は終了しています。');
 
-            if (is_string($answer) && trim($answer) !== '') {
-                $answers[$questionId] = $answer;
+            if ($attempt->remainingSeconds() <= 0) {
+                $service->finish($attempt);
+
+                return response()->json(['message' => '制限時間を過ぎたため、自動採点しました。'], 422);
             }
-        }
 
-        $attempt->update(['answers' => $answers]);
+            $questionIds = $attempt->mockExam->examQuestions()
+                ->pluck('question_id')
+                ->map(fn ($id) => (int) $id)
+                ->all();
+            /** @var array<array-key, mixed> $submitted */
+            $submitted = $validated['answers'];
+            $answers = [];
 
-        return response()->json(['saved' => true, 'saved_at' => now()->toIso8601String()]);
+            foreach ($questionIds as $questionId) {
+                $answer = $submitted[$questionId] ?? null;
+
+                if (is_string($answer) && trim($answer) !== '') {
+                    $answers[$questionId] = $answer;
+                }
+            }
+
+            $attempt->update(['answers' => $answers]);
+
+            return response()->json(['saved' => true, 'saved_at' => now()->toIso8601String()]);
+        });
     }
 
     public function finish(Request $request, MockExamAttempt $attempt, MockExamService $service): RedirectResponse

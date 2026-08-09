@@ -210,6 +210,44 @@ test('同じ出題への二重解答ではXPを再獲得できない', function 
     expect($this->user->statOrCreate()->refresh()->total_xp)->toBe(10);
 });
 
+test('レビュー期限切れの問題は古いレッスンセッションからも解答できない', function () {
+    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $run = lessonRun($question);
+    $question->update(['review_due_at' => now()->subMinute()]);
+
+    actingAs($this->user)->withSession($run)->postJson('/answers', [
+        'question_id' => $question->id,
+        'answer' => 'D',
+        'context' => 'lesson',
+        'lesson_id' => $question->lesson_id,
+    ])->assertNotFound();
+
+    expect($this->user->attempts()->count())->toBe(0);
+});
+
+test('同じレッスンセッションを二重完了してもボーナスを再獲得できない', function () {
+    $lesson = Lesson::whereHas('unit', fn ($q) => $q->where('slug', 'shikyu'))->firstOrFail();
+    $questions = $lesson->questions()->limit(7)->get();
+    $run = lessonRun(...$questions);
+
+    foreach ($questions as $question) {
+        actingAs($this->user)->withSession($run)->postJson('/answers', [
+            'question_id' => $question->id,
+            'answer' => 'A',
+            'context' => 'lesson',
+            'lesson_id' => $lesson->id,
+        ])->assertOk();
+    }
+
+    $xpBeforeCompletion = $this->user->statOrCreate()->refresh()->total_xp;
+    actingAs($this->user)->withSession($run)->postJson("/lessons/{$lesson->id}/complete")->assertOk();
+    actingAs($this->user)->withSession($run)->postJson("/lessons/{$lesson->id}/complete")->assertStatus(422);
+
+    $progress = $this->user->lessonProgresses()->where('lesson_id', $lesson->id)->firstOrFail();
+    expect($progress->completed_count)->toBe(1)
+        ->and($this->user->statOrCreate()->refresh()->total_xp)->toBe($xpBeforeCompletion + 10);
+});
+
 test('期限の来ていない問題を復習として送信できない', function () {
     $question = Question::where('source_id', 'r2-q01')->firstOrFail();
 

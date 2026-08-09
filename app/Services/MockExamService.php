@@ -14,16 +14,20 @@ class MockExamService
      */
     public function finish(MockExamAttempt $attempt): array
     {
-        if ($attempt->finished_at !== null) {
-            return [
-                'score' => $attempt->score ?? 0,
-                'passed' => ($attempt->score ?? 0) >= $attempt->mockExam->passing_score,
-                'section_scores' => $attempt->section_scores ?? [],
-            ];
-        }
-
         return DB::transaction(function () use ($attempt): array {
+            $attempt = MockExamAttempt::query()
+                ->lockForUpdate()
+                ->findOrFail($attempt->id);
             $attempt->load('mockExam.examQuestions.question');
+
+            if ($attempt->finished_at !== null) {
+                return [
+                    'score' => $attempt->score ?? 0,
+                    'passed' => ($attempt->score ?? 0) >= $attempt->mockExam->passing_score,
+                    'section_scores' => $attempt->section_scores ?? [],
+                ];
+            }
+
             $answers = $attempt->answers ?? [];
             $score = 0;
             /** @var array<string, array{correct: int, total: int, earned: int, max: int, accuracy: int}> $sections */

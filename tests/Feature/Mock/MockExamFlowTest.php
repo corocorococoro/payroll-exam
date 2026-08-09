@@ -65,6 +65,38 @@ test('40問をサーバー採点し100点と分野別診断を返す', function 
         );
 });
 
+test('模試終了の再送でも解答履歴を二重作成しない', function () {
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id,
+        'time_limit_minutes' => 120,
+        'started_at' => now(),
+        'answers' => correctAnswers($this->exam),
+    ]);
+
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+
+    expect($this->user->attempts()->where('context', 'mock')->count())->toBe(40);
+});
+
+test('採点後の遅延した途中保存を拒否して採点時の解答を保持する', function () {
+    $answers = correctAnswers($this->exam);
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id,
+        'time_limit_minutes' => 120,
+        'started_at' => now(),
+        'answers' => $answers,
+    ]);
+
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+    actingAs($this->user)->patchJson("/mock-attempts/{$attempt->id}", [
+        'answers' => [],
+    ])->assertStatus(422);
+
+    expect($attempt->refresh()->answers)->toBe($answers)
+        ->and($attempt->score)->toBe(100);
+});
+
 test('知識35問正解で70点となり合格判定される', function () {
     $answers = collect(correctAnswers($this->exam))->take(35)->all();
     $attempt = $this->user->mockExamAttempts()->create([

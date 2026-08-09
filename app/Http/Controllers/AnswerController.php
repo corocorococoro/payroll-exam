@@ -29,9 +29,10 @@ class AnswerController extends Controller
             'lesson_id' => ['nullable', 'integer', 'exists:lessons,id'],
         ]);
 
-        $question = Question::where('is_active', true)->findOrFail((int) $validated['question_id']);
+        $question = Question::query()->published()->findOrFail((int) $validated['question_id']);
         $context = AttemptContext::from($validated['context']);
         $lessonId = isset($validated['lesson_id']) ? (int) $validated['lesson_id'] : null;
+        $runStartedAt = null;
 
         if ($context === AttemptContext::Lesson) {
             abort_if($lessonId === null, 422, 'レッスンIDが必要です。');
@@ -47,11 +48,13 @@ class AnswerController extends Controller
                 'この問題は現在のレッスンには含まれていません。',
             );
 
+            $runStartedAt = CarbonImmutable::parse($run['started_at']);
+
             $alreadyAnswered = $request->user()->attempts()
                 ->where('question_id', $question->id)
                 ->where('lesson_id', $lesson->id)
                 ->where('context', AttemptContext::Lesson)
-                ->where('created_at', '>=', CarbonImmutable::parse($run['started_at']))
+                ->where('created_at', '>=', $runStartedAt)
                 ->exists();
             abort_if($alreadyAnswered, 422, 'この問題にはすでに解答済みです。');
         } else {
@@ -69,6 +72,7 @@ class AnswerController extends Controller
             $validated['answer'],
             $context,
             $lessonId,
+            $runStartedAt,
         );
 
         return response()->json($result);

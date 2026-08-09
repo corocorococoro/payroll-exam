@@ -7,7 +7,9 @@ use App\Enums\QuestionType;
 use App\Models\Question;
 use App\Models\ReviewItem;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 /**
  * 解答判定はすべてサーバー側で行う（正解のフロント漏洩・XPチート防止）。
@@ -18,9 +20,52 @@ class AnswerService
     /**
      * @return array{correct: bool, correct_answer: string, explanation: string, common_mistake: string|null, selected_feedback: string|null, xp_earned: int}
      */
-    public function answer(User $user, Question $question, string $given, AttemptContext $context, ?int $lessonId = null): array
-    {
-        return DB::transaction(function () use ($user, $question, $given, $context, $lessonId) {
+    public function answer(
+        User $user,
+        Question $question,
+        string $given,
+        AttemptContext $context,
+        ?int $lessonId = null,
+        ?CarbonImmutable $runStartedAt = null,
+    ): array {
+        return DB::transaction(function () use ($user, $question, $given, $context, $lessonId, $runStartedAt) {
+            // 同一ユーザーの採点処理を直列化し、二重クリックや通信再送でも
+            // XP・クエスト・復習状態を二重更新しない。
+            $user = User::query()->lockForUpdate()->findOrFail($user->id);
+
+            if ($context === AttemptContext::Lesson) {
+                if ($lessonId === null || $runStartedAt === null) {
+                    throw ValidationException::withMessages([
+                        'question_id' => '有効なレッスンセッションがありません。',
+                    ]);
+                }
+
+                $alreadyAnswered = $user->attempts()
+                    ->where('question_id', $question->id)
+                    ->where('lesson_id', $lessonId)
+                    ->where('context', AttemptContext::Lesson)
+                    ->where('created_at', '>=', $runStartedAt)
+                    ->exists();
+
+                if ($alreadyAnswered) {
+                    throw ValidationException::withMessages([
+                        'question_id' => 'この問題にはすでに解答済みです。',
+                    ]);
+                }
+            } else {
+                $isDue = $user->reviewItems()
+                    ->where('question_id', $question->id)
+                    ->whereDate('due_date', '<=', today())
+                    ->lockForUpdate()
+                    ->exists();
+
+                if (! $isDue) {
+                    throw ValidationException::withMessages([
+                        'question_id' => 'この問題は現在の復習対象ではありません。',
+                    ]);
+                }
+            }
+
             $correct = $question->checkAnswer($given);
             $xp = $correct ? $question->difficulty->xp() : 0;
 

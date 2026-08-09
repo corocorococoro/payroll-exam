@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\DailyActivity;
+use App\Models\Question;
 use App\Models\QuestionAttempt;
 use App\Models\Unit;
 use App\Services\DailyQuestService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Inertia\Inertia;
@@ -106,7 +108,13 @@ class DashboardController extends Controller
                 'current_streak' => $stat->current_streak,
                 'longest_streak' => $stat->longest_streak,
                 'streak_freezes' => $stat->streak_freezes,
-                'review_due' => $user->reviewItems()->whereDate('due_date', '<=', today())->count(),
+                'review_due' => $user->reviewItems()
+                    ->whereDate('due_date', '<=', today())
+                    ->whereHas('question', function (Builder $query): void {
+                        /** @var Builder<Question> $query */
+                        $query->published();
+                    })
+                    ->count(),
                 'days_to_exam' => (int) today()->diffInDays($user->exam_date ?? '2026-11-22', false),
                 'estimated_score' => (int) round($estimatedScore),
                 'score_evidence' => $latestAttempts->count(),

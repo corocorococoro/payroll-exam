@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use App\Models\LessonProgress;
 use App\Models\ReferenceSheet;
+use App\Models\User;
 use App\Services\AnswerService;
 use App\Services\LessonRunService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -79,30 +81,43 @@ class LessonController extends Controller
             return response()->json(['message' => '有効なレッスンセッションがありません。'], 422);
         }
 
-        $answeredCount = $user->attempts()
-            ->where('lesson_id', $lesson->id)
-            ->where('context', 'lesson')
-            ->where('created_at', '>=', CarbonImmutable::parse($run['started_at']))
-            ->whereIn('question_id', $run['question_ids'])
-            ->distinct()
-            ->count('question_id');
+        $runStartedAt = CarbonImmutable::parse($run['started_at']);
 
-        if ($answeredCount < count($run['question_ids'])) {
-            return response()->json(['message' => 'レッスンが完了していません。'], 422);
-        }
+        $progress = DB::transaction(function () use ($user, $lesson, $run, $runStartedAt, $answerService): LessonProgress {
+            $user = User::query()->lockForUpdate()->findOrFail($user->id);
 
-        $progress = $user->lessonProgresses()->firstOrCreate(
-            ['lesson_id' => $lesson->id],
-            ['crown_level' => 0, 'completed_count' => 0],
-        );
+            $answeredCount = $user->attempts()
+                ->where('lesson_id', $lesson->id)
+                ->where('context', 'lesson')
+                ->where('created_at', '>=', $runStartedAt)
+                ->whereIn('question_id', $run['question_ids'])
+                ->distinct()
+                ->count('question_id');
 
-        $progress->update([
-            'crown_level' => min(LessonProgress::MAX_CROWN, $progress->crown_level + 1),
-            'completed_count' => $progress->completed_count + 1,
-            'last_completed_at' => now(),
-        ]);
+            if ($answeredCount < count($run['question_ids'])) {
+                abort(422, 'レッスンが完了していません。');
+            }
 
-        $answerService->awardXp($user, self::COMPLETION_BONUS_XP);
+            $progress = $user->lessonProgresses()->firstOrCreate(
+                ['lesson_id' => $lesson->id],
+                ['crown_level' => 0, 'completed_count' => 0],
+            );
+
+            if ($progress->last_completed_at?->greaterThanOrEqualTo($runStartedAt)) {
+                abort(422, 'このレッスンセッションは完了済みです。');
+            }
+
+            $progress->update([
+                'crown_level' => min(LessonProgress::MAX_CROWN, $progress->crown_level + 1),
+                'completed_count' => $progress->completed_count + 1,
+                'last_completed_at' => now(),
+            ]);
+
+            $answerService->awardXp($user, self::COMPLETION_BONUS_XP);
+
+            return $progress;
+        });
+
         $runs->clear($request, $lesson);
 
         $stat = $user->statOrCreate()->refresh();

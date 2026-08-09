@@ -5,6 +5,12 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
+const wayfinderCommand =
+    process.env.WAYFINDER_COMMAND ??
+    (process.env.CI
+        ? 'php artisan wayfinder:generate'
+        : 'docker compose exec -T app php artisan wayfinder:generate');
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -26,9 +32,8 @@ export default defineConfig({
             : [
                   wayfinder({
                       formVariants: true,
-                      // ホストに PHP がないため、Docker の app コンテナ経由で生成する
-                      command:
-                          'docker compose exec -T app php artisan wayfinder:generate --with-form',
+                      // ローカルはDocker、CIはsetup-phpで用意したPHPを使う。
+                      command: wayfinderCommand,
                   }),
               ]),
     ],

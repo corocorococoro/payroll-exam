@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\User;
-use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\User as SocialiteUser;
 
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertAuthenticatedAs;
@@ -18,16 +18,15 @@ beforeEach(function () {
 
 function fakeGoogleUser(string $id = 'google-123', string $email = 'taro@example.com', string $name = '検定 太郎'): SocialiteUser
 {
-    $user = Mockery::mock(SocialiteUser::class);
-    $user->allows([
-        'getId' => $id,
-        'getEmail' => $email,
-        'getName' => $name,
-        'getNickname' => null,
-        'getAvatar' => 'https://example.com/avatar.png',
-    ]);
-
-    return $user;
+    return (new SocialiteUser)
+        ->setRaw(['email_verified' => true])
+        ->map([
+            'id' => $id,
+            'email' => $email,
+            'name' => $name,
+            'nickname' => null,
+            'avatar' => 'https://example.com/avatar.png',
+        ]);
 }
 
 test('google redirect はGoogleの認可画面へ飛ばす', function () {
@@ -65,6 +64,16 @@ test('google callback で既存メールのユーザーに紐付けされる', f
     assertAuthenticatedAs($existing);
     expect($existing->refresh()->google_id)->toBe('google-123');
     expect(User::count())->toBe(1);
+});
+
+test('未検証メールのgoogle callbackを拒否する', function () {
+    $googleUser = fakeGoogleUser();
+    $googleUser->setRaw(['email_verified' => false]);
+    Socialite::shouldReceive('driver->user')->andReturn($googleUser);
+
+    get('/auth/google/callback')->assertForbidden();
+
+    expect(User::count())->toBe(0);
 });
 
 test('dev-login はテスト/ローカル環境でワンクリックログインできる', function () {
