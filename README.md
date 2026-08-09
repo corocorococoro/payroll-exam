@@ -48,6 +48,8 @@ PHP側の品質ゲートにはPint、PHPStan、Pestが含まれます。計算�
 
 `railway.toml` とマルチステージDockerfileを同梱しています。アプリサービスにPostgreSQLを接続し、次の環境変数を設定してください。
 
+公開環境: https://payroll-exam-production.up.railway.app
+
 ```text
 APP_ENV=production
 APP_DEBUG=false
@@ -58,9 +60,12 @@ DATABASE_URL=${{Postgres.DATABASE_URL}}
 SESSION_DRIVER=database
 CACHE_STORE=database
 QUEUE_CONNECTION=database
+MAIL_MAILER=log
 ```
 
-Googleログインやメール送信を利用する場合は、各プロバイダーの認証情報も設定してください。未設定のログイン手段は本番画面に表示されません。
+Googleログインには `GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`GOOGLE_REDIRECT_URI` を設定します。未設定の場合はログイン画面に表示されません。
+
+本番メール配送はバックログです。配送プロバイダーと送信ドメイン認証を整備するまでは `MAIL_MAILER=log` を維持し、外部へメールを送信しません。詳細は [plan.md](plan.md#バックログ) を参照してください。
 
 ## 技術構成
 
