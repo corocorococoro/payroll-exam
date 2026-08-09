@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\Difficulty;
+use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
 use App\Models\Lesson;
 use App\Models\Question;
@@ -20,6 +21,7 @@ class QuestionImportService
 
         return DB::transaction(function () use ($rows): int {
             $count = 0;
+            $normalizedTexts = [];
 
             foreach ($rows as $index => $row) {
                 $data = $this->normalize($row);
@@ -27,6 +29,7 @@ class QuestionImportService
                     'unit' => ['required', 'string', 'exists:units,slug'],
                     'lesson' => ['nullable', 'string'],
                     'source_id' => ['required', 'string', 'max:100'],
+                    'concept_key' => ['required', 'string', 'max:100'],
                     'type' => ['required', Rule::enum(QuestionType::class)],
                     'category' => ['required', 'string'],
                     'difficulty' => ['required', Rule::enum(Difficulty::class)],
@@ -35,7 +38,25 @@ class QuestionImportService
                     'choices' => ['nullable', 'array'],
                     'answer' => ['required', 'array'],
                     'explanation' => ['required', 'string'],
+                    'source_urls' => ['required', 'array', 'min:1'],
+                    'source_urls.*' => ['required', 'url'],
                 ])->validate();
+
+                $normalizedText = $this->normalizeQuestionText($validated['question_text']);
+                if (isset($normalizedTexts[$normalizedText])) {
+                    throw new RuntimeException('行'.($index + 1).": 同一問題文がファイル内にあります（{$normalizedTexts[$normalizedText]}）。");
+                }
+                $normalizedTexts[$normalizedText] = $validated['source_id'];
+
+                $duplicate = Question::query()
+                    ->published()
+                    ->where('source_id', '!=', $validated['source_id'])
+                    ->get(['source_id', 'question_text'])
+                    ->first(fn (Question $question): bool => $this->normalizeQuestionText($question->question_text) === $normalizedText);
+
+                if ($duplicate !== null) {
+                    throw new RuntimeException('行'.($index + 1).": 公開問題{$duplicate->source_id}と同一の問題文です。");
+                }
 
                 $unit = Unit::where('slug', $validated['unit'])->firstOrFail();
                 $lessonId = null;
@@ -49,21 +70,47 @@ class QuestionImportService
                     }
                 }
 
-                Question::updateOrCreate(['source_id' => $validated['source_id']], [
-                    'unit_id' => $unit->id,
-                    'lesson_id' => $lessonId,
+                $content = [
                     'type' => $validated['type'],
-                    'category' => $validated['category'],
-                    'difficulty' => $validated['difficulty'],
-                    'fiscal_year' => $validated['fiscal_year'],
                     'question_text' => $validated['question_text'],
                     'choices' => $validated['choices'] ?? null,
                     'answer' => $validated['answer'],
                     'explanation' => $validated['explanation'],
                     'common_mistake' => $data['common_mistake'] ?? null,
                     'calc_params' => $data['calc_params'] ?? null,
+                ];
+                $contentHash = Question::contentHash($content);
+                $existing = Question::where('source_id', $validated['source_id'])->first();
+                $contentChanged = $existing !== null && $existing->content_hash !== $contentHash;
+
+                Question::updateOrCreate(['source_id' => $validated['source_id']], [
+                    'unit_id' => $unit->id,
+                    'lesson_id' => $lessonId,
+                    'concept_key' => $validated['concept_key'],
+                    'type' => $content['type'],
+                    'category' => $validated['category'],
+                    'difficulty' => $validated['difficulty'],
+                    'review_status' => $existing === null
+                        ? QuestionReviewStatus::Draft
+                        : ($contentChanged ? QuestionReviewStatus::InReview : $existing->review_status),
+                    'content_revision' => $existing === null
+                        ? 1
+                        : $existing->content_revision + ($contentChanged ? 1 : 0),
+                    'content_hash' => $contentHash,
+                    'reviewed_content_hash' => $existing?->reviewed_content_hash,
+                    'fiscal_year' => $validated['fiscal_year'],
+                    'question_text' => $content['question_text'],
+                    'choices' => $content['choices'],
+                    'answer' => $content['answer'],
+                    'explanation' => $content['explanation'],
+                    'common_mistake' => $content['common_mistake'],
+                    'calc_params' => $content['calc_params'],
                     'reference_sheet_slugs' => $data['reference_sheet_slugs'] ?? [],
-                    'is_active' => $data['is_active'] ?? true,
+                    'source_urls' => $validated['source_urls'],
+                    'review_notes' => $data['review_notes'] ?? $existing?->review_notes,
+                    'reviewed_at' => $contentChanged ? null : $existing?->reviewed_at,
+                    'review_due_at' => $contentChanged ? null : $existing?->review_due_at,
+                    'is_active' => $contentChanged || $existing === null ? false : $existing->is_active,
                 ]);
                 $count++;
             }
@@ -125,5 +172,12 @@ class QuestionImportService
         $row['is_active'] = filter_var($row['is_active'] ?? true, FILTER_VALIDATE_BOOL);
 
         return $row;
+    }
+
+    private function normalizeQuestionText(string $text): string
+    {
+        $normalized = mb_strtolower(mb_convert_kana($text, 'asKV'));
+
+        return preg_replace('/[\s　、。,.・「」『』（）()！？!?:：;；]/u', '', $normalized) ?? $normalized;
     }
 }

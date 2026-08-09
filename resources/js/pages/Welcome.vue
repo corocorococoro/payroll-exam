@@ -15,7 +15,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
     <Head title="給与計算実務能力検定2級">
         <meta
             name="description"
-            content="給与計算実務能力検定2級の合格に向けて、短いレッスン・復習・本番形式模試を一つにした学習アプリ。"
+            content="給与計算実務能力検定2級の合格に向けて、短いレッスン・復習・公式公開仕様に合わせた診断模試を一つにした学習アプリ。"
         />
     </Head>
 
@@ -74,12 +74,12 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     <h1
                         class="text-4xl leading-tight font-bold tracking-tight text-[#323232] sm:text-5xl dark:text-white"
                     >
-                        毎日7問。<br />合格まで、迷わない。
+                        毎日ひと区切り。<br />合格まで、迷わない。
                     </h1>
                     <p
                         class="mt-5 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300"
                     >
-                        労働法、給与計算、税、社会保険を短いレッスンで積み上げ、忘れた問題は自動で復習。本番形式の40問模試まで、一つの学習ループで仕上げます。
+                        労働法、給与計算、税、社会保険を短いレッスンで積み上げ、忘れた問題は自動で復習。40問の診断模試まで、一つの学習ループで仕上げます。
                     </p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <Link
@@ -108,7 +108,8 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-gray-500"
                     >
                         <span class="flex items-center gap-1.5"
-                            ><Clock3 class="size-4 text-sky-500" />1回7問</span
+                            ><Clock3 class="size-4 text-sky-500" />1回
+                            最大7問</span
                         >
                         <span class="flex items-center gap-1.5"
                             ><Trophy
@@ -138,7 +139,9 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     <div
                         class="absolute right-6 bottom-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >
-                        <p class="text-xs font-bold text-gray-400">本番形式</p>
+                        <p class="text-xs font-bold text-gray-400">
+                            公式公開仕様
+                        </p>
                         <p class="text-lg font-bold text-emerald-500">
                             40問 / 120分
                         </p>

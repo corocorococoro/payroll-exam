@@ -4,19 +4,17 @@ use App\Models\Lesson;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
 use Database\Seeders\GamificationSeeder;
-use Database\Seeders\GeneratedContentSeeder;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    seed([ContentSeeder::class, GeneratedContentSeeder::class, GamificationSeeder::class]);
+    seed([ContentSeeder::class, GamificationSeeder::class]);
 });
 
 test('解答でクエスト・報酬XP・週間リーグ・初回バッジが更新される', function () {
     $user = User::factory()->create(['daily_goal' => 20, 'onboarded' => true])->refresh();
-    $lesson = Lesson::whereHas('unit', fn ($query) => $query->where('slug', 'roudou'))
-        ->orderBy('sort_order')->firstOrFail();
+    $lesson = Lesson::where('slug', 'nencho-kiso')->firstOrFail();
     $questions = $lesson->questions()->limit(5)->get();
     $run = lessonRun(...$questions);
 

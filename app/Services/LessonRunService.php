@@ -28,13 +28,33 @@ class LessonRunService
             }
         }
 
+        $candidates = $lesson->questions()
+            ->get(['id', 'concept_key'])
+            ->shuffle()
+            ->unique(fn ($question): string => $question->concept_key ?? "question-{$question->id}")
+            ->values();
+
+        $lastAttempts = $request->user()->attempts()
+            ->whereIn('question_id', $candidates->pluck('id'))
+            ->selectRaw('question_id, MAX(created_at) AS last_attempted_at')
+            ->groupBy('question_id')
+            ->pluck('last_attempted_at', 'question_id');
+
+        $unseen = $candidates
+            ->reject(fn ($question): bool => $lastAttempts->has($question->id))
+            ->shuffle();
+        $seen = $candidates
+            ->filter(fn ($question): bool => $lastAttempts->has($question->id))
+            ->sortBy(fn ($question): string => (string) $lastAttempts[$question->id]);
+
         /** @var list<int> $questionIds */
-        $questionIds = array_values($lesson->questions()
-            ->inRandomOrder()
-            ->limit(self::QUESTION_COUNT)
+        $questionIds = $unseen
+            ->concat($seen)
+            ->take(self::QUESTION_COUNT)
             ->pluck('id')
             ->map(fn ($id): int => (int) $id)
-            ->all());
+            ->values()
+            ->all();
 
         $run = [
             'question_ids' => $questionIds,

@@ -19,6 +19,6 @@ class Lesson extends Model
     /** @return HasMany<Question, $this> */
     public function questions(): HasMany
     {
-        return $this->hasMany(Question::class)->where('is_active', true);
+        return $this->hasMany(Question::class)->published();
     }
 }

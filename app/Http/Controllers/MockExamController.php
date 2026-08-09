@@ -13,7 +13,12 @@ class MockExamController extends Controller
     public function index(Request $request): Response
     {
         $course = Course::where('slug', 'kyuyo-2kyu')->firstOrFail();
-        $exams = $course->mockExams()->withCount('examQuestions')->get();
+        $exams = $course->mockExams()
+            ->where('is_published', true)
+            ->withCount('examQuestions')
+            ->get()
+            ->filter(fn (MockExam $exam): bool => $exam->isAvailableForNewAttempt())
+            ->values();
         $attempts = $request->user()->mockExamAttempts()
             ->latest('started_at')
             ->get()

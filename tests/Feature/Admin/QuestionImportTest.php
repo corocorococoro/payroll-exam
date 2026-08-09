@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuestionReviewStatus;
 use App\Models\Question;
 use App\Services\QuestionImportService;
 use Database\Seeders\ContentSeeder;
@@ -13,6 +14,7 @@ test('JSONから問題を検証付きでインポートできる', function () {
         'unit' => 'roudou',
         'lesson' => 'chingin-shiharai',
         'source_id' => 'import-test-001',
+        'concept_key' => 'import-test-concept',
         'type' => 'choice',
         'category' => '労働法・勤怠',
         'difficulty' => 'easy',
@@ -22,10 +24,13 @@ test('JSONから問題を検証付きでインポートできる', function () {
         'answer' => ['choice' => 'A'],
         'explanation' => '検証用解説',
         'common_mistake' => '検証用ミス',
+        'source_urls' => ['https://example.com/source'],
     ]], JSON_THROW_ON_ERROR));
 
     $count = app(QuestionImportService::class)->import($path, 'json');
 
     expect($count)->toBe(1)
-        ->and(Question::where('source_id', 'import-test-001')->value('question_text'))->toBe('インポート確認問題');
+        ->and(Question::where('source_id', 'import-test-001')->value('question_text'))->toBe('インポート確認問題')
+        ->and(Question::where('source_id', 'import-test-001')->firstOrFail()->review_status)->toBe(QuestionReviewStatus::Draft)
+        ->and(Question::where('source_id', 'import-test-001')->value('is_active'))->toBeFalse();
 });

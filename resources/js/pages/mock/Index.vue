@@ -55,7 +55,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                 <h1
                     class="text-xl font-semibold text-gray-700 dark:text-gray-100"
                 >
-                    本番形式 模擬試験
+                    2級 診断模試
                 </h1>
                 <p class="text-xs text-gray-500">40問・100点満点・70点合格</p>
             </div>

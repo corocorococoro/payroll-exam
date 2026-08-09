@@ -2,12 +2,17 @@
 
 namespace App\Filament\Resources\Questions\Tables;
 
+use App\Enums\QuestionReviewStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class QuestionsTable
 {
@@ -21,6 +26,9 @@ class QuestionsTable
                     ->searchable(),
                 TextColumn::make('source_id')
                     ->searchable(),
+                TextColumn::make('concept_key')
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('type')
                     ->badge()
                     ->searchable(),
@@ -29,6 +37,17 @@ class QuestionsTable
                 TextColumn::make('difficulty')
                     ->badge()
                     ->searchable(),
+                TextColumn::make('review_status')
+                    ->badge()
+                    ->formatStateUsing(fn (QuestionReviewStatus $state): string => $state->label()),
+                TextColumn::make('content_revision')
+                    ->label('版')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('review_due_at')
+                    ->label('次回レビュー')
+                    ->dateTime()
+                    ->sortable(),
                 TextColumn::make('fiscal_year')
                     ->numeric()
                     ->sortable(),
@@ -44,7 +63,16 @@ class QuestionsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('review_status')
+                    ->options(collect(QuestionReviewStatus::cases())->mapWithKeys(
+                        fn (QuestionReviewStatus $status): array => [$status->value => $status->label()],
+                    )->all()),
+                TernaryFilter::make('is_active'),
+                Filter::make('review_due')
+                    ->label('レビュー期限切れ')
+                    ->query(fn (Builder $query): Builder => $query
+                        ->whereNotNull('review_due_at')
+                        ->where('review_due_at', '<=', now())),
             ])
             ->recordActions([
                 EditAction::make(),

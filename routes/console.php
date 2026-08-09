@@ -11,3 +11,4 @@ Artisan::command('inspire', function () {
 Schedule::command('streaks:maintain')->dailyAt('00:05')->withoutOverlapping();
 Schedule::command('quests:generate')->dailyAt('00:01')->withoutOverlapping();
 Schedule::command('reminders:send')->everyMinute()->withoutOverlapping();
+Schedule::command('content:audit')->weeklyOn(1, '08:00')->withoutOverlapping();

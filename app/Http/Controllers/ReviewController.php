@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\ReferenceSheet;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -13,6 +15,10 @@ class ReviewController extends Controller
     {
         $items = $request->user()->reviewItems()
             ->whereDate('due_date', '<=', today())
+            ->whereHas('question', function (Builder $query): void {
+                /** @var Builder<Question> $query */
+                $query->published();
+            })
             ->with('question.unit')
             ->orderBy('due_date')
             ->get();

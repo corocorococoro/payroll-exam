@@ -17,6 +17,8 @@ class MockExamAttemptController extends Controller
 {
     public function store(Request $request, MockExam $mockExam): RedirectResponse
     {
+        abort_unless($mockExam->isAvailableForNewAttempt(), 404);
+
         $validated = $request->validate([
             'mode' => ['required', Rule::in(['standard', 'compressed'])],
         ]);

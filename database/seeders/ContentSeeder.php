@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
 use App\Models\Course;
 use App\Models\Lesson;
@@ -89,6 +90,16 @@ class ContentSeeder extends Seeder
                 $this->validateQuestion($q);
 
                 $lessonKey = $q['unit'].'/'.$q['lesson'];
+                $content = [
+                    'type' => $q['type'],
+                    'question_text' => $q['question_text'],
+                    'choices' => $q['choices'],
+                    'answer' => $q['answer'],
+                    'explanation' => $q['explanation'],
+                    'common_mistake' => $q['common_mistake'],
+                    'calc_params' => $q['calc_params'],
+                ];
+                $contentHash = Question::contentHash($content);
 
                 Question::updateOrCreate(
                     ['source_id' => $q['source_id']],
@@ -97,22 +108,62 @@ class ContentSeeder extends Seeder
                         'lesson_id' => $q['lesson'] !== null
                             ? ($lessons[$lessonKey] ?? throw new RuntimeException("Unknown lesson {$lessonKey}"))->id
                             : null,
-                        'type' => $q['type'],
+                        'concept_key' => $q['concept_key'] ?? $q['source_id'],
+                        'type' => $content['type'],
                         'category' => $q['category'],
                         'difficulty' => $q['difficulty'],
+                        'review_status' => QuestionReviewStatus::Approved,
+                        'content_revision' => $q['content_revision'] ?? 1,
+                        'content_hash' => $contentHash,
+                        'reviewed_content_hash' => $contentHash,
                         'fiscal_year' => self::FISCAL_YEAR,
-                        'question_text' => $q['question_text'],
-                        'choices' => $q['choices'],
-                        'answer' => $q['answer'],
-                        'explanation' => $q['explanation'],
-                        'common_mistake' => $q['common_mistake'],
-                        'calc_params' => $q['calc_params'],
+                        'question_text' => $content['question_text'],
+                        'choices' => $content['choices'],
+                        'answer' => $content['answer'],
+                        'explanation' => $content['explanation'],
+                        'common_mistake' => $content['common_mistake'],
+                        'calc_params' => $content['calc_params'],
                         'reference_sheet_slugs' => $q['reference_sheet_slugs'],
+                        'source_urls' => $q['source_urls'] ?? $this->sourceUrls($q['source_id']),
+                        'review_notes' => $q['review_notes'] ?? '2026年度の公表一次資料で確認。試験基準日の2026-09-01経過後に再レビューする。',
+                        'reviewed_at' => $q['reviewed_at'] ?? '2026-08-09 00:00:00',
+                        'review_due_at' => $q['review_due_at'] ?? '2026-09-02 00:00:00',
                         'is_active' => true,
                     ],
                 );
             }
         }
+    }
+
+    /** @return list<string> */
+    private function sourceUrls(string $sourceId): array
+    {
+        $number = (int) substr($sourceId, 4);
+        $exam = 'https://jitsumu-up.jp/about/';
+
+        return match (true) {
+            $number <= 11, $number === 36 => [
+                $exam,
+                'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html',
+            ],
+            $number <= 15, $number === 40 => [
+                $exam,
+                'https://www.nta.go.jp/users/gensen/2026tsukin/index.htm',
+            ],
+            $number <= 21, in_array($number, [38, 39], true) => [
+                $exam,
+                'https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf',
+            ],
+            $number <= 35, in_array($number, [37, 48], true) => [
+                $exam,
+                'https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html',
+                'https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html',
+            ],
+            default => [
+                $exam,
+                'https://www.nta.go.jp/users/gensen/2026kiso/index.htm',
+            ],
+        };
     }
 
     /**
@@ -162,6 +213,7 @@ class ContentSeeder extends Seeder
                     'time_limit_minutes' => $examData['time_limit_minutes'],
                     'passing_score' => $examData['passing_score'],
                     'sort_order' => $examData['sort_order'],
+                    'is_published' => true,
                 ],
             );
 

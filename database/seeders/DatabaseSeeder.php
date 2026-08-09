@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ContentSeeder::class,
-            GeneratedContentSeeder::class,
             GamificationSeeder::class,
         ]);
     }
