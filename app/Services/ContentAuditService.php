@@ -43,11 +43,24 @@ class ContentAuditService
                 'answer',
                 'explanation',
                 'common_mistake',
+                'distractor_feedback',
                 'calc_params',
             ]));
 
             if ($question->concept_key === null || trim($question->concept_key) === '') {
                 $errors[] = "{$id}: concept_keyがありません。";
+            }
+
+            if ($question->learning_objective === null || trim($question->learning_objective) === '') {
+                $errors[] = "{$id}: learning_objectiveがありません。";
+            }
+
+            if ($question->variant_role === null) {
+                $errors[] = "{$id}: variant_roleがありません。";
+            }
+
+            if ($question->misconception_key === null || trim($question->misconception_key) === '') {
+                $errors[] = "{$id}: misconception_keyがありません。";
             }
 
             if ($question->source_urls === null || $question->source_urls === []) {
@@ -92,6 +105,7 @@ class ContentAuditService
             $errors[] = '同一問題文: '.$group->pluck('source_id')->implode(', ');
         }
 
+        $this->auditLearningObjectives($questions, $errors);
         $this->appendNearDuplicateWarnings($questions, $warnings);
         $this->auditMockExams($errors);
 
@@ -100,6 +114,8 @@ class ContentAuditService
             'warnings' => array_values(array_unique($warnings)),
             'stats' => [
                 'published_questions' => $questions->count(),
+                'learning_objectives' => $questions->pluck('concept_key')->unique()->count(),
+                'variant_roles' => $questions->pluck('variant_role')->unique()->count(),
                 'retired_generated_questions' => Question::query()
                     ->where('source_id', 'like', 'gen-%')
                     ->where('review_status', QuestionReviewStatus::Retired->value)
@@ -108,6 +124,42 @@ class ContentAuditService
                 'reviews_due' => $reviewCandidates->filter(fn (Question $question): bool => $question->review_due_at?->isPast() ?? false)->count(),
             ],
         ];
+    }
+
+    /**
+     * @param  Collection<int, Question>  $questions
+     * @param  list<string>  $errors
+     */
+    private function auditLearningObjectives(Collection $questions, array &$errors): void
+    {
+        foreach ($questions->groupBy('concept_key') as $conceptKey => $variants) {
+            if ($variants->count() !== 2) {
+                $errors[] = "concept_key={$conceptKey}: 意味の異なる2変種で構成する必要があります（現在{$variants->count()}問）。";
+            }
+
+            $roles = $variants
+                ->map(fn (Question $question): ?string => $question->variant_role?->value)
+                ->filter()
+                ->unique();
+
+            if ($roles->count() !== $variants->count()) {
+                $errors[] = "concept_key={$conceptKey}: 同じvariant_roleが重複しています。";
+            }
+
+            if ($variants->pluck('learning_objective')->filter()->unique()->count() !== 1) {
+                $errors[] = "concept_key={$conceptKey}: learning_objectiveが変種間で一致していません。";
+            }
+
+            $hasTargetedFeedback = $variants->contains(
+                fn (Question $question): bool => $question->type === QuestionType::Choice
+                    && is_array($question->distractor_feedback)
+                    && $question->distractor_feedback !== [],
+            );
+
+            if (! $hasTargetedFeedback) {
+                $errors[] = "concept_key={$conceptKey}: 誤答選択肢別のフィードバックが1問もありません。";
+            }
+        }
     }
 
     /**

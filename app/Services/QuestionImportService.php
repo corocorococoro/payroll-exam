@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\Difficulty;
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Enums\QuestionVariantRole;
 use App\Models\Lesson;
 use App\Models\Question;
 use App\Models\Unit;
@@ -30,6 +31,9 @@ class QuestionImportService
                     'lesson' => ['nullable', 'string'],
                     'source_id' => ['required', 'string', 'max:100'],
                     'concept_key' => ['required', 'string', 'max:100'],
+                    'learning_objective' => ['required', 'string'],
+                    'variant_role' => ['required', Rule::enum(QuestionVariantRole::class)],
+                    'misconception_key' => ['nullable', 'string', 'max:100'],
                     'type' => ['required', Rule::enum(QuestionType::class)],
                     'category' => ['required', 'string'],
                     'difficulty' => ['required', Rule::enum(Difficulty::class)],
@@ -38,6 +42,7 @@ class QuestionImportService
                     'choices' => ['nullable', 'array'],
                     'answer' => ['required', 'array'],
                     'explanation' => ['required', 'string'],
+                    'distractor_feedback' => ['nullable', 'array'],
                     'source_urls' => ['required', 'array', 'min:1'],
                     'source_urls.*' => ['required', 'url'],
                 ])->validate();
@@ -77,6 +82,7 @@ class QuestionImportService
                     'answer' => $validated['answer'],
                     'explanation' => $validated['explanation'],
                     'common_mistake' => $data['common_mistake'] ?? null,
+                    'distractor_feedback' => $validated['distractor_feedback'] ?? null,
                     'calc_params' => $data['calc_params'] ?? null,
                 ];
                 $contentHash = Question::contentHash($content);
@@ -87,6 +93,9 @@ class QuestionImportService
                     'unit_id' => $unit->id,
                     'lesson_id' => $lessonId,
                     'concept_key' => $validated['concept_key'],
+                    'learning_objective' => $validated['learning_objective'],
+                    'variant_role' => $validated['variant_role'],
+                    'misconception_key' => $validated['misconception_key'] ?? null,
                     'type' => $content['type'],
                     'category' => $validated['category'],
                     'difficulty' => $validated['difficulty'],
@@ -104,6 +113,7 @@ class QuestionImportService
                     'answer' => $content['answer'],
                     'explanation' => $content['explanation'],
                     'common_mistake' => $content['common_mistake'],
+                    'distractor_feedback' => $content['distractor_feedback'],
                     'calc_params' => $content['calc_params'],
                     'reference_sheet_slugs' => $data['reference_sheet_slugs'] ?? [],
                     'source_urls' => $validated['source_urls'],
@@ -161,7 +171,7 @@ class QuestionImportService
      */
     private function normalize(array $row): array
     {
-        foreach (['choices', 'answer', 'calc_params', 'reference_sheet_slugs'] as $key) {
+        foreach (['choices', 'answer', 'distractor_feedback', 'calc_params', 'reference_sheet_slugs'] as $key) {
             $csvKey = $key.'_json';
             if (isset($row[$csvKey]) && is_string($row[$csvKey]) && $row[$csvKey] !== '') {
                 $row[$key] = json_decode($row[$csvKey], true, 512, JSON_THROW_ON_ERROR);

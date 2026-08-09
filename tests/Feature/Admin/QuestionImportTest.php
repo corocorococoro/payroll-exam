@@ -15,6 +15,9 @@ test('JSONから問題を検証付きでインポートできる', function () {
         'lesson' => 'chingin-shiharai',
         'source_id' => 'import-test-001',
         'concept_key' => 'import-test-concept',
+        'learning_objective' => '問題インポートの正誤を判定できる',
+        'variant_role' => 'recall',
+        'misconception_key' => 'import-test-mistake',
         'type' => 'choice',
         'category' => '労働法・勤怠',
         'difficulty' => 'easy',
@@ -24,6 +27,7 @@ test('JSONから問題を検証付きでインポートできる', function () {
         'answer' => ['choice' => 'A'],
         'explanation' => '検証用解説',
         'common_mistake' => '検証用ミス',
+        'distractor_feedback' => ['B' => 'Aが正答です。'],
         'source_urls' => ['https://example.com/source'],
     ]], JSON_THROW_ON_ERROR));
 

@@ -28,6 +28,7 @@ export type AnswerResult = {
     correct_answer: string;
     explanation: string;
     common_mistake: string | null;
+    selected_feedback: string | null;
     xp_earned: number;
 };
 

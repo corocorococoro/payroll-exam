@@ -14,7 +14,7 @@ beforeEach(function () {
 
 test('解答でクエスト・報酬XP・週間リーグ・初回バッジが更新される', function () {
     $user = User::factory()->create(['daily_goal' => 20, 'onboarded' => true])->refresh();
-    $lesson = Lesson::where('slug', 'nencho-kiso')->firstOrFail();
+    $lesson = Lesson::where('slug', 'kyuyo-keisan')->firstOrFail();
     $questions = $lesson->questions()->limit(5)->get();
     $run = lessonRun(...$questions);
 

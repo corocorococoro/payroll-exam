@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Questions\Schemas;
 use App\Enums\Difficulty;
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Enums\QuestionVariantRole;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Repeater;
@@ -28,8 +29,21 @@ class QuestionForm
                     ->relationship('lesson', 'name'),
                 TextInput::make('source_id'),
                 TextInput::make('concept_key')
-                    ->helperText('同じ知識・計算パターンの派生問題は同じキーにします。')
+                    ->helperText('同じ学習目標を測る問題は、聞き方が違っても同じキーにします。')
                     ->required(),
+                Textarea::make('learning_objective')
+                    ->label('この問題で何ができるようになるか')
+                    ->required()
+                    ->columnSpanFull(),
+                Select::make('variant_role')
+                    ->label('問題の役割')
+                    ->options(collect(QuestionVariantRole::cases())->mapWithKeys(
+                        fn (QuestionVariantRole $role): array => [$role->value => $role->label()],
+                    )->all())
+                    ->required(),
+                TextInput::make('misconception_key')
+                    ->label('狙う誤概念キー')
+                    ->helperText('例: statutory-vs-company-holiday'),
                 Select::make('type')
                     ->options([
                         QuestionType::Choice->value => '四肢択一',
@@ -72,6 +86,11 @@ class QuestionForm
                     ->required()
                     ->columnSpanFull(),
                 Textarea::make('common_mistake')
+                    ->columnSpanFull(),
+                KeyValue::make('distractor_feedback')
+                    ->label('選択肢別フィードバック')
+                    ->keyLabel('選択肢キー')
+                    ->valueLabel('なぜ誤りか')
                     ->columnSpanFull(),
                 KeyValue::make('calc_params')->columnSpanFull(),
                 TagsInput::make('reference_sheet_slugs')->columnSpanFull(),

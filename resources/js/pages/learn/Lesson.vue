@@ -384,6 +384,13 @@ const accuracy = computed(() =>
                         <div
                             class="max-h-36 overflow-y-auto rounded-xl bg-white/70 p-3 text-xs leading-relaxed text-gray-600 dark:bg-gray-900/70 dark:text-gray-300"
                         >
+                            <p
+                                v-if="result.selected_feedback"
+                                class="mb-2 rounded-md bg-rose-100 px-3 py-2 font-bold text-rose-700 dark:bg-rose-900/50 dark:text-rose-200"
+                            >
+                                この選択肢が違う理由:
+                                {{ result.selected_feedback }}
+                            </p>
                             <p>{{ result.explanation }}</p>
                             <p
                                 v-if="result.common_mistake"

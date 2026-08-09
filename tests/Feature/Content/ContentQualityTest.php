@@ -4,6 +4,7 @@ use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
 use App\Models\MockExam;
 use App\Models\Question;
+use App\Models\Unit;
 use App\Services\ContentAuditService;
 use Database\Seeders\ContentSeeder;
 
@@ -13,10 +14,20 @@ beforeEach(function () {
     seed(ContentSeeder::class);
 });
 
-test('公開対象は個別レビュー済み48問だけで生成水増し問題を含まない', function () {
-    expect(Question::query()->published()->count())->toBe(48)
+test('公開対象は45学習目標それぞれに意味の異なる2変種を持つ90問だけ', function () {
+    $questions = Question::query()->published()->get();
+
+    expect($questions)->toHaveCount(90)
+        ->and($questions->groupBy('concept_key'))->toHaveCount(45)
+        ->and($questions->groupBy('concept_key')->every(fn ($variants): bool => $variants->count() === 2))->toBeTrue()
+        ->and($questions->groupBy('concept_key')->every(
+            fn ($variants): bool => $variants->pluck('variant_role')->unique()->count() === 2,
+        ))->toBeTrue()
         ->and(Question::where('source_id', 'like', 'gen-%')->where('is_active', true)->count())->toBe(0)
         ->and(Question::query()->published()->whereNull('concept_key')->count())->toBe(0)
+        ->and(Question::query()->published()->whereNull('learning_objective')->count())->toBe(0)
+        ->and(Question::query()->published()->whereNull('variant_role')->count())->toBe(0)
+        ->and(Unit::where('slug', 'nencho')->exists())->toBeFalse()
         ->and(Question::query()->published()->whereNull('reviewed_content_hash')->count())->toBe(0);
 });
 
@@ -24,7 +35,8 @@ test('公開コンテンツ監査にエラーがない', function () {
     $result = app(ContentAuditService::class)->audit();
 
     expect($result['errors'])->toBe([])
-        ->and($result['stats']['published_questions'])->toBe(48)
+        ->and($result['stats']['published_questions'])->toBe(90)
+        ->and($result['stats']['learning_objectives'])->toBe(45)
         ->and($result['stats']['published_mock_exams'])->toBe(1);
 });
 
@@ -43,7 +55,7 @@ test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', 
 test('問題内容ハッシュは正解と解説の変更も検知する', function () {
     $question = Question::where('source_id', 'r2-q01')->firstOrFail();
     $content = $question->only([
-        'type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'calc_params',
+        'type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback', 'calc_params',
     ]);
 
     expect(Question::contentHash($content))->toBe($question->content_hash);
@@ -69,7 +81,7 @@ test('監査は計算問題の登録正答と再計算値の不一致を検出�
     $answer['value']++;
     $question->answer = $answer;
     $hash = Question::contentHash($question->only([
-        'type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'calc_params',
+        'type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback', 'calc_params',
     ]));
     $question->content_hash = $hash;
     $question->reviewed_content_hash = $hash;

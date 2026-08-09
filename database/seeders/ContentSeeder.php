@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Enums\QuestionVariantRole;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\MockExam;
@@ -44,7 +45,10 @@ class ContentSeeder extends Seeder
             ['name' => $data['name'], 'description' => $data['description'], 'sort_order' => $data['sort_order']],
         );
 
+        $unitSlugs = [];
+
         foreach ($data['units'] as $unitData) {
+            $unitSlugs[] = $unitData['slug'];
             $unit = Unit::updateOrCreate(
                 ['course_id' => $course->id, 'slug' => $unitData['slug']],
                 [
@@ -57,7 +61,10 @@ class ContentSeeder extends Seeder
                 ],
             );
 
+            $lessonSlugs = [];
+
             foreach ($unitData['lessons'] as $lessonData) {
+                $lessonSlugs[] = $lessonData['slug'];
                 Lesson::updateOrCreate(
                     ['unit_id' => $unit->id, 'slug' => $lessonData['slug']],
                     [
@@ -67,7 +74,17 @@ class ContentSeeder extends Seeder
                     ],
                 );
             }
+
+            Lesson::query()
+                ->where('unit_id', $unit->id)
+                ->whereNotIn('slug', $lessonSlugs)
+                ->delete();
         }
+
+        Unit::query()
+            ->where('course_id', $course->id)
+            ->whereNotIn('slug', $unitSlugs)
+            ->delete();
     }
 
     private function seedReferenceSheets(): void
@@ -84,10 +101,15 @@ class ContentSeeder extends Seeder
     {
         $units = Unit::pluck('id', 'slug');
         $lessons = Lesson::with('unit')->get()->keyBy(fn (Lesson $l) => $l->unit->slug.'/'.$l->slug);
+        $blueprint = $this->questionBlueprint();
+        $seededSourceIds = [];
 
         foreach (File::files($this->dataPath('questions')) as $file) {
             foreach (File::json($file->getPathname()) as $q) {
                 $this->validateQuestion($q);
+                $pedagogy = $blueprint[$q['source_id']]
+                    ?? throw new RuntimeException("Question {$q['source_id']}: question-blueprint.jsonに定義がありません。");
+                $seededSourceIds[] = $q['source_id'];
 
                 $lessonKey = $q['unit'].'/'.$q['lesson'];
                 $content = [
@@ -97,6 +119,7 @@ class ContentSeeder extends Seeder
                     'answer' => $q['answer'],
                     'explanation' => $q['explanation'],
                     'common_mistake' => $q['common_mistake'],
+                    'distractor_feedback' => $q['distractor_feedback'] ?? null,
                     'calc_params' => $q['calc_params'],
                 ];
                 $contentHash = Question::contentHash($content);
@@ -108,7 +131,10 @@ class ContentSeeder extends Seeder
                         'lesson_id' => $q['lesson'] !== null
                             ? ($lessons[$lessonKey] ?? throw new RuntimeException("Unknown lesson {$lessonKey}"))->id
                             : null,
-                        'concept_key' => $q['concept_key'] ?? $q['source_id'],
+                        'concept_key' => $pedagogy['concept_key'],
+                        'learning_objective' => $pedagogy['learning_objective'],
+                        'variant_role' => $pedagogy['variant_role'],
+                        'misconception_key' => $pedagogy['misconception_key'],
                         'type' => $content['type'],
                         'category' => $q['category'],
                         'difficulty' => $q['difficulty'],
@@ -122,9 +148,10 @@ class ContentSeeder extends Seeder
                         'answer' => $content['answer'],
                         'explanation' => $content['explanation'],
                         'common_mistake' => $content['common_mistake'],
+                        'distractor_feedback' => $content['distractor_feedback'],
                         'calc_params' => $content['calc_params'],
                         'reference_sheet_slugs' => $q['reference_sheet_slugs'],
-                        'source_urls' => $q['source_urls'] ?? $this->sourceUrls($q['source_id']),
+                        'source_urls' => $pedagogy['source_urls'],
                         'review_notes' => $q['review_notes'] ?? '2026年度の公表一次資料で確認。試験基準日の2026-09-01経過後に再レビューする。',
                         'reviewed_at' => $q['reviewed_at'] ?? '2026-08-09 00:00:00',
                         'review_due_at' => $q['review_due_at'] ?? '2026-09-02 00:00:00',
@@ -133,37 +160,67 @@ class ContentSeeder extends Seeder
                 );
             }
         }
+
+        $missingBlueprintIds = array_diff(array_keys($blueprint), $seededSourceIds);
+        if ($missingBlueprintIds !== []) {
+            throw new RuntimeException('設計図にある問題データがありません: '.implode(', ', $missingBlueprintIds));
+        }
+
+        Question::query()
+            ->whereNotNull('source_id')
+            ->whereNotIn('source_id', $seededSourceIds)
+            ->update([
+                'review_status' => QuestionReviewStatus::Retired,
+                'is_active' => false,
+            ]);
     }
 
-    /** @return list<string> */
-    private function sourceUrls(string $sourceId): array
+    /**
+     * @return array<string, array{
+     *     concept_key: string,
+     *     learning_objective: string,
+     *     variant_role: string,
+     *     misconception_key: string|null,
+     *     source_urls: list<string>
+     * }>
+     */
+    private function questionBlueprint(): array
     {
-        $number = (int) substr($sourceId, 4);
-        $exam = 'https://jitsumu-up.jp/about/';
+        $catalog = File::json($this->dataPath('content-source-catalog.json'));
+        $questions = [];
 
-        return match (true) {
-            $number <= 11, $number === 36 => [
-                $exam,
-                'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/index.html',
-            ],
-            $number <= 15, $number === 40 => [
-                $exam,
-                'https://www.nta.go.jp/users/gensen/2026tsukin/index.htm',
-            ],
-            $number <= 21, in_array($number, [38, 39], true) => [
-                $exam,
-                'https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf',
-            ],
-            $number <= 35, in_array($number, [37, 48], true) => [
-                $exam,
-                'https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html',
-                'https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html',
-            ],
-            default => [
-                $exam,
-                'https://www.nta.go.jp/users/gensen/2026kiso/index.htm',
-            ],
-        };
+        foreach (File::json($this->dataPath('question-blueprint.json')) as $objective) {
+            $sourceUrls = array_values(array_map(
+                fn (string $key): string => $catalog[$key]
+                    ?? throw new RuntimeException("Unknown content source key {$key}"),
+                $objective['source_keys'],
+            ));
+
+            foreach ($objective['questions'] as $variant) {
+                $sourceId = (string) $variant['source_id'];
+
+                if (isset($questions[$sourceId])) {
+                    throw new RuntimeException("Question {$sourceId}: 設計図で重複しています。");
+                }
+
+                $role = QuestionVariantRole::tryFrom($variant['variant_role']);
+                if ($role === null) {
+                    throw new RuntimeException("Question {$sourceId}: unknown variant role {$variant['variant_role']}");
+                }
+
+                $questions[$sourceId] = [
+                    'concept_key' => (string) $objective['concept_key'],
+                    'learning_objective' => (string) $objective['learning_objective'],
+                    'variant_role' => $role->value,
+                    'misconception_key' => isset($variant['misconception_key'])
+                        ? (string) $variant['misconception_key']
+                        : null,
+                    'source_urls' => $sourceUrls,
+                ];
+            }
+        }
+
+        return $questions;
     }
 
     /**
@@ -190,6 +247,12 @@ class ContentSeeder extends Seeder
 
             if (! in_array($q['answer']['choice'] ?? null, $keys, true)) {
                 throw new RuntimeException("Question {$id}: correct choice not found in choices");
+            }
+
+            $feedbackKeys = array_keys($q['distractor_feedback'] ?? []);
+            $unknownFeedbackKeys = array_diff($feedbackKeys, $keys);
+            if ($unknownFeedbackKeys !== []) {
+                throw new RuntimeException("Question {$id}: distractor_feedback has unknown choice keys");
             }
         }
 

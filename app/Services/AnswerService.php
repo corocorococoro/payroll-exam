@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class AnswerService
 {
     /**
-     * @return array{correct: bool, correct_answer: string, explanation: string, common_mistake: string|null, xp_earned: int}
+     * @return array{correct: bool, correct_answer: string, explanation: string, common_mistake: string|null, selected_feedback: string|null, xp_earned: int}
      */
     public function answer(User $user, Question $question, string $given, AttemptContext $context, ?int $lessonId = null): array
     {
@@ -48,6 +48,9 @@ class AnswerService
                     : number_format((float) $question->answer['value']),
                 'explanation' => $question->explanation,
                 'common_mistake' => $question->common_mistake,
+                'selected_feedback' => $correct
+                    ? null
+                    : ($question->distractor_feedback[strtoupper(trim($given))] ?? null),
                 'xp_earned' => $xp,
             ];
         });

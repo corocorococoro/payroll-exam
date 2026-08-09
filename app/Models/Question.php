@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Difficulty;
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Enums\QuestionVariantRole;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,6 +18,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $lesson_id
  * @property string|null $source_id
  * @property string|null $concept_key
+ * @property string|null $learning_objective
+ * @property QuestionVariantRole|null $variant_role
+ * @property string|null $misconception_key
  * @property QuestionType $type
  * @property string $category
  * @property Difficulty $difficulty
@@ -30,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<string, mixed> $answer
  * @property string $explanation
  * @property string|null $common_mistake
+ * @property array<string, string>|null $distractor_feedback
  * @property array<string, mixed>|null $calc_params
  * @property list<string>|null $reference_sheet_slugs
  * @property list<string>|null $source_urls
@@ -39,9 +44,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property bool $is_active
  */
 #[Fillable([
-    'unit_id', 'lesson_id', 'source_id', 'concept_key', 'type', 'category', 'difficulty',
+    'unit_id', 'lesson_id', 'source_id', 'concept_key', 'learning_objective', 'variant_role',
+    'misconception_key', 'type', 'category', 'difficulty',
     'review_status', 'content_revision', 'content_hash', 'reviewed_content_hash', 'fiscal_year',
-    'question_text', 'choices', 'answer', 'explanation', 'common_mistake',
+    'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback',
     'calc_params', 'reference_sheet_slugs', 'source_urls', 'review_notes', 'reviewed_at',
     'review_due_at', 'is_active',
 ])]
@@ -53,8 +59,10 @@ class Question extends Model
             'type' => QuestionType::class,
             'difficulty' => Difficulty::class,
             'review_status' => QuestionReviewStatus::class,
+            'variant_role' => QuestionVariantRole::class,
             'choices' => 'array',
             'answer' => 'array',
+            'distractor_feedback' => 'array',
             'calc_params' => 'array',
             'reference_sheet_slugs' => 'array',
             'source_urls' => 'array',
@@ -76,6 +84,8 @@ class Question extends Model
             ->whereNotNull('content_hash')
             ->whereColumn('content_hash', 'reviewed_content_hash')
             ->whereNotNull('concept_key')
+            ->whereNotNull('learning_objective')
+            ->whereNotNull('variant_role')
             ->whereNotNull('source_urls')
             ->whereNotNull('reviewed_at')
             ->where('review_due_at', '>=', now());
@@ -107,7 +117,7 @@ class Question extends Model
     {
         $content = [];
 
-        foreach (['type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'calc_params'] as $key) {
+        foreach (['type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback', 'calc_params'] as $key) {
             $content[$key] = $attributes[$key] ?? null;
         }
 

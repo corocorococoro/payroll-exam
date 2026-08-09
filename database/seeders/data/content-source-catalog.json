@@ -1,0 +1,20 @@
+{
+  "exam-scope": "https://jitsumu-up.jp/about/",
+  "exam-examples": "https://jitsumu-up.jp/example/",
+  "labor-standards-act": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+  "worktime-leave": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html",
+  "commuting-2026": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm",
+  "withholding-2026": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+  "resident-tax": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about",
+  "labor-contract-act": "https://elaws.e-gov.go.jp/document?lawid=419AC0000000128",
+  "standard-remuneration": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+  "regular-determination": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+  "acquisition-determination": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20120330.html",
+  "monthly-revision": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20140602-02.html",
+  "kenpo-rates-2026": "https://www.kyoukaikenpo.or.jp/shibu/tokyo/assets/R0802.pdf",
+  "child-contribution-2026": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08kikinryougaku.pdf",
+  "employment-rates-2026": "https://www.mhlw.go.jp/content/001692566.pdf",
+  "short-worker-coverage": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+  "mynumber-guideline": "https://www.ppc.go.jp/legal/policy/my_number_guideline_jigyosha/",
+  "labor-insurance-renewal": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/roudouhoken21/index.html"
+}

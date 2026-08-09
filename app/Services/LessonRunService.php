@@ -28,28 +28,38 @@ class LessonRunService
             }
         }
 
-        $candidates = $lesson->questions()
-            ->get(['id', 'concept_key'])
-            ->shuffle()
-            ->unique(fn ($question): string => $question->concept_key ?? "question-{$question->id}")
-            ->values();
+        $bank = $lesson->questions()->get(['id', 'concept_key', 'variant_role']);
 
         $lastAttempts = $request->user()->attempts()
-            ->whereIn('question_id', $candidates->pluck('id'))
+            ->whereIn('question_id', $bank->pluck('id'))
             ->selectRaw('question_id, MAX(created_at) AS last_attempted_at')
             ->groupBy('question_id')
             ->pluck('last_attempted_at', 'question_id');
 
-        $unseen = $candidates
-            ->reject(fn ($question): bool => $lastAttempts->has($question->id))
-            ->shuffle();
-        $seen = $candidates
-            ->filter(fn ($question): bool => $lastAttempts->has($question->id))
-            ->sortBy(fn ($question): string => (string) $lastAttempts[$question->id]);
+        // 同じ学習目標は1回のレッスンに1問だけ。ただし単純に重複排除せず、
+        // 未出の聞き方を優先し、全て既出なら最後に解いたのが最も古い問題を選ぶ。
+        // これにより再受講時には別の役割（適用・境界判断など）が自然に回ってくる。
+        $candidates = $bank
+            ->groupBy(fn ($question): string => $question->concept_key ?? "question-{$question->id}")
+            ->map(function ($variants) use ($lastAttempts) {
+                $unseen = $variants
+                    ->reject(fn ($question): bool => $lastAttempts->has($question->id))
+                    ->shuffle();
+
+                if ($unseen->isNotEmpty()) {
+                    return $unseen->first();
+                }
+
+                return $variants
+                    ->sortBy(fn ($question): string => (string) $lastAttempts[$question->id])
+                    ->first();
+            })
+            ->filter()
+            ->shuffle()
+            ->values();
 
         /** @var list<int> $questionIds */
-        $questionIds = $unseen
-            ->concat($seen)
+        $questionIds = $candidates
             ->take(self::QUESTION_COUNT)
             ->pluck('id')
             ->map(fn ($id): int => (int) $id)

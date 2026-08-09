@@ -3,7 +3,9 @@
 use App\Models\Lesson;
 use App\Models\Question;
 use App\Models\User;
+use App\Services\LessonRunService;
 use Database\Seeders\ContentSeeder;
+use Illuminate\Http\Request;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -20,7 +22,7 @@ test('スキルツリーが表示され、ユニットとレッスンが並ぶ',
         ->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('learn/Index')
-            ->has('units', 6)
+            ->has('units', 5)
             ->where('units.0.name', '労働法・勤怠'),
         );
 });
@@ -31,7 +33,7 @@ test('問題配信レスポンスに正解・解説が含まれない', function
     $response = actingAs($this->user)->get("/lessons/{$lesson->id}");
 
     $response->assertOk();
-    $expectedCount = min(7, $lesson->questions()->count());
+    $expectedCount = min(7, $lesson->questions()->pluck('concept_key')->unique()->count());
     $response->assertInertia(fn ($page) => $page->has('questions', $expectedCount));
 
     $html = $response->getContent();
@@ -78,6 +80,47 @@ test('誤答すると復習キューに入りXPは0', function () {
     expect($item)->not->toBeNull()
         ->and($item->box)->toBe(1)
         ->and($item->due_date->isSameDay(today()->addDay()))->toBeTrue();
+});
+
+test('誤答した選択肢に対応するフィードバックを返す', function () {
+    $question = Question::where('source_id', 'r2-q41')->firstOrFail();
+
+    actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
+        'question_id' => $question->id,
+        'answer' => 'A',
+        'context' => 'lesson',
+        'lesson_id' => $question->lesson_id,
+    ])->assertOk()->assertJson([
+        'correct' => false,
+        'selected_feedback' => '回数の要件だけを見ており、一定期日払いを確認していません。',
+    ]);
+});
+
+test('再受講では同じ学習目標の未出変種を優先する', function () {
+    $lesson = Lesson::where('slug', 'chingin-shiharai')->firstOrFail();
+    $request = Request::create("/lessons/{$lesson->id}");
+    $request->setUserResolver(fn () => $this->user);
+    $request->setLaravelSession(app('session')->driver());
+    $service = app(LessonRunService::class);
+
+    $first = $service->getOrStart($request, $lesson);
+    foreach ($first['question_ids'] as $questionId) {
+        $this->user->attempts()->create([
+            'question_id' => $questionId,
+            'lesson_id' => $lesson->id,
+            'context' => 'lesson',
+            'is_correct' => true,
+            'given_answer' => ['given' => 'A'],
+            'xp_earned' => 0,
+        ]);
+    }
+
+    $service->clear($request, $lesson);
+    $second = $service->getOrStart($request, $lesson);
+
+    expect(array_intersect($first['question_ids'], $second['question_ids']))->toBe([])
+        ->and(Question::whereIn('id', $second['question_ids'])->pluck('concept_key')->unique())
+        ->toHaveCount(count($second['question_ids']));
 });
 
 test('数値入力はカンマ・全角数字でも判定できる', function () {

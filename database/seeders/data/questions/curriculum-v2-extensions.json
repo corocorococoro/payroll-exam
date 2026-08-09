@@ -1,0 +1,300 @@
+[
+  {
+    "source_id": "r2-q49", "unit": "roudou", "lesson": "warimashi", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "割増賃金の算定基礎を求める。基本給250,000円、役職手当20,000円、全員一律の住宅手当15,000円、扶養人数に応じる家族手当10,000円のとき、算定基礎に含める月額はいくらか。",
+    "choices": [{"key":"A","text":"250,000円"},{"key":"B","text":"270,000円"},{"key":"C","text":"285,000円"},{"key":"D","text":"295,000円"}], "answer": {"choice":"C"},
+    "explanation": "基本給・役職手当・全員一律の住宅手当を含めて285,000円。住宅手当は名称ではなく住宅費との対応関係で判断し、全員一律なら除外できません。扶養人数に応じる家族手当は除外できます。",
+    "common_mistake": "『住宅手当』という名称だけで除外しないこと。", "distractor_feedback": {"B":"全員一律の住宅手当15,000円が抜けています。","D":"扶養人数に応じる家族手当は本問では除外できます。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q50", "unit": "roudou", "lesson": "roudou-jikan", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "入社から6か月継続勤務した一般労働者の出勤率が79％だった。初回の年次有給休暇について正しいものはどれか。",
+    "choices": [{"key":"A","text":"10日付与する"},{"key":"B","text":"出勤率が8割未満なので法定の付与要件を満たさない"},{"key":"C","text":"5日だけ付与する"},{"key":"D","text":"1年勤務まで判定しない"}], "answer": {"choice":"B"},
+    "explanation": "初回付与には6か月継続勤務に加えて全労働日の8割以上の出勤が必要です。79％は8割未満です。",
+    "common_mistake": "6か月勤務だけで自動的に10日付与されるわけではありません。", "distractor_feedback": {"A":"出勤率要件を満たしていません。","C":"出勤率不足の場合に半分を付与する制度ではありません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q51", "unit": "roudou", "lesson": "roudou-jikan", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "年10日の年休を付与された労働者が、本人請求で3日取得済みである。使用者が時季指定して取得させる必要がある残日数は原則何日か。",
+    "choices": [{"key":"A","text":"0日"},{"key":"B","text":"2日"},{"key":"C","text":"3日"},{"key":"D","text":"5日"}], "answer": {"choice":"B"},
+    "explanation": "使用者は年5日の取得を確保します。労働者が自ら3日取得しているため、時季指定が必要な残りは2日です。",
+    "common_mistake": "本人請求や計画年休で取得した日も5日の確保数に含めます。", "distractor_feedback": {"D":"取得済み3日を無視して5日を追加指定する必要はありません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q52", "unit": "roudou", "lesson": "chingin-shiharai", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "常時20人を使用する事業場が就業規則を作成する際、過半数労働組合がない場合の手続として正しいものはどれか。",
+    "choices": [{"key":"A","text":"全労働者の同意を得る"},{"key":"B","text":"過半数代表者の意見を聴き、意見書を添えて届け出る"},{"key":"C","text":"管理職だけの承認を得る"},{"key":"D","text":"会社が単独で作成し、周知も届出も不要"}], "answer": {"choice":"B"},
+    "explanation": "過半数労働組合がない場合は過半数代表者の意見を聴き、意見書を添付して届け出ます。賛成という意味の同意までは要件ではありません。",
+    "common_mistake": "意見聴取と同意取得を混同しないこと。", "distractor_feedback": {"A":"法定手続は全員同意ではなく、過半数代表者からの意見聴取です。","D":"常時10人以上の事業場には作成・届出義務があります。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q53", "unit": "shikyu", "lesson": "tsukin", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "easy",
+    "question_text": "2026年4月1日以後、片道1.8kmを自転車通勤する従業員に月3,000円の通勤手当を支給した。所得税上の課税額はいくらか。",
+    "choices": [{"key":"A","text":"0円"},{"key":"B","text":"1,200円"},{"key":"C","text":"2,000円"},{"key":"D","text":"3,000円"}], "answer": {"choice":"D"},
+    "explanation": "マイカー・自転車等で片道2km未満は全額課税です。実費相当かどうかではなく距離区分で判定します。",
+    "common_mistake": "近距離にも最低限度額があると思い込まないこと。", "distractor_feedback": {"A":"片道2km未満は全額非課税ではなく全額課税です。"}, "calc_params": null, "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q54", "unit": "shikyu", "lesson": "tsukin", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "2026年4月1日以後、片道12kmのマイカー通勤者に月10,000円を支給した。非課税限度額を7,300円とすると、課税通勤手当はいくらか。",
+    "choices": [{"key":"A","text":"0円"},{"key":"B","text":"2,700円"},{"key":"C","text":"7,300円"},{"key":"D","text":"10,000円"}], "answer": {"choice":"B"},
+    "explanation": "支給10,000円のうち7,300円までが非課税で、超過する2,700円が課税です。",
+    "common_mistake": "限度額を超えたら全額課税になるのではなく、超過部分が課税です。", "distractor_feedback": {"D":"全額ではなく限度額超過分だけが課税です。"}, "calc_params": null, "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q55", "unit": "shikyu", "lesson": "tsukin", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "合理的な運賃等として認められる公共交通機関の通勤手当を月160,000円支給した。所得税上の課税額はいくらか。",
+    "choices": [{"key":"A","text":"0円"},{"key":"B","text":"10,000円"},{"key":"C","text":"150,000円"},{"key":"D","text":"160,000円"}], "answer": {"choice":"B"},
+    "explanation": "公共交通機関の合理的な運賃等は月150,000円まで非課税なので、超過する10,000円が課税です。",
+    "common_mistake": "合理的な経路であっても非課税額は無制限ではありません。", "distractor_feedback": {"A":"月150,000円の最高限度額を10,000円超えています。"}, "calc_params": null, "reference_sheet_slugs": ["tsukin-hikazei"]
+  },
+  {
+    "source_id": "r2-q56", "unit": "shikyu", "lesson": "tsukin", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "月10,000円の通勤手当が所得税では全額非課税である。社会保険の報酬月額を算定するときの扱いはどれか。",
+    "choices": [{"key":"A","text":"所得税非課税なので必ず除外する"},{"key":"B","text":"原則として報酬に含める"},{"key":"C","text":"半額だけ含める"},{"key":"D","text":"賞与として届け出る"}], "answer": {"choice":"B"},
+    "explanation": "所得税の非課税判定と社会保険上の報酬判定は別です。通勤手当は原則として報酬に含めます。",
+    "common_mistake": "税の『非課税』をすべての制度に横展開しないこと。", "distractor_feedback": {"A":"所得税非課税でも社会保険上は報酬です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q57", "unit": "zei", "lesson": "juminzei-shoyo", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "給与からの住民税特別徴収について、年度の切替として正しいものはどれか。",
+    "choices": [{"key":"A","text":"毎年1月に新税額へ切り替える"},{"key":"B","text":"毎年4月に新税額へ切り替える"},{"key":"C","text":"原則として毎年6月に新しい通知税額へ切り替える"},{"key":"D","text":"年末調整の翌月だけ徴収する"}], "answer": {"choice":"C"},
+    "explanation": "特別徴収は原則6月から翌年5月のサイクルで、自治体から通知された新年度税額へ6月に切り替えます。",
+    "common_mistake": "所得税の暦年処理と住民税の6月開始を混同しないこと。", "distractor_feedback": {"A":"住民税特別徴収の年度切替は原則6月です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q58", "unit": "zei", "lesson": "gensen", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "A社を主たる勤務先として扶養控除等申告書を提出している従業員が、副業先B社からも月給を受ける。B社が原則使用する月額表の欄はどれか。",
+    "choices": [{"key":"A","text":"甲欄"},{"key":"B","text":"乙欄"},{"key":"C","text":"丙欄"},{"key":"D","text":"住民税欄"}], "answer": {"choice":"B"},
+    "explanation": "扶養控除等申告書は主たる給与の支払者へ提出し、従たる給与を支払うB社では原則乙欄を使います。",
+    "common_mistake": "本人がどこか一社へ申告書を出しているだけで、両社が甲欄になるわけではありません。", "distractor_feedback": {"A":"甲欄は申告書を提出した主たる給与で使います。"}, "calc_params": null, "reference_sheet_slugs": ["gensen-getsugaku"]
+  },
+  {
+    "source_id": "r2-q59", "unit": "zei", "lesson": "gensen", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "総支給300,000円、社会保険料42,570円、雇用保険料1,500円、住民税12,000円である。月額表に当てる『社会保険料等控除後の給与等の金額』はいくらか。",
+    "choices": [{"key":"A","text":"243,930円"},{"key":"B","text":"255,930円"},{"key":"C","text":"256,000円"},{"key":"D","text":"300,000円"}], "answer": {"choice":"B"},
+    "explanation": "300,000−42,570−1,500＝255,930円。住民税は月額表へ当てる金額を求める段階では控除しません。",
+    "common_mistake": "給与から引かれるものを全部先に引くのではありません。", "distractor_feedback": {"A":"住民税12,000円を誤って先に控除しています。"}, "calc_params": null, "reference_sheet_slugs": ["gensen-getsugaku"]
+  },
+  {
+    "source_id": "r2-q60", "unit": "zei", "lesson": "gensen", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "扶養控除等申告書を提出済みの従業員について、年の途中で扶養親族等の数に異動が生じた。適切な対応はどれか。",
+    "choices": [{"key":"A","text":"翌年の申告まで変更しない"},{"key":"B","text":"異動内容を記載した申告書の提出を受け、以後の源泉徴収へ反映する"},{"key":"C","text":"住民税通知だけを変更する"},{"key":"D","text":"会社が本人確認なしに人数を推測する"}], "answer": {"choice":"B"},
+    "explanation": "扶養親族等に異動があれば異動内容を記載した申告書の提出を受け、以後の源泉徴収へ反映します。",
+    "common_mistake": "年初だけの固定情報ではありません。", "distractor_feedback": {"A":"異動後の源泉徴収へ反映する必要があります。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q61", "unit": "zei", "lesson": "juminzei-shoyo", "type": "choice", "category": "税", "difficulty": "hard",
+    "question_text": "賞与を支給するが、前月に普通給与の支払がなかった。源泉所得税について最も適切なものはどれか。",
+    "choices": [{"key":"A","text":"賞与なので必ず賞与算出率表の0％を使う"},{"key":"B","text":"前月給与がない場合の特例計算を行い、月額表を用いる手順で求める"},{"key":"C","text":"所得税を徴収しない"},{"key":"D","text":"住民税率10％を用いる"}], "answer": {"choice":"B"},
+    "explanation": "前月に給与の支払がない場合などは通常の賞与算出率表によらず、賞与額を一定方法で月額換算して月額表を用いる特例手順があります。",
+    "common_mistake": "賞与なら常に同じ算出率表を使うとは限りません。", "distractor_feedback": {"A":"前月給与がない場合は通常の算出率表の前提を満たしません。","C":"前月給与がないことは非課税を意味しません。"}, "calc_params": null, "reference_sheet_slugs": ["shoyo-santei-ritsu"]
+  },
+  {
+    "source_id": "r2-q62", "unit": "zei", "lesson": "juminzei-shoyo", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "自治体から従業員の特別徴収税額通知が届いた。給与担当者の処理として適切なものはどれか。",
+    "choices": [{"key":"A","text":"所得税の月額表で税額を再計算する"},{"key":"B","text":"通知された月割額を給与から控除し納入する"},{"key":"C","text":"賞与支給時だけ全額控除する"},{"key":"D","text":"従業員本人に毎月納付させる"}], "answer": {"choice":"B"},
+    "explanation": "特別徴収では自治体が税額を計算して通知し、会社は通知された月割額を給与から徴収して納入します。",
+    "common_mistake": "会社が所得税と同じように税率表から計算する税ではありません。", "distractor_feedback": {"A":"住民税額は自治体通知に従い、所得税月額表では再計算しません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q63", "unit": "shaho", "lesson": "hyojun-hoshu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "会社が従業員へ社宅を低額で提供している。標準報酬月額の報酬について適切なものはどれか。",
+    "choices": [{"key":"A","text":"現金でないため必ず報酬外"},{"key":"B","text":"現物給与価額により報酬へ算入する場合がある"},{"key":"C","text":"所得税非課税なら必ず報酬外"},{"key":"D","text":"全額を賞与として扱う"}], "answer": {"choice":"B"},
+    "explanation": "住宅など現物で支給される利益も、厚生労働大臣が定める現物給与価額等により報酬へ算入する場合があります。",
+    "common_mistake": "報酬は現金給与だけではありません。", "distractor_feedback": {"A":"現物給与も報酬になり得ます。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q64", "unit": "shaho", "lesson": "hyojun-hoshu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "一般被保険者の定時決定で、4月と6月は支払基礎日数17日以上、5月だけ16日だった。原則的な算定方法はどれか。",
+    "choices": [{"key":"A","text":"4～6月の3か月すべてを平均する"},{"key":"B","text":"5月を除き、4月と6月の報酬で平均する"},{"key":"C","text":"定時決定を一切行わない"},{"key":"D","text":"5月だけで決める"}], "answer": {"choice":"B"},
+    "explanation": "一般被保険者では支払基礎日数17日未満の月を算定から除き、要件を満たす月で平均します。",
+    "common_mistake": "1か月でも17日未満なら全体を中止するわけではありません。", "distractor_feedback": {"A":"5月は17日未満なので算定から除外します。","C":"残る対象月で定時決定できます。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q65", "unit": "shaho", "lesson": "zuiji-kaitei", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "基本給など固定的賃金は変わらず、繁忙で残業代だけが3か月連続して増え、2等級以上の差が生じた。随時改定について正しいものはどれか。",
+    "choices": [{"key":"A","text":"2等級差があるので必ず改定"},{"key":"B","text":"固定的賃金の変動がないため、原則として随時改定の契機にならない"},{"key":"C","text":"1か月目から改定"},{"key":"D","text":"本人の希望で改定"}], "answer": {"choice":"B"},
+    "explanation": "随時改定には固定的賃金の変動が必要です。非固定的な残業代だけの増減は、原則として随時改定の契機になりません。",
+    "common_mistake": "2等級差だけを見ず、固定的賃金変動の有無を先に確認します。", "distractor_feedback": {"A":"2等級差に加えて固定的賃金の変動が必要です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q66", "unit": "shaho", "lesson": "zuiji-kaitei", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "随時改定を判定する一般被保険者について、変動後3か月の支払基礎日数が17日、16日、20日だった。原則としてどうなるか。",
+    "choices": [{"key":"A","text":"3か月すべて17日以上ではないため要件を満たさない"},{"key":"B","text":"平均が17日以上なので満たす"},{"key":"C","text":"16日の月だけ除いて判定する"},{"key":"D","text":"日数は随時改定と無関係"}], "answer": {"choice":"A"},
+    "explanation": "随時改定では変動後の継続した3か月の各月が支払基礎日数要件を満たす必要があります。一般被保険者の16日は不足です。",
+    "common_mistake": "定時決定の除外月の扱いと、随時改定の連続3か月要件を混同しないこと。", "distractor_feedback": {"C":"随時改定では不足月を除いて残り2か月で判定する扱いではありません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q67", "unit": "shaho", "lesson": "hyojun-hoshu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "厚生年金の標準報酬月額について、実際の報酬月額が上限等級を超える場合の保険料計算として正しいものはどれか。",
+    "choices": [{"key":"A","text":"実際の報酬額に18.3％を乗じる"},{"key":"B","text":"上限の標準報酬月額を用いる"},{"key":"C","text":"保険料は0円になる"},{"key":"D","text":"超過分だけに保険料をかける"}], "answer": {"choice":"B"},
+    "explanation": "厚生年金保険料は決定された標準報酬月額を基礎にするため、実報酬が上限を超えても上限等級を用います。",
+    "common_mistake": "実際の総支給額へ直接料率を掛けるとは限りません。", "distractor_feedback": {"A":"月例保険料は実報酬そのものではなく標準報酬月額を基礎にします。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q68", "unit": "shaho", "lesson": "ryoritsu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "協会けんぽの介護保険第2号被保険者の年齢範囲について正しい組合せはどれか。",
+    "choices": [{"key":"A","text":"39歳は該当、40歳は非該当"},{"key":"B","text":"40歳は該当、64歳も該当"},{"key":"C","text":"64歳は非該当、65歳は該当"},{"key":"D","text":"全年齢が該当"}], "answer": {"choice":"B"},
+    "explanation": "介護保険第2号被保険者は40歳以上65歳未満、一般に40～64歳です。",
+    "common_mistake": "65歳を第2号に含めないこと。", "distractor_feedback": {"C":"64歳は第2号に含まれ、65歳以後は第1号です。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q69", "unit": "shaho", "lesson": "ryoritsu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "2026年度東京支部、介護保険非該当者の標準報酬月額が300,000円で健康保険料率9.85％、労使折半とする。被保険者負担はいくらか。",
+    "choices": [{"key":"A","text":"9,850円"},{"key":"B","text":"14,775円"},{"key":"C","text":"29,550円"},{"key":"D","text":"59,100円"}], "answer": {"choice":"B"},
+    "explanation": "300,000×9.85％÷2＝14,775円です。9.85％は労使合計の料率です。",
+    "common_mistake": "公表料率と被保険者負担率を区別します。", "distractor_feedback": {"C":"29,550円は労使合計額で、被保険者負担はその半分です。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q70", "unit": "shaho", "lesson": "ryoritsu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "2026年度の子ども・子育て拠出金0.36％について、給与担当者の処理として正しいものはどれか。",
+    "choices": [{"key":"A","text":"全額を被保険者給与から控除する"},{"key":"B","text":"半額を被保険者給与から控除する"},{"key":"C","text":"事業主負担であり被保険者給与から控除しない"},{"key":"D","text":"健康保険料に含まれるので計算不要"}], "answer": {"choice":"C"},
+    "explanation": "子ども・子育て拠出金は事業主のみが負担します。労使折半の子ども・子育て支援金と区別します。",
+    "common_mistake": "名称が似る支援金0.23％と拠出金0.36％を取り違えないこと。", "distractor_feedback": {"B":"労使折半なのは支援金で、拠出金は事業主負担です。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q71", "unit": "shaho", "lesson": "ryoritsu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "標準報酬月額300,000円、厚生年金保険料率18.3％、労使折半の場合の被保険者負担はいくらか。",
+    "choices": [{"key":"A","text":"9,150円"},{"key":"B","text":"27,450円"},{"key":"C","text":"54,900円"},{"key":"D","text":"109,800円"}], "answer": {"choice":"B"},
+    "explanation": "300,000×18.3％÷2＝27,450円です。",
+    "common_mistake": "18.3％を被保険者だけの率として二重に扱わないこと。", "distractor_feedback": {"C":"54,900円は労使合計額です。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q72", "unit": "shaho", "lesson": "ryoritsu", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "2026年度の一般の事業における雇用保険料の事業主負担8.5/1,000の内訳として正しいものはどれか。",
+    "choices": [{"key":"A","text":"失業等給付等5/1,000＋雇用保険二事業3.5/1,000"},{"key":"B","text":"労働者負担5/1,000＋事業主負担3.5/1,000"},{"key":"C","text":"健康保険5/1,000＋労災保険3.5/1,000"},{"key":"D","text":"全額が労働者負担"}], "answer": {"choice":"A"},
+    "explanation": "一般の事業の事業主負担8.5/1,000は、失業等給付・育児休業給付分5/1,000と雇用保険二事業分3.5/1,000です。",
+    "common_mistake": "合計13.5/1,000、労働者5/1,000、事業主8.5/1,000を分けて覚えます。", "distractor_feedback": {"B":"労働者負担は事業主負担の内訳ではありません。"}, "calc_params": null, "reference_sheet_slugs": ["koyo-hoken"]
+  },
+  {
+    "source_id": "r2-q73", "unit": "shaho", "lesson": "taishoku-shoyo", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "賞与612,800円を支給した。社会保険料計算に用いる標準賞与額はいくらか。上限には達していないものとする。",
+    "choices": [{"key":"A","text":"612,000円"},{"key":"B","text":"612,800円"},{"key":"C","text":"613,000円"},{"key":"D","text":"610,000円"}], "answer": {"choice":"A"},
+    "explanation": "標準賞与額は賞与額の1,000円未満を切り捨てるため612,000円です。",
+    "common_mistake": "四捨五入ではなく1,000円未満切捨てです。", "distractor_feedback": {"C":"1,000円単位への四捨五入ではありません。"}, "calc_params": null, "reference_sheet_slugs": ["kenpo-tokyo"]
+  },
+  {
+    "source_id": "r2-q74", "unit": "shaho", "lesson": "taishoku-shoyo", "type": "choice", "category": "社会保険", "difficulty": "hard",
+    "question_text": "2026年9月1日時点。厚生年金被保険者51人以上の特定適用事業所で、週20時間、月額賃金90,000円、2か月を超える雇用見込みがあり、学生ではない短時間労働者の扱いはどれか。",
+    "choices": [{"key":"A","text":"短時間労働者なので常に対象外"},{"key":"B","text":"要件を満たすため健康保険・厚生年金の加入対象"},{"key":"C","text":"月額賃金が10万円未満なので対象外"},{"key":"D","text":"週30時間未満なので対象外"}], "answer": {"choice":"B"},
+    "explanation": "基準日時点の企業規模、週20時間、月額8.8万円、雇用見込み、非学生の要件を満たすため加入対象です。",
+    "common_mistake": "正社員の4分の3基準だけで判定せず、短時間労働者の適用要件も確認します。", "distractor_feedback": {"A":"短時間労働者にも適用拡大の加入要件があります。","C":"90,000円は8.8万円以上です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q75", "unit": "keisan", "lesson": "kyuyo-keisan", "type": "choice", "category": "労働法・勤怠", "difficulty": "hard",
+    "question_text": "基本給260,000円と役職手当20,000円を算定基礎とし、月平均所定労働時間160時間。法定時間外8時間のうち3時間が深夜で、月60時間超はない。時間外・深夜分の割増賃金総額はいくらか。各区分の1円未満は四捨五入する。",
+    "choices": [{"key":"A","text":"14,000円"},{"key":"B","text":"17,500円"},{"key":"C","text":"18,813円"},{"key":"D","text":"21,875円"}], "answer": {"choice":"C","value":18813},
+    "explanation": "単価は280,000÷160＝1,750円。時間外のみ5時間は1,750×1.25×5＝10,937.5→10,938円、深夜重複3時間は1,750×1.50×3＝7,875円、合計18,813円。",
+    "common_mistake": "深夜重複3時間を25％分だけ加算して通常賃金を落とさないこと。", "distractor_feedback": {"B":"時間外8時間を125％だけで計算し、深夜割増が抜けています。"},
+    "calc_params": {"calc_type":"overtime_pay","included_wages":[260000,20000],"monthly_hours":160,"components":[{"rate":1.25,"hours":5},{"rate":1.5,"hours":3}]}, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q76", "unit": "keisan", "lesson": "kyuyo-keisan", "type": "choice", "category": "税", "difficulty": "medium",
+    "question_text": "月給300,000円、社会保険料42,570円、雇用保険料1,500円。扶養控除等申告書提出済みで扶養親族等0人。2026年分月額表の該当行（254,000円以上257,000円未満）による源泉所得税額はいくらか。",
+    "choices": [{"key":"A","text":"3,100円"},{"key":"B","text":"4,710円"},{"key":"C","text":"6,320円"},{"key":"D","text":"7,930円"}], "answer": {"choice":"C","value":6320},
+    "explanation": "社会保険料等控除後は255,930円。甲欄・扶養親族等0人の税額6,320円です。",
+    "common_mistake": "同じ金額帯でも扶養親族等の数で列が変わります。", "distractor_feedback": {"B":"4,710円は扶養親族等1人の列です。"},
+    "calc_params": {"calc_type":"withholding_tax_monthly","gross":300000,"social_insurance":42570,"employment_insurance":1500,"dependents":0,"table":"gensen-getsugaku"}, "reference_sheet_slugs": ["gensen-getsugaku"]
+  },
+  {
+    "source_id": "r2-q77", "unit": "keisan", "lesson": "shoyo-tedori", "type": "choice", "category": "税", "difficulty": "hard",
+    "question_text": "東京都、45歳。賞与600,000円、前月の社会保険料等控除後給与に対応する賞与算出率2.042％。健保＋介護11.47％、支援金0.23％、厚年18.3％を労使折半、雇用保険5/1,000とする。賞与の源泉所得税額はいくらか。",
+    "choices": [{"key":"A","text":"9,762円"},{"key":"B","text":"10,352円"},{"key":"C","text":"12,252円"},{"key":"D","text":"18,600円"}], "answer": {"choice":"B","value":10352},
+    "explanation": "社会保険料等は34,410＋690＋54,900＋3,000＝93,000円。控除後507,000円×2.042％＝10,352.94円、1円未満切捨てで10,352円。",
+    "common_mistake": "45歳なので賞与にも介護保険を含め、税率は控除後賞与へ乗じます。", "distractor_feedback": {"C":"賞与総額600,000円へ直接2.042％を掛けています。"},
+    "calc_params": {"calc_type":"bonus_withholding","bonus":600000,"rates_percent":{"health_care":11.47,"support":0.23,"pension":18.3},"employee_share":0.5,"employment_rate_per_mille":5,"rate_percent":2.042}, "reference_sheet_slugs": ["kenpo-tokyo","shoyo-santei-ritsu"]
+  },
+  {
+    "source_id": "r2-q78", "unit": "keisan", "lesson": "shoyo-tedori", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "総支給320,000円、健康保険等・厚生年金等45,000円、雇用保険1,600円、源泉所得税6,320円、住民税12,000円。その他控除なしの差引支給額はいくらか。",
+    "choices": [{"key":"A","text":"255,080円"},{"key":"B","text":"267,080円"},{"key":"C","text":"273,400円"},{"key":"D","text":"275,000円"}], "answer": {"choice":"A","value":255080},
+    "explanation": "320,000−45,000−1,600−6,320−12,000＝255,080円です。",
+    "common_mistake": "税額表用の課税対象額と最終手取りを混同せず、住民税まで控除します。", "distractor_feedback": {"B":"住民税12,000円が抜けています。"},
+    "calc_params": {"calc_type":"net_pay","gross":320000,"deductions":[45000,1600,6320,12000]}, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q79", "unit": "roudou", "lesson": "roudou-jikan", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "労働時間と法定の最低休憩時間の組合せとして正しいものはどれか。",
+    "choices": [{"key":"A","text":"6時間ちょうど：45分"},{"key":"B","text":"6時間30分：45分"},{"key":"C","text":"8時間ちょうど：60分"},{"key":"D","text":"5時間：30分"}], "answer": {"choice":"B"},
+    "explanation": "6時間を超える場合は45分以上、8時間を超える場合は1時間以上です。6時間・8時間『ちょうど』はそれぞれ次の基準を超えていません。",
+    "common_mistake": "『以上』ではなく『超える』という境界を正確に読みます。", "distractor_feedback": {"A":"6時間ちょうどは『6時間を超える』に当たりません。","C":"8時間ちょうどは45分以上で足り、1時間は8時間を超える場合です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q80", "unit": "roudou", "lesson": "roudou-jikan", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "昼休み中も電話が鳴れば必ず応対するよう指示され、実際に自由に職場を離れられない時間の扱いとして適切なものはどれか。",
+    "choices": [{"key":"A","text":"名称が昼休みなら必ず休憩"},{"key":"B","text":"労働から解放されておらず、休憩時間と認められない可能性が高い"},{"key":"C","text":"無給なら必ず休憩"},{"key":"D","text":"10分以内の電話なら常に休憩"}], "answer": {"choice":"B"},
+    "explanation": "休憩は労働から解放され自由に利用できる必要があります。電話当番として待機を義務付けられる時間は休憩と認められない可能性が高いです。",
+    "common_mistake": "勤怠表の名称ではなく、実際に労働から解放されているかで判断します。", "distractor_feedback": {"A":"名称だけで休憩かどうかは決まりません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q81", "unit": "shikyu", "lesson": "payroll-flow", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "月給者が私傷病で1日欠勤し、就業規則の合理的な計算式により不就労分を控除した。この控除について適切なものはどれか。",
+    "choices": [{"key":"A","text":"必ず制裁としての減給に当たる"},{"key":"B","text":"ノーワーク・ノーペイに基づく不就労分控除であり、制裁とは区別して考える"},{"key":"C","text":"賃金全額払いのため一切控除できない"},{"key":"D","text":"社会保険料だけを減額する制度である"}], "answer": {"choice":"B"},
+    "explanation": "働かなかった時間に対応する賃金を控除する欠勤控除と、懲戒処分として賃金を減らす制裁は別です。",
+    "common_mistake": "給与から減る処理をすべて減給制裁と呼ばないこと。", "distractor_feedback": {"A":"不就労分の控除と懲戒制裁は法的性質が異なります。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q82", "unit": "shikyu", "lesson": "payroll-flow", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "hard",
+    "question_text": "就業規則で懲戒として減給を定める場合、労基法上の限度として正しいものはどれか。",
+    "choices": [{"key":"A","text":"1回の額は平均賃金1日分の半額まで、総額は一賃金支払期の賃金総額の10分の1まで"},{"key":"B","text":"1回につき月給全額まで"},{"key":"C","text":"本人同意があれば限度なし"},{"key":"D","text":"1回の額も総額も一律1万円まで"}], "answer": {"choice":"A"},
+    "explanation": "減給制裁は、1回の額が平均賃金1日分の半額を超えず、総額が一賃金支払期の賃金総額の10分の1を超えない範囲です。",
+    "common_mistake": "1回当たりと支払期総額の2つの限度をセットで確認します。", "distractor_feedback": {"C":"同意があっても労基法上の制限を無制限にはできません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q83", "unit": "roudou", "lesson": "chingin-shiharai", "type": "choice", "category": "労働法・勤怠", "difficulty": "medium",
+    "question_text": "就業規則に『時間外割増率は10％』と記載されている。この規定の扱いとして適切なものはどれか。",
+    "choices": [{"key":"A","text":"就業規則が優先され10％でよい"},{"key":"B","text":"法令の最低基準を下回る部分は無効で、法定基準が適用される"},{"key":"C","text":"労働者が署名すれば常に有効"},{"key":"D","text":"給与担当者が任意の率を選べる"}], "answer": {"choice":"B"},
+    "explanation": "就業規則や労働契約で法令の最低基準を下回る条件を定めても、その部分は法定基準に置き換わります。",
+    "common_mistake": "社内規程があれば法令より優先するわけではありません。", "distractor_feedback": {"A":"就業規則は法令に反することができません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q84", "unit": "roudou", "lesson": "chingin-shiharai", "type": "choice", "category": "労働法・勤怠", "difficulty": "hard",
+    "question_text": "会社が就業規則を変更して労働条件を不利益に変更しようとしている。労働契約法上もっとも適切な説明はどれか。",
+    "choices": [{"key":"A","text":"就業規則を変更すれば理由を問わず直ちに有効"},{"key":"B","text":"不利益の程度、変更の必要性、内容の相当性、交渉状況、周知などから合理性を判断する"},{"key":"C","text":"給与担当者の承認だけで有効"},{"key":"D","text":"不利益変更はどのような場合も不可能"}], "answer": {"choice":"B"},
+    "explanation": "就業規則による不利益変更は無条件でも絶対禁止でもなく、不利益の程度や必要性、相当性、交渉状況、周知等から合理性を判断します。",
+    "common_mistake": "『会社が変えれば有効』『不利益なら全部無効』の二択にしないこと。", "distractor_feedback": {"A":"一方的に変更しただけで当然に有効にはなりません。","D":"合理性等の要件を満たす変更まで一律禁止ではありません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q85", "unit": "shikyu", "lesson": "payroll-flow", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "会社が従業員から取得したマイナンバーの利用として適切なものはどれか。",
+    "choices": [{"key":"A","text":"人事評価の社員検索キーとして使う"},{"key":"B","text":"源泉徴収票や社会保険届出など法令で定められた事務に使う"},{"key":"C","text":"社内名簿へ掲載する"},{"key":"D","text":"営業先へ本人確認用として提供する"}], "answer": {"choice":"B"},
+    "explanation": "事業者は源泉徴収票作成や社会保険届出など、番号法で認められた事務の範囲でマイナンバーを利用します。",
+    "common_mistake": "便利な個人識別番号として一般業務へ流用できるものではありません。", "distractor_feedback": {"A":"人事評価は法令で限定された個人番号関係事務ではありません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q86", "unit": "shikyu", "lesson": "payroll-flow", "type": "choice", "category": "給与基礎・支給控除", "difficulty": "medium",
+    "question_text": "退職者のマイナンバーを含む書類について、法定保存期間等が経過し関係事務で保管する必要がなくなった。適切な対応はどれか。",
+    "choices": [{"key":"A","text":"将来使うかもしれないので永久保存する"},{"key":"B","text":"復元できない方法で削除・廃棄し、必要に応じ記録を残す"},{"key":"C","text":"一般ごみへそのまま捨てる"},{"key":"D","text":"全社員へ共有する"}], "answer": {"choice":"B"},
+    "explanation": "保管の必要がなくなった特定個人情報は、復元不可能な方法で速やかに削除・廃棄します。",
+    "common_mistake": "厳重保管だけでなく、不要になった後の確実な廃棄までが管理です。", "distractor_feedback": {"A":"必要性がなくなった後まで漫然と保管できません。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q87", "unit": "shaho", "lesson": "tekiyo-tetsuzuki", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "月給制の従業員を採用した。健康保険・厚生年金の資格取得時決定について適切なものはどれか。",
+    "choices": [{"key":"A","text":"3か月分の実績がそろうまで届出を待つ"},{"key":"B","text":"労働契約等の報酬見込に基づき、原則5日以内に資格取得届を提出する"},{"key":"C","text":"最初の賞与額だけで決める"},{"key":"D","text":"本人が標準報酬月額を選ぶ"}], "answer": {"choice":"B"},
+    "explanation": "入社時は報酬実績がないため、労働契約等の内容から報酬月額を見込み、事業主が原則5日以内に資格取得届を提出します。",
+    "common_mistake": "定時決定の4～6月実績や随時改定の3か月実績と混同しないこと。", "distractor_feedback": {"A":"資格取得時決定は実績3か月を待たず見込額で行います。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q88", "unit": "shaho", "lesson": "tekiyo-tetsuzuki", "type": "choice", "category": "社会保険", "difficulty": "hard",
+    "question_text": "7月1日に資格取得した者の資格取得時決定による標準報酬月額は、随時改定等がない場合、原則いつまで適用されるか。",
+    "choices": [{"key":"A","text":"同年8月まで"},{"key":"B","text":"同年12月まで"},{"key":"C","text":"翌年8月まで"},{"key":"D","text":"退職まで永久"}], "answer": {"choice":"C"},
+    "explanation": "6月1日から12月31日までに資格取得した場合、資格取得時決定は原則として翌年8月まで適用されます。",
+    "common_mistake": "1～5月取得と6～12月取得で適用期間が異なります。", "distractor_feedback": {"A":"7月取得は翌年8月までの区分です。"}, "calc_params": null, "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q89", "unit": "shaho", "lesson": "roudou-hoken", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "労働保険の年度更新で行う手続として最も適切なものはどれか。",
+    "choices": [{"key":"A","text":"前年度の確定保険料を精算し、当年度の概算保険料を申告・納付する"},{"key":"B","text":"全従業員の標準報酬月額を9月改定する"},{"key":"C","text":"住民税の年税額を計算する"},{"key":"D","text":"賞与支払届だけを提出する"}], "answer": {"choice":"A"},
+    "explanation": "年度更新では前年度の実際の賃金総額等に基づく確定保険料を精算し、当年度の見込賃金総額等に基づく概算保険料を申告・納付します。",
+    "common_mistake": "社会保険の算定基礎届と労働保険の年度更新を混同しないこと。", "distractor_feedback": {"B":"標準報酬月額の定時決定は算定基礎届の手続です。"}, "calc_params": null, "reference_sheet_slugs": ["koyo-hoken"]
+  },
+  {
+    "source_id": "r2-q90", "unit": "shaho", "lesson": "roudou-hoken", "type": "choice", "category": "社会保険", "difficulty": "medium",
+    "question_text": "労災保険料の負担について正しいものはどれか。",
+    "choices": [{"key":"A","text":"労働者が全額負担"},{"key":"B","text":"原則労使折半"},{"key":"C","text":"事業主が全額負担"},{"key":"D","text":"正社員だけが負担"}], "answer": {"choice":"C"},
+    "explanation": "労災保険料は事業主が全額負担し、労働者の給与から控除しません。雇用保険料の労働者負担と区別します。",
+    "common_mistake": "労働保険を一括りにして、労災保険にも労働者負担があると思わないこと。", "distractor_feedback": {"B":"労使双方に負担がある雇用保険と異なり、労災保険は事業主全額負担です。"}, "calc_params": null, "reference_sheet_slugs": null
+  }
+]

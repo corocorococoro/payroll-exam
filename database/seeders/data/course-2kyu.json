@@ -27,7 +27,8 @@
       "is_advanced": false,
       "sort_order": 2,
       "lessons": [
-        { "slug": "tsukin", "name": "通勤手当と非課税", "description": "距離別の非課税限度額と社会保険上の扱い", "sort_order": 1 }
+        { "slug": "tsukin", "name": "通勤手当と非課税", "description": "距離別の非課税限度額と社会保険上の扱い", "sort_order": 1 },
+        { "slug": "payroll-flow", "name": "給与処理と情報管理", "description": "欠勤控除・減給制裁、マイナンバーの取扱い", "sort_order": 2 }
       ]
     },
     {
@@ -55,7 +56,9 @@
         { "slug": "hyojun-hoshu", "name": "標準報酬と定時決定", "description": "報酬の範囲、4〜6月→9月改定、等級", "sort_order": 1 },
         { "slug": "zuiji-kaitei", "name": "随時改定", "description": "固定的賃金の変動、2等級差、支払基礎日数", "sort_order": 2 },
         { "slug": "ryoritsu", "name": "保険料率と各制度", "description": "健保・介護・厚年・雇用保険・子育て支援金の料率", "sort_order": 3 },
-        { "slug": "taishoku-shoyo", "name": "入退社と賞与の保険料", "description": "資格喪失と保険料発生月、標準賞与額、適用拡大", "sort_order": 4 }
+        { "slug": "taishoku-shoyo", "name": "入退社と賞与の保険料", "description": "資格喪失と保険料発生月、標準賞与額、適用拡大", "sort_order": 4 },
+        { "slug": "tekiyo-tetsuzuki", "name": "加入と資格取得時決定", "description": "入社時の資格取得届、標準報酬月額の決定", "sort_order": 5 },
+        { "slug": "roudou-hoken", "name": "労働保険の年度更新", "description": "確定・概算保険料、労災・雇用保険の負担", "sort_order": 6 }
       ]
     },
     {
@@ -69,18 +72,6 @@
       "lessons": [
         { "slug": "kyuyo-keisan", "name": "給与計算の実践", "description": "割増賃金→社会保険料→源泉所得税の流れ", "sort_order": 1 },
         { "slug": "shoyo-tedori", "name": "賞与と手取り計算", "description": "賞与の保険料・源泉税、差引支給額", "sort_order": 2 }
-      ]
-    },
-    {
-      "slug": "nencho",
-      "name": "年末調整（発展）",
-      "description": "1級範囲への橋渡し。2026年税制改正の基礎控除・給与所得控除",
-      "icon": "🎓",
-      "color": "rose",
-      "is_advanced": true,
-      "sort_order": 6,
-      "lessons": [
-        { "slug": "nencho-kiso", "name": "年末調整のきほん", "description": "基礎控除・給与所得控除・扶養親族の所得要件", "sort_order": 1 }
       ]
     }
   ]

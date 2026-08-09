@@ -279,6 +279,12 @@ function next() {
                     </div>
                 </div>
                 <p
+                    v-if="result.selected_feedback"
+                    class="mb-2 rounded-md bg-rose-100 px-3 py-2 text-xs font-bold text-rose-700 dark:bg-rose-900/50 dark:text-rose-200"
+                >
+                    この選択肢が違う理由: {{ result.selected_feedback }}
+                </p>
+                <p
                     class="text-xs leading-relaxed text-gray-600 dark:text-gray-300"
                 >
                     {{ result.explanation }}

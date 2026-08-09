@@ -29,6 +29,10 @@ class QuestionsTable
                 TextColumn::make('concept_key')
                     ->searchable()
                     ->toggleable(),
+                TextColumn::make('variant_role')
+                    ->label('役割')
+                    ->badge()
+                    ->formatStateUsing(fn ($state): string => $state?->label() ?? '未設定'),
                 TextColumn::make('type')
                     ->badge()
                     ->searchable(),
