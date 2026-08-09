@@ -106,6 +106,7 @@ class ContentAuditService
         }
 
         $this->auditLearningObjectives($questions, $errors);
+        $this->auditAnswerPositionBalance($questions, $errors);
         $this->appendNearDuplicateWarnings($questions, $warnings);
         $this->auditMockExams($errors);
 
@@ -124,6 +125,19 @@ class ContentAuditService
                 'reviews_due' => $reviewCandidates->filter(fn (Question $question): bool => $question->review_due_at?->isPast() ?? false)->count(),
             ],
         ];
+    }
+
+    /**
+     * @param  Collection<int, Question>  $questions
+     * @param  list<string>  $errors
+     */
+    private function auditAnswerPositionBalance(Collection $questions, array &$errors): void
+    {
+        $counts = $this->answerPositionCounts($questions);
+
+        if ($counts->max() - $counts->min() > 4) {
+            $errors[] = '公開問題の正解位置が偏っています（'.$this->formatAnswerPositionCounts($counts).'）。';
+        }
     }
 
     /**
@@ -215,6 +229,7 @@ class ContentAuditService
             }
 
             $conceptKeys = [];
+            $knowledgeRoles = collect();
 
             foreach ($items as $index => $item) {
                 $position = $index + 1;
@@ -228,11 +243,17 @@ class ContentAuditService
 
                 if ($question->type !== QuestionType::Choice) {
                     $errors[] = "{$exam->slug}: {$position}問目が四肢択一ではありません。";
+                } elseif (count($question->choices ?? []) !== 4) {
+                    $errors[] = "{$exam->slug}: {$position}問目の選択肢が4つではありません。";
                 }
 
                 if ($isKnowledge === $question->isCalculation()) {
                     $section = $isKnowledge ? '知識問題' : '計算問題';
                     $errors[] = "{$exam->slug}: {$position}問目が{$section}の構成条件と一致しません。";
+                }
+
+                if ($isKnowledge && $question->variant_role !== null) {
+                    $knowledgeRoles->push($question->variant_role->value);
                 }
 
                 if (! $question->is_active || $question->review_status !== QuestionReviewStatus::Approved) {
@@ -245,7 +266,47 @@ class ContentAuditService
                 }
                 $conceptKeys[$conceptKey] = true;
             }
+
+            $recallCount = $knowledgeRoles->filter(fn (string $role): bool => $role === 'recall')->count();
+            $appliedCount = $knowledgeRoles->filter(fn (string $role): bool => in_array(
+                $role,
+                ['application', 'boundary', 'workflow', 'misconception'],
+                true,
+            ))->count();
+
+            if ($recallCount > 7 || $appliedCount < 25) {
+                $errors[] = "{$exam->slug}: 知識問題の役割配分が実戦演習向けではありません（想起{$recallCount}問・応用系{$appliedCount}問）。";
+            }
+
+            $answerCounts = $this->answerPositionCounts($items->pluck('question'));
+            if ($answerCounts->max() - $answerCounts->min() > 2) {
+                $errors[] = "{$exam->slug}: 正解位置が偏っています（{$this->formatAnswerPositionCounts($answerCounts)}）。";
+            }
         }
+    }
+
+    /**
+     * @param  Collection<int, Question>  $questions
+     * @return Collection<string, int>
+     */
+    private function answerPositionCounts(Collection $questions): Collection
+    {
+        $counts = collect(['A' => 0, 'B' => 0, 'C' => 0, 'D' => 0]);
+
+        foreach ($questions->where('type', QuestionType::Choice) as $question) {
+            $key = $question->answer['choice'] ?? null;
+            if (is_string($key) && $counts->has($key)) {
+                $counts->put($key, $counts->get($key) + 1);
+            }
+        }
+
+        return $counts;
+    }
+
+    /** @param Collection<string, int> $counts */
+    private function formatAnswerPositionCounts(Collection $counts): string
+    {
+        return $counts->map(fn (int $count, string $key): string => "{$key}={$count}")->implode('、');
     }
 
     private function normalize(string $text): string

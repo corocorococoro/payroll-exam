@@ -23,6 +23,12 @@ class ContentSeeder extends Seeder
 {
     private const int FISCAL_YEAR = 2026;
 
+    /**
+     * 正解位置をランダムに見せつつ、再シードで順番が変わらない固定シード。
+     * 全問題と公開模試の正解位置が均等になることは ContentAuditService で検証する。
+     */
+    private const string CHOICE_ORDER_SEED = '12273';
+
     public function run(): void
     {
         $this->seedCourse();
@@ -107,6 +113,7 @@ class ContentSeeder extends Seeder
         foreach (File::files($this->dataPath('questions')) as $file) {
             foreach (File::json($file->getPathname()) as $q) {
                 $this->validateQuestion($q);
+                $q = $this->normalizeChoiceOrder($q);
                 $pedagogy = $blueprint[$q['source_id']]
                     ?? throw new RuntimeException("Question {$q['source_id']}: question-blueprint.jsonに定義がありません。");
                 $seededSourceIds[] = $q['source_id'];
@@ -241,8 +248,8 @@ class ContentSeeder extends Seeder
         if ($q['type'] === QuestionType::Choice->value) {
             $keys = array_column($q['choices'] ?? [], 'key');
 
-            if (count($keys) < 2) {
-                throw new RuntimeException("Question {$id}: choice question needs at least 2 choices");
+            if ($keys !== ['A', 'B', 'C', 'D']) {
+                throw new RuntimeException("Question {$id}: choice question needs choices A, B, C, D in this order");
             }
 
             if (! in_array($q['answer']['choice'] ?? null, $keys, true)) {
@@ -259,6 +266,66 @@ class ContentSeeder extends Seeder
         if ($q['type'] === QuestionType::Numeric->value && ! is_numeric($q['answer']['value'] ?? null)) {
             throw new RuntimeException("Question {$id}: numeric question needs answer.value");
         }
+    }
+
+    /**
+     * 正解位置の偏りから答えを推測できないよう、選択肢を決定的に再配置する。
+     *
+     * @param  array<string, mixed>  $question
+     * @return array<string, mixed>
+     */
+    private function normalizeChoiceOrder(array $question): array
+    {
+        if ($question['type'] !== QuestionType::Choice->value) {
+            return $question;
+        }
+
+        $keys = ['A', 'B', 'C', 'D'];
+        $digest = hash('sha256', self::CHOICE_ORDER_SEED.':'.$question['source_id'], true);
+        $targetCorrectKey = $keys[ord($digest[0]) % count($keys)];
+        $originalCorrectKey = $question['answer']['choice'];
+        /** @var list<array{key: string, text: string}> $choices */
+        $choices = $question['choices'];
+        $correctChoice = null;
+        $distractors = [];
+
+        foreach ($choices as $choice) {
+            if ($choice['key'] === $originalCorrectKey) {
+                $correctChoice = $choice;
+            } else {
+                $distractors[] = $choice;
+            }
+        }
+
+        if ($correctChoice === null) {
+            throw new RuntimeException("Question {$question['source_id']}: correct choice not found");
+        }
+        $oldToNewKeys = [];
+        $reordered = [];
+        $distractorIndex = 0;
+
+        foreach ($keys as $newKey) {
+            $choice = $newKey === $targetCorrectKey
+                ? $correctChoice
+                : $distractors[$distractorIndex++];
+            $oldToNewKeys[$choice['key']] = $newKey;
+            $choice['key'] = $newKey;
+            $reordered[] = $choice;
+        }
+
+        $feedback = [];
+        /** @var array<string, string> $sourceFeedback */
+        $sourceFeedback = $question['distractor_feedback'] ?? [];
+        foreach ($sourceFeedback as $oldKey => $message) {
+            $feedback[$oldToNewKeys[$oldKey]] = $message;
+        }
+        ksort($feedback);
+
+        $question['choices'] = $reordered;
+        $question['answer']['choice'] = $targetCorrectKey;
+        $question['distractor_feedback'] = $feedback;
+
+        return $question;
     }
 
     private function seedMockExams(): void

@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\Unit;
 use App\Services\ContentAuditService;
 use Database\Seeders\ContentSeeder;
+use Illuminate\Support\Facades\File;
 
 use function Pest\Laravel\seed;
 
@@ -49,7 +50,46 @@ test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', 
         ->and($items->take(35)->every(fn ($item): bool => $item->points === 2 && ! $item->question->isCalculation()))->toBeTrue()
         ->and($items->skip(35)->every(fn ($item): bool => $item->points === 6 && $item->question->isCalculation()))->toBeTrue()
         ->and($items->every(fn ($item): bool => $item->question->type === QuestionType::Choice))->toBeTrue()
+        ->and($items->every(fn ($item): bool => count($item->question->choices) === 4))->toBeTrue()
         ->and($items->every(fn ($item): bool => $item->question->review_status === QuestionReviewStatus::Approved))->toBeTrue();
+});
+
+test('正解位置は問題バンク全体と模試で偏らず模試は応用系を中心に構成する', function () {
+    $questions = Question::query()->published()->where('type', QuestionType::Choice)->get();
+    $bankCounts = $questions->countBy(fn (Question $question): string => $question->answer['choice']);
+    $examQuestions = MockExam::where('is_published', true)->sole()
+        ->examQuestions()->with('question')->get()->pluck('question');
+    $examCounts = $examQuestions->countBy(fn (Question $question): string => $question->answer['choice']);
+    $knowledgeRoles = $examQuestions->take(35)->countBy(fn (Question $question): string => $question->variant_role->value);
+
+    expect($bankCounts->sortKeys()->all())->toBe(['A' => 22, 'B' => 24, 'C' => 21, 'D' => 22])
+        ->and($examCounts->sortKeys()->all())->toBe(['A' => 10, 'B' => 10, 'C' => 10, 'D' => 10])
+        ->and($knowledgeRoles['recall'])->toBeLessThanOrEqual(7)
+        ->and($knowledgeRoles->except('recall')->sum())->toBeGreaterThanOrEqual(25);
+});
+
+test('選択肢再配置後も正答と誤答別フィードバックの対応を維持する', function () {
+    foreach (File::files(database_path('seeders/data/questions')) as $file) {
+        foreach (File::json($file->getPathname()) as $source) {
+            if ($source['type'] !== QuestionType::Choice->value) {
+                continue;
+            }
+
+            $question = Question::where('source_id', $source['source_id'])->firstOrFail();
+            $originalChoices = collect($source['choices'])->pluck('text', 'key');
+            $displayedChoices = collect($question->choices)->pluck('text', 'key');
+            $correctText = $originalChoices[$source['answer']['choice']];
+
+            expect($displayedChoices[$question->answer['choice']])->toBe($correctText);
+
+            foreach ($source['distractor_feedback'] ?? [] as $originalKey => $feedback) {
+                $displayedKey = $displayedChoices->search($originalChoices[$originalKey], strict: true);
+
+                expect($displayedKey)->not->toBeFalse()
+                    ->and($question->distractor_feedback[$displayedKey])->toBe($feedback);
+            }
+        }
+    }
 });
 
 test('問題内容ハッシュは正解と解説の変更も検知する', function () {
