@@ -40,3 +40,15 @@ function unlockLesson(User $user, Lesson $lesson): void
         ]);
     }
 }
+
+function correctChoice(Question $question): string
+{
+    return (string) $question->answer['choice'];
+}
+
+function incorrectChoice(Question $question): string
+{
+    return (string) collect($question->choices)
+        ->pluck('key')
+        ->first(fn (string $key): bool => $key !== correctChoice($question));
+}

@@ -76,7 +76,7 @@ test('誤答も今日の解答数に数え、復習画面に正解を漏らさ�
 
     actingAs($user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'A',
+        'answer' => incorrectChoice($question),
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ])->assertOk()->assertJson(['correct' => false]);
@@ -111,7 +111,7 @@ test('復習で正解するとLeitnerボックスと期限が進む', function (
 
     actingAs($user)->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'D',
+        'answer' => correctChoice($question),
         'context' => 'review',
     ])->assertOk()->assertJson(['correct' => true]);
 

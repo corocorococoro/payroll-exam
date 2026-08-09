@@ -45,16 +45,17 @@ test('問題配信レスポンスに正解・解説が含まれない', function
 
 test('正解するとXPが付与され解説が返る', function () {
     $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $correctChoice = correctChoice($question);
 
     $response = actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'D',
+        'answer' => $correctChoice,
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ]);
 
     $response->assertOk()
-        ->assertJson(['correct' => true, 'correct_answer' => 'D', 'xp_earned' => 10]);
+        ->assertJson(['correct' => true, 'correct_answer' => $correctChoice, 'xp_earned' => 10]);
 
     expect($response->json('explanation'))->toContain('労基法24条');
 
@@ -70,7 +71,7 @@ test('誤答すると復習キューに入りXPは0', function () {
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'A',
+        'answer' => incorrectChoice($question),
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ])->assertOk()->assertJson(['correct' => false, 'xp_earned' => 0]);
@@ -84,15 +85,19 @@ test('誤答すると復習キューに入りXPは0', function () {
 
 test('誤答した選択肢に対応するフィードバックを返す', function () {
     $question = Question::where('source_id', 'r2-q41')->firstOrFail();
+    $expectedFeedback = '回数の要件だけを見ており、一定期日払いを確認していません。';
+    $choice = collect($question->distractor_feedback)->search($expectedFeedback, strict: true);
+
+    expect($choice)->toBeString();
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'A',
+        'answer' => $choice,
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ])->assertOk()->assertJson([
         'correct' => false,
-        'selected_feedback' => '回数の要件だけを見ており、一定期日払いを確認していません。',
+        'selected_feedback' => $expectedFeedback,
     ]);
 });
 
@@ -169,7 +174,7 @@ test('デイリーゴール達成でストリークが記録される', function
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
-        'answer' => 'D',
+        'answer' => correctChoice($question),
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ])->assertOk();
@@ -199,7 +204,7 @@ test('同じ出題への二重解答ではXPを再獲得できない', function 
     $run = lessonRun($question);
     $payload = [
         'question_id' => $question->id,
-        'answer' => 'D',
+        'answer' => correctChoice($question),
         'context' => 'lesson',
         'lesson_id' => $question->lesson_id,
     ];
