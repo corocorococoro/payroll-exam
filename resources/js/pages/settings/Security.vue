@@ -10,7 +10,7 @@ import { edit } from '@/routes/security';
 
 type Props = {
     passwordRules: string;
-} ;
+};
 
 const props = defineProps<Props>();
 
@@ -100,6 +100,4 @@ defineOptions({
             </div>
         </Form>
     </div>
-
-
 </template>

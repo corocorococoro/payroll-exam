@@ -12,8 +12,8 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.ts'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('M PLUS Rounded 1c', {
+                    weights: [400, 500, 700, 800],
                 }),
             ],
         }),
@@ -27,10 +27,15 @@ export default defineConfig({
                 },
             },
         }),
-        wayfinder({
-            formVariants: true,
-            // ホストに PHP がないため、Docker の app コンテナ経由で生成する
-            command: 'docker compose exec -T app php artisan wayfinder:generate --with-form',
-        }),
+        ...(process.env.SKIP_WAYFINDER_GENERATION === '1'
+            ? []
+            : [
+                  wayfinder({
+                      formVariants: true,
+                      // ホストに PHP がないため、Docker の app コンテナ経由で生成する
+                      command:
+                          'docker compose exec -T app php artisan wayfinder:generate --with-form',
+                  }),
+              ]),
     ],
 });

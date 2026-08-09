@@ -1,0 +1,13 @@
+{
+    "name": "きゅーよ！ 給与計算実務能力検定2級",
+    "short_name": "きゅーよ！",
+    "description": "毎日コツコツ学ぶ給与計算実務能力検定2級対策",
+    "start_url": "/dashboard",
+    "display": "standalone",
+    "background_color": "#fff7ed",
+    "theme_color": "#fb923c",
+    "icons": [
+        { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+        { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+    ]
+}

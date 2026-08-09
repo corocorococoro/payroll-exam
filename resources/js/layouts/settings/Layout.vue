@@ -23,6 +23,10 @@ const sidebarNavItems: NavItem[] = [
         title: 'Appearance',
         href: editAppearance(),
     },
+    {
+        title: '学習設定',
+        href: '/settings/learning',
+    },
 ];
 
 const { isCurrentOrParentUrl } = useCurrentUrl();
