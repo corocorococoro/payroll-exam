@@ -49,6 +49,7 @@ jobs:
           php artisan key:generate
           php artisan migrate:fresh --seed --force
           php artisan content:audit --strict
+          php artisan wayfinder:generate --with-form
 
       - name: Run CI Checks
         run: composer ci:check
