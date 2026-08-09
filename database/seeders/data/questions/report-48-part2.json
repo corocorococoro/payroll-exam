@@ -411,6 +411,26 @@
     "reference_sheet_slugs": null
   },
   {
+    "source_id": "r2-q41",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "medium",
+    "question_text": "年末調整の目的として最も適切なものはどれか。",
+    "choices": [
+      { "key": "A", "text": "毎月の給与額を確定すること" },
+      { "key": "B", "text": "住民税の翌年度税額を会社が決定すること" },
+      { "key": "C", "text": "所得税の年税額と既に源泉徴収した税額を比較し、差額を精算すること" },
+      { "key": "D", "text": "社会保険料の標準報酬月額を改定すること" }
+    ],
+    "answer": { "choice": "C" },
+    "explanation": "年末調整は、その年の給与等から計算した本来の所得税の年税額と、毎月の給与・賞与から既に源泉徴収した所得税額を比較し、還付または追加徴収で差額を精算する手続です。",
+    "common_mistake": "年末調整は住民税や社会保険料の精算ではなく、給与所得に係る所得税の精算です。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
     "source_id": "r2-q42",
     "unit": "nencho",
     "lesson": "nencho-kiso",
@@ -470,6 +490,26 @@
     "reference_sheet_slugs": null
   },
   {
+    "source_id": "r2-q45",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "hard",
+    "question_text": "2026年税制改正の給与計算実務への適用時期として正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "2026年1月の月次源泉徴収からすべての改正を反映する" },
+      { "key": "B", "text": "11月までの月次源泉徴収は変更せず、12月の年末調整で新控除を反映し、扶養親族等の所得要件は12月1日以後支払分から適用する" },
+      { "key": "C", "text": "2027年1月まで改正内容を一切適用しない" },
+      { "key": "D", "text": "年末調整では旧控除を使い、住民税だけに新制度を反映する" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "2026年11月までの給与等の源泉徴収事務に変更はなく、12月の年末調整で改正後の基礎控除・給与所得控除を反映します。扶養親族等の所得要件改正は12月1日以後に支払う給与等から適用されます。",
+    "common_mistake": "改正年の1月から月次税額表も変わると思い込まず、月次源泉徴収・年末調整・扶養要件それぞれの適用時期を分けて覚えます。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
     "source_id": "r2-q46",
     "unit": "nencho",
     "lesson": "nencho-kiso",
@@ -486,6 +526,26 @@
     "answer": { "choice": "B" },
     "explanation": "2026・2027年分の扶養親族等の所得要件は合計所得62万円以下。給与収入だけの場合は136万円以下（62万＋給与所得控除74万）。",
     "common_mistake": "所得要件と収入ベースの目安の対応関係（62万円⇔136万円）をセットで覚える。",
+    "calc_params": null,
+    "reference_sheet_slugs": null
+  },
+  {
+    "source_id": "r2-q47",
+    "unit": "nencho",
+    "lesson": "nencho-kiso",
+    "type": "choice",
+    "category": "年末調整",
+    "difficulty": "medium",
+    "question_text": "年末調整の基本的な計算・精算の流れとして正しいものはどれか。",
+    "choices": [
+      { "key": "A", "text": "年税額計算→給与収入集計→所得控除→給与所得計算→追加徴収のみ" },
+      { "key": "B", "text": "給与収入集計→給与所得計算→所得控除反映→年税額計算→既徴収税額と比較して精算" },
+      { "key": "C", "text": "所得控除反映→住民税計算→社会保険料改定→年税額計算→給与収入集計" },
+      { "key": "D", "text": "既徴収税額を全額還付→給与所得計算→年税額計算→翌年に追加徴収" }
+    ],
+    "answer": { "choice": "B" },
+    "explanation": "年間給与収入を集計し、給与所得控除後の給与所得を求め、各種所得控除を反映して年税額を計算します。最後に既に源泉徴収した税額と比較し、還付または追加徴収します。",
+    "common_mistake": "既徴収税額との比較は年税額を計算した後です。年末調整で住民税や標準報酬月額を直接計算するわけではありません。",
     "calc_params": null,
     "reference_sheet_slugs": null
   },
