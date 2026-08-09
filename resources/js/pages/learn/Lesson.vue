@@ -131,16 +131,14 @@ const accuracy = computed(() =>
 <template>
     <Head :title="lesson.name" />
 
-    <div class="flex min-h-dvh flex-col bg-orange-50/60 dark:bg-stone-950">
+    <div class="flex min-h-dvh flex-col bg-blue-50/60 dark:bg-gray-950">
         <!-- 結果画面 -->
         <div
             v-if="completion"
             class="flex flex-1 flex-col items-center justify-center gap-5 p-6 text-center"
         >
             <Kyuchan mood="cheer" :size="140" />
-            <h1
-                class="text-2xl font-extrabold text-stone-700 dark:text-stone-100"
-            >
+            <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-100">
                 レッスンクリア！🎉
             </h1>
 
@@ -152,31 +150,31 @@ const accuracy = computed(() =>
                         'size-8',
                         i <= completion.crown_level
                             ? 'fill-amber-400 text-amber-400'
-                            : 'text-stone-200 dark:text-stone-700',
+                            : 'text-gray-200 dark:text-gray-700',
                     ]"
                 />
             </div>
 
             <div class="grid w-full max-w-sm grid-cols-2 gap-3">
                 <div
-                    class="rounded-2xl border-2 border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-stone-900"
+                    class="rounded-md border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-gray-900"
                 >
-                    <p class="text-xs font-bold text-stone-400">かくとくXP</p>
-                    <p class="text-2xl font-extrabold text-amber-500">
+                    <p class="text-xs font-bold text-gray-400">かくとくXP</p>
+                    <p class="text-2xl font-semibold text-amber-500">
                         +{{ earnedXp + completion.bonus_xp }}
                     </p>
-                    <p class="text-[10px] text-stone-400">
+                    <p class="text-[10px] text-gray-400">
                         クリアボーナス +{{ completion.bonus_xp }} 込み
                     </p>
                 </div>
                 <div
-                    class="rounded-2xl border-2 border-emerald-200 bg-white p-4 dark:border-emerald-900 dark:bg-stone-900"
+                    class="rounded-md border border-emerald-200 bg-white p-4 dark:border-emerald-900 dark:bg-gray-900"
                 >
-                    <p class="text-xs font-bold text-stone-400">せいかいりつ</p>
-                    <p class="text-2xl font-extrabold text-emerald-500">
+                    <p class="text-xs font-bold text-gray-400">せいかいりつ</p>
+                    <p class="text-2xl font-semibold text-emerald-500">
                         {{ accuracy }}%
                     </p>
-                    <p class="text-[10px] text-stone-400">
+                    <p class="text-[10px] text-gray-400">
                         {{ correctCount }} / {{ questions.length }} 問
                     </p>
                 </div>
@@ -184,19 +182,19 @@ const accuracy = computed(() =>
 
             <div
                 v-if="completion.goal_met"
-                class="rounded-2xl bg-orange-100 px-4 py-2 text-sm font-bold text-orange-500 dark:bg-orange-950"
+                class="rounded-md bg-blue-100 px-4 py-2 text-sm font-bold text-[#285ac8] dark:bg-blue-950"
             >
                 🔥 今日のゴール達成！ストリーク
                 {{ completion.current_streak }} 日目
             </div>
-            <p v-else class="text-sm text-stone-500">
+            <p v-else class="text-sm text-gray-500">
                 今日はあと
                 {{ Math.max(0, completion.daily_goal - completion.today_xp) }}
                 XP でゴール達成！
             </p>
 
             <button
-                class="w-full max-w-sm rounded-2xl bg-orange-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-orange-500 transition hover:bg-orange-500 active:translate-y-1 active:shadow-none"
+                class="w-full max-w-sm rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm transition hover:bg-[#285ac8] active:shadow-none"
                 @click="backToTree"
             >
                 スキルツリーへもどる
@@ -206,27 +204,27 @@ const accuracy = computed(() =>
         <!-- プレイヤー画面 -->
         <template v-else>
             <header
-                class="sticky top-0 z-10 bg-white/90 backdrop-blur dark:bg-stone-900/90"
+                class="sticky top-0 z-10 bg-white/90 backdrop-blur dark:bg-gray-900/90"
             >
                 <div
                     class="mx-auto flex max-w-2xl items-center gap-3 px-4 py-3"
                 >
                     <Link
                         href="/learn"
-                        class="rounded-full p-1 text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800"
+                        class="rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                         aria-label="やめる"
                     >
                         <X class="size-5" />
                     </Link>
                     <div
-                        class="h-4 flex-1 overflow-hidden rounded-full bg-orange-100 dark:bg-stone-800"
+                        class="h-4 flex-1 overflow-hidden rounded-full bg-blue-100 dark:bg-gray-800"
                     >
                         <div
                             class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
                             :style="{ width: `${progress}%` }"
                         />
                     </div>
-                    <span class="text-xs font-bold text-stone-400"
+                    <span class="text-xs font-bold text-gray-400"
                         >{{ index + 1 }}/{{ questions.length }}</span
                     >
                 </div>
@@ -236,16 +234,16 @@ const accuracy = computed(() =>
                 class="mx-auto w-full max-w-2xl flex-1 px-4 py-5"
                 :class="{ 'pb-56': result }"
             >
-                <p class="mb-1 text-xs font-bold text-stone-400">
+                <p class="mb-1 text-xs font-bold text-gray-400">
                     {{ lesson.unit_name }} / {{ lesson.name }}
                 </p>
 
                 <div v-if="current" class="flex flex-col gap-4">
                     <div
-                        class="rounded-3xl border-2 border-orange-100 bg-white p-5 dark:border-stone-800 dark:bg-stone-900"
+                        class="rounded-lg border border-blue-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
                     >
                         <p
-                            class="text-[15px] leading-relaxed font-medium whitespace-pre-wrap text-stone-700 dark:text-stone-200"
+                            class="text-[15px] leading-relaxed font-medium whitespace-pre-wrap text-gray-700 dark:text-gray-200"
                         >
                             {{ current.question_text }}
                         </p>
@@ -272,10 +270,10 @@ const accuracy = computed(() =>
                             :key="choice.key"
                             :disabled="result !== null"
                             :class="[
-                                'flex items-start gap-3 rounded-2xl border-2 bg-white p-3.5 text-left text-sm font-medium transition dark:bg-stone-900',
+                                'flex items-start gap-3 rounded-md border bg-white p-3.5 text-left text-sm font-medium transition dark:bg-gray-900',
                                 selectedChoice === choice.key
                                     ? 'border-sky-400 bg-sky-50 dark:bg-sky-950/40'
-                                    : 'border-stone-200 hover:border-sky-200 dark:border-stone-700',
+                                    : 'border-gray-200 hover:border-sky-200 dark:border-gray-700',
                                 result &&
                                     result.correct_answer === choice.key &&
                                     'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
@@ -289,16 +287,16 @@ const accuracy = computed(() =>
                         >
                             <span
                                 :class="[
-                                    'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold',
+                                    'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
                                     selectedChoice === choice.key
                                         ? 'bg-sky-400 text-white'
-                                        : 'bg-stone-100 text-stone-500 dark:bg-stone-800',
+                                        : 'bg-gray-100 text-gray-500 dark:bg-gray-800',
                                 ]"
                             >
                                 {{ choice.key }}
                             </span>
                             <span
-                                class="pt-0.5 text-stone-700 dark:text-stone-200"
+                                class="pt-0.5 text-gray-700 dark:text-gray-200"
                                 >{{ choice.text }}</span
                             >
                         </button>
@@ -307,10 +305,10 @@ const accuracy = computed(() =>
                     <!-- 数値入力 -->
                     <div
                         v-else
-                        class="rounded-2xl border-2 border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900"
+                        class="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
                     >
                         <label
-                            class="mb-2 block text-xs font-bold text-stone-400"
+                            class="mb-2 block text-xs font-bold text-gray-400"
                             for="numeric-answer"
                             >こたえ（円）</label
                         >
@@ -321,7 +319,7 @@ const accuracy = computed(() =>
                             inputmode="numeric"
                             :disabled="result !== null"
                             placeholder="例: 45000"
-                            class="w-full rounded-xl border-2 border-stone-200 bg-stone-50 px-4 py-3 text-lg font-bold text-stone-700 focus:border-sky-400 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+                            class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-bold text-gray-700 focus:border-sky-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
                             @keydown.enter="canCheck && !result && check()"
                         />
                     </div>
@@ -355,7 +353,7 @@ const accuracy = computed(() =>
                             <div class="flex-1">
                                 <p
                                     :class="[
-                                        'text-lg font-extrabold',
+                                        'text-lg font-semibold',
                                         result.correct
                                             ? 'text-emerald-600'
                                             : 'text-rose-500',
@@ -376,7 +374,7 @@ const accuracy = computed(() =>
                                 </p>
                                 <p
                                     v-if="!result.correct"
-                                    class="text-sm font-bold text-stone-600 dark:text-stone-300"
+                                    class="text-sm font-bold text-gray-600 dark:text-gray-300"
                                 >
                                     こたえ: {{ result.correct_answer }}
                                 </p>
@@ -384,7 +382,7 @@ const accuracy = computed(() =>
                         </div>
 
                         <div
-                            class="max-h-36 overflow-y-auto rounded-xl bg-white/70 p-3 text-xs leading-relaxed text-stone-600 dark:bg-stone-900/70 dark:text-stone-300"
+                            class="max-h-36 overflow-y-auto rounded-xl bg-white/70 p-3 text-xs leading-relaxed text-gray-600 dark:bg-gray-900/70 dark:text-gray-300"
                         >
                             <p>{{ result.explanation }}</p>
                             <p
@@ -397,10 +395,10 @@ const accuracy = computed(() =>
 
                         <button
                             :class="[
-                                'w-full rounded-2xl py-3 font-extrabold text-white transition active:translate-y-1 active:shadow-none',
+                                'w-full rounded-md py-3 font-semibold text-white transition active:shadow-none',
                                 result.correct
-                                    ? 'bg-emerald-400 shadow-[0_4px_0] shadow-emerald-500 hover:bg-emerald-500'
-                                    : 'bg-rose-400 shadow-[0_4px_0] shadow-rose-500 hover:bg-rose-500',
+                                    ? 'bg-emerald-400 shadow-sm shadow-emerald-500 hover:bg-emerald-500'
+                                    : 'bg-rose-400 shadow-sm shadow-rose-500 hover:bg-rose-500',
                             ]"
                             :disabled="finishing"
                             @click="next"
@@ -412,11 +410,11 @@ const accuracy = computed(() =>
 
                 <div
                     v-else
-                    class="border-t border-orange-100 bg-white/95 backdrop-blur dark:border-stone-800 dark:bg-stone-900/95"
+                    class="border-t border-blue-100 bg-white/95 backdrop-blur dark:border-gray-800 dark:bg-gray-900/95"
                 >
                     <div class="mx-auto max-w-2xl p-4">
                         <button
-                            class="w-full rounded-2xl bg-sky-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-sky-500 transition hover:bg-sky-500 active:translate-y-1 active:shadow-none disabled:opacity-40 disabled:shadow-none"
+                            class="w-full rounded-md bg-sky-400 py-3 font-semibold text-white shadow-sm shadow-sky-500 transition hover:bg-sky-500 active:shadow-none disabled:opacity-40 disabled:shadow-none"
                             :disabled="!canCheck || checking"
                             @click="check"
                         >

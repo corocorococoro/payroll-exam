@@ -15,28 +15,31 @@ const stats = computed(() => page.props.stats as Stats | null);
 
 const tabs = [
     { href: '/dashboard', label: 'ホーム', icon: BarChart3 },
-    { href: '/learn', label: 'まなぶ', icon: BookOpen },
-    { href: '/review', label: 'ふくしゅう', icon: RotateCcw },
-    { href: '/mock-exams', label: 'もし', icon: ClipboardCheck },
-    { href: '/settings/profile', label: 'せってい', icon: Settings },
+    { href: '/learn', label: '学習', icon: BookOpen },
+    { href: '/review', label: '復習', icon: RotateCcw },
+    { href: '/mock-exams', label: '模試', icon: ClipboardCheck },
+    { href: '/settings/profile', label: '設定', icon: Settings },
 ];
 
 const isActive = (href: string) => page.url.startsWith(href);
 </script>
 
 <template>
-    <div class="flex min-h-dvh flex-col bg-orange-50/60 dark:bg-stone-950">
+    <div class="flex min-h-dvh flex-col bg-[#f7f8fb] dark:bg-gray-950">
         <!-- ヘッダー: ストリーク / XP / 試験カウントダウン -->
         <header
-            class="sticky top-0 z-20 border-b border-orange-100 bg-white/90 backdrop-blur dark:border-stone-800 dark:bg-stone-900/90"
+            class="sticky top-0 z-20 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
         >
             <div
-                class="mx-auto flex h-14 max-w-3xl items-center justify-between px-4"
+                class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6"
             >
                 <Link
                     href="/dashboard"
-                    class="text-lg font-extrabold text-orange-500"
-                    >きゅーよ！</Link
+                    class="flex items-center gap-2 text-lg font-semibold text-[#2864f0]"
+                    ><span
+                        class="flex size-8 items-center justify-center rounded-sm bg-[#2864f0] text-sm font-bold text-white"
+                        >給</span
+                    ><span>給与検定2級</span></Link
                 >
 
                 <div
@@ -46,62 +49,83 @@ const isActive = (href: string) => page.url.startsWith(href);
                     <span
                         class="flex items-center gap-1"
                         :class="
-                            stats.goal_met
-                                ? 'text-orange-500'
-                                : 'text-stone-400'
+                            stats.goal_met ? 'text-[#285ac8]' : 'text-gray-400'
                         "
                         :title="`ストリーク ${stats.current_streak}日`"
                     >
                         🔥 {{ stats.current_streak }}
                     </span>
                     <span
-                        class="flex items-center gap-1 text-sky-500"
+                        class="flex items-center gap-1 text-[#285ac8]"
                         :title="`合計 ${stats.total_xp} XP`"
                     >
                         💎 {{ stats.total_xp }}
                     </span>
                     <span
                         v-if="stats.days_to_exam >= 0"
-                        class="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-bold text-rose-500 dark:bg-rose-950"
+                        class="rounded-sm bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                         title="試験日まで"
                     >
                         あと{{ stats.days_to_exam }}日
                     </span>
                 </div>
             </div>
+            <nav
+                class="mx-auto hidden max-w-6xl items-end gap-1 px-4 sm:px-6 md:flex"
+                aria-label="メインナビゲーション"
+            >
+                <Link
+                    v-for="tab in tabs"
+                    :key="`desktop-${tab.href}`"
+                    :href="tab.href"
+                    class="flex items-center gap-2 border-b-4 px-5 py-3 text-sm font-semibold transition-colors"
+                    :class="
+                        isActive(tab.href)
+                            ? 'border-[#2864f0] text-[#285ac8]'
+                            : 'border-transparent text-gray-700 hover:border-gray-200 hover:text-[#285ac8] dark:text-gray-300'
+                    "
+                >
+                    <component :is="tab.icon" class="size-5" />
+                    {{ tab.label }}
+                </Link>
+            </nav>
         </header>
 
         <!-- 今日のゴール進捗バー -->
         <div
             v-if="stats"
-            class="border-b border-orange-100 bg-white dark:border-stone-800 dark:bg-stone-900"
+            class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
         >
-            <div class="mx-auto flex max-w-3xl items-center gap-3 px-4 py-2">
+            <div
+                class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2 sm:px-6"
+            >
                 <div
-                    class="h-3 flex-1 overflow-hidden rounded-full bg-orange-100 dark:bg-stone-800"
+                    class="h-2 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
                 >
                     <div
-                        class="h-full rounded-full bg-gradient-to-r from-amber-400 to-orange-400 transition-all duration-700"
+                        class="h-full rounded-full bg-[#2864f0] transition-all duration-700"
                         :style="{
                             width: `${Math.min(100, (stats.today_xp / stats.daily_goal) * 100)}%`,
                         }"
                     />
                 </div>
                 <span
-                    class="text-xs font-bold text-stone-500 dark:text-stone-400"
+                    class="text-xs font-bold text-gray-500 dark:text-gray-400"
                 >
                     {{ stats.today_xp }} / {{ stats.daily_goal }} XP
                 </span>
             </div>
         </div>
 
-        <main class="mx-auto w-full max-w-3xl flex-1 px-4 pt-4 pb-24">
+        <main
+            class="mx-auto w-full max-w-6xl flex-1 px-4 pt-6 pb-24 sm:px-6 md:pb-10"
+        >
             <slot />
         </main>
 
         <!-- ボトムタブナビ（モバイルファースト） -->
         <nav
-            class="fixed inset-x-0 bottom-0 z-20 border-t border-orange-100 bg-white/95 backdrop-blur dark:border-stone-800 dark:bg-stone-900/95"
+            class="fixed inset-x-0 bottom-0 z-20 border-t border-gray-200 bg-white/95 backdrop-blur md:hidden dark:border-gray-800 dark:bg-gray-900/95"
         >
             <div class="mx-auto flex max-w-3xl items-stretch justify-around">
                 <Link
@@ -111,8 +135,8 @@ const isActive = (href: string) => page.url.startsWith(href);
                     class="flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-bold transition-colors"
                     :class="
                         isActive(tab.href)
-                            ? 'text-orange-500'
-                            : 'text-stone-400 hover:text-orange-400'
+                            ? 'text-[#285ac8]'
+                            : 'text-gray-500 hover:text-[#285ac8]'
                     "
                 >
                     <component :is="tab.icon" class="size-5" />

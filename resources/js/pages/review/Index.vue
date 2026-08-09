@@ -97,17 +97,15 @@ function next() {
         class="flex min-h-[65vh] flex-col items-center justify-center text-center"
     >
         <Kyuchan mood="happy" :size="130" />
-        <h1
-            class="mt-3 text-xl font-extrabold text-stone-700 dark:text-stone-100"
-        >
+        <h1 class="mt-3 text-xl font-semibold text-gray-700 dark:text-gray-100">
             今日の復習は完了！
         </h1>
-        <p class="mt-1 text-sm text-stone-400">
+        <p class="mt-1 text-sm text-gray-400">
             忘れたころに、またきゅーちゃんがお知らせします。
         </p>
         <Link
             href="/learn"
-            class="mt-5 rounded-2xl bg-orange-400 px-6 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-orange-500"
+            class="mt-5 rounded-md bg-[#2864f0] px-6 py-3 font-semibold text-white shadow-sm"
             >新しいレッスンへ</Link
         >
     </div>
@@ -119,16 +117,16 @@ function next() {
         <Kyuchan mood="cheer" :size="140" />
         <CheckCircle2 class="mt-2 size-9 text-emerald-500" />
         <h1
-            class="mt-2 text-2xl font-extrabold text-stone-700 dark:text-stone-100"
+            class="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-100"
         >
             復習おつかれさま！
         </h1>
-        <p class="mt-1 text-sm font-bold text-stone-500">
+        <p class="mt-1 text-sm font-bold text-gray-500">
             {{ correctCount }} / {{ questions.length }} 問正解
         </p>
         <Link
             href="/dashboard"
-            class="mt-5 rounded-2xl bg-emerald-400 px-8 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-emerald-500"
+            class="mt-5 rounded-md bg-emerald-400 px-8 py-3 font-semibold text-white shadow-sm shadow-emerald-500"
             >ホームへ</Link
         >
     </div>
@@ -137,22 +135,22 @@ function next() {
         <div class="mb-5">
             <div class="mb-2 flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <RotateCcw class="size-5 text-violet-500" />
+                    <RotateCcw class="size-5 text-[#285ac8]" />
                     <h1
-                        class="text-lg font-extrabold text-stone-700 dark:text-stone-100"
+                        class="text-lg font-semibold text-gray-700 dark:text-gray-100"
                     >
                         今日の復習
                     </h1>
                 </div>
-                <span class="text-xs font-bold text-stone-400"
+                <span class="text-xs font-bold text-gray-400"
                     >{{ index + 1 }} / {{ questions.length }}</span
                 >
             </div>
             <div
-                class="h-3 overflow-hidden rounded-full bg-violet-100 dark:bg-stone-800"
+                class="h-3 overflow-hidden rounded-full bg-blue-100 dark:bg-gray-800"
             >
                 <div
-                    class="h-full rounded-full bg-violet-400 transition-all"
+                    class="h-full rounded-full bg-[#2864f0] transition-all"
                     :style="{ width: `${progress}%` }"
                 />
             </div>
@@ -160,19 +158,19 @@ function next() {
 
         <div v-if="current" class="flex flex-col gap-4">
             <section
-                class="rounded-3xl border-2 border-violet-100 bg-white p-5 dark:border-stone-800 dark:bg-stone-900"
+                class="rounded-lg border border-blue-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
             >
                 <div class="mb-3 flex items-center justify-between">
-                    <span class="text-xs font-bold text-violet-500">{{
+                    <span class="text-xs font-bold text-[#285ac8]">{{
                         current.unit_name
                     }}</span
                     ><span
-                        class="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-bold text-violet-400 dark:bg-violet-950"
+                        class="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-[#2864f0] dark:bg-blue-950"
                         >復習ボックス {{ current.box }}</span
                     >
                 </div>
                 <p
-                    class="text-[15px] leading-relaxed font-medium whitespace-pre-wrap text-stone-700 dark:text-stone-200"
+                    class="text-[15px] leading-relaxed font-medium whitespace-pre-wrap text-gray-700 dark:text-gray-200"
                 >
                     {{ current.question_text }}
                 </p>
@@ -197,10 +195,10 @@ function next() {
                     :key="choice.key"
                     :disabled="result !== null"
                     :class="[
-                        'flex items-start gap-3 rounded-2xl border-2 bg-white p-3.5 text-left text-sm font-medium transition dark:bg-stone-900',
+                        'flex items-start gap-3 rounded-md border bg-white p-3.5 text-left text-sm font-medium transition dark:bg-gray-900',
                         selectedChoice === choice.key
-                            ? 'border-violet-400 bg-violet-50 dark:bg-violet-950/40'
-                            : 'border-stone-200 dark:border-stone-700',
+                            ? 'border-[#2864f0] bg-blue-50 dark:bg-blue-950/40'
+                            : 'border-gray-200 dark:border-gray-700',
                         result &&
                             result.correct_answer === choice.key &&
                             'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
@@ -214,31 +212,31 @@ function next() {
                 >
                     <span
                         :class="[
-                            'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-extrabold',
+                            'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
                             selectedChoice === choice.key
-                                ? 'bg-violet-400 text-white'
-                                : 'bg-stone-100 text-stone-500 dark:bg-stone-800',
+                                ? 'bg-[#2864f0] text-white'
+                                : 'bg-gray-100 text-gray-500 dark:bg-gray-800',
                         ]"
                         >{{ choice.key }}</span
-                    ><span class="pt-0.5 text-stone-700 dark:text-stone-200">{{
+                    ><span class="pt-0.5 text-gray-700 dark:text-gray-200">{{
                         choice.text
                     }}</span>
                 </button>
             </div>
             <div
                 v-else
-                class="rounded-2xl border-2 border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900"
+                class="rounded-md border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900"
             >
                 <label
                     for="review-answer"
-                    class="mb-2 block text-xs font-bold text-stone-400"
+                    class="mb-2 block text-xs font-bold text-gray-400"
                     >こたえ（円）</label
                 ><input
                     id="review-answer"
                     v-model="numericInput"
                     :disabled="result !== null"
                     inputmode="numeric"
-                    class="w-full rounded-xl border-2 border-stone-200 bg-stone-50 px-4 py-3 text-lg font-bold focus:border-violet-400 focus:outline-none dark:border-stone-700 dark:bg-stone-800"
+                    class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-bold focus:border-[#2864f0] focus:outline-none dark:border-gray-700 dark:bg-gray-800"
                     @keydown.enter="canCheck && !result && check()"
                 />
             </div>
@@ -246,7 +244,7 @@ function next() {
             <div
                 v-if="result"
                 :class="[
-                    'rounded-3xl border-2 p-4',
+                    'rounded-lg border p-4',
                     result.correct
                         ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950'
                         : 'border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950',
@@ -260,7 +258,7 @@ function next() {
                     <div>
                         <p
                             :class="[
-                                'font-extrabold',
+                                'font-semibold',
                                 result.correct
                                     ? 'text-emerald-600'
                                     : 'text-rose-500',
@@ -274,14 +272,14 @@ function next() {
                         </p>
                         <p
                             v-if="!result.correct"
-                            class="text-xs font-bold text-stone-600 dark:text-stone-300"
+                            class="text-xs font-bold text-gray-600 dark:text-gray-300"
                         >
                             こたえ: {{ result.correct_answer }}
                         </p>
                     </div>
                 </div>
                 <p
-                    class="text-xs leading-relaxed text-stone-600 dark:text-stone-300"
+                    class="text-xs leading-relaxed text-gray-600 dark:text-gray-300"
                 >
                     {{ result.explanation }}
                 </p>
@@ -292,7 +290,7 @@ function next() {
                     ⚠️ {{ result.common_mistake }}
                 </p>
                 <button
-                    class="mt-4 w-full rounded-2xl bg-violet-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-violet-500 active:translate-y-1 active:shadow-none"
+                    class="mt-4 w-full rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none"
                     @click="next"
                 >
                     {{
@@ -302,7 +300,7 @@ function next() {
             </div>
             <button
                 v-else
-                class="rounded-2xl bg-violet-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-violet-500 active:translate-y-1 active:shadow-none disabled:opacity-40 disabled:shadow-none"
+                class="rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none disabled:opacity-40 disabled:shadow-none"
                 :disabled="!canCheck || checking"
                 @click="check"
             >

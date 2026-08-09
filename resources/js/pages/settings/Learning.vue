@@ -54,7 +54,7 @@ function submit() {
         <form class="mt-6 space-y-6" @submit.prevent="submit">
             <section>
                 <label class="mb-2 flex items-center gap-2 text-sm font-bold"
-                    ><Flame class="size-4 text-orange-500" />1日の XP
+                    ><Flame class="size-4 text-[#285ac8]" />1日の XP
                     ゴール</label
                 >
                 <div class="grid grid-cols-4 gap-2">
@@ -63,9 +63,9 @@ function submit() {
                         :key="goal"
                         type="button"
                         :class="[
-                            'rounded-xl border-2 py-3 text-sm font-bold',
+                            'rounded-xl border py-3 text-sm font-bold',
                             dailyGoal === goal
-                                ? 'border-orange-400 bg-orange-50 text-orange-600 dark:bg-orange-950'
+                                ? 'border-[#2864f0] bg-blue-50 text-[#285ac8] dark:bg-blue-950'
                                 : 'border-border',
                         ]"
                         @click="dailyGoal = goal"
@@ -125,11 +125,11 @@ function submit() {
                 <label
                     class="flex items-center justify-between rounded-xl border p-4"
                     ><span class="flex items-center gap-2 text-sm font-bold"
-                        ><Volume2 class="size-4 text-violet-500" />効果音</span
+                        ><Volume2 class="size-4 text-[#285ac8]" />効果音</span
                     ><input
                         v-model="soundEnabled"
                         type="checkbox"
-                        class="size-5 accent-violet-500"
+                        class="size-5 accent-blue-500"
                 /></label>
             </section>
             <button

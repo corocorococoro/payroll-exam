@@ -48,25 +48,25 @@ function toggle(position: number) {
         <Kyuchan :mood="result.passed ? 'cheer' : 'sad'" :size="130" />
         <p
             :class="[
-                'text-sm font-extrabold',
-                result.passed ? 'text-emerald-500' : 'text-orange-500',
+                'text-sm font-semibold',
+                result.passed ? 'text-emerald-500' : 'text-[#285ac8]',
             ]"
         >
             {{ result.passed ? '合格ライン突破！' : 'もうひと伸び！' }}
         </p>
         <h1
-            class="mt-1 text-5xl font-extrabold text-stone-700 dark:text-stone-100"
+            class="mt-1 text-5xl font-semibold text-gray-700 dark:text-gray-100"
         >
-            {{ result.score }}<span class="text-lg text-stone-400"> / 100</span>
+            {{ result.score }}<span class="text-lg text-gray-400"> / 100</span>
         </h1>
-        <p class="mt-1 text-xs text-stone-400">
+        <p class="mt-1 text-xs text-gray-400">
             合格ライン {{ result.passing_score }}点
         </p>
     </div>
     <section
-        class="mt-5 rounded-3xl border-2 border-stone-100 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+        class="mt-5 rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
-        <h2 class="mb-3 flex items-center gap-2 font-extrabold">
+        <h2 class="mb-3 flex items-center gap-2 font-semibold">
             <Trophy class="size-5 text-amber-500" />分野別診断
         </h2>
         <div class="space-y-3">
@@ -85,7 +85,7 @@ function toggle(position: number) {
                     >
                 </div>
                 <div
-                    class="h-2 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800"
+                    class="h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
                 >
                     <div
                         :class="[
@@ -101,7 +101,7 @@ function toggle(position: number) {
         </div>
         <div
             v-if="result.weakest_sections.length"
-            class="mt-4 rounded-2xl bg-orange-50 p-3 text-xs text-orange-700 dark:bg-orange-950 dark:text-orange-300"
+            class="mt-4 rounded-md bg-blue-50 p-3 text-xs text-blue-700 dark:bg-blue-950 dark:text-blue-300"
         >
             優先復習: <strong>{{ result.weakest_sections.join('・') }}</strong
             ><Link href="/learn" class="ml-2 underline">レッスンへ</Link>
@@ -110,18 +110,16 @@ function toggle(position: number) {
     <div class="mt-4 grid grid-cols-2 gap-3">
         <Link
             href="/mock-exams"
-            class="flex items-center justify-center gap-1 rounded-2xl border-2 border-violet-200 py-3 text-sm font-extrabold text-violet-500"
+            class="flex items-center justify-center gap-1 rounded-md border border-blue-200 py-3 text-sm font-semibold text-[#285ac8]"
             ><RotateCcw class="size-4" />模試一覧</Link
         ><Link
             href="/review"
-            class="rounded-2xl bg-violet-500 py-3 text-center text-sm font-extrabold text-white"
+            class="rounded-md bg-[#2864f0] py-3 text-center text-sm font-semibold text-white"
             >復習する</Link
         >
     </div>
     <section class="mt-6">
-        <h2
-            class="mb-3 text-lg font-extrabold text-stone-700 dark:text-stone-100"
-        >
+        <h2 class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-100">
             問題別レビュー
         </h2>
         <div class="space-y-2">
@@ -129,7 +127,7 @@ function toggle(position: number) {
                 v-for="item in review"
                 :key="item.position"
                 :class="[
-                    'rounded-2xl border-2 bg-white dark:bg-stone-900',
+                    'rounded-md border bg-white dark:bg-gray-900',
                     item.correct
                         ? 'border-emerald-100 dark:border-emerald-900'
                         : 'border-rose-100 dark:border-rose-900',
@@ -141,18 +139,18 @@ function toggle(position: number) {
                 >
                     <span
                         :class="[
-                            'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-extrabold text-white',
+                            'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white',
                             item.correct ? 'bg-emerald-400' : 'bg-rose-400',
                         ]"
                         >{{ item.position }}</span
                     >
                     <div class="min-w-0 flex-1">
                         <p
-                            class="truncate text-sm font-bold text-stone-700 dark:text-stone-200"
+                            class="truncate text-sm font-bold text-gray-700 dark:text-gray-200"
                         >
                             {{ item.question_text }}
                         </p>
-                        <p class="text-[10px] text-stone-400">
+                        <p class="text-[10px] text-gray-400">
                             {{ item.unit_name }}・{{ item.points }}点
                         </p>
                     </div>
@@ -163,7 +161,7 @@ function toggle(position: number) {
                 </button>
                 <div
                     v-if="open.includes(item.position)"
-                    class="border-t p-4 text-xs leading-relaxed dark:border-stone-800"
+                    class="border-t p-4 text-xs leading-relaxed dark:border-gray-800"
                 >
                     <p>
                         あなたの解答:
@@ -173,7 +171,7 @@ function toggle(position: number) {
                             item.correct_answer
                         }}</strong>
                     </p>
-                    <p class="mt-2 text-stone-600 dark:text-stone-300">
+                    <p class="mt-2 text-gray-600 dark:text-gray-300">
                         {{ item.explanation }}
                     </p>
                 </div>

@@ -59,18 +59,18 @@ function submit() {
 <template>
     <Head title="はじめの設定" />
     <main
-        class="flex min-h-dvh items-center justify-center bg-gradient-to-br from-orange-50 via-amber-50 to-sky-50 p-4 dark:from-stone-950 dark:via-stone-900 dark:to-sky-950"
+        class="flex min-h-dvh items-center justify-center bg-gradient-to-br from-blue-50 via-amber-50 to-sky-50 p-4 dark:from-gray-950 dark:via-gray-900 dark:to-sky-950"
     >
         <div
-            class="w-full max-w-md rounded-[2rem] border-2 border-white bg-white/90 p-6 shadow-xl shadow-orange-100/60 backdrop-blur dark:border-stone-800 dark:bg-stone-900/90 dark:shadow-none"
+            class="w-full max-w-md rounded-lg border border-white bg-white/90 p-6 shadow-xl/60 backdrop-blur dark:border-gray-800 dark:bg-gray-900/90 dark:shadow-none"
         >
             <div class="mb-4 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-extrabold text-orange-400">
+                    <p class="text-xs font-semibold text-[#2864f0]">
                         きゅーよ！をはじめよう
                     </p>
                     <h1
-                        class="text-xl font-extrabold text-stone-700 dark:text-stone-100"
+                        class="text-xl font-semibold text-gray-700 dark:text-gray-100"
                     >
                         あなたの学習プラン
                     </h1>
@@ -84,22 +84,22 @@ function submit() {
                     :class="[
                         'h-2 flex-1 rounded-full transition',
                         i <= step
-                            ? 'bg-orange-400'
-                            : 'bg-stone-100 dark:bg-stone-800',
+                            ? 'bg-[#2864f0]'
+                            : 'bg-gray-100 dark:bg-gray-800',
                     ]"
                 />
             </div>
 
             <section v-if="step === 1">
                 <div class="mb-4 flex items-center gap-2">
-                    <Flame class="size-6 text-orange-500" />
+                    <Flame class="size-6 text-[#285ac8]" />
                     <div>
                         <h2
-                            class="font-extrabold text-stone-700 dark:text-stone-100"
+                            class="font-semibold text-gray-700 dark:text-gray-100"
                         >
                             1日の目標を選ぼう
                         </h2>
-                        <p class="text-xs text-stone-400">
+                        <p class="text-xs text-gray-400">
                             無理なく続けられる量がおすすめ
                         </p>
                     </div>
@@ -109,22 +109,22 @@ function submit() {
                         v-for="goal in goals"
                         :key="goal.value"
                         :class="[
-                            'rounded-2xl border-2 p-4 text-left transition',
+                            'rounded-md border p-4 text-left transition',
                             dailyGoal === goal.value
-                                ? 'border-orange-400 bg-orange-50 dark:bg-orange-950'
-                                : 'border-stone-100 hover:border-orange-200 dark:border-stone-800',
+                                ? 'border-[#2864f0] bg-blue-50 dark:bg-blue-950'
+                                : 'border-gray-100 hover:border-blue-200 dark:border-gray-800',
                         ]"
                         @click="dailyGoal = goal.value"
                     >
                         <p
-                            class="font-extrabold text-stone-700 dark:text-stone-100"
+                            class="font-semibold text-gray-700 dark:text-gray-100"
                         >
                             {{ goal.label }}
                         </p>
-                        <p class="text-xl font-extrabold text-orange-500">
+                        <p class="text-xl font-semibold text-[#285ac8]">
                             {{ goal.value }} XP
                         </p>
-                        <p class="text-[11px] text-stone-400">
+                        <p class="text-[11px] text-gray-400">
                             {{ goal.note }}
                         </p>
                     </button>
@@ -136,18 +136,18 @@ function submit() {
                     <Bell class="size-6 text-sky-500" />
                     <div>
                         <h2
-                            class="font-extrabold text-stone-700 dark:text-stone-100"
+                            class="font-semibold text-gray-700 dark:text-gray-100"
                         >
                             リマインダー
                         </h2>
-                        <p class="text-xs text-stone-400">
+                        <p class="text-xs text-gray-400">
                             学習を忘れない時間を決めよう
                         </p>
                     </div>
                 </div>
                 <label
-                    class="flex cursor-pointer items-center justify-between rounded-2xl border-2 border-sky-100 bg-sky-50 p-4 dark:border-sky-900 dark:bg-sky-950"
-                    ><span class="font-bold text-stone-700 dark:text-stone-200"
+                    class="flex cursor-pointer items-center justify-between rounded-md border border-sky-100 bg-sky-50 p-4 dark:border-sky-900 dark:bg-sky-950"
+                    ><span class="font-bold text-gray-700 dark:text-gray-200"
                         >毎日お知らせする</span
                     ><input
                         v-model="reminderEnabled"
@@ -157,13 +157,13 @@ function submit() {
                 <div v-if="reminderEnabled" class="mt-4">
                     <label
                         for="reminder"
-                        class="mb-1 block text-xs font-bold text-stone-500"
+                        class="mb-1 block text-xs font-bold text-gray-500"
                         >お知らせ時刻</label
                     ><input
                         id="reminder"
                         v-model="reminderTime"
                         type="time"
-                        class="w-full rounded-2xl border-2 border-stone-200 bg-white px-4 py-3 font-bold dark:border-stone-700 dark:bg-stone-800"
+                        class="w-full rounded-md border border-gray-200 bg-white px-4 py-3 font-bold dark:border-gray-700 dark:bg-gray-800"
                     />
                 </div>
                 <p
@@ -179,11 +179,11 @@ function submit() {
                     <CalendarDays class="size-6 text-rose-500" />
                     <div>
                         <h2
-                            class="font-extrabold text-stone-700 dark:text-stone-100"
+                            class="font-semibold text-gray-700 dark:text-gray-100"
                         >
                             試験日を確認
                         </h2>
-                        <p class="text-xs text-stone-400">
+                        <p class="text-xs text-gray-400">
                             カウントダウンを表示します
                         </p>
                     </div>
@@ -191,10 +191,10 @@ function submit() {
                 <input
                     v-model="examDate"
                     type="date"
-                    class="w-full rounded-2xl border-2 border-rose-100 bg-rose-50 px-4 py-4 text-lg font-extrabold text-stone-700 dark:border-rose-900 dark:bg-rose-950 dark:text-stone-100"
+                    class="w-full rounded-md border border-rose-100 bg-rose-50 px-4 py-4 text-lg font-semibold text-gray-700 dark:border-rose-900 dark:bg-rose-950 dark:text-gray-100"
                 />
                 <p
-                    class="mt-3 rounded-2xl bg-amber-50 p-3 text-xs leading-relaxed text-amber-700 dark:bg-amber-950 dark:text-amber-300"
+                    class="mt-3 rounded-md bg-amber-50 p-3 text-xs leading-relaxed text-amber-700 dark:bg-amber-950 dark:text-amber-300"
                 >
                     2026年11月22日の2級試験を初期値にしています。別日程の場合は変更できます。
                 </p>
@@ -209,21 +209,21 @@ function submit() {
             <div class="mt-7 flex gap-3">
                 <button
                     v-if="step > 1"
-                    class="flex items-center rounded-2xl border-2 border-stone-200 px-4 py-3 font-bold text-stone-500 dark:border-stone-700"
+                    class="flex items-center rounded-md border border-gray-200 px-4 py-3 font-bold text-gray-500 dark:border-gray-700"
                     @click="step--"
                 >
                     <ChevronLeft class="size-4" />戻る
                 </button>
                 <button
                     v-if="step < 3"
-                    class="flex flex-1 items-center justify-center rounded-2xl bg-orange-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-orange-500 active:translate-y-1 active:shadow-none"
+                    class="flex flex-1 items-center justify-center rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none"
                     @click="step++"
                 >
                     つぎへ<ChevronRight class="size-4" />
                 </button>
                 <button
                     v-else
-                    class="flex-1 rounded-2xl bg-emerald-400 py-3 font-extrabold text-white shadow-[0_4px_0] shadow-emerald-500 active:translate-y-1 active:shadow-none disabled:opacity-50"
+                    class="flex-1 rounded-md bg-emerald-400 py-3 font-semibold text-white shadow-sm shadow-emerald-500 active:shadow-none disabled:opacity-50"
                     :disabled="processing"
                     @click="submit"
                 >

@@ -70,7 +70,7 @@ const goalPercent = computed(() =>
     ),
 );
 const ringStyle = computed(() => ({
-    background: `conic-gradient(#fb923c ${goalPercent.value * 3.6}deg, #ffedd5 0deg)`,
+    background: `conic-gradient(#2864f0 ${goalPercent.value * 3.6}deg, #e8efff 0deg)`,
 }));
 
 const radarPoints = computed(() => {
@@ -107,7 +107,7 @@ const radarAxes = computed(() =>
 
 function heatLevel(day: HeatmapDay): string {
     if (day.xp === 0) {
-        return 'bg-stone-100 dark:bg-stone-800';
+        return 'bg-gray-100 dark:bg-gray-800';
     }
 
     if (day.goal_met) {
@@ -126,7 +126,7 @@ function heatLevel(day: HeatmapDay): string {
     <Head title="ホーム" />
 
     <section
-        class="mb-4 overflow-hidden rounded-3xl bg-gradient-to-br from-orange-100 via-amber-50 to-rose-100 p-5 dark:from-orange-950 dark:via-stone-900 dark:to-rose-950"
+        class="mb-4 overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 via-amber-50 to-rose-100 p-5 dark:from-blue-950 dark:via-gray-900 dark:to-rose-950"
     >
         <div class="flex items-center gap-4">
             <div
@@ -134,25 +134,25 @@ function heatLevel(day: HeatmapDay): string {
                 :style="ringStyle"
             >
                 <div
-                    class="flex size-20 flex-col items-center justify-center rounded-full bg-white dark:bg-stone-900"
+                    class="flex size-20 flex-col items-center justify-center rounded-full bg-white dark:bg-gray-900"
                 >
-                    <span class="text-2xl font-extrabold text-orange-500"
+                    <span class="text-2xl font-semibold text-[#285ac8]"
                         >{{ goalPercent }}%</span
                     >
-                    <span class="text-[10px] font-bold text-stone-400"
+                    <span class="text-[10px] font-bold text-gray-400"
                         >今日のゴール</span
                     >
                 </div>
             </div>
             <div class="min-w-0 flex-1">
                 <div
-                    class="flex items-center gap-1 text-sm font-extrabold text-orange-500"
+                    class="flex items-center gap-1 text-sm font-semibold text-[#285ac8]"
                 >
-                    <Flame class="size-4 fill-orange-400" />
+                    <Flame class="size-4 fill-blue-400" />
                     {{ summary.current_streak }}日ストリーク
                 </div>
                 <p
-                    class="mt-1 text-lg font-extrabold text-stone-700 dark:text-stone-100"
+                    class="mt-1 text-lg font-semibold text-gray-700 dark:text-gray-100"
                 >
                     {{
                         summary.goal_met
@@ -160,12 +160,12 @@ function heatLevel(day: HeatmapDay): string {
                             : `あと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP！`
                     }}
                 </p>
-                <p class="text-xs text-stone-500">
+                <p class="text-xs text-gray-500">
                     {{ summary.today_xp }} / {{ summary.daily_goal }} XP
                 </p>
                 <Link
                     href="/learn"
-                    class="mt-3 inline-flex items-center gap-1 rounded-full bg-orange-400 px-4 py-2 text-xs font-extrabold text-white shadow-sm hover:bg-orange-500"
+                    class="mt-3 inline-flex items-center gap-1 rounded-full bg-[#2864f0] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#285ac8]"
                 >
                     <BookOpen class="size-4" /> 学習をはじめる
                 </Link>
@@ -180,64 +180,56 @@ function heatLevel(day: HeatmapDay): string {
 
     <div class="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <div
-            class="rounded-2xl border-2 border-amber-100 bg-white p-3 dark:border-stone-800 dark:bg-stone-900"
+            class="rounded-md border border-amber-100 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
         >
             <Sparkles class="mb-1 size-5 text-amber-500" />
-            <p
-                class="text-xl font-extrabold text-stone-700 dark:text-stone-100"
-            >
+            <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
                 {{ summary.total_xp }}
             </p>
-            <p class="text-[11px] font-bold text-stone-400">合計 XP</p>
+            <p class="text-[11px] font-bold text-gray-400">合計 XP</p>
         </div>
         <div
-            class="rounded-2xl border-2 border-sky-100 bg-white p-3 dark:border-stone-800 dark:bg-stone-900"
+            class="rounded-md border border-sky-100 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
         >
             <ShieldCheck class="mb-1 size-5 text-sky-500" />
-            <p
-                class="text-xl font-extrabold text-stone-700 dark:text-stone-100"
-            >
+            <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
                 {{ summary.streak_freezes }}
             </p>
-            <p class="text-[11px] font-bold text-stone-400">フリーズ</p>
+            <p class="text-[11px] font-bold text-gray-400">フリーズ</p>
         </div>
         <Link
             href="/review"
-            class="rounded-2xl border-2 border-violet-100 bg-white p-3 transition hover:-translate-y-0.5 dark:border-stone-800 dark:bg-stone-900"
+            class="rounded-md border border-blue-100 bg-white p-3 transition dark:border-gray-800 dark:bg-gray-900"
         >
-            <RotateCcw class="mb-1 size-5 text-violet-500" />
-            <p
-                class="text-xl font-extrabold text-stone-700 dark:text-stone-100"
-            >
+            <RotateCcw class="mb-1 size-5 text-[#285ac8]" />
+            <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
                 {{ summary.review_due }}
             </p>
-            <p class="text-[11px] font-bold text-stone-400">今日の復習</p>
+            <p class="text-[11px] font-bold text-gray-400">今日の復習</p>
         </Link>
         <div
-            class="rounded-2xl border-2 border-rose-100 bg-white p-3 dark:border-stone-800 dark:bg-stone-900"
+            class="rounded-md border border-rose-100 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
         >
             <Trophy class="mb-1 size-5 text-rose-500" />
-            <p
-                class="text-xl font-extrabold text-stone-700 dark:text-stone-100"
-            >
+            <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
                 あと{{ summary.days_to_exam }}日
             </p>
-            <p class="text-[11px] font-bold text-stone-400">試験まで</p>
+            <p class="text-[11px] font-bold text-gray-400">試験まで</p>
         </div>
     </div>
 
     <section
-        class="mb-4 rounded-3xl border-2 border-amber-100 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+        class="mb-4 rounded-lg border border-amber-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
         <div class="mb-3 flex items-center justify-between">
             <h2
-                class="flex items-center gap-2 font-extrabold text-stone-700 dark:text-stone-100"
+                class="flex items-center gap-2 font-semibold text-gray-700 dark:text-gray-100"
             >
                 <Target class="size-5 text-amber-500" />今日のクエスト
             </h2>
             <Link
                 href="/league"
-                class="flex items-center gap-1 text-xs font-bold text-violet-500"
+                class="flex items-center gap-1 text-xs font-bold text-[#285ac8]"
                 ><Swords class="size-4" />リーグ・バッジ</Link
             >
         </div>
@@ -257,14 +249,14 @@ function heatLevel(day: HeatmapDay): string {
                 <div class="min-w-0 flex-1">
                     <div class="mb-1 flex justify-between text-xs">
                         <span
-                            class="font-bold text-stone-600 dark:text-stone-300"
+                            class="font-bold text-gray-600 dark:text-gray-300"
                             >{{ quest.label }}</span
-                        ><span class="text-stone-400"
+                        ><span class="text-gray-400"
                             >{{ quest.progress }}/{{ quest.target }}</span
                         >
                     </div>
                     <div
-                        class="h-2 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800"
+                        class="h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
                     >
                         <div
                             :class="[
@@ -287,41 +279,41 @@ function heatLevel(day: HeatmapDay): string {
     </section>
 
     <section
-        class="mb-4 rounded-3xl border-2 border-stone-100 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+        class="mb-4 rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
         <div class="mb-3 flex items-end justify-between">
             <div>
-                <h2 class="font-extrabold text-stone-700 dark:text-stone-100">
+                <h2 class="font-semibold text-gray-700 dark:text-gray-100">
                     学習スコア目安
                 </h2>
-                <p class="text-[11px] text-stone-400">
+                <p class="text-[11px] text-gray-400">
                     問題ごとの最新結果から算出（参考値）
                 </p>
             </div>
             <p
                 :class="[
-                    'text-3xl font-extrabold',
+                    'text-3xl font-semibold',
                     summary.estimated_score >= 70
                         ? 'text-emerald-500'
-                        : 'text-orange-500',
+                        : 'text-[#285ac8]',
                 ]"
             >
                 {{ summary.estimated_score }}<span class="text-sm"> / 100</span>
             </p>
         </div>
         <div
-            class="relative h-4 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800"
+            class="relative h-4 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
         >
             <div
-                class="h-full rounded-full bg-gradient-to-r from-orange-400 to-emerald-400 transition-all"
+                class="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-400 transition-all"
                 :style="{ width: `${summary.estimated_score}%` }"
             />
-            <div class="absolute inset-y-0 left-[70%] w-0.5 bg-stone-600" />
+            <div class="absolute inset-y-0 left-[70%] w-0.5 bg-gray-600" />
         </div>
-        <p class="mt-1 text-right text-[10px] font-bold text-stone-400">
+        <p class="mt-1 text-right text-[10px] font-bold text-gray-400">
             ▲ 合格ライン 70点
         </p>
-        <p class="mt-2 text-[11px] leading-5 text-stone-400">
+        <p class="mt-2 text-[11px] leading-5 text-gray-400">
             根拠:
             {{
                 summary.score_evidence
@@ -330,10 +322,10 @@ function heatLevel(day: HeatmapDay): string {
     </section>
 
     <section
-        class="mb-4 grid gap-4 rounded-3xl border-2 border-stone-100 bg-white p-4 sm:grid-cols-[220px_1fr] dark:border-stone-800 dark:bg-stone-900"
+        class="mb-4 grid gap-4 rounded-lg border border-gray-100 bg-white p-4 sm:grid-cols-[220px_1fr] dark:border-gray-800 dark:bg-gray-900"
     >
         <div>
-            <h2 class="font-extrabold text-stone-700 dark:text-stone-100">
+            <h2 class="font-semibold text-gray-700 dark:text-gray-100">
                 分野別正答率
             </h2>
             <svg
@@ -374,7 +366,7 @@ function heatLevel(day: HeatmapDay): string {
                     :y="axis.labelY"
                     text-anchor="middle"
                     dominant-baseline="middle"
-                    class="fill-stone-500 text-[10px] font-bold"
+                    class="fill-gray-500 text-[10px] font-bold"
                 >
                     {{ axis.icon }}
                 </text>
@@ -388,15 +380,14 @@ function heatLevel(day: HeatmapDay): string {
             >
                 <div>
                     <div class="mb-1 flex justify-between">
-                        <span
-                            class="font-bold text-stone-600 dark:text-stone-300"
+                        <span class="font-bold text-gray-600 dark:text-gray-300"
                             >{{ unit.icon }} {{ unit.name }}</span
-                        ><span class="text-stone-400"
+                        ><span class="text-gray-400"
                             >{{ unit.attempts }}問</span
                         >
                     </div>
                     <div
-                        class="h-2 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800"
+                        class="h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
                     >
                         <div
                             class="h-full rounded-full bg-sky-400"
@@ -404,7 +395,7 @@ function heatLevel(day: HeatmapDay): string {
                         />
                     </div>
                 </div>
-                <span class="text-right font-extrabold text-sky-500"
+                <span class="text-right font-semibold text-sky-500"
                     >{{ unit.accuracy }}%</span
                 >
             </div>
@@ -412,16 +403,16 @@ function heatLevel(day: HeatmapDay): string {
     </section>
 
     <section
-        class="mb-4 rounded-3xl border-2 border-stone-100 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+        class="mb-4 rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
         <div class="mb-3 flex items-center justify-between">
             <div>
-                <h2 class="font-extrabold text-stone-700 dark:text-stone-100">
+                <h2 class="font-semibold text-gray-700 dark:text-gray-100">
                     学習ヒートマップ
                 </h2>
-                <p class="text-[11px] text-stone-400">直近12週間</p>
+                <p class="text-[11px] text-gray-400">直近12週間</p>
             </div>
-            <span class="text-xs font-bold text-stone-400"
+            <span class="text-xs font-bold text-gray-400"
                 >最長 {{ summary.longest_streak }}日 🔥</span
             >
         </div>
@@ -436,9 +427,9 @@ function heatLevel(day: HeatmapDay): string {
     </section>
 
     <section
-        class="rounded-3xl border-2 border-stone-100 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+        class="rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
-        <h2 class="mb-3 font-extrabold text-stone-700 dark:text-stone-100">
+        <h2 class="mb-3 font-semibold text-gray-700 dark:text-gray-100">
             合格までのシーズンマップ
         </h2>
         <div class="flex flex-col gap-2">
@@ -446,18 +437,18 @@ function heatLevel(day: HeatmapDay): string {
                 v-for="(phase, index) in season.phases"
                 :key="phase.key"
                 :class="[
-                    'flex items-center gap-3 rounded-2xl p-3',
+                    'flex items-center gap-3 rounded-md p-3',
                     phase.active
-                        ? 'bg-orange-100 dark:bg-orange-950'
-                        : 'bg-stone-50 dark:bg-stone-800/60',
+                        ? 'bg-blue-100 dark:bg-blue-950'
+                        : 'bg-gray-50 dark:bg-gray-800/60',
                 ]"
             >
                 <div
                     :class="[
-                        'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-extrabold',
+                        'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
                         phase.active
-                            ? 'bg-orange-400 text-white'
-                            : 'bg-stone-200 text-stone-500 dark:bg-stone-700',
+                            ? 'bg-[#2864f0] text-white'
+                            : 'bg-gray-200 text-gray-500 dark:bg-gray-700',
                     ]"
                 >
                     <Check
@@ -471,21 +462,21 @@ function heatLevel(day: HeatmapDay): string {
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2">
                         <p
-                            class="text-sm font-extrabold text-stone-700 dark:text-stone-200"
+                            class="text-sm font-semibold text-gray-700 dark:text-gray-200"
                         >
                             {{ phase.label }}
                         </p>
-                        <span class="text-[10px] text-stone-400">{{
+                        <span class="text-[10px] text-gray-400">{{
                             phase.period
                         }}</span>
                     </div>
-                    <p class="truncate text-xs text-stone-500">
+                    <p class="truncate text-xs text-gray-500">
                         {{ phase.focus }}
                     </p>
                 </div>
                 <span
                     v-if="phase.active"
-                    class="rounded-full bg-orange-400 px-2 py-1 text-[10px] font-extrabold text-white"
+                    class="rounded-full bg-[#2864f0] px-2 py-1 text-[10px] font-semibold text-white"
                     >いまここ</span
                 >
             </div>

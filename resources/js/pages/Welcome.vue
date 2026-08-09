@@ -20,63 +20,64 @@ import Kyuchan from '@/components/Kyuchan.vue';
     </Head>
 
     <div
-        class="min-h-dvh bg-orange-50 text-stone-700 dark:bg-stone-950 dark:text-stone-100"
+        class="min-h-dvh bg-white text-gray-800 dark:bg-gray-950 dark:text-gray-100"
     >
         <header
-            class="mx-auto flex max-w-6xl items-center justify-between px-5 py-5"
+            class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950"
         >
-            <Link
-                href="/"
-                class="flex items-center gap-2 font-extrabold text-orange-500"
+            <div
+                class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5"
             >
-                <span
-                    class="flex size-10 items-center justify-center rounded-2xl bg-orange-400 text-xl text-white"
-                    >給</span
-                >
-                <span>合格クエスト</span>
-            </Link>
-            <nav class="flex items-center gap-2" aria-label="アカウント">
                 <Link
-                    v-if="$page.props.auth.user"
-                    href="/dashboard"
-                    class="rounded-full bg-orange-400 px-5 py-2.5 text-sm font-extrabold text-white hover:bg-orange-500"
+                    href="/"
+                    class="flex items-center gap-2 font-semibold text-[#2864f0]"
                 >
-                    学習を続ける
+                    <span
+                        class="flex size-8 items-center justify-center rounded-sm bg-[#2864f0] text-sm font-bold text-white"
+                        >給</span
+                    >
+                    <span>給与検定2級</span>
                 </Link>
-                <template v-else>
+                <nav class="flex items-center gap-2" aria-label="アカウント">
                     <Link
-                        href="/login"
-                        class="rounded-full px-4 py-2 text-sm font-bold hover:bg-white dark:hover:bg-stone-900"
+                        v-if="$page.props.auth.user"
+                        href="/dashboard"
+                        class="vibes-button-primary"
                     >
-                        ログイン
+                        学習を続ける
                     </Link>
-                    <Link
-                        href="/register"
-                        class="rounded-full bg-orange-400 px-5 py-2.5 text-sm font-extrabold text-white hover:bg-orange-500"
-                    >
-                        無料ではじめる
-                    </Link>
-                </template>
-            </nav>
+                    <template v-else>
+                        <Link
+                            href="/login"
+                            class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-[#285ac8] dark:text-gray-200"
+                        >
+                            ログイン
+                        </Link>
+                        <Link href="/register" class="vibes-button-primary">
+                            無料ではじめる
+                        </Link>
+                    </template>
+                </nav>
+            </div>
         </header>
 
         <main>
             <section
-                class="mx-auto grid max-w-6xl items-center gap-8 px-5 py-12 md:grid-cols-[1.2fr_0.8fr] md:py-20"
+                class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-[1.15fr_0.85fr] md:py-20"
             >
                 <div>
                     <p
-                        class="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-xs font-extrabold text-orange-500 shadow-sm dark:bg-stone-900"
+                        class="mb-4 inline-flex rounded-sm bg-blue-50 px-3 py-1.5 text-xs font-semibold text-[#285ac8] dark:bg-gray-900"
                     >
                         2026年度・給与計算実務能力検定2級対応
                     </p>
                     <h1
-                        class="text-4xl leading-tight font-black tracking-tight text-stone-800 sm:text-5xl dark:text-white"
+                        class="text-4xl leading-tight font-bold tracking-tight text-[#323232] sm:text-5xl dark:text-white"
                     >
                         毎日7問。<br />合格まで、迷わない。
                     </h1>
                     <p
-                        class="mt-5 max-w-2xl text-base leading-8 text-stone-600 dark:text-stone-300"
+                        class="mt-5 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300"
                     >
                         労働法、給与計算、税、社会保険を短いレッスンで積み上げ、忘れた問題は自動で復習。本番形式の40問模試まで、一つの学習ループで仕上げます。
                     </p>
@@ -87,7 +88,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                                     ? '/dashboard'
                                     : '/register'
                             "
-                            class="rounded-2xl bg-orange-400 px-7 py-3.5 font-extrabold text-white shadow-[0_4px_0] shadow-orange-500 transition hover:bg-orange-500 active:translate-y-1 active:shadow-none"
+                            class="vibes-button-primary px-7 py-3.5 text-base"
                         >
                             {{
                                 $page.props.auth.user
@@ -98,13 +99,13 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         <Link
                             v-if="!$page.props.auth.user"
                             href="/login"
-                            class="rounded-2xl border-2 border-orange-200 bg-white px-7 py-3 font-extrabold text-orange-500 hover:border-orange-300 dark:bg-stone-900"
+                            class="vibes-button-secondary px-7 py-3 text-base"
                         >
                             ログイン
                         </Link>
                     </div>
                     <div
-                        class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-stone-500"
+                        class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold text-gray-500"
                     >
                         <span class="flex items-center gap-1.5"
                             ><Clock3 class="size-4 text-sky-500" />1回7問</span
@@ -123,22 +124,22 @@ import Kyuchan from '@/components/Kyuchan.vue';
                 </div>
 
                 <div
-                    class="relative mx-auto flex min-h-80 w-full max-w-md items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-amber-100 via-white to-sky-100 p-8 shadow-xl shadow-orange-100 dark:from-orange-950 dark:via-stone-900 dark:to-sky-950 dark:shadow-none"
+                    class="relative mx-auto flex min-h-80 w-full max-w-md items-center justify-center rounded-md border border-blue-100 bg-[#f3f7ff] p-8 dark:border-gray-800 dark:bg-gray-900"
                 >
                     <div
-                        class="absolute top-6 left-6 rounded-2xl bg-white px-4 py-3 shadow-sm dark:bg-stone-800"
+                        class="absolute top-6 left-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >
-                        <p class="text-xs font-bold text-stone-400">
+                        <p class="text-xs font-bold text-gray-400">
                             今日のゴール
                         </p>
-                        <p class="text-lg font-black text-orange-500">20 XP</p>
+                        <p class="text-lg font-bold text-[#285ac8]">20 XP</p>
                     </div>
                     <Kyuchan mood="cheer" :size="190" />
                     <div
-                        class="absolute right-6 bottom-6 rounded-2xl bg-white px-4 py-3 shadow-sm dark:bg-stone-800"
+                        class="absolute right-6 bottom-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >
-                        <p class="text-xs font-bold text-stone-400">本番形式</p>
-                        <p class="text-lg font-black text-emerald-500">
+                        <p class="text-xs font-bold text-gray-400">本番形式</p>
+                        <p class="text-lg font-bold text-emerald-500">
                             40問 / 120分
                         </p>
                     </div>
@@ -146,36 +147,38 @@ import Kyuchan from '@/components/Kyuchan.vue';
             </section>
 
             <section class="mx-auto max-w-6xl px-5 pb-20">
-                <div class="grid gap-4 md:grid-cols-3">
+                <div
+                    class="grid gap-4 border-t border-gray-200 pt-8 md:grid-cols-3"
+                >
                     <article
-                        class="rounded-3xl border-2 border-orange-100 bg-white p-6 dark:border-stone-800 dark:bg-stone-900"
+                        class="rounded-md border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
                     >
-                        <BookOpen class="mb-4 size-8 text-orange-400" />
-                        <h2 class="font-extrabold">短く、毎日続けられる</h2>
-                        <p class="mt-2 text-sm leading-6 text-stone-500">
+                        <BookOpen class="mb-4 size-7 text-[#2864f0]" />
+                        <h2 class="font-semibold">短く、毎日続けられる</h2>
+                        <p class="mt-2 text-sm leading-6 text-gray-500">
                             長い問題集を一気に解かず、毎回7問のレッスンで理解と習慣を積み上げます。
                         </p>
                     </article>
                     <article
-                        class="rounded-3xl border-2 border-violet-100 bg-white p-6 dark:border-stone-800 dark:bg-stone-900"
+                        class="rounded-md border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
                     >
-                        <RotateCcw class="mb-4 size-8 text-violet-500" />
-                        <h2 class="font-extrabold">間違いを、合格力に変える</h2>
-                        <p class="mt-2 text-sm leading-6 text-stone-500">
+                        <RotateCcw class="mb-4 size-7 text-[#2864f0]" />
+                        <h2 class="font-semibold">間違いを、合格力に変える</h2>
+                        <p class="mt-2 text-sm leading-6 text-gray-500">
                             誤答は復習キューへ。記憶の定着に合わせて出し直し、弱点を放置しません。
                         </p>
                     </article>
                     <article
-                        class="rounded-3xl border-2 border-emerald-100 bg-white p-6 dark:border-stone-800 dark:bg-stone-900"
+                        class="rounded-md border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
                     >
-                        <Brain class="mb-4 size-8 text-emerald-500" />
-                        <h2 class="font-extrabold">本番の配点で現在地を知る</h2>
-                        <p class="mt-2 text-sm leading-6 text-stone-500">
+                        <Brain class="mb-4 size-7 text-[#2864f0]" />
+                        <h2 class="font-semibold">本番の配点で現在地を知る</h2>
+                        <p class="mt-2 text-sm leading-6 text-gray-500">
                             知識35問・計算5問の模試を100点満点で採点し、次に補強する分野を示します。
                         </p>
                     </article>
                 </div>
-                <p class="mt-8 text-center text-xs leading-5 text-stone-400">
+                <p class="mt-8 text-center text-xs leading-5 text-gray-400">
                     本サービスは学習支援ツールです。合格を保証するものではなく、最新の公式教材・受験案内との併用を推奨します。
                 </p>
             </section>
