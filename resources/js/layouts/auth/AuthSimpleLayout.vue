@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { home } from '@/routes';
 
 defineProps<{
@@ -20,16 +19,14 @@ defineProps<{
                 <div class="flex flex-col items-center gap-4">
                     <Link
                         :href="home()"
-                        class="flex flex-col items-center gap-2 font-medium"
+                        class="flex items-center gap-2 text-lg font-semibold text-[#2864f0]"
                     >
                         <div
-                            class="mb-1 flex h-10 w-10 items-center justify-center rounded-sm bg-[#2864f0] p-2"
+                            class="flex size-10 items-center justify-center rounded-sm bg-[#2864f0] text-base font-bold text-white"
                         >
-                            <AppLogoIcon
-                                class="size-7 fill-current text-white"
-                            />
+                            給
                         </div>
-                        <span class="sr-only">{{ title }}</span>
+                        <span>きゅーよ！</span>
                     </Link>
                     <div class="space-y-2 text-center">
                         <h1

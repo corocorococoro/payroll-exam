@@ -63,7 +63,7 @@ function submit() {
                         :key="goal"
                         type="button"
                         :class="[
-                            'rounded-xl border py-3 text-sm font-bold',
+                            'rounded-md border py-3 text-sm font-bold',
                             dailyGoal === goal
                                 ? 'border-[#2864f0] bg-blue-50 text-[#285ac8] dark:bg-blue-950'
                                 : 'border-border',
@@ -76,7 +76,7 @@ function submit() {
             </section>
             <section class="space-y-3">
                 <label
-                    class="flex items-center justify-between rounded-xl border p-4"
+                    class="flex items-center justify-between rounded-md border p-4"
                     ><span class="flex items-center gap-2 text-sm font-bold"
                         ><Bell
                             class="size-4 text-sky-500"
@@ -93,7 +93,7 @@ function submit() {
                         id="learning-reminder"
                         v-model="reminderTime"
                         type="time"
-                        class="w-full rounded-xl border bg-background px-3 py-2"
+                        class="w-full rounded-md border bg-background px-3 py-2"
                     />
                     <p
                         v-if="errors.reminder_time"
@@ -112,7 +112,7 @@ function submit() {
                     id="exam-date"
                     v-model="examDate"
                     type="date"
-                    class="w-full rounded-xl border bg-background px-3 py-2"
+                    class="w-full rounded-md border bg-background px-3 py-2"
                 />
                 <p
                     v-if="errors.exam_date"
@@ -123,7 +123,7 @@ function submit() {
             </section>
             <section>
                 <label
-                    class="flex items-center justify-between rounded-xl border p-4"
+                    class="flex items-center justify-between rounded-md border p-4"
                     ><span class="flex items-center gap-2 text-sm font-bold"
                         ><Volume2 class="size-4 text-[#285ac8]" />効果音</span
                     ><input
@@ -135,7 +135,7 @@ function submit() {
             <button
                 type="submit"
                 :disabled="processing"
-                class="rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground disabled:opacity-50"
+                class="vibes-button-primary w-full sm:w-auto"
             >
                 {{ processing ? '保存中…' : '保存する' }}
             </button>
