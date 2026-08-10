@@ -52,7 +52,7 @@ const isActive = (matches: string[]) =>
             class="sticky top-0 z-20 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
         >
             <div
-                class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6"
+                class="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
             >
                 <Link
                     href="/dashboard"
@@ -65,7 +65,7 @@ const isActive = (matches: string[]) =>
 
                 <div
                     v-if="stats"
-                    class="flex items-center gap-3 text-sm font-bold"
+                    class="hidden items-center gap-3 text-sm font-bold md:flex"
                 >
                     <span
                         class="flex items-center gap-1"
@@ -90,6 +90,14 @@ const isActive = (matches: string[]) =>
                         あと{{ stats.days_to_exam }}日
                     </span>
                 </div>
+
+                <span
+                    v-if="stats && stats.days_to_exam >= 0"
+                    class="shrink-0 rounded-full bg-rose-50 px-3 py-1.5 text-xs font-bold text-rose-600 md:hidden dark:bg-rose-950 dark:text-rose-300"
+                    title="試験日まで"
+                >
+                    試験まで {{ stats.days_to_exam }}日
+                </span>
             </div>
             <nav
                 class="mx-auto hidden max-w-6xl items-end gap-1 px-4 sm:px-6 md:flex"
@@ -117,24 +125,45 @@ const isActive = (matches: string[]) =>
             v-if="stats"
             class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
         >
-            <div
-                class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-2 sm:px-6"
-            >
+            <div class="mx-auto max-w-6xl px-4 py-2.5 sm:px-6">
                 <div
-                    class="h-2 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
+                    class="mb-2 flex items-center justify-between gap-3 text-xs font-bold md:hidden"
                 >
-                    <div
-                        class="h-full rounded-full bg-[#2864f0] transition-all duration-700"
-                        :style="{
-                            width: `${Math.min(100, (stats.today_xp / stats.daily_goal) * 100)}%`,
-                        }"
-                    />
+                    <div class="flex items-center gap-4">
+                        <span
+                            :class="
+                                stats.goal_met
+                                    ? 'text-[#285ac8]'
+                                    : 'text-gray-500'
+                            "
+                        >
+                            🔥 {{ stats.current_streak }}日
+                        </span>
+                        <span class="text-[#285ac8]">
+                            💎 {{ stats.total_xp }} XP
+                        </span>
+                    </div>
+                    <span class="shrink-0 text-gray-500 dark:text-gray-400">
+                        今日 {{ stats.today_xp }} / {{ stats.daily_goal }} XP
+                    </span>
                 </div>
-                <span
-                    class="text-xs font-bold text-gray-500 dark:text-gray-400"
-                >
-                    {{ stats.today_xp }} / {{ stats.daily_goal }} XP
-                </span>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-2 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
+                    >
+                        <div
+                            class="h-full rounded-full bg-[#2864f0] transition-all duration-700"
+                            :style="{
+                                width: `${Math.min(100, (stats.today_xp / Math.max(1, stats.daily_goal)) * 100)}%`,
+                            }"
+                        />
+                    </div>
+                    <span
+                        class="hidden text-xs font-bold text-gray-500 md:inline dark:text-gray-400"
+                    >
+                        {{ stats.today_xp }} / {{ stats.daily_goal }} XP
+                    </span>
+                </div>
             </div>
         </div>
 

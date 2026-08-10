@@ -66,7 +66,10 @@ const props = defineProps<{
 const goalPercent = computed(() =>
     Math.min(
         100,
-        Math.round((props.summary.today_xp / props.summary.daily_goal) * 100),
+        Math.round(
+            (props.summary.today_xp / Math.max(1, props.summary.daily_goal)) *
+                100,
+        ),
     ),
 );
 const ringStyle = computed(() => ({
@@ -126,9 +129,50 @@ function heatLevel(day: HeatmapDay): string {
     <Head title="ホーム" />
 
     <section
-        class="mb-4 overflow-hidden rounded-lg bg-gradient-to-br from-blue-100 via-amber-50 to-rose-100 p-5 dark:from-blue-950 dark:via-gray-900 dark:to-rose-950"
+        class="relative mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-blue-100 via-amber-50 to-rose-100 p-4 sm:p-5 dark:from-blue-950 dark:via-gray-900 dark:to-rose-950"
     >
-        <div class="flex items-center gap-4">
+        <!-- Mobile: the mascot and next action are the visual focus. -->
+        <div class="sm:hidden">
+            <div
+                class="grid min-h-40 grid-cols-[minmax(0,1fr)_148px] items-end"
+            >
+                <div class="self-center pb-1">
+                    <div
+                        class="mb-2 flex items-center gap-1 text-sm font-semibold text-[#285ac8]"
+                    >
+                        <Flame class="size-4 fill-blue-400" />
+                        {{ summary.current_streak }}日ストリーク
+                    </div>
+                    <p
+                        class="text-xl leading-snug font-semibold whitespace-pre-line text-gray-800 dark:text-gray-100"
+                    >
+                        {{
+                            summary.goal_met
+                                ? '今日も達成！\nすごい！'
+                                : `あと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP！`
+                        }}
+                    </p>
+                    <p class="mt-2 text-xs font-bold text-gray-500">
+                        今日 {{ summary.today_xp }} /
+                        {{ summary.daily_goal }} XP
+                    </p>
+                </div>
+                <Kyuchan
+                    class="-mr-3 -mb-2 justify-self-end"
+                    :mood="summary.goal_met ? 'cheer' : 'normal'"
+                    :size="148"
+                />
+            </div>
+            <Link
+                href="/learn"
+                class="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#285ac8]"
+            >
+                <BookOpen class="size-4" /> 学習をはじめる
+            </Link>
+        </div>
+
+        <!-- Tablet and desktop: preserve the at-a-glance goal ring. -->
+        <div class="hidden items-center gap-5 sm:flex">
             <div
                 class="relative flex size-28 shrink-0 items-center justify-center rounded-full"
                 :style="ringStyle"
@@ -171,9 +215,9 @@ function heatLevel(day: HeatmapDay): string {
                 </Link>
             </div>
             <Kyuchan
-                class="hidden sm:block"
+                class="-my-3 -mr-2 shrink-0"
                 :mood="summary.goal_met ? 'cheer' : 'normal'"
-                :size="86"
+                :size="124"
             />
         </div>
     </section>
