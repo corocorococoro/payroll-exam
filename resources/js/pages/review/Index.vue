@@ -125,8 +125,21 @@ function next() {
             {{ correctCount }} / {{ questions.length }} 問正解
         </p>
         <Link
+            v-if="correctCount < questions.length"
+            href="/review"
+            class="mt-5 flex items-center gap-2 rounded-md bg-rose-400 px-8 py-3 font-semibold text-white shadow-sm shadow-rose-500"
+        >
+            <RotateCcw class="size-4" />
+            間違えた問題をもう一度
+        </Link>
+        <Link
             href="/dashboard"
-            class="mt-5 rounded-md bg-emerald-400 px-8 py-3 font-semibold text-white shadow-sm shadow-emerald-500"
+            :class="[
+                'rounded-md px-8 py-3 font-semibold shadow-sm',
+                correctCount < questions.length
+                    ? 'mt-2 border border-gray-200 bg-white text-gray-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200'
+                    : 'mt-5 bg-emerald-400 text-white shadow-emerald-500',
+            ]"
             >ホームへ</Link
         >
     </div>

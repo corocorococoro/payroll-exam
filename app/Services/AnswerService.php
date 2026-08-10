@@ -138,7 +138,7 @@ class AnswerService
     }
 
     /**
-     * Leitner 方式: 誤答→box1で明日復習へ。復習で正解→box+1（間隔延長）、最大到達で卒業。
+     * Leitner 方式: 誤答→box1で今日の復習へ。復習で正解→box+1（間隔延長）、最大到達で卒業。
      */
     private function updateReviewItem(User $user, Question $question, bool $correct, AttemptContext $context): void
     {
@@ -149,13 +149,13 @@ class AnswerService
                 $user->reviewItems()->create([
                     'question_id' => $question->id,
                     'box' => 1,
-                    'due_date' => today()->addDay(),
+                    'due_date' => today(),
                     'lapses' => 1,
                 ]);
             } else {
                 $item->update([
                     'box' => 1,
-                    'due_date' => today()->addDay(),
+                    'due_date' => today(),
                     'lapses' => $item->lapses + 1,
                 ]);
             }

@@ -83,9 +83,6 @@ test('誤答も今日の解答数に数え、復習画面に正解を漏らさ�
 
     expect($user->dailyActivities()->whereDate('date', today())->first()->questions_answered)->toBe(1);
 
-    $item = $user->reviewItems()->firstOrFail();
-    $item->update(['due_date' => today()]);
-
     $response = actingAs($user)->get('/review');
 
     $response->assertOk()->assertInertia(fn ($page) => $page
@@ -119,6 +116,30 @@ test('復習で正解するとLeitnerボックスと期限が進む', function (
 
     expect($item->box)->toBe(2)
         ->and($item->due_date->isSameDay(today()->addDays(3)))->toBeTrue();
+});
+
+test('復習で再び誤答した問題は今日の復習に残る', function () {
+    $user = User::factory()->create(['onboarded' => true])->refresh();
+    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $item = ReviewItem::create([
+        'user_id' => $user->id,
+        'question_id' => $question->id,
+        'box' => 2,
+        'due_date' => today(),
+        'lapses' => 1,
+    ]);
+
+    actingAs($user)->postJson('/answers', [
+        'question_id' => $question->id,
+        'answer' => incorrectChoice($question),
+        'context' => 'review',
+    ])->assertOk()->assertJson(['correct' => false]);
+
+    $item->refresh();
+
+    expect($item->box)->toBe(1)
+        ->and($item->lapses)->toBe(2)
+        ->and($item->due_date->isToday())->toBeTrue();
 });
 
 test('日次判定はフリーズを消費し、その後の未達でストリークを切る', function () {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link, router } from '@inertiajs/vue3';
-import { BookOpen, Crown, X } from '@lucide/vue';
+import { BookOpen, Crown, RotateCcw, X } from '@lucide/vue';
 import { computed, ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
@@ -193,6 +193,15 @@ const accuracy = computed(() =>
                 XP でゴール達成！
             </p>
 
+            <Link
+                v-if="correctCount < questions.length"
+                href="/review"
+                class="flex w-full max-w-sm items-center justify-center gap-2 rounded-md bg-rose-400 py-3 font-semibold text-white shadow-sm shadow-rose-500 transition hover:bg-rose-500 active:shadow-none"
+            >
+                <RotateCcw class="size-4" />
+                間違えた{{ questions.length - correctCount }}問を今すぐ復習
+            </Link>
+
             <button
                 class="w-full max-w-sm rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm transition hover:bg-[#285ac8] active:shadow-none"
                 @click="backToTree"
@@ -377,6 +386,12 @@ const accuracy = computed(() =>
                                     class="text-sm font-bold text-gray-600 dark:text-gray-300"
                                 >
                                     こたえ: {{ result.correct_answer }}
+                                </p>
+                                <p
+                                    v-if="!result.correct"
+                                    class="mt-0.5 text-xs font-bold text-rose-500 dark:text-rose-300"
+                                >
+                                    今日の復習に追加しました
                                 </p>
                             </div>
                         </div>

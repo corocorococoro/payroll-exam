@@ -66,7 +66,7 @@ test('正解するとXPが付与され解説が返る', function () {
     expect($this->user->dailyActivities()->whereDate('date', today())->first()->xp)->toBe(10);
 });
 
-test('誤答すると復習キューに入りXPは0', function () {
+test('誤答すると今日の復習キューに入りXPは0', function () {
     $question = Question::where('source_id', 'r2-q01')->firstOrFail();
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
@@ -80,7 +80,15 @@ test('誤答すると復習キューに入りXPは0', function () {
 
     expect($item)->not->toBeNull()
         ->and($item->box)->toBe(1)
-        ->and($item->due_date->isSameDay(today()->addDay()))->toBeTrue();
+        ->and($item->due_date->isToday())->toBeTrue();
+
+    actingAs($this->user)->get('/review')
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('review/Index')
+            ->has('questions', 1)
+            ->where('questions.0.id', $question->id),
+        );
 });
 
 test('誤答した選択肢に対応するフィードバックを返す', function () {
