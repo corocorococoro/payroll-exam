@@ -14,14 +14,35 @@ const page = usePage();
 const stats = computed(() => page.props.stats as Stats | null);
 
 const tabs = [
-    { href: '/dashboard', label: 'ホーム', icon: BarChart3 },
-    { href: '/learn', label: '学習', icon: BookOpen },
-    { href: '/review', label: '復習', icon: RotateCcw },
-    { href: '/mock-exams', label: '模試', icon: ClipboardCheck },
-    { href: '/settings/profile', label: '設定', icon: Settings },
+    {
+        href: '/dashboard',
+        label: 'ホーム',
+        icon: BarChart3,
+        matches: ['/dashboard', '/league'],
+    },
+    { href: '/learn', label: '学習', icon: BookOpen, matches: ['/learn'] },
+    {
+        href: '/review',
+        label: '復習',
+        icon: RotateCcw,
+        matches: ['/review'],
+    },
+    {
+        href: '/mock-exams',
+        label: '模試',
+        icon: ClipboardCheck,
+        matches: ['/mock-exams', '/mock-attempts'],
+    },
+    {
+        href: '/settings/profile',
+        label: '設定',
+        icon: Settings,
+        matches: ['/settings'],
+    },
 ];
 
-const isActive = (href: string) => page.url.startsWith(href);
+const isActive = (matches: string[]) =>
+    matches.some((path) => page.url.startsWith(path));
 </script>
 
 <template>
@@ -80,7 +101,7 @@ const isActive = (href: string) => page.url.startsWith(href);
                     :href="tab.href"
                     class="flex items-center gap-2 border-b-4 px-5 py-3 text-sm font-semibold transition-colors"
                     :class="
-                        isActive(tab.href)
+                        isActive(tab.matches)
                             ? 'border-[#2864f0] text-[#285ac8]'
                             : 'border-transparent text-gray-700 hover:border-gray-200 hover:text-[#285ac8] dark:text-gray-300'
                     "
@@ -126,6 +147,7 @@ const isActive = (href: string) => page.url.startsWith(href);
         <!-- ボトムタブナビ（モバイルファースト） -->
         <nav
             class="fixed inset-x-0 bottom-0 z-20 border-t border-gray-200 bg-white/95 backdrop-blur md:hidden dark:border-gray-800 dark:bg-gray-900/95"
+            style="padding-bottom: env(safe-area-inset-bottom)"
         >
             <div class="mx-auto flex max-w-3xl items-stretch justify-around">
                 <Link
@@ -134,7 +156,7 @@ const isActive = (href: string) => page.url.startsWith(href);
                     :href="tab.href"
                     class="flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-bold transition-colors"
                     :class="
-                        isActive(tab.href)
+                        isActive(tab.matches)
                             ? 'text-[#285ac8]'
                             : 'text-gray-500 hover:text-[#285ac8]'
                     "

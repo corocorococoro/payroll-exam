@@ -1,6 +1,5 @@
 import { createInertiaApp } from '@inertiajs/vue3';
 import { initializeTheme } from '@/composables/useAppearance';
-import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import LearnLayout from '@/layouts/LearnLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
@@ -24,14 +23,11 @@ createInertiaApp({
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
-            case name === 'Dashboard' ||
-                name.startsWith('learn/') ||
-                name.startsWith('review/') ||
-                name.startsWith('mock/'):
-                return LearnLayout;
+                return [LearnLayout, SettingsLayout];
             default:
-                return AppLayout;
+                // ログイン後の新規ページがスターターUIへ逆戻りしないよう、
+                // 学習アプリの共通レイアウトを標準とする。
+                return LearnLayout;
         }
     },
     progress: {
