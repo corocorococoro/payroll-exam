@@ -42,7 +42,11 @@ initializeTheme();
 initializeFlashToast();
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
-    window.addEventListener('load', () =>
-        navigator.serviceWorker.register('/sw.js'),
-    );
+    window.addEventListener('load', () => {
+        void navigator.serviceWorker
+            .register('/sw.js', { updateViaCache: 'none' })
+            .then((registration) => registration.update())
+            // Service Workerは補助機能のため、登録失敗で学習画面を止めない。
+            .catch(() => undefined);
+    });
 }
