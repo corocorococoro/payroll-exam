@@ -6,13 +6,47 @@ use App\Models\User;
 
 class XpLevelService
 {
-    /** @return list<array<string, int|string|null>> */
+    /**
+     * @return list<array{
+     *     level: int,
+     *     threshold: int,
+     *     title: string,
+     *     message: string,
+     *     style: string|null,
+     *     style_name: string|null
+     * }>
+     */
     public function levels(): array
     {
-        return array_values(config('xp.levels', []));
+        return array_values(array_map(
+            static fn (array $level): array => [
+                'level' => (int) $level['level'],
+                'threshold' => (int) $level['threshold'],
+                'title' => (string) $level['title'],
+                'message' => (string) $level['message'],
+                'style' => isset($level['style']) ? (string) $level['style'] : null,
+                'style_name' => isset($level['style_name']) ? (string) $level['style_name'] : null,
+            ],
+            config('xp.levels', []),
+        ));
     }
 
-    /** @return array<string, int|string|null> */
+    /**
+     * @return array{
+     *     total_xp: int,
+     *     level: int,
+     *     title: string,
+     *     level_start_xp: int,
+     *     next_level_xp: int|null,
+     *     xp_to_next: int|null,
+     *     progress_percent: int,
+     *     mascot_style: string,
+     *     today_xp: int,
+     *     daily_goal: int,
+     *     goal_met: bool,
+     *     current_streak: int
+     * }
+     */
     public function progress(User $user): array
     {
         $stat = $user->statOrCreate()->refresh();
@@ -43,14 +77,23 @@ class XpLevelService
             'xp_to_next' => $next === null ? null : max(0, $next['threshold'] - $stat->total_xp),
             'progress_percent' => max(0, min(100, $progress)),
             'mascot_style' => $stat->mascot_style,
-            'today_xp' => $activity?->xp ?? 0,
+            'today_xp' => $activity->xp ?? 0,
             'daily_goal' => (int) ($user->daily_goal ?: 20),
-            'goal_met' => $activity?->goal_met ?? false,
+            'goal_met' => $activity->goal_met ?? false,
             'current_streak' => $stat->current_streak,
         ];
     }
 
-    /** @return list<array<string, int|string|null>> */
+    /**
+     * @return list<array{
+     *     level: int,
+     *     threshold: int,
+     *     title: string,
+     *     message: string,
+     *     style: string|null,
+     *     style_name: string|null
+     * }>
+     */
     public function crossedLevels(int $beforeXp, int $afterXp): array
     {
         return array_values(array_filter(
