@@ -2,18 +2,22 @@
 
 use Illuminate\Support\Facades\File;
 
-it('ships every mascot reward style in all learning moods', function () {
+it('ships the default mascot and every reward style in all learning moods', function () {
     $styles = collect(config('xp.levels'))
         ->pluck('style')
         ->filter(fn (?string $style): bool => $style !== null && $style !== 'default');
+    $directories = collect(['default' => public_path('images/kyuchan')])
+        ->merge($styles->mapWithKeys(
+            fn (string $style): array => [$style => public_path("images/kyuchan/styles/{$style}")],
+        ));
 
     expect($styles)->toHaveCount(4);
 
-    foreach ($styles as $style) {
-        foreach (['normal', 'happy', 'sad', 'cheer'] as $mood) {
-            $path = public_path("images/kyuchan/styles/{$style}/{$mood}.webp");
+    foreach ($directories as $style => $directory) {
+        foreach (['normal', 'happy', 'sad', 'cheer', 'wave', 'study', 'think', 'point', 'calculate', 'rest'] as $mood) {
+            $path = "{$directory}/{$mood}.webp";
 
-            expect(File::exists($path))->toBeTrue("Missing mascot asset: {$path}")
+            expect(File::exists($path))->toBeTrue("Missing {$style} mascot asset: {$path}")
                 ->and(File::size($path))->toBeLessThan(80 * 1024);
 
             $size = getimagesize($path);
