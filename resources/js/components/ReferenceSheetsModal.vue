@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { X } from '@lucide/vue';
+import Kyuchan from '@/components/Kyuchan.vue';
 import type { ReferenceSheetData } from '@/types';
 
-defineProps<{
-    sheets: ReferenceSheetData[];
-    open: boolean;
-}>();
+withDefaults(
+    defineProps<{
+        sheets: ReferenceSheetData[];
+        open: boolean;
+        showMascot?: boolean;
+    }>(),
+    { showMascot: false },
+);
 
 const emit = defineEmits<{ close: [] }>();
 
@@ -32,12 +37,19 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
             <div
                 class="relative max-h-[85dvh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-white p-5 shadow-xl sm:rounded-lg dark:bg-gray-900"
             >
-                <div class="mb-3 flex items-center justify-between">
+                <div class="mb-3 flex items-center justify-between gap-3">
                     <h2
                         class="text-base font-semibold text-gray-700 dark:text-gray-200"
                     >
                         📖 資料集（2026年度）
                     </h2>
+                    <Kyuchan
+                        v-if="showMascot"
+                        mood="calculate"
+                        :size="64"
+                        loading="lazy"
+                        class="ml-auto"
+                    />
                     <button
                         class="rounded-full p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                         aria-label="閉じる"

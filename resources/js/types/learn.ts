@@ -17,6 +17,18 @@ export type MascotStyleSlug =
     | 'focus-glasses'
     | 'exam-wish';
 
+export type KyuchanMood =
+    | 'normal'
+    | 'happy'
+    | 'sad'
+    | 'cheer'
+    | 'wave'
+    | 'study'
+    | 'think'
+    | 'point'
+    | 'calculate'
+    | 'rest';
+
 export type XpProgress = {
     total_xp: number;
     level: number;

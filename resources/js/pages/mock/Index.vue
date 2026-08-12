@@ -9,6 +9,7 @@ import {
     Trophy,
 } from '@lucide/vue';
 import { ref } from 'vue';
+import KyuchanMoment from '@/components/KyuchanMoment.vue';
 
 type Exam = {
     id: number;
@@ -45,20 +46,31 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
     <div
         class="mb-5 rounded-lg bg-gradient-to-br from-blue-100 to-sky-100 p-5 dark:from-blue-950 dark:to-sky-950"
     >
-        <div class="flex items-center gap-3">
-            <div
-                class="flex size-12 items-center justify-center rounded-md bg-white text-[#285ac8] shadow-sm dark:bg-gray-900"
-            >
-                <FileCheck2 class="size-7" />
-            </div>
-            <div>
-                <h1
-                    class="text-xl font-semibold text-gray-700 dark:text-gray-100"
+        <div class="grid items-center gap-3 sm:grid-cols-[1fr_230px]">
+            <div class="flex items-center gap-3">
+                <div
+                    class="flex size-12 items-center justify-center rounded-md bg-white text-[#285ac8] shadow-sm dark:bg-gray-900"
                 >
-                    2級 診断模試
-                </h1>
-                <p class="text-xs text-gray-500">40問・100点満点・70点合格</p>
+                    <FileCheck2 class="size-7" />
+                </div>
+                <div>
+                    <h1
+                        class="text-xl font-semibold text-gray-700 dark:text-gray-100"
+                    >
+                        2級 診断模試
+                    </h1>
+                    <p class="text-xs text-gray-500">
+                        40問・100点満点・70点合格
+                    </p>
+                </div>
             </div>
+            <KyuchanMoment
+                mood="think"
+                message="120分、本番のつもりでいこう"
+                :size="84"
+                compact
+                class="mt-3 sm:mt-0"
+            />
         </div>
     </div>
 

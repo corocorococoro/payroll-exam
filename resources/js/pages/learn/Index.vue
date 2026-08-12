@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { Crown, Lock } from '@lucide/vue';
+import { computed } from 'vue';
+import KyuchanMoment from '@/components/KyuchanMoment.vue';
 import type { SkillTreeUnit } from '@/types';
 
-defineProps<{
+const props = defineProps<{
     course: { name: string };
     units: SkillTreeUnit[];
 }>();
+
+const nextLesson = computed(() =>
+    props.units
+        .flatMap((unit) => unit.lessons)
+        .find((lesson) => lesson.unlocked && lesson.crown_level < 5),
+);
 
 const unitClasses = {
     bg: 'bg-white dark:bg-gray-900',
@@ -25,6 +33,19 @@ const unitClasses = {
     <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
         毎日コツコツ、レッスンを進めよう！
     </p>
+
+    <Link
+        v-if="nextLesson"
+        :href="`/lessons/${nextLesson.id}`"
+        class="mb-5 block rounded-lg bg-gradient-to-r from-blue-50 to-amber-50 p-3 transition hover:ring-2 hover:ring-blue-100 dark:from-blue-950 dark:to-gray-900 dark:hover:ring-blue-900"
+    >
+        <KyuchanMoment
+            mood="point"
+            :message="`次は「${nextLesson.name}」がおすすめだよ`"
+            :size="88"
+            compact
+        />
+    </Link>
 
     <div class="flex flex-col gap-6">
         <section

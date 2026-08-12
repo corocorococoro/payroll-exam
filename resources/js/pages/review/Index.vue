@@ -99,7 +99,7 @@ function next() {
         v-if="questions.length === 0"
         class="flex min-h-[65vh] flex-col items-center justify-center text-center"
     >
-        <Kyuchan mood="happy" :size="130" />
+        <Kyuchan mood="rest" :size="140" />
         <h1 class="mt-3 text-xl font-semibold text-gray-700 dark:text-gray-100">
             今日の復習は完了！
         </h1>
@@ -365,6 +365,7 @@ function next() {
     <ReferenceSheetsModal
         :sheets="reference_sheets"
         :open="sheetsOpen"
+        show-mascot
         @close="sheetsOpen = false"
     />
 </template>

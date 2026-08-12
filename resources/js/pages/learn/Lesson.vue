@@ -520,6 +520,7 @@ const accuracy = computed(() =>
         <ReferenceSheetsModal
             :sheets="reference_sheets"
             :open="sheetsOpen"
+            show-mascot
             @close="sheetsOpen = false"
         />
     </div>

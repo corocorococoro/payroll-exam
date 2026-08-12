@@ -2,19 +2,20 @@
 import { usePage } from '@inertiajs/vue3';
 import { computed, ref, watch } from 'vue';
 import { useXpProgress } from '@/composables/useXpProgress';
-import type { MascotStyleSlug, Stats } from '@/types';
+import type { KyuchanMood, MascotStyleSlug, Stats } from '@/types';
 
 /**
  * マスコット「きゅーちゃん」— 給与学習を応援する3頭身キャラクター。
- * mood でイラストが変わる: normal / happy / sad / cheer
+ * mood で表情・学習ポーズが変わる。
  */
 const props = withDefaults(
     defineProps<{
-        mood?: 'normal' | 'happy' | 'sad' | 'cheer';
+        mood?: KyuchanMood;
         size?: number;
         outfit?: MascotStyleSlug;
+        loading?: 'eager' | 'lazy';
     }>(),
-    { mood: 'normal', size: 96 },
+    { mood: 'normal', size: 96, loading: 'eager' },
 );
 
 const page = usePage();
@@ -52,6 +53,7 @@ watch([selectedStyle, () => props.mood], () => {
             alt=""
             width="627"
             height="627"
+            :loading="loading"
             draggable="false"
             @error="failed = true"
         />
@@ -76,7 +78,9 @@ watch([selectedStyle, () => props.mood], () => {
 }
 
 .kyuchan--happy,
-.kyuchan--cheer {
+.kyuchan--cheer,
+.kyuchan--wave,
+.kyuchan--point {
     animation: kyuchan-bounce 0.6s ease-in-out;
 }
 
@@ -113,6 +117,8 @@ watch([selectedStyle, () => props.mood], () => {
 @media (prefers-reduced-motion: reduce) {
     .kyuchan--happy,
     .kyuchan--cheer,
+    .kyuchan--wave,
+    .kyuchan--point,
     .kyuchan--sad {
         animation: none;
     }

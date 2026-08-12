@@ -2,6 +2,7 @@
 import { Head, router } from '@inertiajs/vue3';
 import { Bell, CalendarDays, Flame, Volume2 } from '@lucide/vue';
 import { ref } from 'vue';
+import KyuchanMoment from '@/components/KyuchanMoment.vue';
 
 const props = defineProps<{
     learning: {
@@ -20,9 +21,11 @@ const examDate = ref(props.learning.exam_date);
 const soundEnabled = ref(props.learning.sound_enabled);
 const processing = ref(false);
 const errors = ref<Record<string, string>>({});
+const saved = ref(false);
 
 function submit() {
     processing.value = true;
+    saved.value = false;
     router.patch(
         '/settings/learning',
         {
@@ -35,6 +38,10 @@ function submit() {
         {
             onError: (value) => {
                 errors.value = value;
+            },
+            onSuccess: () => {
+                errors.value = {};
+                saved.value = true;
             },
             onFinish: () => {
                 processing.value = false;
@@ -51,6 +58,14 @@ function submit() {
         <p class="mt-1 text-sm text-muted-foreground">
             毎日の目標とお知らせを調整します
         </p>
+        <KyuchanMoment
+            v-if="saved"
+            mood="point"
+            message="設定したよ。無理なく続けよう！"
+            :size="76"
+            compact
+            class="mt-4 max-w-sm"
+        />
         <form class="mt-6 space-y-6" @submit.prevent="submit">
             <section>
                 <label class="mb-2 flex items-center gap-2 text-sm font-bold"

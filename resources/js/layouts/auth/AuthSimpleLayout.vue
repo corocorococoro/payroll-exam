@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import KyuchanMoment from '@/components/KyuchanMoment.vue';
 import { home } from '@/routes';
 
-defineProps<{
+const props = defineProps<{
     title?: string;
     description?: string;
 }>();
+
+const mascotMessage = computed(() =>
+    props.title?.includes('おかえり')
+        ? 'おかえり！今日も少しずつ進めよう'
+        : '一緒に、合格まで進んでいこう！',
+);
 </script>
 
 <template>
@@ -38,6 +46,15 @@ defineProps<{
                             {{ description }}
                         </p>
                     </div>
+                    <KyuchanMoment
+                        mood="wave"
+                        :message="mascotMessage"
+                        :size="76"
+                        outfit="default"
+                        compact
+                        loading="eager"
+                        class="w-full justify-center"
+                    />
                 </div>
                 <slot />
             </div>

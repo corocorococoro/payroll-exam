@@ -121,6 +121,7 @@ async function equip(style: MascotStyle) {
                 <Kyuchan
                     mood="cheer"
                     :size="160"
+                    loading="eager"
                     class="-mr-5 justify-self-end"
                 />
             </div>
@@ -170,6 +171,7 @@ async function equip(style: MascotStyle) {
                         mood="normal"
                         :outfit="style.slug"
                         :size="112"
+                        loading="lazy"
                         :class="!style.unlocked && 'opacity-45 grayscale'"
                     />
                     <p
