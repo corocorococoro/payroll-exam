@@ -254,11 +254,13 @@ test('同じレッスンセッションを二重完了してもボーナスを�
 
     $xpBeforeCompletion = $this->user->statOrCreate()->refresh()->total_xp;
     actingAs($this->user)->withSession($run)->postJson("/lessons/{$lesson->id}/complete")->assertOk();
+    $xpAfterCompletion = $this->user->statOrCreate()->refresh()->total_xp;
     actingAs($this->user)->withSession($run)->postJson("/lessons/{$lesson->id}/complete")->assertStatus(422);
 
     $progress = $this->user->lessonProgresses()->where('lesson_id', $lesson->id)->firstOrFail();
     expect($progress->completed_count)->toBe(1)
-        ->and($this->user->statOrCreate()->refresh()->total_xp)->toBe($xpBeforeCompletion + 10);
+        ->and($xpAfterCompletion)->toBeGreaterThan($xpBeforeCompletion)
+        ->and($this->user->statOrCreate()->refresh()->total_xp)->toBe($xpAfterCompletion);
 });
 
 test('期限の来ていない問題を復習として送信できない', function () {

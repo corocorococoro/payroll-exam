@@ -7,11 +7,33 @@ import {
     RotateCcw,
     Settings,
 } from '@lucide/vue';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
+import { useXpProgress } from '@/composables/useXpProgress';
 import type { Stats } from '@/types';
 
 const page = usePage();
-const stats = computed(() => page.props.stats as Stats | null);
+const pageStats = computed(() => page.props.stats as Stats | null);
+const { progress: liveXp, sync: syncXp } = useXpProgress();
+
+watch(pageStats, (value) => syncXp(value?.xp_progress), { immediate: true });
+
+const stats = computed<Stats | null>(() => {
+    const value = pageStats.value;
+
+    if (!value || !liveXp.value) {
+        return value;
+    }
+
+    return {
+        ...value,
+        total_xp: liveXp.value.total_xp,
+        today_xp: liveXp.value.today_xp,
+        daily_goal: liveXp.value.daily_goal,
+        goal_met: liveXp.value.goal_met,
+        current_streak: liveXp.value.current_streak,
+        xp_progress: liveXp.value,
+    };
+});
 
 const tabs = [
     {

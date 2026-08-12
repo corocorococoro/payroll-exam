@@ -13,6 +13,7 @@ import {
 } from '@lucide/vue';
 import { computed } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
+import type { XpProgress } from '@/types';
 
 type Summary = {
     today_xp: number;
@@ -26,6 +27,7 @@ type Summary = {
     days_to_exam: number;
     estimated_score: number;
     score_evidence: number;
+    xp_progress: XpProgress;
 };
 
 type UnitAccuracy = {
@@ -223,15 +225,21 @@ function heatLevel(day: HeatmapDay): string {
     </section>
 
     <div class="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div
+        <Link
+            href="/league"
             class="rounded-md border border-amber-100 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
         >
             <Sparkles class="mb-1 size-5 text-amber-500" />
             <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
-                {{ summary.total_xp }}
+                Lv.{{ summary.xp_progress.level }}
             </p>
-            <p class="text-[11px] font-bold text-gray-400">合計 XP</p>
-        </div>
+            <p class="truncate text-[11px] font-bold text-gray-400">
+                {{ summary.xp_progress.title }}
+                <template v-if="summary.xp_progress.xp_to_next !== null">
+                    ・あと{{ summary.xp_progress.xp_to_next }} XP
+                </template>
+            </p>
+        </Link>
         <div
             class="rounded-md border border-sky-100 bg-white p-3 dark:border-gray-800 dark:bg-gray-900"
         >
@@ -274,7 +282,7 @@ function heatLevel(day: HeatmapDay): string {
             <Link
                 href="/league"
                 class="flex items-center gap-1 text-xs font-bold text-[#285ac8]"
-                ><Swords class="size-4" />リーグ・バッジ</Link
+                ><Swords class="size-4" />成長・ごほうび</Link
             >
         </div>
         <div class="space-y-3">

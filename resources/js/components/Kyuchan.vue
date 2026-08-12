@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { computed, ref, watch } from 'vue';
+import { useXpProgress } from '@/composables/useXpProgress';
+import type { MascotStyleSlug, Stats } from '@/types';
 
 /**
  * マスコット「きゅーちゃん」— 給与学習を応援する3頭身キャラクター。
@@ -9,11 +12,33 @@ const props = withDefaults(
     defineProps<{
         mood?: 'normal' | 'happy' | 'sad' | 'cheer';
         size?: number;
+        outfit?: MascotStyleSlug;
     }>(),
     { mood: 'normal', size: 96 },
 );
 
-const imageSource = computed(() => `/images/kyuchan/${props.mood}.webp`);
+const page = usePage();
+const { progress } = useXpProgress();
+const failed = ref(false);
+const pageStyle = computed(
+    () => (page.props.stats as Stats | null)?.xp_progress?.mascot_style,
+);
+const selectedStyle = computed(
+    () =>
+        props.outfit ??
+        progress.value?.mascot_style ??
+        pageStyle.value ??
+        'default',
+);
+const imageSource = computed(() =>
+    failed.value || selectedStyle.value === 'default'
+        ? `/images/kyuchan/${props.mood}.webp`
+        : `/images/kyuchan/styles/${selectedStyle.value}/${props.mood}.webp`,
+);
+
+watch([selectedStyle, () => props.mood], () => {
+    failed.value = false;
+});
 </script>
 
 <template>
@@ -28,6 +53,7 @@ const imageSource = computed(() => `/images/kyuchan/${props.mood}.webp`);
             width="627"
             height="627"
             draggable="false"
+            @error="failed = true"
         />
     </span>
 </template>

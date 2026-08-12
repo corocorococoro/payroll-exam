@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\MascotStyleController;
 use App\Http\Controllers\MockExamAttemptController;
 use App\Http\Controllers\MockExamController;
 use App\Http\Controllers\OnboardingController;
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('learn', [LearnController::class, 'index'])->name('learn');
     Route::get('review', ReviewController::class)->name('review');
     Route::get('league', LeagueController::class)->name('league');
+    Route::patch('rewards/mascot-style', [MascotStyleController::class, 'update'])->name('rewards.mascot-style.update');
     Route::get('mock-exams', [MockExamController::class, 'index'])->name('mock-exams.index');
     Route::post('mock-exams/{mockExam}/attempts', [MockExamAttemptController::class, 'store'])->middleware('throttle:10,1')->name('mock-attempts.store');
     Route::get('mock-attempts/{attempt}', [MockExamAttemptController::class, 'show'])->name('mock-attempts.show');

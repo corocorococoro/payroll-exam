@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
 class AnswerService
 {
     /**
-     * @return array{correct: bool, correct_answer: string, explanation: string, common_mistake: string|null, selected_feedback: string|null, xp_earned: int}
+     * @return array<string, mixed>
      */
     public function answer(
         User $user,
@@ -66,10 +66,17 @@ class AnswerService
                 }
             }
 
+            $beforeXp = $user->statOrCreate()->total_xp;
             $correct = $question->checkAnswer($given);
-            $xp = $correct ? $question->difficulty->xp() : 0;
+            $hasPriorCorrect = $user->attempts()
+                ->where('question_id', $question->id)
+                ->where('is_correct', true)
+                ->exists();
+            $xp = $correct && ($context === AttemptContext::Review || ! $hasPriorCorrect)
+                ? $question->difficulty->xp()
+                : 0;
 
-            $user->attempts()->create([
+            $attempt = $user->attempts()->create([
                 'question_id' => $question->id,
                 'lesson_id' => $lessonId,
                 'context' => $context,
@@ -78,13 +85,39 @@ class AnswerService
                 'xp_earned' => $xp,
             ]);
 
-            // 誤答も「解答した問題数」には含める。レッスン完了ボーナスなど、
-            // 問題への解答を伴わない XP は呼び出し側で countQuestion=false にする。
-            $this->awardXp($user, $xp, countQuestion: true);
+            $activity = $user->dailyActivities()->firstOrCreate(
+                ['date' => today()],
+                ['xp' => 0, 'questions_answered' => 0, 'goal_met' => false],
+            );
+            $activity->update([
+                'questions_answered' => $user->attempts()
+                    ->whereDate('created_at', today())
+                    ->distinct()
+                    ->count('question_id'),
+            ]);
+
+            $awards = [];
+            $directAward = app(XpService::class)->award(
+                $user,
+                $xp,
+                $context === AttemptContext::Review ? 'review' : 'question',
+                ($context === AttemptContext::Review ? 'review:' : 'question:').$attempt->id,
+            );
+
+            if ($directAward !== null) {
+                $awards[] = $directAward;
+                $awards = [...$awards, ...app(DailyQuestService::class)->recordXp($user, $directAward['amount'])];
+            }
 
             $this->updateReviewItem($user, $question, $correct, $context);
-            app(DailyQuestService::class)->recordAnswer($user, $correct, $context);
+            $awards = [...$awards, ...app(DailyQuestService::class)->recordAnswer($user, $context)];
             app(AchievementService::class)->evaluate($user);
+            app(XpLevelService::class)->syncRewardUnlocks($user);
+
+            $afterXp = $user->statOrCreate()->refresh()->total_xp;
+            $questXp = collect($awards)
+                ->where('source_type', 'daily_quest')
+                ->sum('amount');
 
             return [
                 'correct' => $correct,
@@ -96,45 +129,14 @@ class AnswerService
                 'selected_feedback' => $correct
                     ? null
                     : ($question->distractor_feedback[strtoupper(trim($given))] ?? null),
+                'xp_status' => ! $correct ? 'incorrect' : ($xp > 0 ? 'earned' : 'already_credited'),
                 'xp_earned' => $xp,
+                'xp_bonus_earned' => $questXp,
+                'xp_total_earned' => $xp + $questXp,
+                'xp_progress' => app(XpLevelService::class)->progress($user),
+                'level_ups' => app(XpLevelService::class)->crossedLevels($beforeXp, $afterXp),
             ];
         });
-    }
-
-    public function awardXp(User $user, int $xp, bool $countQuestion = false, bool $trackQuests = true): void
-    {
-        $stat = $user->statOrCreate();
-
-        if ($xp > 0) {
-            $stat->increment('total_xp', $xp);
-
-            $user->leagueScores()->firstOrCreate(
-                ['week_start' => today()->startOfWeek()],
-                ['xp' => 0],
-            )->increment('xp', $xp);
-        }
-
-        $activity = $user->dailyActivities()->firstOrCreate(
-            ['date' => today()],
-            ['xp' => 0, 'questions_answered' => 0, 'goal_met' => false],
-        );
-
-        if ($xp > 0) {
-            $activity->increment('xp', $xp);
-        }
-
-        if ($countQuestion) {
-            $activity->increment('questions_answered');
-        }
-
-        if (! $activity->goal_met && $activity->xp >= $user->daily_goal) {
-            $activity->update(['goal_met' => true]);
-            app(StreakService::class)->recordGoalMet($user);
-        }
-
-        if ($trackQuests) {
-            app(DailyQuestService::class)->recordXp($user, $xp);
-        }
     }
 
     /**

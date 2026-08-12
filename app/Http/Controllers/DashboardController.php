@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\QuestionAttempt;
 use App\Models\Unit;
 use App\Services\DailyQuestService;
+use App\Services\XpLevelService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -118,6 +119,7 @@ class DashboardController extends Controller
                 'days_to_exam' => (int) today()->diffInDays($user->exam_date ?? '2026-11-22', false),
                 'estimated_score' => (int) round($estimatedScore),
                 'score_evidence' => $latestAttempts->count(),
+                'xp_progress' => app(XpLevelService::class)->progress($user),
             ],
             'accuracy_by_unit' => $accuracyByUnit,
             'heatmap' => $heatmap,
@@ -127,6 +129,7 @@ class DashboardController extends Controller
                     'earn_xp' => 'XPを獲得しよう',
                     'answer_questions' => '問題に答えよう',
                     'review_correct' => '復習を正解しよう',
+                    'complete_lesson' => 'レッスンを完了しよう',
                     default => '今日のチャレンジ',
                 },
                 'target' => $quest->target,

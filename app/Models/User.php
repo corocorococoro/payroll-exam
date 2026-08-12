@@ -82,7 +82,7 @@ class User extends Authenticatable implements FilamentUser
     /** ユーザー統計を必ず取得する（無ければ作成） */
     public function statOrCreate(): UserStat
     {
-        $stat = $this->stat()->firstOrCreate([]);
+        $stat = $this->stat()->firstOrCreate([])->refresh();
         $this->setRelation('stat', $stat);
 
         return $stat;
@@ -128,6 +128,18 @@ class User extends Authenticatable implements FilamentUser
     public function leagueScores(): HasMany
     {
         return $this->hasMany(LeagueScore::class);
+    }
+
+    /** @return HasMany<XpTransaction, $this> */
+    public function xpTransactions(): HasMany
+    {
+        return $this->hasMany(XpTransaction::class);
+    }
+
+    /** @return HasMany<UserRewardUnlock, $this> */
+    public function rewardUnlocks(): HasMany
+    {
+        return $this->hasMany(UserRewardUnlock::class);
     }
 
     /** @return BelongsToMany<Badge, $this> */

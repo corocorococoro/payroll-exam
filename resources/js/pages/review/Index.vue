@@ -5,6 +5,7 @@ import { computed, ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
 import { useSoundEffects } from '@/composables/useSoundEffects';
+import { useXpProgress } from '@/composables/useXpProgress';
 import { postJson } from '@/lib/api';
 import type { AnswerResult, PlayerQuestion, ReferenceSheetData } from '@/types';
 
@@ -25,6 +26,7 @@ const finished = ref(false);
 const correctCount = ref(0);
 const errorMessage = ref<string | null>(null);
 const sound = useSoundEffects();
+const { sync: syncXp } = useXpProgress();
 
 const current = computed(() => props.questions[index.value]);
 const progress = computed(() =>
@@ -57,6 +59,7 @@ async function check() {
             context: 'review',
             lesson_id: null,
         });
+        syncXp(result.value.xp_progress);
 
         if (result.value.correct) {
             correctCount.value++;
@@ -279,7 +282,9 @@ function next() {
                         >
                             {{
                                 result.correct
-                                    ? `せいかい！ +${result.xp_earned} XP`
+                                    ? result.xp_earned > 0
+                                        ? `せいかい！ +${result.xp_earned} XP`
+                                        : 'せいかい！ XP獲得済み'
                                     : 'もう一度覚えよう！'
                             }}
                         </p>
@@ -308,6 +313,29 @@ function next() {
                 >
                     ⚠️ {{ result.common_mistake }}
                 </p>
+                <p
+                    v-if="result.xp_bonus_earned > 0"
+                    class="mt-2 rounded-md bg-amber-100 px-3 py-2 text-xs font-bold text-amber-700 dark:bg-amber-900/50 dark:text-amber-200"
+                >
+                    🎯 クエスト達成 +{{ result.xp_bonus_earned }} XP
+                </p>
+                <div
+                    v-if="result.level_ups.length"
+                    class="mt-2 rounded-md bg-blue-100 px-3 py-2 text-xs text-[#285ac8] dark:bg-blue-950"
+                >
+                    <strong>
+                        Lv.{{
+                            result.level_ups[result.level_ups.length - 1].level
+                        }}
+                        {{
+                            result.level_ups[result.level_ups.length - 1].title
+                        }}
+                    </strong>
+                    になりました！
+                    <Link href="/league" class="ml-1 font-bold"
+                        >ごほうびを見る</Link
+                    >
+                </div>
                 <button
                     class="mt-4 w-full rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none"
                     @click="next"

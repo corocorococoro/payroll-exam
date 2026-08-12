@@ -7,6 +7,38 @@ export type Stats = {
     daily_goal: number;
     exam_date: string;
     days_to_exam: number;
+    xp_progress: XpProgress;
+};
+
+export type MascotStyleSlug =
+    | 'default'
+    | 'study-parka'
+    | 'payroll-cardigan'
+    | 'focus-glasses'
+    | 'exam-wish';
+
+export type XpProgress = {
+    total_xp: number;
+    level: number;
+    title: string;
+    level_start_xp: number;
+    next_level_xp: number | null;
+    xp_to_next: number | null;
+    progress_percent: number;
+    mascot_style: MascotStyleSlug;
+    today_xp: number;
+    daily_goal: number;
+    goal_met: boolean;
+    current_streak: number;
+};
+
+export type XpLevelReward = {
+    level: number;
+    threshold: number;
+    title: string;
+    message: string;
+    style: MascotStyleSlug | null;
+    style_name: string | null;
 };
 
 export type Choice = {
@@ -30,6 +62,11 @@ export type AnswerResult = {
     common_mistake: string | null;
     selected_feedback: string | null;
     xp_earned: number;
+    xp_status: 'earned' | 'already_credited' | 'incorrect';
+    xp_bonus_earned: number;
+    xp_total_earned: number;
+    xp_progress: XpProgress;
+    level_ups: XpLevelReward[];
 };
 
 export type ReferenceSheetData = {
@@ -71,10 +108,15 @@ export type SkillTreeUnit = {
 
 export type LessonComplete = {
     crown_level: number;
+    crown_increased: boolean;
     bonus_xp: number;
+    xp_bonus_earned: number;
+    xp_total_earned: number;
     total_xp: number;
     current_streak: number;
     today_xp: number;
     goal_met: boolean;
     daily_goal: number;
+    xp_progress: XpProgress;
+    level_ups: XpLevelReward[];
 };

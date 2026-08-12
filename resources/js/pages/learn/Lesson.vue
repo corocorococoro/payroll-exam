@@ -5,12 +5,14 @@ import { computed, ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
 import { useSoundEffects } from '@/composables/useSoundEffects';
+import { useXpProgress } from '@/composables/useXpProgress';
 import { postJson } from '@/lib/api';
 import type {
     AnswerResult,
     LessonComplete,
     PlayerQuestion,
     ReferenceSheetData,
+    XpLevelReward,
 } from '@/types';
 
 const props = defineProps<{
@@ -31,6 +33,8 @@ const completion = ref<LessonComplete | null>(null);
 const finishing = ref(false);
 const errorMessage = ref<string | null>(null);
 const sound = useSoundEffects();
+const { sync: syncXp } = useXpProgress();
+const levelUps = ref<XpLevelReward[]>([]);
 
 const current = computed(() => props.questions[index.value]);
 const isLast = computed(() => index.value >= props.questions.length - 1);
@@ -63,6 +67,14 @@ async function check() {
         });
 
         result.value = res;
+        syncXp(res.xp_progress);
+        earnedXp.value += res.xp_total_earned;
+
+        for (const level of res.level_ups) {
+            if (!levelUps.value.some((item) => item.level === level.level)) {
+                levelUps.value.push(level);
+            }
+        }
 
         if (res.correct) {
             sound.correct();
@@ -72,7 +84,6 @@ async function check() {
 
         if (res.correct) {
             correctCount.value++;
-            earnedXp.value += res.xp_earned;
         }
     } catch (e) {
         errorMessage.value =
@@ -108,6 +119,14 @@ async function finish() {
             `/lessons/${props.lesson.id}/complete`,
             {},
         );
+        syncXp(completion.value.xp_progress);
+
+        for (const level of completion.value.level_ups) {
+            if (!levelUps.value.some((item) => item.level === level.level)) {
+                levelUps.value.push(level);
+            }
+        }
+
         sound.complete();
     } catch (e) {
         errorMessage.value =
@@ -161,10 +180,13 @@ const accuracy = computed(() =>
                 >
                     <p class="text-xs font-bold text-gray-400">かくとくXP</p>
                     <p class="text-2xl font-semibold text-amber-500">
-                        +{{ earnedXp + completion.bonus_xp }}
+                        +{{ earnedXp + completion.xp_total_earned }}
                     </p>
                     <p class="text-[10px] text-gray-400">
-                        クリアボーナス +{{ completion.bonus_xp }} 込み
+                        <template v-if="completion.bonus_xp > 0">
+                            クラウンボーナス +{{ completion.bonus_xp }}
+                        </template>
+                        <template v-else>クラウンXPは獲得済み</template>
                     </p>
                 </div>
                 <div
@@ -178,6 +200,26 @@ const accuracy = computed(() =>
                         {{ correctCount }} / {{ questions.length }} 問
                     </p>
                 </div>
+            </div>
+
+            <div
+                v-if="levelUps.length"
+                class="w-full max-w-sm rounded-lg border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-900 dark:bg-amber-950"
+            >
+                <p class="text-xs font-bold text-amber-600">LEVEL UP!</p>
+                <p class="mt-1 font-semibold text-gray-800 dark:text-gray-100">
+                    Lv.{{ levelUps[levelUps.length - 1].level }}
+                    {{ levelUps[levelUps.length - 1].title }}
+                </p>
+                <p class="mt-1 text-xs text-gray-500">
+                    {{ levelUps[levelUps.length - 1].message }}
+                </p>
+                <Link
+                    href="/league"
+                    class="mt-3 inline-flex text-xs font-bold text-[#285ac8]"
+                >
+                    ごほうびを見る →
+                </Link>
             </div>
 
             <div
@@ -374,12 +416,14 @@ const accuracy = computed(() =>
                                             : 'ざんねん…'
                                     }}
                                     <span
-                                        v-if="
-                                            result.correct && result.xp_earned
-                                        "
+                                        v-if="result.correct"
                                         class="ml-1 text-sm"
-                                        >+{{ result.xp_earned }} XP</span
                                     >
+                                        <template v-if="result.xp_earned > 0">
+                                            +{{ result.xp_earned }} XP
+                                        </template>
+                                        <template v-else>XP獲得済み</template>
+                                    </span>
                                 </p>
                                 <p
                                     v-if="!result.correct"
@@ -394,6 +438,32 @@ const accuracy = computed(() =>
                                     今日の復習に追加しました
                                 </p>
                             </div>
+                        </div>
+
+                        <div
+                            v-if="result.xp_bonus_earned > 0"
+                            class="rounded-md bg-amber-100 px-3 py-2 text-xs font-bold text-amber-700 dark:bg-amber-900/50 dark:text-amber-200"
+                        >
+                            🎯 クエスト達成 +{{ result.xp_bonus_earned }} XP
+                        </div>
+
+                        <div
+                            v-if="result.level_ups.length"
+                            class="rounded-md bg-blue-100 px-3 py-2 text-xs text-[#285ac8] dark:bg-blue-950"
+                        >
+                            <strong>
+                                Lv.{{
+                                    result.level_ups[
+                                        result.level_ups.length - 1
+                                    ].level
+                                }}
+                                {{
+                                    result.level_ups[
+                                        result.level_ups.length - 1
+                                    ].title
+                                }}
+                            </strong>
+                            <span class="ml-1">になりました！</span>
                         </div>
 
                         <div

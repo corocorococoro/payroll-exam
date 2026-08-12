@@ -6,8 +6,11 @@ use App\Models\Lesson;
 use App\Models\LessonProgress;
 use App\Models\ReferenceSheet;
 use App\Models\User;
-use App\Services\AnswerService;
+use App\Services\AchievementService;
+use App\Services\DailyQuestService;
 use App\Services\LessonRunService;
+use App\Services\XpLevelService;
+use App\Services\XpService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -69,8 +72,11 @@ class LessonController extends Controller
     public function complete(
         Request $request,
         Lesson $lesson,
-        AnswerService $answerService,
         LessonRunService $runs,
+        XpService $xp,
+        XpLevelService $levels,
+        DailyQuestService $quests,
+        AchievementService $achievements,
     ): JsonResponse {
         $user = $request->user();
         abort_unless($runs->isUnlocked($user, $lesson), 403);
@@ -83,8 +89,9 @@ class LessonController extends Controller
 
         $runStartedAt = CarbonImmutable::parse($run['started_at']);
 
-        $progress = DB::transaction(function () use ($user, $lesson, $run, $runStartedAt, $answerService): LessonProgress {
+        $result = DB::transaction(function () use ($user, $lesson, $run, $runStartedAt, $xp, $levels, $quests, $achievements): array {
             $user = User::query()->lockForUpdate()->findOrFail($user->id);
+            $beforeXp = $user->statOrCreate()->total_xp;
 
             $answeredCount = $user->attempts()
                 ->where('lesson_id', $lesson->id)
@@ -107,30 +114,59 @@ class LessonController extends Controller
                 abort(422, 'このレッスンセッションは完了済みです。');
             }
 
+            $crownIncreased = $progress->crown_level < LessonProgress::MAX_CROWN;
+            $nextCrown = $crownIncreased ? $progress->crown_level + 1 : $progress->crown_level;
+
             $progress->update([
-                'crown_level' => min(LessonProgress::MAX_CROWN, $progress->crown_level + 1),
+                'crown_level' => $nextCrown,
                 'completed_count' => $progress->completed_count + 1,
                 'last_completed_at' => now(),
             ]);
 
-            $answerService->awardXp($user, self::COMPLETION_BONUS_XP);
+            $awards = [];
+            $bonusXp = 0;
 
-            return $progress;
+            if ($crownIncreased) {
+                $award = $xp->award(
+                    $user,
+                    self::COMPLETION_BONUS_XP,
+                    'lesson_crown',
+                    "lesson-crown:{$lesson->id}:{$nextCrown}",
+                );
+
+                if ($award !== null) {
+                    $bonusXp = $award['amount'];
+                    $awards[] = $award;
+                    $awards = [...$awards, ...$quests->recordXp($user, $award['amount'])];
+                }
+            }
+
+            $awards = [...$awards, ...$quests->recordLessonCompleted($user)];
+            $achievements->evaluate($user);
+            $levels->syncRewardUnlocks($user);
+
+            return compact('progress', 'crownIncreased', 'bonusXp', 'awards', 'beforeXp');
         });
 
         $runs->clear($request, $lesson);
 
         $stat = $user->statOrCreate()->refresh();
         $activity = $user->dailyActivities()->whereDate('date', today())->first();
+        $questXp = collect($result['awards'])->where('source_type', 'daily_quest')->sum('amount');
 
         return response()->json([
-            'crown_level' => $progress->crown_level,
-            'bonus_xp' => self::COMPLETION_BONUS_XP,
+            'crown_level' => $result['progress']->crown_level,
+            'crown_increased' => $result['crownIncreased'],
+            'bonus_xp' => $result['bonusXp'],
+            'xp_bonus_earned' => $questXp,
+            'xp_total_earned' => $result['bonusXp'] + $questXp,
             'total_xp' => $stat->total_xp,
             'current_streak' => $stat->current_streak,
             'today_xp' => $activity->xp ?? 0,
             'goal_met' => $activity->goal_met ?? false,
             'daily_goal' => $user->daily_goal,
+            'xp_progress' => $levels->progress($user),
+            'level_ups' => $levels->crossedLevels($result['beforeXp'], $stat->total_xp),
         ]);
     }
 }

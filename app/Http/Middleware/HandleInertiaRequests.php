@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\XpLevelService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -71,6 +72,7 @@ class HandleInertiaRequests extends Middleware
             'daily_goal' => $user->daily_goal,
             'exam_date' => $user->exam_date?->toDateString() ?? '2026-11-22',
             'days_to_exam' => (int) today()->diffInDays($user->exam_date ?? '2026-11-22', false),
+            'xp_progress' => app(XpLevelService::class)->progress($user),
         ];
     }
 }

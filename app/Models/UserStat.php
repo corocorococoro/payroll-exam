@@ -10,12 +10,13 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $user_id
  * @property int $total_xp
+ * @property string $mascot_style
  * @property int $current_streak
  * @property int $longest_streak
  * @property Carbon|null $last_active_date
  * @property int $streak_freezes
  */
-#[Fillable(['user_id', 'total_xp', 'current_streak', 'longest_streak', 'last_active_date', 'streak_freezes'])]
+#[Fillable(['user_id', 'total_xp', 'mascot_style', 'current_streak', 'longest_streak', 'last_active_date', 'streak_freezes'])]
 class UserStat extends Model
 {
     protected $primaryKey = 'user_id';
