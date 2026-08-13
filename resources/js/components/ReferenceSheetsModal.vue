@@ -46,6 +46,7 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                     <Kyuchan
                         v-if="showMascot"
                         mood="calculate"
+                        effect="focus"
                         :size="64"
                         loading="lazy"
                         class="ml-auto"

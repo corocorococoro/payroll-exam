@@ -45,7 +45,11 @@ function toggle(position: number) {
 <template>
     <Head title="模試結果" />
     <div class="text-center">
-        <Kyuchan :mood="result.passed ? 'cheer' : 'sad'" :size="130" />
+        <Kyuchan
+            :mood="result.passed ? 'clap' : 'curious'"
+            :effect="result.passed ? 'confetti' : 'heart'"
+            :size="130"
+        />
         <p
             :class="[
                 'text-sm font-semibold',

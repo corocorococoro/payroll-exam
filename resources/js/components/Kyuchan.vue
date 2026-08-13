@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3';
 import { computed, ref, watch } from 'vue';
+import KyuchanEffectLayer from '@/components/KyuchanEffect.vue';
 import { useXpProgress } from '@/composables/useXpProgress';
-import type { KyuchanMood, MascotStyleSlug, Stats } from '@/types';
+import type {
+    KyuchanEffect,
+    KyuchanMood,
+    MascotStyleSlug,
+    Stats,
+} from '@/types';
 
 /**
  * マスコット「きゅーちゃん」— 給与学習を応援する3頭身キャラクター。
@@ -13,6 +19,7 @@ const props = withDefaults(
         mood?: KyuchanMood;
         size?: number;
         outfit?: MascotStyleSlug;
+        effect?: KyuchanEffect;
         loading?: 'eager' | 'lazy';
     }>(),
     { mood: 'normal', size: 96, loading: 'eager' },
@@ -45,7 +52,11 @@ watch([selectedStyle, () => props.mood], () => {
 <template>
     <span
         :class="['kyuchan', `kyuchan--${mood}`]"
-        :style="{ width: `${size}px`, height: `${size}px` }"
+        :style="{
+            width: `${size}px`,
+            height: `${size}px`,
+            fontSize: `${size}px`,
+        }"
         aria-hidden="true"
     >
         <img
@@ -57,6 +68,7 @@ watch([selectedStyle, () => props.mood], () => {
             draggable="false"
             @error="failed = true"
         />
+        <KyuchanEffectLayer v-if="effect" :effect="effect" />
     </span>
 </template>
 
@@ -66,11 +78,15 @@ watch([selectedStyle, () => props.mood], () => {
     flex: none;
     align-items: center;
     justify-content: center;
+    position: relative;
+    isolation: isolate;
     transform-origin: bottom center;
     user-select: none;
 }
 
 .kyuchan img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -80,11 +96,15 @@ watch([selectedStyle, () => props.mood], () => {
 .kyuchan--happy,
 .kyuchan--cheer,
 .kyuchan--wave,
-.kyuchan--point {
+.kyuchan--point,
+.kyuchan--approve,
+.kyuchan--clap,
+.kyuchan--confident {
     animation: kyuchan-bounce 0.6s ease-in-out;
 }
 
-.kyuchan--sad {
+.kyuchan--sad,
+.kyuchan--curious {
     animation: kyuchan-shake 0.5s ease-in-out;
 }
 
@@ -119,6 +139,10 @@ watch([selectedStyle, () => props.mood], () => {
     .kyuchan--cheer,
     .kyuchan--wave,
     .kyuchan--point,
+    .kyuchan--approve,
+    .kyuchan--clap,
+    .kyuchan--confident,
+    .kyuchan--curious,
     .kyuchan--sad {
         animation: none;
     }

@@ -65,7 +65,8 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                 </div>
             </div>
             <KyuchanMoment
-                mood="think"
+                mood="confident"
+                effect="focus"
                 message="120分、本番のつもりでいこう"
                 :size="84"
                 compact

@@ -156,7 +156,7 @@ const accuracy = computed(() =>
             v-if="completion"
             class="flex flex-1 flex-col items-center justify-center gap-5 p-6 text-center"
         >
-            <Kyuchan mood="cheer" :size="140" />
+            <Kyuchan mood="clap" effect="confetti" :size="140" />
             <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-100">
                 レッスンクリア！🎉
             </h1>
@@ -398,7 +398,10 @@ const accuracy = computed(() =>
                     <div class="mx-auto flex max-w-2xl flex-col gap-2 p-4">
                         <div class="flex items-center gap-3">
                             <Kyuchan
-                                :mood="result.correct ? 'happy' : 'sad'"
+                                :mood="result.correct ? 'approve' : 'curious'"
+                                :effect="
+                                    result.correct ? 'sparkle' : 'question'
+                                "
                                 :size="56"
                             />
                             <div class="flex-1">

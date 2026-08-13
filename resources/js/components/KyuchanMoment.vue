@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Kyuchan from '@/components/Kyuchan.vue';
-import type { KyuchanMood, MascotStyleSlug } from '@/types';
+import type { KyuchanEffect, KyuchanMood, MascotStyleSlug } from '@/types';
 
 withDefaults(
     defineProps<{
@@ -8,6 +8,7 @@ withDefaults(
         message: string;
         size?: number;
         outfit?: MascotStyleSlug;
+        effect?: KyuchanEffect;
         compact?: boolean;
         loading?: 'eager' | 'lazy';
     }>(),
@@ -21,6 +22,7 @@ withDefaults(
             :mood="mood"
             :size="size"
             :outfit="outfit"
+            :effect="effect"
             :loading="loading"
         />
         <p

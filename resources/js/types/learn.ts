@@ -27,7 +27,16 @@ export type KyuchanMood =
     | 'think'
     | 'point'
     | 'calculate'
-    | 'rest';
+    | 'rest'
+    | 'approve'
+    | 'clap'
+    | 'curious'
+    | 'confident'
+    | 'sleepy'
+    | 'write';
+
+export type KyuchanEffect =
+    'sparkle' | 'heart' | 'question' | 'focus' | 'confetti' | 'alert' | 'zzz';
 
 export type XpProgress = {
     total_xp: number;

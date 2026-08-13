@@ -135,7 +135,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         </p>
                         <p class="text-lg font-bold text-[#285ac8]">20 XP</p>
                     </div>
-                    <Kyuchan mood="cheer" :size="190" />
+                    <Kyuchan mood="clap" effect="confetti" :size="190" />
                     <div
                         class="absolute right-6 bottom-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >

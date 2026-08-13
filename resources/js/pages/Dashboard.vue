@@ -161,7 +161,8 @@ function heatLevel(day: HeatmapDay): string {
                 </div>
                 <Kyuchan
                     class="-mr-3 -mb-2 justify-self-end"
-                    :mood="summary.goal_met ? 'cheer' : 'study'"
+                    :mood="summary.goal_met ? 'approve' : 'study'"
+                    :effect="summary.goal_met ? 'confetti' : 'focus'"
                     :size="148"
                 />
             </div>
@@ -218,7 +219,8 @@ function heatLevel(day: HeatmapDay): string {
             </div>
             <Kyuchan
                 class="-my-3 -mr-2 shrink-0"
-                :mood="summary.goal_met ? 'cheer' : 'study'"
+                :mood="summary.goal_met ? 'approve' : 'study'"
+                :effect="summary.goal_met ? 'confetti' : 'focus'"
                 :size="124"
             />
         </div>

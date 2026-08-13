@@ -48,6 +48,7 @@ const mascotMessage = computed(() =>
                     </div>
                     <KyuchanMoment
                         mood="wave"
+                        effect="sparkle"
                         :message="mascotMessage"
                         :size="76"
                         outfit="default"

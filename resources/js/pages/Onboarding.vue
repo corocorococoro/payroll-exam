@@ -9,7 +9,7 @@ import {
 } from '@lucide/vue';
 import { ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
-import type { KyuchanMood } from '@/types';
+import type { KyuchanEffect, KyuchanMood } from '@/types';
 
 const props = defineProps<{
     defaults: {
@@ -28,9 +28,14 @@ const examDate = ref(props.defaults.exam_date);
 const processing = ref(false);
 const errors = ref<Record<string, string>>({});
 const stepMood: Record<number, KyuchanMood> = {
-    1: 'study',
+    1: 'write',
     2: 'point',
     3: 'wave',
+};
+const stepEffect: Record<number, KyuchanEffect> = {
+    1: 'focus',
+    2: 'sparkle',
+    3: 'heart',
 };
 
 const goals = [
@@ -81,7 +86,11 @@ function submit() {
                         あなたの学習プラン
                     </h1>
                 </div>
-                <Kyuchan :mood="stepMood[step]" :size="76" />
+                <Kyuchan
+                    :mood="stepMood[step]"
+                    :effect="stepEffect[step]"
+                    :size="76"
+                />
             </div>
             <div class="mb-6 flex gap-2">
                 <div

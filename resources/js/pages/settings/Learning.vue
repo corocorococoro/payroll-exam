@@ -60,7 +60,8 @@ function submit() {
         </p>
         <KyuchanMoment
             v-if="saved"
-            mood="point"
+            mood="approve"
+            effect="sparkle"
             message="設定したよ。無理なく続けよう！"
             :size="76"
             compact

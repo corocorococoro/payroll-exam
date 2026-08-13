@@ -99,7 +99,7 @@ function next() {
         v-if="questions.length === 0"
         class="flex min-h-[65vh] flex-col items-center justify-center text-center"
     >
-        <Kyuchan mood="rest" :size="140" />
+        <Kyuchan mood="sleepy" effect="zzz" :size="140" />
         <h1 class="mt-3 text-xl font-semibold text-gray-700 dark:text-gray-100">
             今日の復習は完了！
         </h1>
@@ -117,7 +117,7 @@ function next() {
         v-else-if="finished"
         class="flex min-h-[65vh] flex-col items-center justify-center text-center"
     >
-        <Kyuchan mood="cheer" :size="140" />
+        <Kyuchan mood="clap" effect="sparkle" :size="140" />
         <CheckCircle2 class="mt-2 size-9 text-emerald-500" />
         <h1
             class="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-100"
@@ -268,7 +268,8 @@ function next() {
             >
                 <div class="mb-2 flex items-center gap-2">
                     <Kyuchan
-                        :mood="result.correct ? 'happy' : 'sad'"
+                        :mood="result.correct ? 'approve' : 'curious'"
+                        :effect="result.correct ? 'sparkle' : 'question'"
                         :size="54"
                     />
                     <div>

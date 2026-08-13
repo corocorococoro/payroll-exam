@@ -41,6 +41,7 @@ const unitClasses = {
     >
         <KyuchanMoment
             mood="point"
+            effect="sparkle"
             :message="`次は「${nextLesson.name}」がおすすめだよ`"
             :size="88"
             compact
