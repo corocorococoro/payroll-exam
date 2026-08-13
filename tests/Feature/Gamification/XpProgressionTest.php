@@ -123,6 +123,7 @@ test('レベル境界で衣装を解放し未解放衣装の装備を拒否す�
         ->level->toBe(3)
         ->title->toBe('いつもの相棒')
         ->xp_to_next->toBe(250)
+        ->and($user->rewardUnlocks()->where('reward_slug', 'cozy-study')->exists())->toBeTrue()
         ->and($user->rewardUnlocks()->where('reward_slug', 'study-parka')->exists())->toBeTrue();
 
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'payroll-cardigan'])
@@ -138,7 +139,7 @@ test('成長画面にレベル進捗と衣装一覧を返す', function () {
     actingAs($user)->get('/league')->assertOk()->assertInertia(fn ($page) => $page
         ->component('league/Index')
         ->where('xp_progress.level', 1)
-        ->has('styles', 5)
+        ->has('styles', 10)
         ->has('levels', 10)
         ->has('badges', 10)
         ->has('leaderboard')

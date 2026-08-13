@@ -15,7 +15,7 @@ it('ships the default mascot and every reward style in all learning moods', func
             fn (string $style): array => [$style => public_path("images/kyuchan/styles/{$style}")],
         ));
 
-    expect($styles)->toHaveCount(4);
+    expect($styles)->toHaveCount(9);
 
     foreach ($directories as $style => $directory) {
         expect(File::files($directory))->toHaveCount(count($moods));

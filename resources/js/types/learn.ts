@@ -12,9 +12,14 @@ export type Stats = {
 
 export type MascotStyleSlug =
     | 'default'
+    | 'cozy-study'
     | 'study-parka'
+    | 'cafe-apron'
     | 'payroll-cardigan'
+    | 'morning-track'
     | 'focus-glasses'
+    | 'library-jacket'
+    | 'starry-academy'
     | 'exam-wish';
 
 export type KyuchanMood =

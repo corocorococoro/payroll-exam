@@ -49,6 +49,9 @@ syncXp(progress.value);
 const nextLevel = computed(() =>
     props.levels.find((level) => level.threshold > progress.value.total_xp),
 );
+const nextStyle = computed(() =>
+    styles.value.find((style) => style.threshold > progress.value.total_xp),
+);
 
 async function equip(style: MascotStyle) {
     if (!style.unlocked || style.equipped || equipping.value) {
@@ -138,11 +141,23 @@ async function equip(style: MascotStyle) {
                         />きゅーちゃんの衣装
                     </h2>
                     <p class="mt-1 text-xs text-gray-500">
-                        XPを積み重ねると、相棒の衣装が増えていきます。
+                        レベルアップするたび、新しい衣装が1着増えます。
                     </p>
                 </div>
+                <p
+                    v-if="nextStyle"
+                    class="shrink-0 rounded-full bg-amber-50 px-3 py-1.5 text-[11px] font-bold text-amber-700 dark:bg-amber-950 dark:text-amber-200"
+                >
+                    次の衣装まで
+                    {{
+                        (
+                            nextStyle.threshold - progress.total_xp
+                        ).toLocaleString()
+                    }}
+                    XP
+                </p>
             </div>
-            <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
                 <button
                     v-for="style in styles"
                     :key="style.slug"
@@ -188,7 +203,7 @@ async function equip(style: MascotStyle) {
                         <template v-else>
                             <Lock class="mr-1 inline size-3" />Lv.{{
                                 style.level
-                            }}・{{ style.threshold }} XP
+                            }}・{{ style.threshold.toLocaleString() }} XP
                         </template>
                     </p>
                 </button>
