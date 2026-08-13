@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\File;
 
 it('ships the default mascot and every reward style in all learning moods', function () {
+    $moods = [
+        'normal', 'happy', 'sad', 'cheer', 'wave', 'study', 'think', 'point',
+        'calculate', 'rest', 'approve', 'clap', 'curious', 'confident', 'sleepy', 'write',
+    ];
     $styles = collect(config('xp.levels'))
         ->pluck('style')
         ->filter(fn (?string $style): bool => $style !== null && $style !== 'default');
@@ -14,7 +18,9 @@ it('ships the default mascot and every reward style in all learning moods', func
     expect($styles)->toHaveCount(4);
 
     foreach ($directories as $style => $directory) {
-        foreach (['normal', 'happy', 'sad', 'cheer', 'wave', 'study', 'think', 'point', 'calculate', 'rest'] as $mood) {
+        expect(File::files($directory))->toHaveCount(count($moods));
+
+        foreach ($moods as $mood) {
             $path = "{$directory}/{$mood}.webp";
 
             expect(File::exists($path))->toBeTrue("Missing {$style} mascot asset: {$path}")
