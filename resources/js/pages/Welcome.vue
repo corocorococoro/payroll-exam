@@ -159,7 +159,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         <BookOpen class="mb-4 size-7 text-[#2864f0]" />
                         <h2 class="font-semibold">短く、毎日続けられる</h2>
                         <p class="mt-2 text-sm leading-6 text-gray-500">
-                            890問を一気に解かず、毎回最大10問のレッスンで理解と習慣を積み上げます。
+                            問題バンクを一気に解かず、毎回最大10問のレッスンで理解と習慣を積み上げます。
                         </p>
                     </article>
                     <article

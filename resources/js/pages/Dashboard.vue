@@ -348,7 +348,7 @@ function heatLevel(day: HeatmapDay): string {
         <div class="mb-3 flex items-end justify-between">
             <div>
                 <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                    全890問の進み具合
+                    全{{ summary.total_questions }}問の進み具合
                 </h2>
                 <p class="text-[11px] text-gray-400">
                     試験14日前までの全問着手を基準にした学習計画

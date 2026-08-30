@@ -1,0 +1,158 @@
+{
+  "exam_scope": {
+    "label": "検定公式：2級の範囲・基準日",
+    "url": "https://fos.or.jp/shikaku/pc2/"
+  },
+  "labor_standards": {
+    "label": "e-Gov法令検索：労働基準法",
+    "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049"
+  },
+  "labor_contract": {
+    "label": "e-Gov法令検索：労働契約法",
+    "url": "https://elaws.e-gov.go.jp/document?lawid=419AC0000000128"
+  },
+  "worktime_leave": {
+    "label": "厚生労働省：労働時間・休憩・休日・年休",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html"
+  },
+  "overtime": {
+    "label": "厚生労働省：時間外労働の上限と割増賃金",
+    "url": "https://hatarakikatakaikaku.mhlw.go.jp/overtime.html"
+  },
+  "rounding": {
+    "label": "鹿児島労働局：割増賃金の端数処理",
+    "url": "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html"
+  },
+  "digital_wage": {
+    "label": "厚生労働省：賃金のデジタル払い",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03_00028.html"
+  },
+  "minimum_wage": {
+    "label": "厚生労働省：最低賃金制度",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/index.html"
+  },
+  "labor_insurance": {
+    "label": "厚生労働省：労働保険の年度更新",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/roudouhoken21/index.html"
+  },
+  "workers_comp": {
+    "label": "厚生労働省：労災保険制度",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousai/index.html"
+  },
+  "social_overview": {
+    "label": "日本年金機構：厚生年金・社会保険の概要",
+    "url": "https://www.nenkin.go.jp/service/learn/seidosetsumei.files/kounen2026_01.pdf"
+  },
+  "care_insurance": {
+    "label": "厚生労働省：介護保険の被保険者",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo4.html"
+  },
+  "short_worker": {
+    "label": "厚生労働省：短時間労働者の社会保険",
+    "url": "https://www.mhlw.go.jp/tekiyoukakudai/qa/"
+  },
+  "short_worker_coverage": {
+    "label": "厚生労働省：短時間労働者の加入対象",
+    "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/"
+  },
+  "remuneration_scope": {
+    "label": "日本年金機構：社会保険上の報酬の範囲",
+    "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html"
+  },
+  "regular_determination": {
+    "label": "日本年金機構：標準報酬月額・定時決定",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html"
+  },
+  "acquisition_determination": {
+    "label": "日本年金機構：資格取得時の標準報酬月額",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20120330.html"
+  },
+  "monthly_revision": {
+    "label": "日本年金機構：随時改定",
+    "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20140602-02.html"
+  },
+  "social_rates": {
+    "label": "協会けんぽ：2026年度保険料率",
+    "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html"
+  },
+  "health_rates_tokyo_2026": {
+    "label": "協会けんぽ東京支部：2026年度保険料率",
+    "url": "https://www.kyoukaikenpo.or.jp/shibu/tokyo/assets/R0802.pdf"
+  },
+  "child_contribution_2026": {
+    "label": "日本年金機構：2026年度子ども・子育て拠出金率",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08kikinryougaku.pdf"
+  },
+  "employment_rates_2026": {
+    "label": "厚生労働省：2026年度雇用保険料率",
+    "url": "https://www.mhlw.go.jp/content/001692566.pdf"
+  },
+  "health_benefits": {
+    "label": "協会けんぽ：健康保険給付",
+    "url": "https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html"
+  },
+  "qualification_acquisition": {
+    "label": "日本年金機構：資格取得の手続",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150422.html"
+  },
+  "qualification_loss": {
+    "label": "日本年金機構：資格喪失の手続",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html"
+  },
+  "leave_exemption": {
+    "label": "日本年金機構：産休・育休中の保険料",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/"
+  },
+  "dependents": {
+    "label": "日本年金機構：被扶養者の認定・手続",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html"
+  },
+  "bonus_insurance": {
+    "label": "日本年金機構：賞与の保険料",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html"
+  },
+  "withholding": {
+    "label": "国税庁：2026年分の源泉徴収税額表",
+    "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/01.htm"
+  },
+  "withholding_table_2026": {
+    "label": "国税庁：2026年分源泉徴収税額表PDF",
+    "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf"
+  },
+  "commuting": {
+    "label": "国税庁：2026年の通勤手当",
+    "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm"
+  },
+  "resident_tax": {
+    "label": "東京都主税局：住民税の特別徴収",
+    "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about"
+  },
+  "employment_benefits": {
+    "label": "厚生労働省：雇用保険給付",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000134526.html"
+  },
+  "employment_procedures": {
+    "label": "厚生労働省：雇用保険の届出期限",
+    "url": "https://www.mhlw.go.jp/bunya/koyou/koyouhoken/tetsuduki_ichiran01.html"
+  },
+  "working_conditions_2024": {
+    "label": "厚生労働省：2024年改正の労働条件明示",
+    "url": "https://www.mhlw.go.jp/stf/newpage_32105.html"
+  },
+  "part_time": {
+    "label": "厚生労働省：パート・有期雇用労働法",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000061842.html"
+  },
+  "childcare_leave": {
+    "label": "厚生労働省：育児・介護休業法",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html"
+  },
+  "my_number": {
+    "label": "個人情報保護委員会：マイナンバー取扱指針",
+    "url": "https://www.ppc.go.jp/legal/policy/my_number_guideline_jigyosha/"
+  },
+  "retirement_health": {
+    "label": "協会けんぽ：退職後の健康保険",
+    "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/002/"
+  }
+}

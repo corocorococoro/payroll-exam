@@ -72,7 +72,7 @@ test('ダッシュボードに習慣ループの集計を表示する', function
 
 test('誤答も今日の解答数に数え、復習画面に正解を漏らさない', function () {
     $user = User::factory()->create(['onboarded' => true])->refresh();
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
 
     actingAs($user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
@@ -97,7 +97,7 @@ test('誤答も今日の解答数に数え、復習画面に正解を漏らさ�
 
 test('復習で正解するとLeitnerボックスと期限が進む', function () {
     $user = User::factory()->create(['onboarded' => true])->refresh();
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $item = ReviewItem::create([
         'user_id' => $user->id,
         'question_id' => $question->id,
@@ -120,7 +120,7 @@ test('復習で正解するとLeitnerボックスと期限が進む', function (
 
 test('復習で再び誤答した問題は今日の復習に残る', function () {
     $user = User::factory()->create(['onboarded' => true])->refresh();
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $item = ReviewItem::create([
         'user_id' => $user->id,
         'question_id' => $question->id,
@@ -144,7 +144,7 @@ test('復習で再び誤答した問題は今日の復習に残る', function ()
 
 test('最終復習の正解で定着状態になり30日後も再確認する', function () {
     $user = User::factory()->create(['onboarded' => true])->refresh();
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     ReviewItem::create([
         'user_id' => $user->id,
         'question_id' => $question->id,

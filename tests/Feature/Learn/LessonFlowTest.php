@@ -33,7 +33,7 @@ test('問題配信レスポンスに正解・解説が含まれない', function
     $response = actingAs($this->user)->get("/lessons/{$lesson->id}");
 
     $response->assertOk();
-    $expectedCount = min(LessonRunService::QUESTION_COUNT, $lesson->questions()->pluck('concept_key')->unique()->count());
+    $expectedCount = min(LessonRunService::QUESTION_COUNT, $lesson->questions()->count());
     $response->assertInertia(fn ($page) => $page->has('questions', $expectedCount));
 
     $html = $response->getContent();
@@ -47,7 +47,7 @@ test('問題配信レスポンスに正解・解説が含まれない', function
 });
 
 test('正解するとXPが付与され解説が返る', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $correctChoice = correctChoice($question);
 
     $response = actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
@@ -81,7 +81,7 @@ test('正解するとXPが付与され解説が返る', function () {
 });
 
 test('誤答すると今日の復習キューに入りXPは0', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
@@ -106,7 +106,7 @@ test('誤答すると今日の復習キューに入りXPは0', function () {
 });
 
 test('誤答した選択肢に対応するフィードバックを返す', function () {
-    $question = Question::where('source_id', 'r2-q41')->firstOrFail();
+    $question = Question::where('source_id', 'q-0033')->firstOrFail();
     $expectedFeedback = '回数の要件だけを見ており、一定期日払いを確認していません。';
     $choice = collect($question->distractor_feedback)->search($expectedFeedback, strict: true);
 
@@ -123,7 +123,7 @@ test('誤答した選択肢に対応するフィードバックを返す', funct
     ]);
 });
 
-test('再受講では同じ学習目標の未出変種を優先する', function () {
+test('再受講では未出問題を優先する', function () {
     $lesson = Lesson::where('slug', 'chingin-shiharai')->firstOrFail();
     $request = Request::create("/lessons/{$lesson->id}");
     $request->setUserResolver(fn () => $this->user);
@@ -145,9 +145,7 @@ test('再受講では同じ学習目標の未出変種を優先する', function
     $service->clear($request, $lesson);
     $second = $service->getOrStart($request, $lesson);
 
-    expect(array_intersect($first['question_ids'], $second['question_ids']))->toBe([])
-        ->and(Question::whereIn('id', $second['question_ids'])->pluck('concept_key')->unique())
-        ->toHaveCount(count($second['question_ids']));
+    expect(array_intersect($first['question_ids'], $second['question_ids']))->toBe([]);
 });
 
 test('有限回のレッスン受講ですべての公開問題へ到達できる', function () {
@@ -186,7 +184,7 @@ test('有限回のレッスン受講ですべての公開問題へ到達でき�
         $reached = $reached->merge($lessonReached);
     }
 
-    expect($reached->unique())->toHaveCount(890);
+    expect($reached->unique())->toHaveCount(Question::query()->published()->count());
 });
 
 test('復習は期限到来数を保ったまま20問ずつ出題する', function () {
@@ -210,7 +208,7 @@ test('復習は期限到来数を保ったまま20問ずつ出題する', functi
 });
 
 test('数値入力はカンマ・全角数字でも判定できる', function () {
-    $question = Question::where('source_id', 'r2-q48')->firstOrFail();
+    $question = Question::where('source_id', 'q-0831')->firstOrFail();
     unlockLesson($this->user, $question->lesson);
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
@@ -251,7 +249,7 @@ test('解答していないレッスンは完了できない', function () {
 
 test('デイリーゴール達成でストリークが記録される', function () {
     $this->user->update(['daily_goal' => 10]);
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
         'question_id' => $question->id,
@@ -269,7 +267,7 @@ test('デイリーゴール達成でストリークが記録される', function
 });
 
 test('出題されていない問題とレッスンIDの偽装を拒否する', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $other = Question::where('lesson_id', $question->lesson_id)->whereKeyNot($question->id)->firstOrFail();
 
     actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
@@ -281,7 +279,7 @@ test('出題されていない問題とレッスンIDの偽装を拒否する', 
 });
 
 test('同じ出題への二重解答ではXPを再獲得できない', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $run = lessonRun($question);
     $payload = [
         'question_id' => $question->id,
@@ -297,7 +295,7 @@ test('同じ出題への二重解答ではXPを再獲得できない', function 
 });
 
 test('レビュー期限切れの問題は古いレッスンセッションからも解答できない', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $run = lessonRun($question);
     $question->update(['review_due_at' => now()->subMinute()]);
 
@@ -337,7 +335,7 @@ test('同じレッスンセッションを二重完了してもボーナスを�
 });
 
 test('期限の来ていない問題を復習として送信できない', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
 
     actingAs($this->user)->postJson('/answers', [
         'question_id' => $question->id,

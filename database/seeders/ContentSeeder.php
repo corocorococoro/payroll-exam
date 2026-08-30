@@ -23,12 +23,6 @@ class ContentSeeder extends Seeder
 {
     private const int FISCAL_YEAR = 2026;
 
-    /**
-     * 正解位置をランダムに見せつつ、再シードで順番が変わらない固定シード。
-     * 全問題と公開模試の正解位置が均等になることは ContentAuditService で検証する。
-     */
-    private const string CHOICE_ORDER_SEED = '43735';
-
     public function run(): void
     {
         $this->seedCourse();
@@ -107,72 +101,77 @@ class ContentSeeder extends Seeder
     {
         $units = Unit::pluck('id', 'slug');
         $lessons = Lesson::with('unit')->get()->keyBy(fn (Lesson $l) => $l->unit->slug.'/'.$l->slug);
-        $blueprint = $this->questionBlueprint();
+        $bank = File::json($this->dataPath('question-bank.json'));
+        $sourceCatalog = File::json($this->dataPath('official-sources.json'));
+        $topics = $bank['topics'] ?? [];
+        $release = $bank['release'] ?? [];
+        $questions = $bank['questions'] ?? [];
+        $choiceTargets = $this->choiceTargets($questions);
         $seededSourceIds = [];
 
-        foreach (File::files($this->dataPath('questions')) as $file) {
-            foreach (File::json($file->getPathname()) as $q) {
-                $this->validateQuestion($q);
-                $q = $this->normalizeChoiceOrder($q);
-                $pedagogy = $this->normalizePedagogy($q, $blueprint[$q['source_id']] ?? []);
-                $seededSourceIds[] = $q['source_id'];
-
-                $lessonKey = $q['unit'].'/'.$q['lesson'];
-                $content = [
-                    'type' => $q['type'],
-                    'question_text' => $q['question_text'],
-                    'choices' => $q['choices'],
-                    'answer' => $q['answer'],
-                    'explanation' => $q['explanation'],
-                    'common_mistake' => $q['common_mistake'],
-                    'distractor_feedback' => $q['distractor_feedback'] ?? null,
-                    'calc_params' => $q['calc_params'],
-                ];
-                $contentHash = Question::contentHash($content);
-
-                Question::updateOrCreate(
-                    ['source_id' => $q['source_id']],
-                    [
-                        'unit_id' => $units[$q['unit']] ?? throw new RuntimeException("Unknown unit {$q['unit']}"),
-                        'lesson_id' => $q['lesson'] !== null
-                            ? ($lessons[$lessonKey] ?? throw new RuntimeException("Unknown lesson {$lessonKey}"))->id
-                            : null,
-                        'concept_key' => $pedagogy['concept_key'],
-                        'learning_objective' => $pedagogy['learning_objective'],
-                        'variant_role' => $pedagogy['variant_role'],
-                        'misconception_key' => $pedagogy['misconception_key'],
-                        'type' => $content['type'],
-                        'category' => $q['category'],
-                        'difficulty' => $q['difficulty'],
-                        'review_status' => QuestionReviewStatus::Approved,
-                        'verification_status' => 'official_sources_reviewed',
-                        'scope_status' => 'exam_2026-09-01',
-                        'exam_role' => $q['exam_role'] ?? ($content['calc_params'] === null ? 'knowledge' : 'calculation'),
-                        'content_revision' => $q['content_revision'] ?? 1,
-                        'content_hash' => $contentHash,
-                        'reviewed_content_hash' => $contentHash,
-                        'fiscal_year' => self::FISCAL_YEAR,
-                        'question_text' => $content['question_text'],
-                        'choices' => $content['choices'],
-                        'answer' => $content['answer'],
-                        'explanation' => $content['explanation'],
-                        'common_mistake' => $content['common_mistake'],
-                        'distractor_feedback' => $content['distractor_feedback'],
-                        'calc_params' => $content['calc_params'],
-                        'reference_sheet_slugs' => $q['reference_sheet_slugs'],
-                        'source_urls' => $pedagogy['source_urls'],
-                        'review_notes' => $q['review_notes'] ?? '2026年9月1日の試験基準に対し、公式試験案内・法令一次資料・計算結果を確認。',
-                        'reviewed_at' => $q['reviewed_at'] ?? '2026-08-30 00:00:00',
-                        'review_due_at' => $q['review_due_at'] ?? '2026-11-23 00:00:00',
-                        'is_active' => true,
-                    ],
-                );
-            }
+        if (($release['question_count'] ?? null) !== count($questions)) {
+            throw new RuntimeException('問題バンクのquestion_countと実際の問題数が一致しません。');
         }
 
-        $missingBlueprintIds = array_diff(array_keys($blueprint), $seededSourceIds);
-        if ($missingBlueprintIds !== []) {
-            throw new RuntimeException('設計図にある問題データがありません: '.implode(', ', $missingBlueprintIds));
+        foreach ($questions as $q) {
+            $this->validateQuestion($q, $topics, $sourceCatalog);
+            $q = $this->normalizeChoiceOrder($q, $choiceTargets[$q['id']] ?? null);
+            $seededSourceIds[] = $q['id'];
+            $sourceUrls = array_values(array_map(
+                fn (string $key): string => $sourceCatalog[$key]['url'],
+                $q['source_keys'],
+            ));
+
+            $lessonKey = $q['unit'].'/'.$q['lesson'];
+            $content = [
+                'type' => $q['type'],
+                'question_text' => $q['question_text'],
+                'choices' => $q['choices'],
+                'answer' => $q['answer'],
+                'explanation' => $q['explanation'],
+                'common_mistake' => $q['common_mistake'],
+                'distractor_feedback' => $q['distractor_feedback'] ?? null,
+                'calc_params' => $q['calc_params'],
+            ];
+            $contentHash = Question::contentHash($content);
+
+            Question::updateOrCreate(
+                ['source_id' => $q['id']],
+                [
+                    'unit_id' => $units[$q['unit']] ?? throw new RuntimeException("Unknown unit {$q['unit']}"),
+                    'lesson_id' => $q['lesson'] !== null
+                        ? ($lessons[$lessonKey] ?? throw new RuntimeException("Unknown lesson {$lessonKey}"))->id
+                        : null,
+                    'concept_key' => $q['topic_key'],
+                    'learning_objective' => $topics[$q['topic_key']],
+                    'variant_role' => $q['role'],
+                    'misconception_key' => $q['misconception_key'] ?? null,
+                    'type' => $content['type'],
+                    'category' => $q['category'],
+                    'difficulty' => $q['difficulty'],
+                    'review_status' => QuestionReviewStatus::Approved,
+                    'verification_status' => 'official_sources_reviewed',
+                    'scope_status' => 'exam_'.($release['legal_as_of'] ?? throw new RuntimeException('法令基準日がありません。')),
+                    'exam_role' => $q['exam_role'] ?? ($content['calc_params'] === null ? 'knowledge' : 'calculation'),
+                    'content_revision' => $q['content_revision'] ?? 1,
+                    'content_hash' => $contentHash,
+                    'reviewed_content_hash' => $contentHash,
+                    'fiscal_year' => self::FISCAL_YEAR,
+                    'question_text' => $content['question_text'],
+                    'choices' => $content['choices'],
+                    'answer' => $content['answer'],
+                    'explanation' => $content['explanation'],
+                    'common_mistake' => $content['common_mistake'],
+                    'distractor_feedback' => $content['distractor_feedback'],
+                    'calc_params' => $content['calc_params'],
+                    'reference_sheet_slugs' => $q['reference_sheet_slugs'],
+                    'source_urls' => $sourceUrls,
+                    'review_notes' => $q['review_notes'] ?? '2026年9月1日の試験基準に対し、公式試験案内・法令一次資料・計算結果を確認。',
+                    'reviewed_at' => $q['reviewed_at'] ?? $release['reviewed_at'].' 00:00:00',
+                    'review_due_at' => $q['review_due_at'] ?? $release['review_due_at'].' 00:00:00',
+                    'is_active' => true,
+                ],
+            );
         }
 
         Question::query()
@@ -185,98 +184,33 @@ class ContentSeeder extends Seeder
     }
 
     /**
-     * 問題データまたは設計図の学習設計を、全問共通の形式へ正規化する。
-     *
-     * @param  array<string, mixed>  $question
-     * @param  array<string, mixed>  $blueprint
-     * @return array{concept_key: string, learning_objective: string, variant_role: string, misconception_key: string|null, source_urls: list<string>}
-     */
-    private function normalizePedagogy(array $question, array $blueprint): array
-    {
-        $pedagogy = array_replace($question, $blueprint);
-
-        foreach (['concept_key', 'learning_objective', 'variant_role', 'source_urls'] as $key) {
-            if (empty($pedagogy[$key])) {
-                throw new RuntimeException("Question {$question['source_id']}: 学習設計 {$key} が定義されていません。");
-            }
-        }
-
-        $role = QuestionVariantRole::tryFrom((string) $pedagogy['variant_role']);
-        if ($role === null) {
-            throw new RuntimeException("Question {$question['source_id']}: unknown variant role {$pedagogy['variant_role']}");
-        }
-
-        return [
-            'concept_key' => (string) $pedagogy['concept_key'],
-            'learning_objective' => (string) $pedagogy['learning_objective'],
-            'variant_role' => $role->value,
-            'misconception_key' => isset($pedagogy['misconception_key'])
-                ? (string) $pedagogy['misconception_key']
-                : null,
-            'source_urls' => array_values($pedagogy['source_urls']),
-        ];
-    }
-
-    /**
-     * @return array<string, array{
-     *     concept_key: string,
-     *     learning_objective: string,
-     *     variant_role: string,
-     *     misconception_key: string|null,
-     *     source_urls: list<string>
-     * }>
-     */
-    private function questionBlueprint(): array
-    {
-        $catalog = File::json($this->dataPath('content-source-catalog.json'));
-        $questions = [];
-
-        foreach (File::json($this->dataPath('question-blueprint.json')) as $objective) {
-            $sourceUrls = array_values(array_map(
-                fn (string $key): string => $catalog[$key]
-                    ?? throw new RuntimeException("Unknown content source key {$key}"),
-                $objective['source_keys'],
-            ));
-
-            foreach ($objective['questions'] as $variant) {
-                $sourceId = (string) $variant['source_id'];
-
-                if (isset($questions[$sourceId])) {
-                    throw new RuntimeException("Question {$sourceId}: 設計図で重複しています。");
-                }
-
-                $role = QuestionVariantRole::tryFrom($variant['variant_role']);
-                if ($role === null) {
-                    throw new RuntimeException("Question {$sourceId}: unknown variant role {$variant['variant_role']}");
-                }
-
-                $questions[$sourceId] = [
-                    'concept_key' => (string) $objective['concept_key'],
-                    'learning_objective' => (string) $objective['learning_objective'],
-                    'variant_role' => $role->value,
-                    'misconception_key' => isset($variant['misconception_key'])
-                        ? (string) $variant['misconception_key']
-                        : null,
-                    'source_urls' => $sourceUrls,
-                ];
-            }
-        }
-
-        return $questions;
-    }
-
-    /**
      * コンテンツ品質のシード時バリデーション。
      *
      * @param  array<string, mixed>  $q
+     * @param  array<string, string>  $topics
+     * @param  array<string, array{label: string, url: string}>  $sourceCatalog
      */
-    private function validateQuestion(array $q): void
+    private function validateQuestion(array $q, array $topics, array $sourceCatalog): void
     {
-        $id = $q['source_id'] ?? '(no source_id)';
+        $id = $q['id'] ?? '(no id)';
 
-        foreach (['source_id', 'unit', 'type', 'category', 'difficulty', 'question_text', 'answer', 'explanation'] as $key) {
+        foreach (['id', 'topic_key', 'role', 'source_keys', 'unit', 'type', 'category', 'difficulty', 'question_text', 'answer', 'explanation'] as $key) {
             if (empty($q[$key])) {
                 throw new RuntimeException("Question {$id}: missing {$key}");
+            }
+        }
+
+        if (! isset($topics[$q['topic_key']])) {
+            throw new RuntimeException("Question {$id}: unknown topic {$q['topic_key']}");
+        }
+
+        if (QuestionVariantRole::tryFrom((string) $q['role']) === null) {
+            throw new RuntimeException("Question {$id}: unknown role {$q['role']}");
+        }
+
+        foreach ($q['source_keys'] as $sourceKey) {
+            if (! isset($sourceCatalog[$sourceKey]['url'], $sourceCatalog[$sourceKey]['label'])) {
+                throw new RuntimeException("Question {$id}: unknown official source {$sourceKey}");
             }
         }
 
@@ -309,15 +243,16 @@ class ContentSeeder extends Seeder
      * @param  array<string, mixed>  $question
      * @return array<string, mixed>
      */
-    private function normalizeChoiceOrder(array $question): array
+    private function normalizeChoiceOrder(array $question, ?string $targetCorrectKey): array
     {
         if ($question['type'] !== QuestionType::Choice->value) {
             return $question;
         }
 
         $keys = ['A', 'B', 'C', 'D'];
-        $digest = hash('sha256', self::CHOICE_ORDER_SEED.':'.$question['source_id'], true);
-        $targetCorrectKey = $keys[ord($digest[0]) % count($keys)];
+        if (! in_array($targetCorrectKey, $keys, true)) {
+            throw new RuntimeException("Question {$question['id']}: correct-choice target is missing");
+        }
         $originalCorrectKey = $question['answer']['choice'];
         /** @var list<array{key: string, text: string}> $choices */
         $choices = $question['choices'];
@@ -333,7 +268,7 @@ class ContentSeeder extends Seeder
         }
 
         if ($correctChoice === null) {
-            throw new RuntimeException("Question {$question['source_id']}: correct choice not found");
+            throw new RuntimeException("Question {$question['id']}: correct choice not found");
         }
         $oldToNewKeys = [];
         $reordered = [];
@@ -363,15 +298,69 @@ class ContentSeeder extends Seeder
         return $question;
     }
 
+    /**
+     * 公開模試は各正解位置を10問ずつにし、残りを現在の最少位置へ配って
+     * 問題バンク全体も均等にする。正本IDと固定シードから再現可能に決定する。
+     *
+     * @param  list<array<string, mixed>>  $questions
+     * @return array<string, string>
+     */
+    private function choiceTargets(array $questions): array
+    {
+        $keys = ['A', 'B', 'C', 'D'];
+        $targets = [];
+        $counts = array_fill_keys($keys, 0);
+
+        foreach (File::json($this->dataPath('mock-exams.json')) as $exam) {
+            foreach ($exam['questions'] as $item) {
+                $questionId = (string) $item['question_id'];
+                $target = match (((int) $item['position'] - 1) % count($keys)) {
+                    0 => 'A',
+                    1 => 'B',
+                    2 => 'C',
+                    3 => 'D',
+                    default => throw new RuntimeException("Mock exam position must be positive: {$item['position']}"),
+                };
+
+                if (isset($targets[$questionId]) && $targets[$questionId] !== $target) {
+                    throw new RuntimeException("Question {$questionId}: 模試間で正解位置が競合しています。");
+                }
+
+                if (! isset($targets[$questionId])) {
+                    $targets[$questionId] = $target;
+                    $counts[$target]++;
+                }
+            }
+        }
+
+        foreach ($questions as $question) {
+            $questionId = (string) $question['id'];
+            if ($question['type'] !== QuestionType::Choice->value || isset($targets[$questionId])) {
+                continue;
+            }
+
+            $minimum = min($counts);
+            $leastUsed = array_values(array_filter(
+                $keys,
+                fn (string $key): bool => $counts[$key] === $minimum,
+            ));
+            $target = $leastUsed[0] ?? throw new RuntimeException('正解位置の割当てに失敗しました。');
+            $targets[$questionId] = $target;
+            $counts[$target]++;
+        }
+
+        return $targets;
+    }
+
     private function seedMockExams(): void
     {
         $course = Course::where('slug', 'kyuyo-2kyu')->firstOrFail();
         $questionIds = Question::whereNotNull('source_id')->pluck('id', 'source_id');
-        /** @var list<array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, source_id: string, points: int}>}> $mockExams */
+        /** @var list<array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, question_id: string, points: int}>}> $mockExams */
         $mockExams = File::json($this->dataPath('mock-exams.json'));
         $availableMockExams = collect($mockExams)->map(function (array $examData) use ($questionIds): array {
-            $sourceIds = collect($examData['questions'])->pluck('source_id');
-            $missing = $sourceIds->diff($questionIds->keys());
+            $questionKeys = collect($examData['questions'])->pluck('question_id');
+            $missing = $questionKeys->diff($questionIds->keys());
 
             if ($missing->isNotEmpty()) {
                 throw new RuntimeException("Mock exam {$examData['slug']}: unknown questions {$missing->implode(', ')}");
@@ -386,7 +375,7 @@ class ContentSeeder extends Seeder
             ->update(['is_published' => false]);
 
         foreach ($availableMockExams as $examData) {
-            /** @var array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, source_id: string, points: int}>} $examData */
+            /** @var array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, question_id: string, points: int}>} $examData */
             $exam = MockExam::updateOrCreate(
                 ['slug' => $examData['slug']],
                 [
@@ -406,8 +395,8 @@ class ContentSeeder extends Seeder
             )->delete();
 
             foreach ($examData['questions'] as $eq) {
-                $questionId = $questionIds[$eq['source_id']]
-                    ?? throw new RuntimeException("Mock exam {$examData['slug']}: unknown question {$eq['source_id']}");
+                $questionId = $questionIds[$eq['question_id']]
+                    ?? throw new RuntimeException("Mock exam {$examData['slug']}: unknown question {$eq['question_id']}");
 
                 $exam->examQuestions()->updateOrCreate(
                     ['position' => $eq['position']],

@@ -48,44 +48,12 @@ CHAPTERS = [
 ]
 
 
-# The supplied PDF is the transcription source.  These are the authoritative
-# references used to independently review each legal topic as of the date used
-# by the November 2026 level-2 exam (2026-09-01).
-OFFICIAL_SOURCE_GROUPS: dict[str, list[str]] = {
-    "exam_scope": ["https://fos.or.jp/shikaku/pc2/"],
-    "labor_standards": ["https://elaws.e-gov.go.jp/document?lawid=322AC0000000049"],
-    "labor_contract": ["https://elaws.e-gov.go.jp/document?lawid=419AC0000000128"],
-    "worktime_leave": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/index.html"],
-    "overtime": ["https://hatarakikatakaikaku.mhlw.go.jp/overtime.html"],
-    "rounding": ["https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html"],
-    "digital_wage": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03_00028.html"],
-    "minimum_wage": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/index.html"],
-    "labor_insurance": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/roudouhoken21/index.html"],
-    "workers_comp": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/rousai/index.html"],
-    "social_overview": ["https://www.nenkin.go.jp/service/learn/seidosetsumei.files/kounen2026_01.pdf"],
-    "care_insurance": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo4.html"],
-    "short_worker": ["https://www.mhlw.go.jp/tekiyoukakudai/qa/"],
-    "standard_remuneration": ["https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html"],
-    "regular_determination": ["https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html"],
-    "monthly_revision": ["https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20140602-02.html"],
-    "social_rates": ["https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html"],
-    "health_benefits": ["https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html"],
-    "qualification_acquisition": ["https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150422.html"],
-    "qualification_loss": ["https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html"],
-    "leave_exemption": ["https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/"],
-    "dependents": ["https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html"],
-    "bonus_insurance": ["https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html"],
-    "withholding": ["https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/01.htm"],
-    "commuting": ["https://www.nta.go.jp/users/gensen/2026tsukin/index.htm"],
-    "resident_tax": ["https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about"],
-    "employment_insurance": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000134526.html"],
-    "employment_procedures": ["https://www.mhlw.go.jp/bunya/koyou/koyouhoken/tetsuduki_ichiran01.html"],
-    "working_conditions_2024": ["https://www.mhlw.go.jp/stf/newpage_32105.html"],
-    "part_time": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000061842.html"],
-    "childcare_leave": ["https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000130583.html"],
-    "my_number": ["https://www.ppc.go.jp/legal/policy/my_number_guideline_jigyosha/"],
-    "retirement_health": ["https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/002/"],
-}
+# URLと表示名はアプリと共通の公式資料カタログだけを正本とする。
+OFFICIAL_SOURCE_CATALOG = (
+    Path(__file__).resolve().parents[1]
+    / "database/seeders/data/official-sources.json"
+)
+OFFICIAL_SOURCE_KEYS = set(json.loads(OFFICIAL_SOURCE_CATALOG.read_text(encoding="utf-8")))
 
 
 def build_question_source_map() -> dict[int, list[str]]:
@@ -105,10 +73,10 @@ def build_question_source_map() -> dict[int, list[str]]:
         (range(97, 101), ["rounding"]), (range(101, 201), ["worktime_leave"]),
         (range(201, 301), ["overtime"]), (range(301, 303), ["health_benefits"]),
         (range(303, 307), ["care_insurance"]), (range(307, 320), ["social_overview"]),
-        (range(320, 330), ["short_worker"]), (range(330, 345), ["standard_remuneration", "social_rates"]),
+        (range(320, 330), ["short_worker"]), (range(330, 345), ["regular_determination", "social_rates"]),
         (range(345, 350), ["health_benefits"]), ([350], ["social_overview"]),
-        (range(351, 363), ["standard_remuneration"]),
-        (range(363, 379), ["standard_remuneration", "social_rates"]),
+        (range(351, 363), ["regular_determination"]),
+        (range(363, 379), ["regular_determination", "social_rates"]),
         (range(379, 390), ["short_worker"]), (range(390, 392), ["care_insurance"]),
         (range(392, 401), ["social_overview", "health_benefits"]),
         (range(401, 416), ["qualification_acquisition", "qualification_loss"]),
@@ -117,24 +85,24 @@ def build_question_source_map() -> dict[int, list[str]]:
         (range(451, 463), ["regular_determination"]), (range(463, 477), ["monthly_revision"]),
         (range(477, 489), ["qualification_acquisition", "qualification_loss"]),
         (range(489, 496), ["leave_exemption"]), (range(496, 501), ["dependents"]),
-        (range(501, 546), ["standard_remuneration", "social_rates"]),
-        (range(546, 550), ["employment_insurance"]), ([550], ["labor_insurance"]),
+        (range(501, 546), ["regular_determination", "social_rates"]),
+        (range(546, 550), ["employment_benefits"]), ([550], ["labor_insurance"]),
         (range(551, 587), ["withholding"]), ([587], ["exam_scope"]),
         (range(588, 626), ["resident_tax"]), (range(626, 629), ["withholding"]),
         (range(629, 636), ["commuting"]), (range(636, 650), ["withholding"]),
         ([650], ["exam_scope"]), (range(651, 653), ["exam_scope"]),
-        (range(653, 655), ["commuting"]), (range(655, 658), ["standard_remuneration", "social_rates"]),
-        (range(658, 660), ["employment_insurance"]), (range(660, 662), ["withholding"]),
+        (range(653, 655), ["commuting"]), (range(655, 658), ["regular_determination", "social_rates"]),
+        (range(658, 660), ["employment_benefits"]), (range(660, 662), ["withholding"]),
         (range(662, 664), ["resident_tax"]),
-        ([664], ["standard_remuneration", "employment_insurance", "withholding", "resident_tax"]),
+        ([664], ["regular_determination", "employment_benefits", "withholding", "resident_tax"]),
         ([665], ["labor_standards"]), ([666], ["exam_scope"]), ([667], ["overtime"]),
-        (range(668, 671), ["withholding"]), (range(671, 675), ["standard_remuneration", "social_rates"]),
+        (range(668, 671), ["withholding"]), (range(671, 675), ["regular_determination", "social_rates"]),
         ([675], ["exam_scope"]), (range(676, 683), ["withholding"]), ([683], ["resident_tax"]),
         (range(684, 686), ["exam_scope"]), (range(686, 688), ["commuting"]),
-        ([688], ["standard_remuneration"]), ([689], ["employment_insurance"]),
+        ([688], ["regular_determination"]), ([689], ["employment_benefits"]),
         ([690], ["bonus_insurance"]), ([691], ["commuting", "withholding"]),
-        ([692], ["employment_insurance"]), ([693], ["withholding"]),
-        ([694], ["standard_remuneration"]), ([695], ["resident_tax"]),
+        ([692], ["employment_benefits"]), ([693], ["withholding"]),
+        ([694], ["regular_determination"]), ([695], ["resident_tax"]),
         (range(696, 699), ["exam_scope"]), ([699], ["withholding"]), ([700], ["exam_scope"]),
         (range(701, 727), ["bonus_insurance"]), (range(727, 733), ["leave_exemption"]),
         (range(733, 745), ["withholding"]), (range(745, 748), ["resident_tax"]),
@@ -144,20 +112,20 @@ def build_question_source_map() -> dict[int, list[str]]:
         (range(768, 772), ["labor_contract"]), (range(772, 775), ["part_time"]),
         (range(775, 784), ["childcare_leave"]), (range(784, 786), ["labor_standards"]),
         ([786], ["health_benefits"]), ([787], ["leave_exemption"]),
-        (range(788, 792), ["employment_insurance"]), (range(792, 796), ["workers_comp"]),
+        (range(788, 792), ["employment_benefits"]), (range(792, 796), ["workers_comp"]),
         (range(796, 798), ["retirement_health"]), ([798], ["my_number"]),
         (range(799, 801), ["qualification_acquisition", "qualification_loss", "employment_procedures"]),
     ]
 
     result: dict[int, list[str]] = {}
     for numbers, group_keys in assignments:
-        urls = list(dict.fromkeys(
-            url for group_key in group_keys for url in OFFICIAL_SOURCE_GROUPS[group_key]
-        ))
+        unknown_keys = set(group_keys) - OFFICIAL_SOURCE_KEYS
+        if unknown_keys:
+            raise ValueError(f"Unknown official source keys: {sorted(unknown_keys)}")
         for number in numbers:
             if number in result:
                 raise ValueError(f"Question {number}: official sources assigned twice")
-            result[number] = urls
+            result[number] = list(dict.fromkeys(group_keys))
 
     if set(result) != set(range(1, 801)):
         missing = sorted(set(range(1, 801)) - set(result))
@@ -165,7 +133,7 @@ def build_question_source_map() -> dict[int, list[str]]:
     return result
 
 
-QUESTION_OFFICIAL_SOURCES = build_question_source_map()
+QUESTION_OFFICIAL_SOURCE_KEYS = build_question_source_map()
 
 
 QUESTION_CORRECTIONS: dict[int, dict[str, object]] = {
@@ -199,9 +167,6 @@ QUESTION_TEXT_REWRITES: dict[int, str] = {
     395: "業務外の病気やけがで医療機関を受診した場合の、健康保険の療養の給付として適切な説明はどれか。",
     396: "同一月の医療費の窓口負担が高額になった場合に利用する、高額療養費の説明として適切なものはどれか。",
 }
-
-
-VARIANT_ROLES = ["recall", "application", "boundary", "workflow", "misconception"]
 
 
 # Independently recompute every question whose answer is a concrete amount or
@@ -343,7 +308,6 @@ def build_records(reader: PdfReader) -> list[dict[str, object]]:
     for number in range(1, 801):
         chapter = chapter_for(number)
         unit, lesson = destination_for(number)
-        block = (number - chapter.start) // 5 + 1
         correction = QUESTION_CORRECTIONS.get(number)
         if correction is not None:
             questions[number]["question_text"] = correction["question_text"]
@@ -381,10 +345,6 @@ def build_records(reader: PdfReader) -> list[dict[str, object]]:
                 "exam_role": "calculation" if calculation else "knowledge",
                 "unit": unit,
                 "lesson": lesson,
-                "concept_key": f"curriculum.{unit}.{lesson}.objective-{(number - 1) // 5 + 1:03d}",
-                "learning_objective": f"{chapter.title}の重要論点を具体例から判断できる（{block}）",
-                "variant_role": VARIANT_ROLES[(number - chapter.start) % len(VARIANT_ROLES)],
-                "misconception_key": f"objective-{(number - 1) // 5 + 1:03d}-question-{number:03d}",
                 "type": "choice",
                 "category": chapter.title,
                 "difficulty": "hard" if calculation else "medium",
@@ -396,7 +356,7 @@ def build_records(reader: PdfReader) -> list[dict[str, object]]:
                 "distractor_feedback": None,
                 "calc_params": None,
                 "reference_sheet_slugs": [],
-                "source_urls": QUESTION_OFFICIAL_SOURCES[number],
+                "source_keys": QUESTION_OFFICIAL_SOURCE_KEYS[number],
             }
         )
     return records

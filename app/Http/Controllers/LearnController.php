@@ -42,7 +42,7 @@ class LearnController extends Controller
                     $questionIds = $lesson->questions()->published()->pluck('id');
                     $sessionQuestionCount = min(
                         LessonRunService::QUESTION_COUNT,
-                        $lesson->questions()->published()->pluck('concept_key')->unique()->count(),
+                        $questionIds->count(),
                     );
                     $lessonQuestionProgresses = $questionProgresses->only($questionIds->all());
                     $seenCount = $lessonQuestionProgresses->whereNotNull('first_seen_at')->count();

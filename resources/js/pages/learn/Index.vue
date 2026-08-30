@@ -21,6 +21,18 @@ const nextLesson = computed(() =>
         ),
 );
 
+const bankQuestionCount = computed(() =>
+    props.units.reduce(
+        (total, unit) =>
+            total +
+            unit.lessons.reduce(
+                (lessonTotal, lesson) => lessonTotal + lesson.question_count,
+                0,
+            ),
+        0,
+    ),
+);
+
 const unitClasses = {
     bg: 'bg-white dark:bg-gray-900',
     border: 'border-gray-200 dark:border-gray-800',
@@ -36,7 +48,9 @@ const unitClasses = {
         {{ course.name }}
     </h1>
     <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
-        全890問を10問ずつ。初見・復習・定着を分けて進めます。
+        全{{
+            bankQuestionCount
+        }}問を10問ずつ。初見・復習・定着を分けて進めます。
     </p>
 
     <Link

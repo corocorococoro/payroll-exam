@@ -7,46 +7,206 @@
     "passing_score": 70,
     "sort_order": 1,
     "questions": [
-      { "position": 1, "source_id": "r2-q01", "points": 2 },
-      { "position": 2, "source_id": "r2-q02", "points": 2 },
-      { "position": 3, "source_id": "r2-q03", "points": 2 },
-      { "position": 4, "source_id": "r2-q04", "points": 2 },
-      { "position": 5, "source_id": "r2-q45", "points": 2 },
-      { "position": 6, "source_id": "r2-q46", "points": 2 },
-      { "position": 7, "source_id": "r2-q47", "points": 2 },
-      { "position": 8, "source_id": "r2-q49", "points": 2 },
-      { "position": 9, "source_id": "r2-q50", "points": 2 },
-      { "position": 10, "source_id": "r2-q51", "points": 2 },
-      { "position": 11, "source_id": "r2-q52", "points": 2 },
-      { "position": 12, "source_id": "r2-q53", "points": 2 },
-      { "position": 13, "source_id": "r2-q54", "points": 2 },
-      { "position": 14, "source_id": "r2-q55", "points": 2 },
-      { "position": 15, "source_id": "r2-q56", "points": 2 },
-      { "position": 16, "source_id": "r2-q81", "points": 2 },
-      { "position": 17, "source_id": "r2-q85", "points": 2 },
-      { "position": 18, "source_id": "r2-q57", "points": 2 },
-      { "position": 19, "source_id": "r2-q58", "points": 2 },
-      { "position": 20, "source_id": "r2-q59", "points": 2 },
-      { "position": 21, "source_id": "r2-q60", "points": 2 },
-      { "position": 22, "source_id": "r2-q61", "points": 2 },
-      { "position": 23, "source_id": "r2-q62", "points": 2 },
-      { "position": 24, "source_id": "r2-q63", "points": 2 },
-      { "position": 25, "source_id": "r2-q64", "points": 2 },
-      { "position": 26, "source_id": "r2-q65", "points": 2 },
-      { "position": 27, "source_id": "r2-q66", "points": 2 },
-      { "position": 28, "source_id": "r2-q67", "points": 2 },
-      { "position": 29, "source_id": "r2-q68", "points": 2 },
-      { "position": 30, "source_id": "r2-q70", "points": 2 },
-      { "position": 31, "source_id": "r2-q71", "points": 2 },
-      { "position": 32, "source_id": "r2-q73", "points": 2 },
-      { "position": 33, "source_id": "r2-q74", "points": 2 },
-      { "position": 34, "source_id": "r2-q87", "points": 2 },
-      { "position": 35, "source_id": "r2-q89", "points": 2 },
-      { "position": 36, "source_id": "r2-q36", "points": 6 },
-      { "position": 37, "source_id": "r2-q37", "points": 6 },
-      { "position": 38, "source_id": "r2-q38", "points": 6 },
-      { "position": 39, "source_id": "r2-q39", "points": 6 },
-      { "position": 40, "source_id": "r2-q40", "points": 6 }
+      {
+        "position": 1,
+        "points": 2,
+        "question_id": "q-0032"
+      },
+      {
+        "position": 2,
+        "points": 2,
+        "question_id": "q-0030"
+      },
+      {
+        "position": 3,
+        "points": 2,
+        "question_id": "q-0038"
+      },
+      {
+        "position": 4,
+        "points": 2,
+        "question_id": "q-0036"
+      },
+      {
+        "position": 5,
+        "points": 2,
+        "question_id": "q-0183"
+      },
+      {
+        "position": 6,
+        "points": 2,
+        "question_id": "q-0181"
+      },
+      {
+        "position": 7,
+        "points": 2,
+        "question_id": "q-0179"
+      },
+      {
+        "position": 8,
+        "points": 2,
+        "question_id": "q-0177"
+      },
+      {
+        "position": 9,
+        "points": 2,
+        "question_id": "q-0145"
+      },
+      {
+        "position": 10,
+        "points": 2,
+        "question_id": "q-0143"
+      },
+      {
+        "position": 11,
+        "points": 2,
+        "question_id": "q-0029"
+      },
+      {
+        "position": 12,
+        "points": 2,
+        "question_id": "q-0251"
+      },
+      {
+        "position": 13,
+        "points": 2,
+        "question_id": "q-0249"
+      },
+      {
+        "position": 14,
+        "points": 2,
+        "question_id": "q-0253"
+      },
+      {
+        "position": 15,
+        "points": 2,
+        "question_id": "q-0255"
+      },
+      {
+        "position": 16,
+        "points": 2,
+        "question_id": "q-0256"
+      },
+      {
+        "position": 17,
+        "points": 2,
+        "question_id": "q-0261"
+      },
+      {
+        "position": 18,
+        "points": 2,
+        "question_id": "q-0398"
+      },
+      {
+        "position": 19,
+        "points": 2,
+        "question_id": "q-0393"
+      },
+      {
+        "position": 20,
+        "points": 2,
+        "question_id": "q-0391"
+      },
+      {
+        "position": 21,
+        "points": 2,
+        "question_id": "q-0389"
+      },
+      {
+        "position": 22,
+        "points": 2,
+        "question_id": "q-0395"
+      },
+      {
+        "position": 23,
+        "points": 2,
+        "question_id": "q-0400"
+      },
+      {
+        "position": 24,
+        "points": 2,
+        "question_id": "q-0492"
+      },
+      {
+        "position": 25,
+        "points": 2,
+        "question_id": "q-0463"
+      },
+      {
+        "position": 26,
+        "points": 2,
+        "question_id": "q-0531"
+      },
+      {
+        "position": 27,
+        "points": 2,
+        "question_id": "q-0505"
+      },
+      {
+        "position": 28,
+        "points": 2,
+        "question_id": "q-0458"
+      },
+      {
+        "position": 29,
+        "points": 2,
+        "question_id": "q-0577"
+      },
+      {
+        "position": 30,
+        "points": 2,
+        "question_id": "q-0565"
+      },
+      {
+        "position": 31,
+        "points": 2,
+        "question_id": "q-0567"
+      },
+      {
+        "position": 32,
+        "points": 2,
+        "question_id": "q-0626"
+      },
+      {
+        "position": 33,
+        "points": 2,
+        "question_id": "q-0650"
+      },
+      {
+        "position": 34,
+        "points": 2,
+        "question_id": "q-0651"
+      },
+      {
+        "position": 35,
+        "points": 2,
+        "question_id": "q-0673"
+      },
+      {
+        "position": 36,
+        "points": 6,
+        "question_id": "q-0677"
+      },
+      {
+        "position": 37,
+        "points": 6,
+        "question_id": "q-0679"
+      },
+      {
+        "position": 38,
+        "points": 6,
+        "question_id": "q-0675"
+      },
+      {
+        "position": 39,
+        "points": 6,
+        "question_id": "q-0827"
+      },
+      {
+        "position": 40,
+        "points": 6,
+        "question_id": "q-0829"
+      }
     ]
   },
   {
@@ -57,46 +217,206 @@
     "passing_score": 70,
     "sort_order": 2,
     "questions": [
-      { "position": 1, "source_id": "exam-202608-q002", "points": 2 },
-      { "position": 2, "source_id": "exam-202608-q008", "points": 2 },
-      { "position": 3, "source_id": "exam-202608-q012", "points": 2 },
-      { "position": 4, "source_id": "exam-202608-q018", "points": 2 },
-      { "position": 5, "source_id": "exam-202608-q022", "points": 2 },
-      { "position": 6, "source_id": "exam-202608-q027", "points": 2 },
-      { "position": 7, "source_id": "exam-202608-q032", "points": 2 },
-      { "position": 8, "source_id": "exam-202608-q037", "points": 2 },
-      { "position": 9, "source_id": "exam-202608-q042", "points": 2 },
-      { "position": 10, "source_id": "exam-202608-q047", "points": 2 },
-      { "position": 11, "source_id": "exam-202608-q052", "points": 2 },
-      { "position": 12, "source_id": "exam-202608-q057", "points": 2 },
-      { "position": 13, "source_id": "exam-202608-q062", "points": 2 },
-      { "position": 14, "source_id": "exam-202608-q067", "points": 2 },
-      { "position": 15, "source_id": "exam-202608-q072", "points": 2 },
-      { "position": 16, "source_id": "exam-202608-q077", "points": 2 },
-      { "position": 17, "source_id": "exam-202608-q082", "points": 2 },
-      { "position": 18, "source_id": "exam-202608-q087", "points": 2 },
-      { "position": 19, "source_id": "exam-202608-q092", "points": 2 },
-      { "position": 20, "source_id": "exam-202608-q097", "points": 2 },
-      { "position": 21, "source_id": "exam-202608-q102", "points": 2 },
-      { "position": 22, "source_id": "exam-202608-q107", "points": 2 },
-      { "position": 23, "source_id": "exam-202608-q112", "points": 2 },
-      { "position": 24, "source_id": "exam-202608-q117", "points": 2 },
-      { "position": 25, "source_id": "exam-202608-q122", "points": 2 },
-      { "position": 26, "source_id": "exam-202608-q127", "points": 2 },
-      { "position": 27, "source_id": "exam-202608-q132", "points": 2 },
-      { "position": 28, "source_id": "exam-202608-q137", "points": 2 },
-      { "position": 29, "source_id": "exam-202608-q142", "points": 2 },
-      { "position": 30, "source_id": "exam-202608-q147", "points": 2 },
-      { "position": 31, "source_id": "exam-202608-q157", "points": 2 },
-      { "position": 32, "source_id": "exam-202608-q162", "points": 2 },
-      { "position": 33, "source_id": "exam-202608-q172", "points": 2 },
-      { "position": 34, "source_id": "exam-202608-q177", "points": 2 },
-      { "position": 35, "source_id": "exam-202608-q187", "points": 2 },
-      { "position": 36, "source_id": "exam-202608-q276", "points": 6 },
-      { "position": 37, "source_id": "exam-202608-q501", "points": 6 },
-      { "position": 38, "source_id": "exam-202608-q218", "points": 6 },
-      { "position": 39, "source_id": "exam-202608-q237", "points": 6 },
-      { "position": 40, "source_id": "exam-202608-q244", "points": 6 }
+      {
+        "position": 1,
+        "points": 2,
+        "question_id": "q-0259"
+      },
+      {
+        "position": 2,
+        "points": 2,
+        "question_id": "q-0268"
+      },
+      {
+        "position": 3,
+        "points": 2,
+        "question_id": "q-0264"
+      },
+      {
+        "position": 4,
+        "points": 2,
+        "question_id": "q-0292"
+      },
+      {
+        "position": 5,
+        "points": 2,
+        "question_id": "q-0311"
+      },
+      {
+        "position": 6,
+        "points": 2,
+        "question_id": "q-0316"
+      },
+      {
+        "position": 7,
+        "points": 2,
+        "question_id": "q-0319"
+      },
+      {
+        "position": 8,
+        "points": 2,
+        "question_id": "q-0344"
+      },
+      {
+        "position": 9,
+        "points": 2,
+        "question_id": "q-0303"
+      },
+      {
+        "position": 10,
+        "points": 2,
+        "question_id": "q-0288"
+      },
+      {
+        "position": 11,
+        "points": 2,
+        "question_id": "q-0271"
+      },
+      {
+        "position": 12,
+        "points": 2,
+        "question_id": "q-0275"
+      },
+      {
+        "position": 13,
+        "points": 2,
+        "question_id": "q-0299"
+      },
+      {
+        "position": 14,
+        "points": 2,
+        "question_id": "q-0323"
+      },
+      {
+        "position": 15,
+        "points": 2,
+        "question_id": "q-0328"
+      },
+      {
+        "position": 16,
+        "points": 2,
+        "question_id": "q-0333"
+      },
+      {
+        "position": 17,
+        "points": 2,
+        "question_id": "q-0280"
+      },
+      {
+        "position": 18,
+        "points": 2,
+        "question_id": "q-0285"
+      },
+      {
+        "position": 19,
+        "points": 2,
+        "question_id": "q-0337"
+      },
+      {
+        "position": 20,
+        "points": 2,
+        "question_id": "q-0340"
+      },
+      {
+        "position": 21,
+        "points": 2,
+        "question_id": "q-0076"
+      },
+      {
+        "position": 22,
+        "points": 2,
+        "question_id": "q-0041"
+      },
+      {
+        "position": 23,
+        "points": 2,
+        "question_id": "q-0069"
+      },
+      {
+        "position": 24,
+        "points": 2,
+        "question_id": "q-0115"
+      },
+      {
+        "position": 25,
+        "points": 2,
+        "question_id": "q-0120"
+      },
+      {
+        "position": 26,
+        "points": 2,
+        "question_id": "q-0134"
+      },
+      {
+        "position": 27,
+        "points": 2,
+        "question_id": "q-0067"
+      },
+      {
+        "position": 28,
+        "points": 2,
+        "question_id": "q-0060"
+      },
+      {
+        "position": 29,
+        "points": 2,
+        "question_id": "q-0086"
+      },
+      {
+        "position": 30,
+        "points": 2,
+        "question_id": "q-0097"
+      },
+      {
+        "position": 31,
+        "points": 2,
+        "question_id": "q-0072"
+      },
+      {
+        "position": 32,
+        "points": 2,
+        "question_id": "q-0124"
+      },
+      {
+        "position": 33,
+        "points": 2,
+        "question_id": "q-0139"
+      },
+      {
+        "position": 34,
+        "points": 2,
+        "question_id": "q-0066"
+      },
+      {
+        "position": 35,
+        "points": 2,
+        "question_id": "q-0093"
+      },
+      {
+        "position": 36,
+        "points": 6,
+        "question_id": "q-0160"
+      },
+      {
+        "position": 37,
+        "points": 6,
+        "question_id": "q-0734"
+      },
+      {
+        "position": 38,
+        "points": 6,
+        "question_id": "q-0233"
+      },
+      {
+        "position": 39,
+        "points": 6,
+        "question_id": "q-0229"
+      },
+      {
+        "position": 40,
+        "points": 6,
+        "question_id": "q-0228"
+      }
     ]
   },
   {
@@ -107,46 +427,206 @@
     "passing_score": 70,
     "sort_order": 3,
     "questions": [
-      { "position": 1, "source_id": "exam-202608-q404", "points": 2 },
-      { "position": 2, "source_id": "exam-202608-q408", "points": 2 },
-      { "position": 3, "source_id": "exam-202608-q412", "points": 2 },
-      { "position": 4, "source_id": "exam-202608-q418", "points": 2 },
-      { "position": 5, "source_id": "exam-202608-q424", "points": 2 },
-      { "position": 6, "source_id": "exam-202608-q428", "points": 2 },
-      { "position": 7, "source_id": "exam-202608-q434", "points": 2 },
-      { "position": 8, "source_id": "exam-202608-q437", "points": 2 },
-      { "position": 9, "source_id": "exam-202608-q442", "points": 2 },
-      { "position": 10, "source_id": "exam-202608-q447", "points": 2 },
-      { "position": 11, "source_id": "exam-202608-q452", "points": 2 },
-      { "position": 12, "source_id": "exam-202608-q458", "points": 2 },
-      { "position": 13, "source_id": "exam-202608-q462", "points": 2 },
-      { "position": 14, "source_id": "exam-202608-q467", "points": 2 },
-      { "position": 15, "source_id": "exam-202608-q473", "points": 2 },
-      { "position": 16, "source_id": "exam-202608-q477", "points": 2 },
-      { "position": 17, "source_id": "exam-202608-q482", "points": 2 },
-      { "position": 18, "source_id": "exam-202608-q487", "points": 2 },
-      { "position": 19, "source_id": "exam-202608-q492", "points": 2 },
-      { "position": 20, "source_id": "exam-202608-q497", "points": 2 },
-      { "position": 21, "source_id": "exam-202608-q502", "points": 2 },
-      { "position": 22, "source_id": "exam-202608-q507", "points": 2 },
-      { "position": 23, "source_id": "exam-202608-q512", "points": 2 },
-      { "position": 24, "source_id": "exam-202608-q522", "points": 2 },
-      { "position": 25, "source_id": "exam-202608-q527", "points": 2 },
-      { "position": 26, "source_id": "exam-202608-q532", "points": 2 },
-      { "position": 27, "source_id": "exam-202608-q537", "points": 2 },
-      { "position": 28, "source_id": "exam-202608-q542", "points": 2 },
-      { "position": 29, "source_id": "exam-202608-q547", "points": 2 },
-      { "position": 30, "source_id": "exam-202608-q552", "points": 2 },
-      { "position": 31, "source_id": "exam-202608-q557", "points": 2 },
-      { "position": 32, "source_id": "exam-202608-q562", "points": 2 },
-      { "position": 33, "source_id": "exam-202608-q567", "points": 2 },
-      { "position": 34, "source_id": "exam-202608-q572", "points": 2 },
-      { "position": 35, "source_id": "exam-202608-q582", "points": 2 },
-      { "position": 36, "source_id": "exam-202608-q299", "points": 6 },
-      { "position": 37, "source_id": "exam-202608-q661", "points": 6 },
-      { "position": 38, "source_id": "exam-202608-q243", "points": 6 },
-      { "position": 39, "source_id": "exam-202608-q668", "points": 6 },
-      { "position": 40, "source_id": "exam-202608-q516", "points": 6 }
+      {
+        "position": 1,
+        "points": 2,
+        "question_id": "q-0656"
+      },
+      {
+        "position": 2,
+        "points": 2,
+        "question_id": "q-0659"
+      },
+      {
+        "position": 3,
+        "points": 2,
+        "question_id": "q-0663"
+      },
+      {
+        "position": 4,
+        "points": 2,
+        "question_id": "q-0548"
+      },
+      {
+        "position": 5,
+        "points": 2,
+        "question_id": "q-0671"
+      },
+      {
+        "position": 6,
+        "points": 2,
+        "question_id": "q-0642"
+      },
+      {
+        "position": 7,
+        "points": 2,
+        "question_id": "q-0523"
+      },
+      {
+        "position": 8,
+        "points": 2,
+        "question_id": "q-0632"
+      },
+      {
+        "position": 9,
+        "points": 2,
+        "question_id": "q-0792"
+      },
+      {
+        "position": 10,
+        "points": 2,
+        "question_id": "q-0628"
+      },
+      {
+        "position": 11,
+        "points": 2,
+        "question_id": "q-0544"
+      },
+      {
+        "position": 12,
+        "points": 2,
+        "question_id": "q-0550"
+      },
+      {
+        "position": 13,
+        "points": 2,
+        "question_id": "q-0554"
+      },
+      {
+        "position": 14,
+        "points": 2,
+        "question_id": "q-0520"
+      },
+      {
+        "position": 15,
+        "points": 2,
+        "question_id": "q-0526"
+      },
+      {
+        "position": 16,
+        "points": 2,
+        "question_id": "q-0532"
+      },
+      {
+        "position": 17,
+        "points": 2,
+        "question_id": "q-0536"
+      },
+      {
+        "position": 18,
+        "points": 2,
+        "question_id": "q-0541"
+      },
+      {
+        "position": 19,
+        "points": 2,
+        "question_id": "q-0793"
+      },
+      {
+        "position": 20,
+        "points": 2,
+        "question_id": "q-0507"
+      },
+      {
+        "position": 21,
+        "points": 2,
+        "question_id": "q-0735"
+      },
+      {
+        "position": 22,
+        "points": 2,
+        "question_id": "q-0740"
+      },
+      {
+        "position": 23,
+        "points": 2,
+        "question_id": "q-0745"
+      },
+      {
+        "position": 24,
+        "points": 2,
+        "question_id": "q-0660"
+      },
+      {
+        "position": 25,
+        "points": 2,
+        "question_id": "q-0758"
+      },
+      {
+        "position": 26,
+        "points": 2,
+        "question_id": "q-0763"
+      },
+      {
+        "position": 27,
+        "points": 2,
+        "question_id": "q-0768"
+      },
+      {
+        "position": 28,
+        "points": 2,
+        "question_id": "q-0773"
+      },
+      {
+        "position": 29,
+        "points": 2,
+        "question_id": "q-0681"
+      },
+      {
+        "position": 30,
+        "points": 2,
+        "question_id": "q-0404"
+      },
+      {
+        "position": 31,
+        "points": 2,
+        "question_id": "q-0363"
+      },
+      {
+        "position": 32,
+        "points": 2,
+        "question_id": "q-0376"
+      },
+      {
+        "position": 33,
+        "points": 2,
+        "question_id": "q-0712"
+      },
+      {
+        "position": 34,
+        "points": 2,
+        "question_id": "q-0350"
+      },
+      {
+        "position": 35,
+        "points": 2,
+        "question_id": "q-0383"
+      },
+      {
+        "position": 36,
+        "points": 6,
+        "question_id": "q-0246"
+      },
+      {
+        "position": 37,
+        "points": 6,
+        "question_id": "q-0694"
+      },
+      {
+        "position": 38,
+        "points": 6,
+        "question_id": "q-0227"
+      },
+      {
+        "position": 39,
+        "points": 6,
+        "question_id": "q-0701"
+      },
+      {
+        "position": 40,
+        "points": 6,
+        "question_id": "q-0749"
+      }
     ]
   }
 ]

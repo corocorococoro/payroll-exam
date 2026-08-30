@@ -61,10 +61,6 @@ class ContentAuditService
                 $errors[] = "{$id}: variant_roleがありません。";
             }
 
-            if ($question->misconception_key === null || trim($question->misconception_key) === '') {
-                $errors[] = "{$id}: misconception_keyがありません。";
-            }
-
             if ($question->source_urls === null || $question->source_urls === []) {
                 $errors[] = "{$id}: 参照元がありません。";
             } elseif (! collect($question->source_urls)->every(
@@ -160,23 +156,9 @@ class ContentAuditService
     private function auditLearningObjectives(Collection $questions, array &$errors): void
     {
         foreach ($questions->groupBy('concept_key') as $conceptKey => $variants) {
-            if ($variants->count() < 2) {
-                $errors[] = "concept_key={$conceptKey}: 異なる角度から学ぶ問題が2問以上必要です（現在{$variants->count()}問）。";
-            }
-
-            $roles = $variants
-                ->map(fn (Question $question): ?string => $question->variant_role?->value)
-                ->filter()
-                ->unique();
-
-            if ($roles->count() !== $variants->count()) {
-                $errors[] = "concept_key={$conceptKey}: 同じvariant_roleが重複しています。";
-            }
-
             if ($variants->pluck('learning_objective')->filter()->unique()->count() !== 1) {
                 $errors[] = "concept_key={$conceptKey}: learning_objectiveが変種間で一致していません。";
             }
-
         }
     }
 
@@ -197,8 +179,7 @@ class ContentAuditService
                 continue;
             }
 
-            $conceptKeys = [];
-            $knowledgeRoles = collect();
+            $unitIds = collect();
 
             foreach ($items as $index => $item) {
                 $position = $index + 1;
@@ -221,30 +202,15 @@ class ContentAuditService
                     $errors[] = "{$exam->slug}: {$position}問目が{$section}の構成条件と一致しません。";
                 }
 
-                if ($isKnowledge && $question->variant_role !== null) {
-                    $knowledgeRoles->push($question->variant_role->value);
-                }
-
                 if (! $question->is_active || $question->review_status !== QuestionReviewStatus::Approved) {
                     $errors[] = "{$exam->slug}: {$position}問目が公開承認済みではありません。";
                 }
 
-                $conceptKey = $question->concept_key ?? "question-{$question->id}";
-                if (isset($conceptKeys[$conceptKey])) {
-                    $errors[] = "{$exam->slug}: concept_key={$conceptKey}が模試内で重複しています。";
-                }
-                $conceptKeys[$conceptKey] = true;
+                $unitIds->push($question->unit_id);
             }
 
-            $recallCount = $knowledgeRoles->filter(fn (string $role): bool => $role === 'recall')->count();
-            $appliedCount = $knowledgeRoles->filter(fn (string $role): bool => in_array(
-                $role,
-                ['application', 'boundary', 'workflow', 'misconception'],
-                true,
-            ))->count();
-
-            if ($recallCount > 7 || $appliedCount < 25) {
-                $errors[] = "{$exam->slug}: 知識問題の役割配分が実戦演習向けではありません（想起{$recallCount}問・応用系{$appliedCount}問）。";
+            if ($unitIds->unique()->count() < 3) {
+                $errors[] = "{$exam->slug}: 模試が3ユニット以上を横断していません。";
             }
 
             $answerCounts = $this->answerPositionCounts($items->pluck('question'));

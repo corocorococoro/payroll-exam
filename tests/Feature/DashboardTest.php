@@ -31,8 +31,8 @@ class DashboardTest extends TestCase
     {
         $this->seed(ContentSeeder::class);
         $user = User::factory()->create(['onboarded' => true])->refresh();
-        $published = Question::where('source_id', 'r2-q01')->firstOrFail();
-        $expired = Question::where('source_id', 'r2-q02')->firstOrFail();
+        $published = Question::where('source_id', 'q-0032')->firstOrFail();
+        $expired = Question::where('source_id', 'q-0030')->firstOrFail();
 
         $user->reviewItems()->create(['question_id' => $published->id, 'box' => 1, 'due_date' => today(), 'lapses' => 1]);
         $user->reviewItems()->create(['question_id' => $expired->id, 'box' => 1, 'due_date' => today(), 'lapses' => 1]);
@@ -48,7 +48,7 @@ class DashboardTest extends TestCase
     {
         $this->seed(ContentSeeder::class);
         $user = User::factory()->create(['onboarded' => true])->refresh();
-        $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+        $question = Question::where('source_id', 'q-0032')->firstOrFail();
         $user->reviewItems()->create([
             'question_id' => $question->id,
             'box' => 1,

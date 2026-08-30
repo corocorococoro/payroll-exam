@@ -32,7 +32,7 @@ test('XP台帳は同じ発生源を一度だけ集計する', function () {
 
 test('正解済み問題の通常周回は直接XPを再付与しない', function () {
     $user = User::factory()->create(['onboarded' => true, 'daily_goal' => 50]);
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $firstRun = lessonRun($question);
 
     $first = actingAs($user)->withSession($firstRun)->postJson('/answers', [
@@ -60,7 +60,7 @@ test('正解済み問題の通常周回は直接XPを再付与しない', functi
 
 test('正解履歴があっても期限到来した復習は満額XPになる', function () {
     $user = User::factory()->create(['onboarded' => true, 'daily_goal' => 50]);
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     QuestionAttempt::create([
         'user_id' => $user->id,
         'question_id' => $question->id,

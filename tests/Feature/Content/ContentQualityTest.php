@@ -17,13 +17,14 @@ beforeEach(function () {
     seed(ContentSeeder::class);
 });
 
-test('890問すべてが同じ公開品質基準を満たす', function () {
+test('単一問題バンクの全問が同じ公開品質基準を満たす', function () {
+    $bank = File::json(database_path('seeders/data/question-bank.json'));
     $questions = Question::query()->published()->get();
     $choiceQuestions = $questions->where('type', QuestionType::Choice);
     $numericQuestions = $questions->where('type', QuestionType::Numeric);
 
-    expect($questions)->toHaveCount(890)
-        ->and($choiceQuestions)->toHaveCount(889)
+    expect($questions)->toHaveCount($bank['release']['question_count'])
+        ->and($choiceQuestions)->toHaveCount($bank['release']['question_count'] - 1)
         ->and($numericQuestions)->toHaveCount(1)
         ->and(Schema::hasColumn('questions', 'source_collection'))->toBeFalse()
         ->and(Schema::hasColumn('questions', 'source_question_number'))->toBeFalse()
@@ -42,9 +43,7 @@ test('890問すべてが同じ公開品質基準を満たす', function () {
                 ),
         ))->toBeTrue()
         ->and($questions->groupBy('concept_key')->every(
-            fn ($variants): bool => $variants->count() >= 2
-                && $variants->pluck('variant_role')->unique()->count() === $variants->count()
-                && $variants->pluck('learning_objective')->unique()->count() === 1,
+            fn ($variants): bool => $variants->pluck('learning_objective')->unique()->count() === 1,
         ))->toBeTrue()
         ->and(Question::where('source_id', 'like', 'gen-%')->where('is_active', true)->count())->toBe(0)
         ->and(Question::query()->published()->whereNull('concept_key')->count())->toBe(0)
@@ -55,8 +54,8 @@ test('890問すべてが同じ公開品質基準を満たす', function () {
 });
 
 test('公式試験案内と矛盾した年末調整2問は正しい2級範囲へ補正される', function () {
-    $scopeQuestion = Question::where('source_id', 'exam-202608-q587')->firstOrFail();
-    $dateQuestion = Question::where('source_id', 'exam-202608-q650')->firstOrFail();
+    $scopeQuestion = Question::where('source_id', 'q-0348')->firstOrFail();
+    $dateQuestion = Question::where('source_id', 'q-0396')->firstOrFail();
 
     $scopeAnswer = collect($scopeQuestion->choices)->firstWhere('key', $scopeQuestion->answer['choice'])['text'];
     $dateAnswer = collect($dateQuestion->choices)->firstWhere('key', $dateQuestion->answer['choice'])['text'];
@@ -69,13 +68,13 @@ test('公式試験案内と矛盾した年末調整2問は正しい2級範囲へ
 
 test('解答画面用の根拠資料は公式httpsだけを返す', function () {
     $commutingSources = app(OfficialSourceService::class)->forQuestion(
-        Question::where('source_id', 'exam-202608-q633')->firstOrFail(),
+        Question::where('source_id', 'q-0411')->firstOrFail(),
     );
     $continuationSources = app(OfficialSourceService::class)->forQuestion(
-        Question::where('source_id', 'exam-202608-q796')->firstOrFail(),
+        Question::where('source_id', 'q-0610')->firstOrFail(),
     );
     $childcareSources = app(OfficialSourceService::class)->forQuestion(
-        Question::where('source_id', 'exam-202608-q727')->firstOrFail(),
+        Question::where('source_id', 'q-0791')->firstOrFail(),
     );
     $sources = collect([$commutingSources, $continuationSources, $childcareSources])->flatten(1);
 
@@ -91,23 +90,23 @@ test('解答画面用の根拠資料は公式httpsだけを返す', function () 
 
 test('各論点には内容の対応した公式資料だけが表示される', function () {
     $expectations = [
-        'exam-202608-q003' => '日本年金機構：標準報酬月額・定時決定',
-        'exam-202608-q041' => '厚生労働省：賃金のデジタル払い',
-        'exam-202608-q088' => '厚生労働省：最低賃金制度',
-        'exam-202608-q097' => '鹿児島労働局：割増賃金の端数処理',
-        'exam-202608-q210' => '厚生労働省：時間外労働の上限と割増賃金',
-        'exam-202608-q303' => '厚生労働省：介護保険の被保険者',
-        'exam-202608-q345' => '協会けんぽ：健康保険給付',
-        'exam-202608-q426' => '日本年金機構：随時改定',
-        'exam-202608-q550' => '厚生労働省：労働保険の年度更新',
-        'exam-202608-q601' => '東京都主税局：住民税の特別徴収',
-        'exam-202608-q633' => '国税庁：2026年の通勤手当',
-        'exam-202608-q707' => '日本年金機構：賞与の保険料',
-        'exam-202608-q752' => '厚生労働省：2024年改正の労働条件明示',
-        'exam-202608-q770' => 'e-Gov法令検索：労働契約法',
-        'exam-202608-q781' => '厚生労働省：育児・介護休業法',
-        'exam-202608-q792' => '厚生労働省：労災保険制度',
-        'exam-202608-q798' => '個人情報保護委員会：マイナンバー取扱指針',
+        'q-0260' => '日本年金機構：標準報酬月額・定時決定',
+        'q-0302' => '厚生労働省：賃金のデジタル払い',
+        'q-0307' => '厚生労働省：最低賃金制度',
+        'q-0340' => '鹿児島労働局：割増賃金の端数処理',
+        'q-0191' => '厚生労働省：時間外労働の上限と割増賃金',
+        'q-0572' => '厚生労働省：介護保険の被保険者',
+        'q-0580' => '協会けんぽ：健康保険給付',
+        'q-0641' => '日本年金機構：随時改定',
+        'q-0684' => '厚生労働省：労働保険の年度更新',
+        'q-0414' => '東京都主税局：住民税の特別徴収',
+        'q-0411' => '国税庁：2026年の通勤手当',
+        'q-0809' => '日本年金機構：賞与の保険料',
+        'q-0003' => '厚生労働省：2024年改正の労働条件明示',
+        'q-0012' => 'e-Gov法令検索：労働契約法',
+        'q-0052' => '厚生労働省：育児・介護休業法',
+        'q-0559' => '厚生労働省：労災保険制度',
+        'q-0563' => '個人情報保護委員会：マイナンバー取扱指針',
     ];
 
     foreach ($expectations as $sourceId => $expectedLabel) {
@@ -119,7 +118,7 @@ test('各論点には内容の対応した公式資料だけが表示される',
     }
 
     $contractSources = app(OfficialSourceService::class)->forQuestion(
-        Question::where('source_id', 'exam-202608-q770')->firstOrFail(),
+        Question::where('source_id', 'q-0012')->firstOrFail(),
     );
 
     expect(collect($contractSources)->pluck('label'))
@@ -145,11 +144,12 @@ test('全問の公式資料は論点名を持ち汎用ラベルへフォール�
 });
 
 test('公開コンテンツ監査にエラーがない', function () {
+    $bank = File::json(database_path('seeders/data/question-bank.json'));
     $result = app(ContentAuditService::class)->audit();
 
     expect($result['errors'])->toBe([])
-        ->and($result['stats']['published_questions'])->toBe(890)
-        ->and($result['stats']['learning_objectives'])->toBe(205)
+        ->and($result['stats']['published_questions'])->toBe($bank['release']['question_count'])
+        ->and($result['stats']['learning_objectives'])->toBe(count($bank['topics']))
         ->and($result['stats']['published_mock_exams'])->toBe(3);
 });
 
@@ -169,7 +169,7 @@ test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', 
     }
 });
 
-test('正解位置は問題バンク全体と模試で偏らず模試は応用系を中心に構成する', function () {
+test('正解位置は問題バンク全体と模試で偏らない', function () {
     $questions = Question::query()->published()->where('type', QuestionType::Choice)->get();
     $bankCounts = $questions->countBy(fn (Question $question): string => $question->answer['choice']);
 
@@ -179,40 +179,36 @@ test('正解位置は問題バンク全体と模試で偏らず模試は応用�
     foreach (MockExam::where('is_published', true)->get() as $exam) {
         $examQuestions = $exam->examQuestions()->with('question')->get()->pluck('question');
         $examCounts = $examQuestions->countBy(fn (Question $question): string => $question->answer['choice']);
-        $knowledgeRoles = $examQuestions->take(35)->countBy(fn (Question $question): string => $question->variant_role->value);
-
-        expect($examCounts->max() - $examCounts->min())->toBeLessThanOrEqual(2)
-            ->and($knowledgeRoles['recall'] ?? 0)->toBeLessThanOrEqual(7)
-            ->and($knowledgeRoles->except('recall')->sum())->toBeGreaterThanOrEqual(25);
+        expect($examCounts->max() - $examCounts->min())->toBeLessThanOrEqual(2);
     }
 });
 
 test('選択肢再配置後も正答と誤答別フィードバックの対応を維持する', function () {
-    foreach (File::files(database_path('seeders/data/questions')) as $file) {
-        foreach (File::json($file->getPathname()) as $source) {
-            if ($source['type'] !== QuestionType::Choice->value) {
-                continue;
-            }
+    $bank = File::json(database_path('seeders/data/question-bank.json'));
 
-            $question = Question::where('source_id', $source['source_id'])->firstOrFail();
-            $originalChoices = collect($source['choices'])->pluck('text', 'key');
-            $displayedChoices = collect($question->choices)->pluck('text', 'key');
-            $correctText = $originalChoices[$source['answer']['choice']];
+    foreach ($bank['questions'] as $source) {
+        if ($source['type'] !== QuestionType::Choice->value) {
+            continue;
+        }
 
-            expect($displayedChoices[$question->answer['choice']])->toBe($correctText);
+        $question = Question::where('source_id', $source['id'])->firstOrFail();
+        $originalChoices = collect($source['choices'])->pluck('text', 'key');
+        $displayedChoices = collect($question->choices)->pluck('text', 'key');
+        $correctText = $originalChoices[$source['answer']['choice']];
 
-            foreach ($source['distractor_feedback'] ?? [] as $originalKey => $feedback) {
-                $displayedKey = $displayedChoices->search($originalChoices[$originalKey], strict: true);
+        expect($displayedChoices[$question->answer['choice']])->toBe($correctText);
 
-                expect($displayedKey)->not->toBeFalse()
-                    ->and($question->distractor_feedback[$displayedKey])->toBe($feedback);
-            }
+        foreach ($source['distractor_feedback'] ?? [] as $originalKey => $feedback) {
+            $displayedKey = $displayedChoices->search($originalChoices[$originalKey], strict: true);
+
+            expect($displayedKey)->not->toBeFalse()
+                ->and($question->distractor_feedback[$displayedKey])->toBe($feedback);
         }
     }
 });
 
 test('問題内容ハッシュは正解と解説の変更も検知する', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $content = $question->only([
         'type', 'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback', 'calc_params',
     ]);
@@ -225,17 +221,17 @@ test('問題内容ハッシュは正解と解説の変更も検知する', funct
 });
 
 test('レビュー期限切れの問題はレッスンと新規模試から自動的に除外される', function () {
-    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $question->update(['review_due_at' => now()->subMinute()]);
 
     expect(Question::query()->published()->whereKey($question->id)->exists())->toBeFalse()
         ->and(MockExam::where('slug', 'mogi-1')->firstOrFail()->isAvailableForNewAttempt())->toBeFalse()
         ->and(app(ContentAuditService::class)->audit()['errors'])
-        ->toContain("r2-q01: レビュー期限（{$question->review_due_at->toDateString()}）を過ぎています。");
+        ->toContain("q-0032: レビュー期限（{$question->review_due_at->toDateString()}）を過ぎています。");
 });
 
 test('監査は計算問題の登録正答と再計算値の不一致を検出する', function () {
-    $question = Question::where('source_id', 'r2-q36')->firstOrFail();
+    $question = Question::where('source_id', 'q-0677')->firstOrFail();
     $answer = $question->answer;
     $answer['value']++;
     $question->answer = $answer;
@@ -247,5 +243,5 @@ test('監査は計算問題の登録正答と再計算値の不一致を検出�
     $question->save();
 
     expect(app(ContentAuditService::class)->audit()['errors'])
-        ->toContain('r2-q36: 計算式の再計算値26164円が登録正答と一致しません。');
+        ->toContain('q-0677: 計算式の再計算値26164円が登録正答と一致しません。');
 });

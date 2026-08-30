@@ -28,7 +28,7 @@ class LessonRunService
             }
         }
 
-        $bank = $lesson->questions()->get(['id', 'concept_key', 'variant_role']);
+        $bank = $lesson->questions()->get(['id']);
 
         $lastAttempts = $request->user()->attempts()
             ->whereIn('question_id', $bank->pluck('id'))
@@ -36,51 +36,21 @@ class LessonRunService
             ->groupBy('question_id')
             ->pluck('last_attempted_at', 'question_id');
 
-        // 同じ学習目標は1回に1問だけ。未着手の概念、既出変種が少ない概念、
-        // 最終出題が古い概念の順で決定し、ランダムな取りこぼしをなくす。
-        // 概念内でも未出変種をID順に出し、全問へ有限回で到達できるようにする。
+        // 未出問題を先に、既出問題は最終出題が古い順に選ぶ。
+        // トピック数をセッション上限に使わないため、広いトピックでも常に最大10問を出せる。
         $candidates = $bank
-            ->groupBy(fn ($question): string => $question->concept_key ?? "question-{$question->id}")
-            ->map(function ($variants) use ($lastAttempts) {
-                $unseen = $variants
-                    ->reject(fn ($question): bool => $lastAttempts->has($question->id))
-                    ->sortBy('id');
-
-                if ($unseen->isNotEmpty()) {
-                    $question = $unseen->first();
-                } else {
-                    $question = $variants
-                        ->sortBy(fn ($variant): string => (string) $lastAttempts[$variant->id])
-                        ->first();
-                }
-
-                $attemptedAt = $variants
-                    ->map(fn ($variant) => $lastAttempts[$variant->id] ?? null)
-                    ->filter()
-                    ->sortDesc()
-                    ->first();
-
-                return [
-                    'question' => $question,
-                    'seen_variant_count' => $variants->filter(
-                        fn ($variant): bool => $lastAttempts->has($variant->id),
-                    )->count(),
-                    'last_attempted_at' => $attemptedAt,
-                ];
-            })
-            ->filter(fn (array $candidate): bool => $candidate['question'] !== null)
-            ->sortBy(fn (array $candidate): string => sprintf(
-                '%03d|%s|%010d',
-                $candidate['seen_variant_count'],
-                (string) ($candidate['last_attempted_at'] ?? ''),
-                $candidate['question']->id,
+            ->sortBy(fn ($question): string => sprintf(
+                '%d|%s|%010d',
+                $lastAttempts->has($question->id) ? 1 : 0,
+                (string) ($lastAttempts[$question->id] ?? ''),
+                $question->id,
             ))
             ->values();
 
         /** @var list<int> $questionIds */
         $questionIds = $candidates
             ->take(self::QUESTION_COUNT)
-            ->pluck('question.id')
+            ->pluck('id')
             ->map(fn ($id): int => (int) $id)
             ->values()
             ->all();
