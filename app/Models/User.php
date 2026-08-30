@@ -112,6 +112,12 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(ReviewItem::class);
     }
 
+    /** @return HasMany<UserQuestionProgress, $this> */
+    public function questionProgresses(): HasMany
+    {
+        return $this->hasMany(UserQuestionProgress::class);
+    }
+
     /** @return HasMany<DailyQuest, $this> */
     public function dailyQuests(): HasMany
     {

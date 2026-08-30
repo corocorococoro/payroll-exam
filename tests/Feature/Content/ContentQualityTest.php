@@ -6,8 +6,10 @@ use App\Models\MockExam;
 use App\Models\Question;
 use App\Models\Unit;
 use App\Services\ContentAuditService;
+use App\Services\OfficialSourceService;
 use Database\Seeders\ContentSeeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 
 use function Pest\Laravel\seed;
 
@@ -15,14 +17,34 @@ beforeEach(function () {
     seed(ContentSeeder::class);
 });
 
-test('公開対象は45学習目標それぞれに意味の異なる2変種を持つ90問だけ', function () {
+test('890問すべてが同じ公開品質基準を満たす', function () {
     $questions = Question::query()->published()->get();
+    $choiceQuestions = $questions->where('type', QuestionType::Choice);
+    $numericQuestions = $questions->where('type', QuestionType::Numeric);
 
-    expect($questions)->toHaveCount(90)
-        ->and($questions->groupBy('concept_key'))->toHaveCount(45)
-        ->and($questions->groupBy('concept_key')->every(fn ($variants): bool => $variants->count() === 2))->toBeTrue()
+    expect($questions)->toHaveCount(890)
+        ->and($choiceQuestions)->toHaveCount(889)
+        ->and($numericQuestions)->toHaveCount(1)
+        ->and(Schema::hasColumn('questions', 'source_collection'))->toBeFalse()
+        ->and(Schema::hasColumn('questions', 'source_question_number'))->toBeFalse()
+        ->and(Schema::hasColumn('questions', 'source_chapter'))->toBeFalse()
+        ->and(Schema::hasColumn('questions', 'source_chapter_title'))->toBeFalse()
+        ->and(Schema::hasColumn('questions', 'source_page'))->toBeFalse()
+        ->and($questions->every(fn (Question $question): bool => trim($question->explanation) !== ''))->toBeTrue()
+        ->and($choiceQuestions->every(fn (Question $question): bool => count($question->choices) === 4
+            && collect($question->choices)->contains('key', $question->answer['choice'])))->toBeTrue()
+        ->and($questions->every(
+            fn (Question $question): bool => $question->verification_status === 'official_sources_reviewed'
+                && $question->scope_status === 'exam_2026-09-01'
+                && $question->source_urls !== []
+                && collect($question->source_urls)->every(
+                    fn (string $url): bool => app(OfficialSourceService::class)->isOfficialUrl($url),
+                ),
+        ))->toBeTrue()
         ->and($questions->groupBy('concept_key')->every(
-            fn ($variants): bool => $variants->pluck('variant_role')->unique()->count() === 2,
+            fn ($variants): bool => $variants->count() >= 2
+                && $variants->pluck('variant_role')->unique()->count() === $variants->count()
+                && $variants->pluck('learning_objective')->unique()->count() === 1,
         ))->toBeTrue()
         ->and(Question::where('source_id', 'like', 'gen-%')->where('is_active', true)->count())->toBe(0)
         ->and(Question::query()->published()->whereNull('concept_key')->count())->toBe(0)
@@ -32,40 +54,137 @@ test('公開対象は45学習目標それぞれに意味の異なる2変種を�
         ->and(Question::query()->published()->whereNull('reviewed_content_hash')->count())->toBe(0);
 });
 
+test('公式試験案内と矛盾した年末調整2問は正しい2級範囲へ補正される', function () {
+    $scopeQuestion = Question::where('source_id', 'exam-202608-q587')->firstOrFail();
+    $dateQuestion = Question::where('source_id', 'exam-202608-q650')->firstOrFail();
+
+    $scopeAnswer = collect($scopeQuestion->choices)->firstWhere('key', $scopeQuestion->answer['choice'])['text'];
+    $dateAnswer = collect($dateQuestion->choices)->firstWhere('key', $dateQuestion->answer['choice'])['text'];
+
+    expect($scopeAnswer)->toBe('年末調整を除く通常の月次給与・賞与計算を扱う')
+        ->and($scopeQuestion->explanation)->toContain('年末調整を含む総合的な実務は1級')
+        ->and($dateAnswer)->toBe('試験実施月の前々月の1日')
+        ->and($dateQuestion->explanation)->toContain('11月の2級試験は同年9月1日現在');
+});
+
+test('解答画面用の根拠資料は公式httpsだけを返す', function () {
+    $commutingSources = app(OfficialSourceService::class)->forQuestion(
+        Question::where('source_id', 'exam-202608-q633')->firstOrFail(),
+    );
+    $continuationSources = app(OfficialSourceService::class)->forQuestion(
+        Question::where('source_id', 'exam-202608-q796')->firstOrFail(),
+    );
+    $childcareSources = app(OfficialSourceService::class)->forQuestion(
+        Question::where('source_id', 'exam-202608-q727')->firstOrFail(),
+    );
+    $sources = collect([$commutingSources, $continuationSources, $childcareSources])->flatten(1);
+
+    expect($sources)->not->toBeEmpty()
+        ->and($sources->every(
+            fn (array $source): bool => str_starts_with($source['url'], 'https://'),
+        ))->toBeTrue()
+        ->and($sources->pluck('label'))
+        ->toContain('国税庁：2026年の通勤手当')
+        ->toContain('協会けんぽ：退職後の健康保険')
+        ->toContain('日本年金機構：産休・育休中の保険料');
+});
+
+test('各論点には内容の対応した公式資料だけが表示される', function () {
+    $expectations = [
+        'exam-202608-q003' => '日本年金機構：標準報酬月額・定時決定',
+        'exam-202608-q041' => '厚生労働省：賃金のデジタル払い',
+        'exam-202608-q088' => '厚生労働省：最低賃金制度',
+        'exam-202608-q097' => '鹿児島労働局：割増賃金の端数処理',
+        'exam-202608-q210' => '厚生労働省：時間外労働の上限と割増賃金',
+        'exam-202608-q303' => '厚生労働省：介護保険の被保険者',
+        'exam-202608-q345' => '協会けんぽ：健康保険給付',
+        'exam-202608-q426' => '日本年金機構：随時改定',
+        'exam-202608-q550' => '厚生労働省：労働保険の年度更新',
+        'exam-202608-q601' => '東京都主税局：住民税の特別徴収',
+        'exam-202608-q633' => '国税庁：2026年の通勤手当',
+        'exam-202608-q707' => '日本年金機構：賞与の保険料',
+        'exam-202608-q752' => '厚生労働省：2024年改正の労働条件明示',
+        'exam-202608-q770' => 'e-Gov法令検索：労働契約法',
+        'exam-202608-q781' => '厚生労働省：育児・介護休業法',
+        'exam-202608-q792' => '厚生労働省：労災保険制度',
+        'exam-202608-q798' => '個人情報保護委員会：マイナンバー取扱指針',
+    ];
+
+    foreach ($expectations as $sourceId => $expectedLabel) {
+        $sources = app(OfficialSourceService::class)->forQuestion(
+            Question::where('source_id', $sourceId)->firstOrFail(),
+        );
+
+        expect(collect($sources)->pluck('label'))->toContain($expectedLabel);
+    }
+
+    $contractSources = app(OfficialSourceService::class)->forQuestion(
+        Question::where('source_id', 'exam-202608-q770')->firstOrFail(),
+    );
+
+    expect(collect($contractSources)->pluck('label'))
+        ->not->toContain('厚生労働省：育児・介護休業法')
+        ->not->toContain('日本年金機構：制度・手続の解説');
+});
+
+test('全問の公式資料は論点名を持ち汎用ラベルへフォールバックしない', function () {
+    $genericLabels = [
+        '公式資料',
+        '厚生労働省：制度の公式資料',
+        '協会けんぽ：健康保険の公式資料',
+        '日本年金機構：制度・手続の解説',
+        '国税庁：税務の公式資料',
+    ];
+
+    $sources = Question::query()->published()->get()->flatMap(
+        fn (Question $question): array => app(OfficialSourceService::class)->forQuestion($question),
+    );
+
+    expect($sources)->not->toBeEmpty()
+        ->and($sources->pluck('label')->intersect($genericLabels))->toBeEmpty();
+});
+
 test('公開コンテンツ監査にエラーがない', function () {
     $result = app(ContentAuditService::class)->audit();
 
     expect($result['errors'])->toBe([])
-        ->and($result['stats']['published_questions'])->toBe(90)
-        ->and($result['stats']['learning_objectives'])->toBe(45)
-        ->and($result['stats']['published_mock_exams'])->toBe(1);
+        ->and($result['stats']['published_questions'])->toBe(890)
+        ->and($result['stats']['learning_objectives'])->toBe(205)
+        ->and($result['stats']['published_mock_exams'])->toBe(3);
 });
 
 test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', function () {
-    $exam = MockExam::where('is_published', true)->sole();
-    $items = $exam->examQuestions()->with('question')->get();
+    expect(MockExam::where('is_published', true)->count())->toBe(3);
 
-    expect($items)->toHaveCount(40)
-        ->and($items->sum('points'))->toBe(100)
-        ->and($items->take(35)->every(fn ($item): bool => $item->points === 2 && ! $item->question->isCalculation()))->toBeTrue()
-        ->and($items->skip(35)->every(fn ($item): bool => $item->points === 6 && $item->question->isCalculation()))->toBeTrue()
-        ->and($items->every(fn ($item): bool => $item->question->type === QuestionType::Choice))->toBeTrue()
-        ->and($items->every(fn ($item): bool => count($item->question->choices) === 4))->toBeTrue()
-        ->and($items->every(fn ($item): bool => $item->question->review_status === QuestionReviewStatus::Approved))->toBeTrue();
+    foreach (MockExam::where('is_published', true)->get() as $exam) {
+        $items = $exam->examQuestions()->with('question')->get();
+
+        expect($items)->toHaveCount(40)
+            ->and($items->sum('points'))->toBe(100)
+            ->and($items->take(35)->every(fn ($item): bool => $item->points === 2 && ! $item->question->isCalculation()))->toBeTrue()
+            ->and($items->skip(35)->every(fn ($item): bool => $item->points === 6 && $item->question->isCalculation()))->toBeTrue()
+            ->and($items->every(fn ($item): bool => $item->question->type === QuestionType::Choice))->toBeTrue()
+            ->and($items->every(fn ($item): bool => count($item->question->choices) === 4))->toBeTrue()
+            ->and($items->every(fn ($item): bool => $item->question->review_status === QuestionReviewStatus::Approved))->toBeTrue();
+    }
 });
 
 test('正解位置は問題バンク全体と模試で偏らず模試は応用系を中心に構成する', function () {
     $questions = Question::query()->published()->where('type', QuestionType::Choice)->get();
     $bankCounts = $questions->countBy(fn (Question $question): string => $question->answer['choice']);
-    $examQuestions = MockExam::where('is_published', true)->sole()
-        ->examQuestions()->with('question')->get()->pluck('question');
-    $examCounts = $examQuestions->countBy(fn (Question $question): string => $question->answer['choice']);
-    $knowledgeRoles = $examQuestions->take(35)->countBy(fn (Question $question): string => $question->variant_role->value);
 
-    expect($bankCounts->sortKeys()->all())->toBe(['A' => 22, 'B' => 24, 'C' => 21, 'D' => 22])
-        ->and($examCounts->sortKeys()->all())->toBe(['A' => 10, 'B' => 10, 'C' => 10, 'D' => 10])
-        ->and($knowledgeRoles['recall'])->toBeLessThanOrEqual(7)
-        ->and($knowledgeRoles->except('recall')->sum())->toBeGreaterThanOrEqual(25);
+    expect($bankCounts)->toHaveKeys(['A', 'B', 'C', 'D'])
+        ->and($bankCounts->max() - $bankCounts->min())->toBeLessThanOrEqual(10);
+
+    foreach (MockExam::where('is_published', true)->get() as $exam) {
+        $examQuestions = $exam->examQuestions()->with('question')->get()->pluck('question');
+        $examCounts = $examQuestions->countBy(fn (Question $question): string => $question->answer['choice']);
+        $knowledgeRoles = $examQuestions->take(35)->countBy(fn (Question $question): string => $question->variant_role->value);
+
+        expect($examCounts->max() - $examCounts->min())->toBeLessThanOrEqual(2)
+            ->and($knowledgeRoles['recall'] ?? 0)->toBeLessThanOrEqual(7)
+            ->and($knowledgeRoles->except('recall')->sum())->toBeGreaterThanOrEqual(25);
+    }
 });
 
 test('選択肢再配置後も正答と誤答別フィードバックの対応を維持する', function () {

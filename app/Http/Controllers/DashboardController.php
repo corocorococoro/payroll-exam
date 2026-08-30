@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\DailyActivity;
+use App\Models\Lesson;
 use App\Models\Question;
 use App\Models\QuestionAttempt;
 use App\Models\Unit;
@@ -17,14 +18,6 @@ use Inertia\Response;
 
 class DashboardController extends Controller
 {
-    /** 本模試の独自配点。公式の分野別配点ではない。 */
-    private const array CATEGORY_WEIGHTS = [
-        '労働法・勤怠' => 28,
-        '給与基礎・支給控除' => 14,
-        '税' => 24,
-        '社会保険' => 34,
-    ];
-
     public function __invoke(Request $request): Response
     {
         $user = $request->user();
@@ -72,15 +65,34 @@ class DashboardController extends Controller
             ];
         })->values();
 
-        $estimatedScore = collect(self::CATEGORY_WEIGHTS)->sum(function (int $weight, string $category) use ($latestAttempts): float {
-            $categoryAttempts = $latestAttempts->filter(fn (QuestionAttempt $attempt) => $attempt->question?->category === $category);
+        $questionProgresses = $user->questionProgresses()->get();
+        $totalQuestions = Question::query()->published()->count();
+        $seenQuestions = $questionProgresses->whereNotNull('first_seen_at')->count();
+        $masteredQuestions = $questionProgresses->where('state', 'mastered')->count();
+        $unseenQuestions = max(0, $totalQuestions - $seenQuestions);
+        $coverageTargetDate = ($user->exam_date ?? today()->addDays(84))->copy()->subDays(14);
+        $coverageDays = max(1, today()->diffInDays($coverageTargetDate, false) + 1);
+        $dailyNewTarget = (int) ceil($unseenQuestions / $coverageDays);
+        $newCompletedToday = $questionProgresses
+            ->filter(fn ($progress) => $progress->first_seen_at?->isToday() ?? false)
+            ->count();
+        $reviewDue = $user->reviewItems()
+            ->whereDate('due_date', '<=', today())
+            ->whereHas('question', function (Builder $query): void {
+                /** @var Builder<Question> $query */
+                $query->published();
+            })
+            ->count();
 
-            if ($categoryAttempts->isEmpty()) {
-                return 0;
-            }
+        $recommendedLesson = Lesson::query()
+            ->whereHas('unit', fn (Builder $query) => $query->where('course_id', $course->id))
+            ->orderBy('id')
+            ->get()
+            ->first(function (Lesson $lesson) use ($questionProgresses): bool {
+                $questionIds = $lesson->questions()->published()->pluck('id');
 
-            return $categoryAttempts->where('is_correct', true)->count() / $categoryAttempts->count() * $weight;
-        });
+                return $questionIds->diff($questionProgresses->pluck('question_id'))->isNotEmpty();
+            });
 
         /** @var Collection<string, DailyActivity> $activities */
         $activities = $user->dailyActivities()
@@ -109,16 +121,24 @@ class DashboardController extends Controller
                 'current_streak' => $stat->current_streak,
                 'longest_streak' => $stat->longest_streak,
                 'streak_freezes' => $stat->streak_freezes,
-                'review_due' => $user->reviewItems()
-                    ->whereDate('due_date', '<=', today())
-                    ->whereHas('question', function (Builder $query): void {
-                        /** @var Builder<Question> $query */
-                        $query->published();
-                    })
-                    ->count(),
+                'review_due' => $reviewDue,
                 'days_to_exam' => (int) today()->diffInDays($user->exam_date ?? '2026-11-22', false),
-                'estimated_score' => (int) round($estimatedScore),
-                'score_evidence' => $latestAttempts->count(),
+                'total_questions' => $totalQuestions,
+                'seen_questions' => $seenQuestions,
+                'mastered_questions' => $masteredQuestions,
+                'coverage_percent' => $totalQuestions === 0 ? 0 : (int) round($seenQuestions / $totalQuestions * 100),
+                'mastery_percent' => $totalQuestions === 0 ? 0 : (int) round($masteredQuestions / $totalQuestions * 100),
+                'daily_new_target' => $dailyNewTarget,
+                'new_completed_today' => $newCompletedToday,
+                'coverage_target_date' => $coverageTargetDate->toDateString(),
+                'recommended_lesson_id' => $recommendedLesson?->id,
+                'recommended_lesson_name' => $recommendedLesson?->name,
+                'next_action_href' => $reviewDue > 0
+                    ? '/review'
+                    : ($recommendedLesson === null ? '/learn' : "/lessons/{$recommendedLesson->id}"),
+                'next_action_label' => $reviewDue > 0
+                    ? "期限到来の復習{$reviewDue}問をはじめる"
+                    : ($recommendedLesson === null ? '学習一覧を見る' : '今日の新規問題をはじめる'),
                 'xp_progress' => app(XpLevelService::class)->progress($user),
             ],
             'accuracy_by_unit' => $accuracyByUnit,

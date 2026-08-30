@@ -44,6 +44,27 @@ class DashboardTest extends TestCase
             ->assertInertia(fn ($page) => $page->where('summary.review_due', 1));
     }
 
+    public function test_due_review_is_prioritized_over_new_questions()
+    {
+        $this->seed(ContentSeeder::class);
+        $user = User::factory()->create(['onboarded' => true])->refresh();
+        $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+        $user->reviewItems()->create([
+            'question_id' => $question->id,
+            'box' => 1,
+            'due_date' => today(),
+            'lapses' => 1,
+        ]);
+
+        $this->actingAs($user)
+            ->get(route('dashboard'))
+            ->assertOk()
+            ->assertInertia(fn ($page) => $page
+                ->where('summary.next_action_href', '/review')
+                ->where('summary.next_action_label', '期限到来の復習1問をはじめる'),
+            );
+    }
+
     public function test_health_endpoint_checks_the_database()
     {
         $this->get('/up')->assertOk();

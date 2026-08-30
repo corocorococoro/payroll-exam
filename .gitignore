@@ -5,6 +5,9 @@
 /public/fonts-manifest.dev.json
 /public/hot
 /public/storage
+/docs/exam_202608.pdf
+__pycache__/
+*.py[cod]
 /storage/*.key
 /storage/pail
 /resources/js/actions

@@ -19,6 +19,7 @@ type Review = {
     correct: boolean;
     correct_answer: string;
     explanation: string;
+    official_sources: { label: string; url: string }[];
     points: number;
 };
 defineProps<{
@@ -178,6 +179,24 @@ function toggle(position: number) {
                     <p class="mt-2 text-gray-600 dark:text-gray-300">
                         {{ item.explanation }}
                     </p>
+                    <div
+                        v-if="item.official_sources.length"
+                        class="mt-2 border-t border-blue-100 pt-2 dark:border-gray-700"
+                    >
+                        <p class="mb-1 font-bold text-gray-500">
+                            関連する公式資料
+                        </p>
+                        <a
+                            v-for="source in item.official_sources"
+                            :key="source.url"
+                            :href="source.url"
+                            class="mr-3 inline-block font-bold text-[#285ac8] underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {{ source.label }}
+                        </a>
+                    </div>
                 </div>
             </article>
         </div>

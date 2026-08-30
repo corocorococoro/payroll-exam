@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { Crown, Lock } from '@lucide/vue';
+import { CheckCircle2, Lock } from '@lucide/vue';
 import { computed } from 'vue';
 import KyuchanMoment from '@/components/KyuchanMoment.vue';
 import type { SkillTreeUnit } from '@/types';
@@ -13,7 +13,12 @@ const props = defineProps<{
 const nextLesson = computed(() =>
     props.units
         .flatMap((unit) => unit.lessons)
-        .find((lesson) => lesson.unlocked && lesson.crown_level < 5),
+        .find(
+            (lesson) =>
+                lesson.unlocked &&
+                (lesson.due_count > 0 ||
+                    lesson.seen_count < lesson.question_count),
+        ),
 );
 
 const unitClasses = {
@@ -31,7 +36,7 @@ const unitClasses = {
         {{ course.name }}
     </h1>
     <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
-        毎日コツコツ、レッスンを進めよう！
+        全890問を10問ずつ。初見・復習・定着を分けて進めます。
     </p>
 
     <Link
@@ -99,16 +104,11 @@ const unitClasses = {
                             ]"
                         >
                             <Lock v-if="!lesson.unlocked" class="size-4" />
-                            <template v-else
-                                >{{
-                                    lesson.crown_level > 0
-                                        ? lesson.crown_level
-                                        : ''
-                                }}<Crown
-                                    v-if="lesson.crown_level > 0"
-                                    class="size-4"
-                                /><span v-else>▶</span></template
-                            >
+                            <CheckCircle2
+                                v-else-if="lesson.coverage_percent === 100"
+                                class="size-5"
+                            />
+                            <span v-else>▶</span>
                         </div>
                         <div>
                             <p
@@ -117,23 +117,30 @@ const unitClasses = {
                                 {{ lesson.name }}
                             </p>
                             <p class="text-xs text-gray-400">
-                                1回{{ lesson.question_count }}問 ·
-                                {{ lesson.description }}
+                                1回{{ lesson.session_question_count }}問 · 全{{
+                                    lesson.question_count
+                                }}問中 {{ lesson.seen_count }}問に着手
                             </p>
+                            <div
+                                class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
+                            >
+                                <div
+                                    class="h-full rounded-full bg-[#2864f0]"
+                                    :style="{
+                                        width: `${lesson.coverage_percent}%`,
+                                    }"
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex gap-0.5">
-                        <Crown
-                            v-for="i in 5"
-                            :key="i"
-                            :class="[
-                                'size-4',
-                                i <= lesson.crown_level
-                                    ? 'fill-amber-400 text-amber-400'
-                                    : 'text-gray-200 dark:text-gray-700',
-                            ]"
-                        />
+                    <div
+                        class="shrink-0 text-right text-[11px] font-bold text-gray-400"
+                    >
+                        <p>{{ lesson.coverage_percent }}%</p>
+                        <p v-if="lesson.due_count > 0" class="text-rose-500">
+                            復習 {{ lesson.due_count }}
+                        </p>
                     </div>
                 </component>
             </div>

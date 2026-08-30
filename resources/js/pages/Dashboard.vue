@@ -25,8 +25,18 @@ type Summary = {
     streak_freezes: number;
     review_due: number;
     days_to_exam: number;
-    estimated_score: number;
-    score_evidence: number;
+    total_questions: number;
+    seen_questions: number;
+    mastered_questions: number;
+    coverage_percent: number;
+    mastery_percent: number;
+    daily_new_target: number;
+    new_completed_today: number;
+    coverage_target_date: string;
+    recommended_lesson_id: number | null;
+    recommended_lesson_name: string | null;
+    next_action_href: string;
+    next_action_label: string;
     xp_progress: XpProgress;
 };
 
@@ -167,10 +177,10 @@ function heatLevel(day: HeatmapDay): string {
                 />
             </div>
             <Link
-                href="/learn"
+                :href="summary.next_action_href"
                 class="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#285ac8]"
             >
-                <BookOpen class="size-4" /> 学習をはじめる
+                <BookOpen class="size-4" /> {{ summary.next_action_label }}
             </Link>
         </div>
 
@@ -211,10 +221,10 @@ function heatLevel(day: HeatmapDay): string {
                     {{ summary.today_xp }} / {{ summary.daily_goal }} XP
                 </p>
                 <Link
-                    href="/learn"
+                    :href="summary.next_action_href"
                     class="mt-3 inline-flex items-center gap-1 rounded-full bg-[#2864f0] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#285ac8]"
                 >
-                    <BookOpen class="size-4" /> 学習をはじめる
+                    <BookOpen class="size-4" /> {{ summary.next_action_label }}
                 </Link>
             </div>
             <Kyuchan
@@ -338,21 +348,14 @@ function heatLevel(day: HeatmapDay): string {
         <div class="mb-3 flex items-end justify-between">
             <div>
                 <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                    学習スコア目安
+                    全890問の進み具合
                 </h2>
                 <p class="text-[11px] text-gray-400">
-                    問題ごとの最新結果から算出（参考値）
+                    試験14日前までの全問着手を基準にした学習計画
                 </p>
             </div>
-            <p
-                :class="[
-                    'text-3xl font-semibold',
-                    summary.estimated_score >= 70
-                        ? 'text-emerald-500'
-                        : 'text-[#285ac8]',
-                ]"
-            >
-                {{ summary.estimated_score }}<span class="text-sm"> / 100</span>
+            <p class="text-3xl font-semibold text-[#285ac8]">
+                {{ summary.coverage_percent }}<span class="text-sm">%</span>
             </p>
         </div>
         <div
@@ -360,18 +363,37 @@ function heatLevel(day: HeatmapDay): string {
         >
             <div
                 class="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-400 transition-all"
-                :style="{ width: `${summary.estimated_score}%` }"
+                :style="{ width: `${summary.coverage_percent}%` }"
             />
-            <div class="absolute inset-y-0 left-[70%] w-0.5 bg-gray-600" />
         </div>
-        <p class="mt-1 text-right text-[10px] font-bold text-gray-400">
-            ▲ 合格ライン 70点
-        </p>
-        <p class="mt-2 text-[11px] leading-5 text-gray-400">
-            根拠:
+        <div class="mt-3 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-md bg-blue-50 p-2 dark:bg-blue-950">
+                <p class="text-lg font-semibold text-[#285ac8]">
+                    {{ summary.new_completed_today }}/{{
+                        summary.daily_new_target
+                    }}
+                </p>
+                <p class="text-[10px] font-bold text-gray-400">今日の新規</p>
+            </div>
+            <div class="rounded-md bg-emerald-50 p-2 dark:bg-emerald-950">
+                <p class="text-lg font-semibold text-emerald-600">
+                    {{ summary.mastered_questions }}
+                </p>
+                <p class="text-[10px] font-bold text-gray-400">定着済み</p>
+            </div>
+            <div class="rounded-md bg-rose-50 p-2 dark:bg-rose-950">
+                <p class="text-lg font-semibold text-rose-500">
+                    {{ summary.review_due }}
+                </p>
+                <p class="text-[10px] font-bold text-gray-400">期限到来</p>
+            </div>
+        </div>
+        <p class="mt-3 text-[11px] leading-5 text-gray-400">
+            {{ summary.seen_questions }} /
+            {{ summary.total_questions }}問に着手。 定着率
             {{
-                summary.score_evidence
-            }}種類の問題。出題範囲の網羅度や本番の得点を保証する値ではありません。
+                summary.mastery_percent
+            }}%。「得点予測」ではなく、実際の着手と間隔反復で表示しています。
         </p>
     </section>
 

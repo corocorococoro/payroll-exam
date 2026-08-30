@@ -85,6 +85,7 @@ export type AnswerResult = {
     correct: boolean;
     correct_answer: string;
     explanation: string;
+    official_sources: OfficialSource[];
     common_mistake: string | null;
     selected_feedback: string | null;
     xp_earned: number;
@@ -93,6 +94,13 @@ export type AnswerResult = {
     xp_total_earned: number;
     xp_progress: XpProgress;
     level_ups: XpLevelReward[];
+    mastery_state: 'new' | 'learning' | 'review' | 'mastered';
+    next_review_at: string;
+};
+
+export type OfficialSource = {
+    label: string;
+    url: string;
 };
 
 export type ReferenceSheetData = {
@@ -119,6 +127,11 @@ export type SkillTreeLesson = {
     crown_level: number;
     unlocked: boolean;
     question_count: number;
+    session_question_count: number;
+    seen_count: number;
+    mastered_count: number;
+    due_count: number;
+    coverage_percent: number;
 };
 
 export type SkillTreeUnit = {

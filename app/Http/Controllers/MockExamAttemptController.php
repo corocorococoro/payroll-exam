@@ -7,6 +7,7 @@ use App\Models\MockExamAttempt;
 use App\Models\ReferenceSheet;
 use App\Models\User;
 use App\Services\MockExamService;
+use App\Services\OfficialSourceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -145,8 +146,11 @@ class MockExamAttemptController extends Controller
         return to_route('mock-attempts.result', $attempt);
     }
 
-    public function result(Request $request, MockExamAttempt $attempt): Response|RedirectResponse
-    {
+    public function result(
+        Request $request,
+        MockExamAttempt $attempt,
+        OfficialSourceService $officialSources,
+    ): Response|RedirectResponse {
         $this->authorizeOwner($request, $attempt);
 
         if ($attempt->finished_at === null) {
@@ -155,7 +159,7 @@ class MockExamAttemptController extends Controller
 
         $attempt->load('mockExam.examQuestions.question.unit');
         $answers = $attempt->answers ?? [];
-        $review = $attempt->mockExam->examQuestions->map(function ($examQuestion) use ($answers): array {
+        $review = $attempt->mockExam->examQuestions->map(function ($examQuestion) use ($answers, $officialSources): array {
             $question = $examQuestion->question;
             $given = $answers[$question->id] ?? null;
 
@@ -169,6 +173,7 @@ class MockExamAttemptController extends Controller
                     ? (string) $question->answer['choice']
                     : number_format((float) $question->answer['value']),
                 'explanation' => $question->explanation,
+                'official_sources' => $officialSources->forQuestion($question),
                 'points' => $examQuestion->points,
             ];
         });

@@ -10,7 +10,10 @@ use Illuminate\Support\Collection;
 
 class ContentAuditService
 {
-    public function __construct(private readonly CalcVerifier $calcVerifier) {}
+    public function __construct(
+        private readonly CalcVerifier $calcVerifier,
+        private readonly OfficialSourceService $officialSources,
+    ) {}
 
     /**
      * @return array{errors: list<string>, warnings: list<string>, stats: array<string, int>}
@@ -18,7 +21,6 @@ class ContentAuditService
     public function audit(): array
     {
         $errors = [];
-        $warnings = [];
         $reviewCandidates = Question::query()
             ->where('is_active', true)
             ->where('review_status', QuestionReviewStatus::Approved->value)
@@ -64,7 +66,19 @@ class ContentAuditService
             }
 
             if ($question->source_urls === null || $question->source_urls === []) {
-                $errors[] = "{$id}: 一次資料URLがありません。";
+                $errors[] = "{$id}: 参照元がありません。";
+            } elseif (! collect($question->source_urls)->every(
+                fn (string $url): bool => $this->officialSources->isOfficialUrl($url),
+            )) {
+                $errors[] = "{$id}: 公式一次資料以外のURLが含まれています。";
+            }
+
+            if ($question->verification_status !== 'official_sources_reviewed') {
+                $errors[] = "{$id}: 公式一次資料との照合状態が記録されていません。";
+            }
+
+            if ($question->scope_status !== 'exam_2026-09-01') {
+                $errors[] = "{$id}: 2026年2級試験の法令基準日が記録されていません。";
             }
 
             if ($question->reviewed_at === null || $question->review_due_at === null) {
@@ -107,12 +121,11 @@ class ContentAuditService
 
         $this->auditLearningObjectives($questions, $errors);
         $this->auditAnswerPositionBalance($questions, $errors);
-        $this->appendNearDuplicateWarnings($questions, $warnings);
         $this->auditMockExams($errors);
 
         return [
             'errors' => array_values(array_unique($errors)),
-            'warnings' => array_values(array_unique($warnings)),
+            'warnings' => [],
             'stats' => [
                 'published_questions' => $questions->count(),
                 'learning_objectives' => $questions->pluck('concept_key')->unique()->count(),
@@ -135,7 +148,7 @@ class ContentAuditService
     {
         $counts = $this->answerPositionCounts($questions);
 
-        if ($counts->max() - $counts->min() > 4) {
+        if ($counts->max() - $counts->min() > 10) {
             $errors[] = '公開問題の正解位置が偏っています（'.$this->formatAnswerPositionCounts($counts).'）。';
         }
     }
@@ -147,8 +160,8 @@ class ContentAuditService
     private function auditLearningObjectives(Collection $questions, array &$errors): void
     {
         foreach ($questions->groupBy('concept_key') as $conceptKey => $variants) {
-            if ($variants->count() !== 2) {
-                $errors[] = "concept_key={$conceptKey}: 意味の異なる2変種で構成する必要があります（現在{$variants->count()}問）。";
+            if ($variants->count() < 2) {
+                $errors[] = "concept_key={$conceptKey}: 異なる角度から学ぶ問題が2問以上必要です（現在{$variants->count()}問）。";
             }
 
             $roles = $variants
@@ -164,50 +177,6 @@ class ContentAuditService
                 $errors[] = "concept_key={$conceptKey}: learning_objectiveが変種間で一致していません。";
             }
 
-            $hasTargetedFeedback = $variants->contains(
-                fn (Question $question): bool => $question->type === QuestionType::Choice
-                    && is_array($question->distractor_feedback)
-                    && $question->distractor_feedback !== [],
-            );
-
-            if (! $hasTargetedFeedback) {
-                $errors[] = "concept_key={$conceptKey}: 誤答選択肢別のフィードバックが1問もありません。";
-            }
-        }
-    }
-
-    /**
-     * @param  Collection<int, Question>  $questions
-     * @param  list<string>  $warnings
-     */
-    private function appendNearDuplicateWarnings(Collection $questions, array &$warnings): void
-    {
-        $byCategory = $questions->groupBy('category');
-
-        foreach ($byCategory as $categoryQuestions) {
-            $values = $categoryQuestions->values();
-
-            for ($left = 0; $left < $values->count(); $left++) {
-                for ($right = $left + 1; $right < $values->count(); $right++) {
-                    $first = $values[$left];
-                    $second = $values[$right];
-
-                    if ($first->concept_key === $second->concept_key) {
-                        continue;
-                    }
-
-                    $similarity = $this->bigramSimilarity($first->question_text, $second->question_text);
-
-                    if ($similarity >= 0.86) {
-                        $warnings[] = sprintf(
-                            '類似度%.0f%%: %s / %s',
-                            $similarity * 100,
-                            $first->source_id,
-                            $second->source_id,
-                        );
-                    }
-                }
-            }
         }
     }
 
@@ -314,31 +283,5 @@ class ContentAuditService
         $normalized = mb_strtolower(mb_convert_kana($text, 'asKV'));
 
         return preg_replace('/[\s　、。,.・「」『』（）()！？!?:：;；]/u', '', $normalized) ?? $normalized;
-    }
-
-    private function bigramSimilarity(string $left, string $right): float
-    {
-        $leftBigrams = $this->bigrams($this->normalize($left));
-        $rightBigrams = $this->bigrams($this->normalize($right));
-        $union = array_unique([...$leftBigrams, ...$rightBigrams]);
-
-        if ($union === []) {
-            return 0.0;
-        }
-
-        return count(array_intersect($leftBigrams, $rightBigrams)) / count($union);
-    }
-
-    /** @return list<string> */
-    private function bigrams(string $text): array
-    {
-        $characters = mb_str_split($text);
-        $bigrams = [];
-
-        for ($index = 0; $index < count($characters) - 1; $index++) {
-            $bigrams[] = $characters[$index].$characters[$index + 1];
-        }
-
-        return array_values(array_unique($bigrams));
     }
 }

@@ -13,6 +13,7 @@ type ReviewQuestion = PlayerQuestion & { unit_name: string; box: number };
 
 const props = defineProps<{
     questions: ReviewQuestion[];
+    due_total: number;
     reference_sheets: ReferenceSheetData[];
 }>();
 
@@ -29,6 +30,9 @@ const sound = useSoundEffects();
 const { sync: syncXp } = useXpProgress();
 
 const current = computed(() => props.questions[index.value]);
+const remainingDue = computed(() =>
+    Math.max(0, props.due_total - correctCount.value),
+);
 const progress = computed(() =>
     props.questions.length === 0
         ? 100
@@ -128,12 +132,15 @@ function next() {
             {{ correctCount }} / {{ questions.length }} 問正解
         </p>
         <Link
-            v-if="correctCount < questions.length"
+            v-if="remainingDue > 0"
             href="/review"
             class="mt-5 flex items-center gap-2 rounded-md bg-rose-400 px-8 py-3 font-semibold text-white shadow-sm shadow-rose-500"
         >
             <RotateCcw class="size-4" />
-            間違えた問題をもう一度
+            <template v-if="due_total > questions.length">
+                次の復習へ（残り{{ remainingDue }}問）
+            </template>
+            <template v-else>間違えた問題をもう一度</template>
         </Link>
         <Link
             href="/dashboard"
@@ -307,7 +314,26 @@ function next() {
                     class="text-xs leading-relaxed text-gray-600 dark:text-gray-300"
                 >
                     {{ result.explanation }}
+                    <span class="mt-2 block text-xs font-bold text-[#285ac8]">
+                        次回復習: {{ result.next_review_at }}
+                    </span>
                 </p>
+                <div
+                    v-if="result.official_sources.length"
+                    class="mt-2 border-t border-blue-100 pt-2 text-xs dark:border-gray-700"
+                >
+                    <p class="mb-1 font-bold text-gray-500">関連する公式資料</p>
+                    <a
+                        v-for="source in result.official_sources"
+                        :key="source.url"
+                        :href="source.url"
+                        class="mr-3 inline-block font-bold text-[#285ac8] underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ source.label }}
+                    </a>
+                </div>
                 <p
                     v-if="result.common_mistake"
                     class="mt-2 text-xs font-bold text-amber-600"

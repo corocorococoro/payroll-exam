@@ -33,14 +33,17 @@ test('問題配信レスポンスに正解・解説が含まれない', function
     $response = actingAs($this->user)->get("/lessons/{$lesson->id}");
 
     $response->assertOk();
-    $expectedCount = min(7, $lesson->questions()->pluck('concept_key')->unique()->count());
+    $expectedCount = min(LessonRunService::QUESTION_COUNT, $lesson->questions()->pluck('concept_key')->unique()->count());
     $response->assertInertia(fn ($page) => $page->has('questions', $expectedCount));
 
     $html = $response->getContent();
 
     expect($html)->not->toContain('common_mistake')
         ->and($html)->not->toContain('労基法24条の賃金支払5原則')
-        ->and($html)->not->toContain('correct_answer');
+        ->and($html)->not->toContain('correct_answer')
+        ->and($html)->not->toContain('source_label')
+        ->and($html)->not->toContain('重点演習')
+        ->and($html)->not->toContain('800問 No.');
 });
 
 test('正解するとXPが付与され解説が返る', function () {
@@ -55,7 +58,12 @@ test('正解するとXPが付与され解説が返る', function () {
     ]);
 
     $response->assertOk()
-        ->assertJson(['correct' => true, 'correct_answer' => $correctChoice, 'xp_earned' => 10]);
+        ->assertJson([
+            'correct' => true,
+            'correct_answer' => $correctChoice,
+            'xp_earned' => 10,
+            'mastery_state' => 'review',
+        ]);
 
     expect($response->json('explanation'))->toContain('労基法24条');
 
@@ -64,6 +72,12 @@ test('正解するとXPが付与され解説が返る', function () {
 
     expect($this->user->attempts()->count())->toBe(1);
     expect($this->user->dailyActivities()->whereDate('date', today())->first()->xp)->toBe(10);
+    expect($this->user->reviewItems()->where('question_id', $question->id)->first())
+        ->box->toBe(2)
+        ->due_date->isSameDay(today()->addDays(3))->toBeTrue();
+    expect($this->user->questionProgresses()->where('question_id', $question->id)->first())
+        ->state->toBe('review')
+        ->correct_count->toBe(1);
 });
 
 test('誤答すると今日の復習キューに入りXPは0', function () {
@@ -134,6 +148,65 @@ test('再受講では同じ学習目標の未出変種を優先する', function
     expect(array_intersect($first['question_ids'], $second['question_ids']))->toBe([])
         ->and(Question::whereIn('id', $second['question_ids'])->pluck('concept_key')->unique())
         ->toHaveCount(count($second['question_ids']));
+});
+
+test('有限回のレッスン受講ですべての公開問題へ到達できる', function () {
+    $service = app(LessonRunService::class);
+    $reached = collect();
+
+    foreach (Lesson::query()->orderBy('id')->get() as $lesson) {
+        $request = Request::create("/lessons/{$lesson->id}");
+        $request->setUserResolver(fn () => $this->user);
+        $request->setLaravelSession(app('session')->driver());
+        $expectedIds = $lesson->questions()->pluck('id')->sort()->values();
+        $lessonReached = collect();
+        $maximumRuns = $expectedIds->count() + 1;
+
+        for ($runNumber = 0; $lessonReached->count() < $expectedIds->count(); $runNumber++) {
+            expect($runNumber)->toBeLessThan($maximumRuns, "{$lesson->slug}で全問題へ到達できません");
+            $run = $service->getOrStart($request, $lesson);
+            expect($run['question_ids'])->not->toBeEmpty();
+
+            foreach ($run['question_ids'] as $questionId) {
+                $this->user->attempts()->create([
+                    'question_id' => $questionId,
+                    'lesson_id' => $lesson->id,
+                    'context' => 'lesson',
+                    'is_correct' => true,
+                    'given_answer' => ['given' => 'A'],
+                    'xp_earned' => 0,
+                ]);
+            }
+
+            $lessonReached = $lessonReached->merge($run['question_ids'])->unique()->values();
+            $service->clear($request, $lesson);
+        }
+
+        expect($lessonReached->sort()->values()->all())->toBe($expectedIds->all());
+        $reached = $reached->merge($lessonReached);
+    }
+
+    expect($reached->unique())->toHaveCount(890);
+});
+
+test('復習は期限到来数を保ったまま20問ずつ出題する', function () {
+    $questions = Question::query()->published()->limit(25)->get();
+
+    foreach ($questions as $question) {
+        $this->user->reviewItems()->create([
+            'question_id' => $question->id,
+            'box' => 1,
+            'due_date' => today(),
+            'lapses' => 1,
+        ]);
+    }
+
+    actingAs($this->user)->get('/review')
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->where('due_total', 25)
+            ->has('questions', 20),
+        );
 });
 
 test('数値入力はカンマ・全角数字でも判定できる', function () {

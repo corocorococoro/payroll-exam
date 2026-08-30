@@ -11,9 +11,11 @@ use Inertia\Response;
 
 class ReviewController extends Controller
 {
+    private const int SESSION_COUNT = 20;
+
     public function __invoke(Request $request): Response
     {
-        $items = $request->user()->reviewItems()
+        $query = $request->user()->reviewItems()
             ->whereDate('due_date', '<=', today())
             ->whereHas('question', function (Builder $query): void {
                 /** @var Builder<Question> $query */
@@ -21,6 +23,11 @@ class ReviewController extends Controller
             })
             ->with('question.unit')
             ->orderBy('due_date')
+            ->orderByDesc('lapses');
+
+        $dueTotal = (clone $query)->count();
+        $items = $query
+            ->limit(self::SESSION_COUNT)
             ->get();
 
         $questions = $items->map(fn ($item) => [
@@ -42,6 +49,7 @@ class ReviewController extends Controller
 
         return Inertia::render('review/Index', [
             'questions' => $questions,
+            'due_total' => $dueTotal,
             'reference_sheets' => $sheets,
         ]);
     }

@@ -20,8 +20,11 @@ class LearnController extends Controller
         $course = Course::where('slug', 'kyuyo-2kyu')->with(['units.lessons'])->firstOrFail();
 
         $progresses = $request->user()->lessonProgresses()->get()->keyBy('lesson_id');
+        // Base collectionのキーを問題IDにする。EloquentCollection::only() は
+        // モデル自身の主キーで抽出するため、手動keyByとの組合せでは誤集計になる。
+        $questionProgresses = $request->user()->questionProgresses()->get()->toBase()->keyBy('question_id');
 
-        $units = $course->units->map(function (Unit $unit) use ($progresses): array {
+        $units = $course->units->map(function (Unit $unit) use ($progresses, $questionProgresses): array {
             $previousCleared = true;
 
             return [
@@ -32,10 +35,22 @@ class LearnController extends Controller
                 'icon' => $unit->icon,
                 'color' => $unit->color,
                 'is_advanced' => $unit->is_advanced,
-                'lessons' => $unit->lessons->map(function (Lesson $lesson) use ($progresses, &$previousCleared) {
+                'lessons' => $unit->lessons->map(function (Lesson $lesson) use ($progresses, $questionProgresses, &$previousCleared) {
                     $crown = $progresses[$lesson->id]->crown_level ?? 0;
                     $unlocked = $previousCleared;
                     $previousCleared = $crown >= 1;
+                    $questionIds = $lesson->questions()->published()->pluck('id');
+                    $sessionQuestionCount = min(
+                        LessonRunService::QUESTION_COUNT,
+                        $lesson->questions()->published()->pluck('concept_key')->unique()->count(),
+                    );
+                    $lessonQuestionProgresses = $questionProgresses->only($questionIds->all());
+                    $seenCount = $lessonQuestionProgresses->whereNotNull('first_seen_at')->count();
+                    $masteredCount = $lessonQuestionProgresses->where('state', 'mastered')->count();
+                    $dueCount = $lessonQuestionProgresses
+                        ->filter(fn ($progress) => $progress->due_at?->isPast() ?? false)
+                        ->count();
+                    $questionCount = $questionIds->count();
 
                     return [
                         'id' => $lesson->id,
@@ -43,7 +58,12 @@ class LearnController extends Controller
                         'description' => $lesson->description,
                         'crown_level' => $crown,
                         'unlocked' => $unlocked,
-                        'question_count' => min(LessonRunService::QUESTION_COUNT, $lesson->questions()->count()),
+                        'question_count' => $questionCount,
+                        'session_question_count' => $sessionQuestionCount,
+                        'seen_count' => $seenCount,
+                        'mastered_count' => $masteredCount,
+                        'due_count' => $dueCount,
+                        'coverage_percent' => $questionCount === 0 ? 0 : (int) round($seenCount / $questionCount * 100),
                     ];
                 })->values()->all(),
             ];

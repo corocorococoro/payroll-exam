@@ -142,6 +142,35 @@ test('復習で再び誤答した問題は今日の復習に残る', function ()
         ->and($item->due_date->isToday())->toBeTrue();
 });
 
+test('最終復習の正解で定着状態になり30日後も再確認する', function () {
+    $user = User::factory()->create(['onboarded' => true])->refresh();
+    $question = Question::where('source_id', 'r2-q01')->firstOrFail();
+    ReviewItem::create([
+        'user_id' => $user->id,
+        'question_id' => $question->id,
+        'box' => 4,
+        'due_date' => today(),
+        'lapses' => 0,
+    ]);
+
+    actingAs($user)->postJson('/answers', [
+        'question_id' => $question->id,
+        'answer' => correctChoice($question),
+        'context' => 'review',
+    ])->assertOk()->assertJson([
+        'correct' => true,
+        'mastery_state' => 'mastered',
+    ]);
+
+    $item = $user->reviewItems()->where('question_id', $question->id)->firstOrFail();
+    $progress = $user->questionProgresses()->where('question_id', $question->id)->firstOrFail();
+
+    expect($item->box)->toBe(5)
+        ->and($item->due_date->isSameDay(today()->addDays(30)))->toBeTrue()
+        ->and($progress->state)->toBe('mastered')
+        ->and($progress->box)->toBe(5);
+});
+
 test('日次判定はフリーズを消費し、その後の未達でストリークを切る', function () {
     $user = User::factory()->create()->refresh();
     $user->statOrCreate()->update([

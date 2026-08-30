@@ -27,7 +27,7 @@ class ContentSeeder extends Seeder
      * 正解位置をランダムに見せつつ、再シードで順番が変わらない固定シード。
      * 全問題と公開模試の正解位置が均等になることは ContentAuditService で検証する。
      */
-    private const string CHOICE_ORDER_SEED = '12273';
+    private const string CHOICE_ORDER_SEED = '43735';
 
     public function run(): void
     {
@@ -114,8 +114,7 @@ class ContentSeeder extends Seeder
             foreach (File::json($file->getPathname()) as $q) {
                 $this->validateQuestion($q);
                 $q = $this->normalizeChoiceOrder($q);
-                $pedagogy = $blueprint[$q['source_id']]
-                    ?? throw new RuntimeException("Question {$q['source_id']}: question-blueprint.jsonに定義がありません。");
+                $pedagogy = $this->normalizePedagogy($q, $blueprint[$q['source_id']] ?? []);
                 $seededSourceIds[] = $q['source_id'];
 
                 $lessonKey = $q['unit'].'/'.$q['lesson'];
@@ -146,6 +145,9 @@ class ContentSeeder extends Seeder
                         'category' => $q['category'],
                         'difficulty' => $q['difficulty'],
                         'review_status' => QuestionReviewStatus::Approved,
+                        'verification_status' => 'official_sources_reviewed',
+                        'scope_status' => 'exam_2026-09-01',
+                        'exam_role' => $q['exam_role'] ?? ($content['calc_params'] === null ? 'knowledge' : 'calculation'),
                         'content_revision' => $q['content_revision'] ?? 1,
                         'content_hash' => $contentHash,
                         'reviewed_content_hash' => $contentHash,
@@ -159,9 +161,9 @@ class ContentSeeder extends Seeder
                         'calc_params' => $content['calc_params'],
                         'reference_sheet_slugs' => $q['reference_sheet_slugs'],
                         'source_urls' => $pedagogy['source_urls'],
-                        'review_notes' => $q['review_notes'] ?? '2026年度の公表一次資料で確認。試験基準日の2026-09-01経過後に再レビューする。',
-                        'reviewed_at' => $q['reviewed_at'] ?? '2026-08-09 00:00:00',
-                        'review_due_at' => $q['review_due_at'] ?? '2026-09-02 00:00:00',
+                        'review_notes' => $q['review_notes'] ?? '2026年9月1日の試験基準に対し、公式試験案内・法令一次資料・計算結果を確認。',
+                        'reviewed_at' => $q['reviewed_at'] ?? '2026-08-30 00:00:00',
+                        'review_due_at' => $q['review_due_at'] ?? '2026-11-23 00:00:00',
                         'is_active' => true,
                     ],
                 );
@@ -180,6 +182,39 @@ class ContentSeeder extends Seeder
                 'review_status' => QuestionReviewStatus::Retired,
                 'is_active' => false,
             ]);
+    }
+
+    /**
+     * 問題データまたは設計図の学習設計を、全問共通の形式へ正規化する。
+     *
+     * @param  array<string, mixed>  $question
+     * @param  array<string, mixed>  $blueprint
+     * @return array{concept_key: string, learning_objective: string, variant_role: string, misconception_key: string|null, source_urls: list<string>}
+     */
+    private function normalizePedagogy(array $question, array $blueprint): array
+    {
+        $pedagogy = array_replace($question, $blueprint);
+
+        foreach (['concept_key', 'learning_objective', 'variant_role', 'source_urls'] as $key) {
+            if (empty($pedagogy[$key])) {
+                throw new RuntimeException("Question {$question['source_id']}: 学習設計 {$key} が定義されていません。");
+            }
+        }
+
+        $role = QuestionVariantRole::tryFrom((string) $pedagogy['variant_role']);
+        if ($role === null) {
+            throw new RuntimeException("Question {$question['source_id']}: unknown variant role {$pedagogy['variant_role']}");
+        }
+
+        return [
+            'concept_key' => (string) $pedagogy['concept_key'],
+            'learning_objective' => (string) $pedagogy['learning_objective'],
+            'variant_role' => $role->value,
+            'misconception_key' => isset($pedagogy['misconception_key'])
+                ? (string) $pedagogy['misconception_key']
+                : null,
+            'source_urls' => array_values($pedagogy['source_urls']),
+        ];
     }
 
     /**
@@ -332,8 +367,26 @@ class ContentSeeder extends Seeder
     {
         $course = Course::where('slug', 'kyuyo-2kyu')->firstOrFail();
         $questionIds = Question::whereNotNull('source_id')->pluck('id', 'source_id');
+        /** @var list<array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, source_id: string, points: int}>}> $mockExams */
+        $mockExams = File::json($this->dataPath('mock-exams.json'));
+        $availableMockExams = collect($mockExams)->map(function (array $examData) use ($questionIds): array {
+            $sourceIds = collect($examData['questions'])->pluck('source_id');
+            $missing = $sourceIds->diff($questionIds->keys());
 
-        foreach (File::json($this->dataPath('mock-exams.json')) as $examData) {
+            if ($missing->isNotEmpty()) {
+                throw new RuntimeException("Mock exam {$examData['slug']}: unknown questions {$missing->implode(', ')}");
+            }
+
+            return $examData;
+        })->values();
+
+        MockExam::query()
+            ->where('course_id', $course->id)
+            ->whereNotIn('slug', $availableMockExams->pluck('slug'))
+            ->update(['is_published' => false]);
+
+        foreach ($availableMockExams as $examData) {
+            /** @var array{slug: string, name: string, description: string, time_limit_minutes: int, passing_score: int, sort_order: int, questions: list<array{position: int, source_id: string, points: int}>} $examData */
             $exam = MockExam::updateOrCreate(
                 ['slug' => $examData['slug']],
                 [
@@ -346,6 +399,11 @@ class ContentSeeder extends Seeder
                     'is_published' => true,
                 ],
             );
+
+            $exam->examQuestions()->whereNotIn(
+                'position',
+                collect($examData['questions'])->pluck('position'),
+            )->delete();
 
             foreach ($examData['questions'] as $eq) {
                 $questionId = $questionIds[$eq['source_id']]

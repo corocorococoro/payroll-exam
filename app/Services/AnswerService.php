@@ -109,7 +109,7 @@ class AnswerService
                 $awards = [...$awards, ...app(DailyQuestService::class)->recordXp($user, $directAward['amount'])];
             }
 
-            $this->updateReviewItem($user, $question, $correct, $context);
+            $progress = $this->updateReviewItem($user, $question, $correct, $context);
             $awards = [...$awards, ...app(DailyQuestService::class)->recordAnswer($user, $context)];
             app(AchievementService::class)->evaluate($user);
             app(XpLevelService::class)->syncRewardUnlocks($user);
@@ -125,10 +125,13 @@ class AnswerService
                     ? (string) $question->answer['choice']
                     : number_format((float) $question->answer['value']),
                 'explanation' => $question->explanation,
+                'official_sources' => app(OfficialSourceService::class)->forQuestion($question),
                 'common_mistake' => $question->common_mistake,
                 'selected_feedback' => $correct
                     ? null
                     : ($question->distractor_feedback[strtoupper(trim($given))] ?? null),
+                'mastery_state' => $progress['state'],
+                'next_review_at' => $progress['due_at'],
                 'xp_status' => ! $correct ? 'incorrect' : ($xp > 0 ? 'earned' : 'already_credited'),
                 'xp_earned' => $xp,
                 'xp_bonus_earned' => $questXp,
@@ -140,11 +143,18 @@ class AnswerService
     }
 
     /**
-     * Leitner 方式: 誤答→box1で今日の復習へ。復習で正解→box+1（間隔延長）、最大到達で卒業。
+     * Leitner 方式: 初回正解もbox2へ登録し、誤答はbox1へ戻す。
+     * 正解を一度きりの「完了」にせず、忘却前の再出題につなげる。
      */
-    private function updateReviewItem(User $user, Question $question, bool $correct, AttemptContext $context): void
+    /** @return array{state: string, due_at: string} */
+    private function updateReviewItem(User $user, Question $question, bool $correct, AttemptContext $context): array
     {
         $item = $user->reviewItems()->where('question_id', $question->id)->first();
+        $progress = $user->questionProgresses()->firstOrCreate(
+            ['question_id' => $question->id],
+            ['state' => 'new', 'content_revision_seen' => $question->content_revision],
+        );
+        $now = now();
 
         if (! $correct) {
             if ($item === null) {
@@ -162,24 +172,48 @@ class AnswerService
                 ]);
             }
 
-            return;
+            $progress->update([
+                'state' => 'learning',
+                'box' => 1,
+                'due_at' => $now,
+                'lapses' => $progress->lapses + 1,
+                'incorrect_count' => $progress->incorrect_count + 1,
+                'content_revision_seen' => $question->content_revision,
+                'first_seen_at' => $progress->first_seen_at ?? $now,
+                'last_seen_at' => $now,
+            ]);
+
+            return ['state' => 'learning', 'due_at' => $now->toIso8601String()];
         }
 
-        if ($item === null || $context !== AttemptContext::Review) {
-            return;
+        $currentBox = $item === null ? 0 : $item->box;
+        $nextBox = $context === AttemptContext::Review && $item !== null
+            ? min(ReviewItem::MAX_BOX, $item->box + 1)
+            : max(2, $currentBox);
+        $dueDate = today()->addDays(ReviewItem::INTERVALS[$nextBox]);
+
+        if ($item === null) {
+            $user->reviewItems()->create([
+                'question_id' => $question->id,
+                'box' => $nextBox,
+                'due_date' => $dueDate,
+                'lapses' => 0,
+            ]);
+        } else {
+            $item->update(['box' => $nextBox, 'due_date' => $dueDate]);
         }
 
-        $nextBox = $item->box + 1;
-
-        if ($nextBox > ReviewItem::MAX_BOX) {
-            $item->delete();
-
-            return;
-        }
-
-        $item->update([
+        $state = $nextBox >= ReviewItem::MAX_BOX ? 'mastered' : 'review';
+        $progress->update([
+            'state' => $state,
             'box' => $nextBox,
-            'due_date' => today()->addDays(ReviewItem::INTERVALS[$nextBox]),
+            'due_at' => $dueDate->startOfDay(),
+            'correct_count' => $progress->correct_count + 1,
+            'content_revision_seen' => $question->content_revision,
+            'first_seen_at' => $progress->first_seen_at ?? $now,
+            'last_seen_at' => $now,
         ]);
+
+        return ['state' => $state, 'due_at' => $dueDate->toDateString()];
     }
 }

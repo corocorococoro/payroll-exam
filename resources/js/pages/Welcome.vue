@@ -109,7 +109,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     >
                         <span class="flex items-center gap-1.5"
                             ><Clock3 class="size-4 text-sky-500" />1回
-                            最大7問</span
+                            最大10問</span
                         >
                         <span class="flex items-center gap-1.5"
                             ><Trophy
@@ -159,7 +159,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         <BookOpen class="mb-4 size-7 text-[#2864f0]" />
                         <h2 class="font-semibold">短く、毎日続けられる</h2>
                         <p class="mt-2 text-sm leading-6 text-gray-500">
-                            長い問題集を一気に解かず、毎回7問のレッスンで理解と習慣を積み上げます。
+                            890問を一気に解かず、毎回最大10問のレッスンで理解と習慣を積み上げます。
                         </p>
                     </article>
                     <article
@@ -182,7 +182,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     </article>
                 </div>
                 <p class="mt-8 text-center text-xs leading-5 text-gray-400">
-                    本サービスは学習支援ツールです。合格を保証するものではなく、最新の公式教材・受験案内との併用を推奨します。
+                    解答後の「関連する公式資料」から、法令や制度の原文まで確認できます。
                 </p>
             </section>
         </main>
