@@ -66,7 +66,7 @@ test('ダッシュボードに習慣ループの集計を表示する', function
             ->where('summary.current_streak', 3)
             ->has('heatmap', 84)
             ->has('accuracy_by_unit', 5)
-            ->has('season.phases', 5),
+            ->missing('season'),
         );
 });
 

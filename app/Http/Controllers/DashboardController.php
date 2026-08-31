@@ -214,34 +214,6 @@ class DashboardController extends Controller
                 'completed' => $quest->completed,
                 'xp_reward' => $quest->xp_reward,
             ]),
-            'season' => $this->season(),
         ]);
-    }
-
-    /** @return array{current: string, phases: list<array<string, string|bool>>} */
-    private function season(): array
-    {
-        $phases = [
-            ['key' => 'foundation', 'label' => '基礎', 'period' => '8/8〜8/31', 'focus' => '労働法・勤怠・給与明細', 'start' => '2026-08-08', 'end' => '2026-08-31'],
-            ['key' => 'insurance', 'label' => '社会保険', 'period' => '9/1〜9/27', 'focus' => '標準報酬・定時／随時決定', 'start' => '2026-09-01', 'end' => '2026-09-27'],
-            ['key' => 'tax', 'label' => '税・賞与', 'period' => '9/28〜10/18', 'focus' => '所得税・住民税・賞与', 'start' => '2026-09-28', 'end' => '2026-10-18'],
-            ['key' => 'mock', 'label' => '実戦', 'period' => '10/19〜11/8', 'focus' => '120分模試と誤答分析', 'start' => '2026-10-19', 'end' => '2026-11-08'],
-            ['key' => 'final', 'label' => '直前', 'period' => '11/9〜11/21', 'focus' => '弱点と料率の最終確認', 'start' => '2026-11-09', 'end' => '2026-11-21'],
-        ];
-
-        $current = collect($phases)->first(
-            fn (array $phase) => today()->betweenIncluded($phase['start'], $phase['end']),
-        )['key'] ?? (today()->lt('2026-08-08') ? 'foundation' : 'final');
-
-        return [
-            'current' => $current,
-            'phases' => array_values(collect($phases)->map(fn (array $phase) => [
-                'key' => $phase['key'],
-                'label' => $phase['label'],
-                'period' => $phase['period'],
-                'focus' => $phase['focus'],
-                'active' => $phase['key'] === $current,
-            ])->all()),
-        ];
     }
 }

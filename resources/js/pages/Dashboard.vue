@@ -2,7 +2,6 @@
 import { Head, Link } from '@inertiajs/vue3';
 import {
     BookOpen,
-    Check,
     Flame,
     RotateCcw,
     ShieldCheck,
@@ -67,20 +66,11 @@ type Quest = {
     completed: boolean;
     xp_reward: number;
 };
-type SeasonPhase = {
-    key: string;
-    label: string;
-    period: string;
-    focus: string;
-    active: boolean;
-};
-
 const props = defineProps<{
     summary: Summary;
     accuracy_by_unit: UnitAccuracy[];
     heatmap: HeatmapDay[];
     quests: Quest[];
-    season: { current: string; phases: SeasonPhase[] };
 }>();
 
 const goalPercent = computed(() =>
@@ -514,63 +504,6 @@ function heatLevel(day: HeatmapDay): string {
                 :class="['size-3 rounded-[3px]', heatLevel(day)]"
                 :title="`${day.date}: ${day.xp} XP`"
             />
-        </div>
-    </section>
-
-    <section
-        class="rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
-    >
-        <h2 class="mb-3 font-semibold text-gray-700 dark:text-gray-100">
-            合格までのシーズンマップ
-        </h2>
-        <div class="flex flex-col gap-2">
-            <div
-                v-for="(phase, index) in season.phases"
-                :key="phase.key"
-                :class="[
-                    'flex items-center gap-3 rounded-md p-3',
-                    phase.active
-                        ? 'bg-blue-100 dark:bg-blue-950'
-                        : 'bg-gray-50 dark:bg-gray-800/60',
-                ]"
-            >
-                <div
-                    :class="[
-                        'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
-                        phase.active
-                            ? 'bg-[#2864f0] text-white'
-                            : 'bg-gray-200 text-gray-500 dark:bg-gray-700',
-                    ]"
-                >
-                    <Check
-                        v-if="
-                            index <
-                            season.phases.findIndex((item) => item.active)
-                        "
-                        class="size-4"
-                    /><span v-else>{{ index + 1 }}</span>
-                </div>
-                <div class="min-w-0 flex-1">
-                    <div class="flex items-center gap-2">
-                        <p
-                            class="text-sm font-semibold text-gray-700 dark:text-gray-200"
-                        >
-                            {{ phase.label }}
-                        </p>
-                        <span class="text-[10px] text-gray-400">{{
-                            phase.period
-                        }}</span>
-                    </div>
-                    <p class="truncate text-xs text-gray-500">
-                        {{ phase.focus }}
-                    </p>
-                </div>
-                <span
-                    v-if="phase.active"
-                    class="rounded-full bg-[#2864f0] px-2 py-1 text-[10px] font-semibold text-white"
-                    >いまここ</span
-                >
-            </div>
         </div>
     </section>
 </template>
