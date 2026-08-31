@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class DashboardTest extends TestCase
@@ -84,6 +85,32 @@ class DashboardTest extends TestCase
                 ->where('summary.readiness_label', '基礎構築中')
                 ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '合格コア')),
             );
+    }
+
+    public function test_learning_recommendation_does_not_change_with_the_exam_date()
+    {
+        Carbon::setTestNow('2026-08-31');
+        try {
+            $this->seed(ContentSeeder::class);
+
+            foreach (['2026-09-01', '2027-08-31'] as $examDate) {
+                $user = User::factory()->create([
+                    'onboarded' => true,
+                    'exam_date' => $examDate,
+                ])->refresh();
+
+                $this->actingAs($user)
+                    ->get(route('dashboard'))
+                    ->assertOk()
+                    ->assertInertia(fn ($page) => $page
+                        ->where('summary.readiness_label', '基礎構築中')
+                        ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '合格コア'))
+                        ->missing('season'),
+                    );
+            }
+        } finally {
+            Carbon::setTestNow();
+        }
     }
 
     public function test_mock_score_is_the_source_of_truth_for_pass_readiness()
