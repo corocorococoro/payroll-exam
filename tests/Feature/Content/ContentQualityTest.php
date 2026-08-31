@@ -43,8 +43,12 @@ test('単一問題バンクの全問が同じ公開品質基準を満たす', fu
                 ),
         ))->toBeTrue()
         ->and($questions->groupBy('concept_key')->every(
-            fn ($variants): bool => $variants->pluck('learning_objective')->unique()->count() === 1,
+            fn ($variants): bool => $variants->pluck('learning_objective')->unique()->count() === 1
+                && $variants->where('study_tier', 'core')->isNotEmpty(),
         ))->toBeTrue()
+        ->and($questions->where('study_tier', 'core'))->toHaveCount($bank['release']['core_question_count'])
+        ->and($questions->pluck('study_tier')->unique()->sort()->values()->all())
+        ->toBe(['core', 'reinforcement'])
         ->and(Question::where('source_id', 'like', 'gen-%')->where('is_active', true)->count())->toBe(0)
         ->and(Question::query()->published()->whereNull('concept_key')->count())->toBe(0)
         ->and(Question::query()->published()->whereNull('learning_objective')->count())->toBe(0)
@@ -150,6 +154,7 @@ test('公開コンテンツ監査にエラーがない', function () {
     expect($result['errors'])->toBe([])
         ->and($result['stats']['published_questions'])->toBe($bank['release']['question_count'])
         ->and($result['stats']['learning_objectives'])->toBe(count($bank['topics']))
+        ->and($result['stats']['core_questions'])->toBe($bank['release']['core_question_count'])
         ->and($result['stats']['published_mock_exams'])->toBe(3);
 });
 

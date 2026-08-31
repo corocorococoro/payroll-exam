@@ -37,7 +37,6 @@ class AnswerController extends Controller
         if ($context === AttemptContext::Lesson) {
             abort_if($lessonId === null, 422, 'レッスンIDが必要です。');
             $lesson = Lesson::findOrFail($lessonId);
-            abort_unless($runs->isUnlocked($request->user(), $lesson), 403);
             $run = $runs->current($request, $lesson);
 
             abort_if(

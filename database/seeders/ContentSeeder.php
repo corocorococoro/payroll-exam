@@ -70,6 +70,7 @@ class ContentSeeder extends Seeder
                     [
                         'name' => $lessonData['name'],
                         'description' => $lessonData['description'],
+                        'study_guide' => $this->validateStudyGuide($lessonData),
                         'sort_order' => $lessonData['sort_order'],
                     ],
                 );
@@ -85,6 +86,52 @@ class ContentSeeder extends Seeder
             ->where('course_id', $course->id)
             ->whereNotIn('slug', $unitSlugs)
             ->delete();
+    }
+
+    /**
+     * @param  array<string, mixed>  $lessonData
+     * @return array{why: string, goal: string, key_points: list<string>, common_traps: list<string>}
+     */
+    private function validateStudyGuide(array $lessonData): array
+    {
+        $slug = (string) ($lessonData['slug'] ?? '(no slug)');
+        $guide = $lessonData['study_guide'] ?? null;
+
+        if (! is_array($guide)) {
+            throw new RuntimeException("Lesson {$slug}: study_guide is missing");
+        }
+
+        $why = $guide['why'] ?? null;
+        $goal = $guide['goal'] ?? null;
+        $keyPoints = $guide['key_points'] ?? null;
+        $commonTraps = $guide['common_traps'] ?? null;
+
+        if (! is_string($why) || trim($why) === '' || ! is_string($goal) || trim($goal) === '') {
+            throw new RuntimeException("Lesson {$slug}: why and goal are required");
+        }
+
+        if (! is_array($keyPoints) || ! array_is_list($keyPoints) || count($keyPoints) !== 3 || array_filter(
+            $keyPoints,
+            fn ($point): bool => ! is_string($point) || trim($point) === '',
+        ) !== []) {
+            throw new RuntimeException("Lesson {$slug}: exactly three key_points are required");
+        }
+
+        if (! is_array($commonTraps) || ! array_is_list($commonTraps) || count($commonTraps) !== 2 || array_filter(
+            $commonTraps,
+            fn ($trap): bool => ! is_string($trap) || trim($trap) === '',
+        ) !== []) {
+            throw new RuntimeException("Lesson {$slug}: exactly two common_traps are required");
+        }
+
+        /** @var list<string> $keyPoints */
+        /** @var list<string> $commonTraps */
+        return [
+            'why' => $why,
+            'goal' => $goal,
+            'key_points' => $keyPoints,
+            'common_traps' => $commonTraps,
+        ];
     }
 
     private function seedReferenceSheets(): void
@@ -105,12 +152,18 @@ class ContentSeeder extends Seeder
         $sourceCatalog = File::json($this->dataPath('official-sources.json'));
         $topics = $bank['topics'] ?? [];
         $release = $bank['release'] ?? [];
+        /** @var list<array<string, mixed>> $questions */
         $questions = $bank['questions'] ?? [];
         $choiceTargets = $this->choiceTargets($questions);
         $seededSourceIds = [];
 
         if (($release['question_count'] ?? null) !== count($questions)) {
             throw new RuntimeException('問題バンクのquestion_countと実際の問題数が一致しません。');
+        }
+
+        $coreQuestionCount = collect($questions)->where('study_tier', 'core')->count();
+        if (($release['core_question_count'] ?? null) !== $coreQuestionCount) {
+            throw new RuntimeException('問題バンクのcore_question_countと実際の合格コア問題数が一致しません。');
         }
 
         foreach ($questions as $q) {
@@ -153,6 +206,7 @@ class ContentSeeder extends Seeder
                     'verification_status' => 'official_sources_reviewed',
                     'scope_status' => 'exam_'.($release['legal_as_of'] ?? throw new RuntimeException('法令基準日がありません。')),
                     'exam_role' => $q['exam_role'] ?? ($content['calc_params'] === null ? 'knowledge' : 'calculation'),
+                    'study_tier' => $q['study_tier'],
                     'content_revision' => $q['content_revision'] ?? 1,
                     'content_hash' => $contentHash,
                     'reviewed_content_hash' => $contentHash,
@@ -194,7 +248,7 @@ class ContentSeeder extends Seeder
     {
         $id = $q['id'] ?? '(no id)';
 
-        foreach (['id', 'topic_key', 'role', 'source_keys', 'unit', 'type', 'category', 'difficulty', 'question_text', 'answer', 'explanation'] as $key) {
+        foreach (['id', 'topic_key', 'role', 'study_tier', 'source_keys', 'unit', 'type', 'category', 'difficulty', 'question_text', 'answer', 'explanation'] as $key) {
             if (empty($q[$key])) {
                 throw new RuntimeException("Question {$id}: missing {$key}");
             }
@@ -206,6 +260,10 @@ class ContentSeeder extends Seeder
 
         if (QuestionVariantRole::tryFrom((string) $q['role']) === null) {
             throw new RuntimeException("Question {$id}: unknown role {$q['role']}");
+        }
+
+        if (! in_array($q['study_tier'], ['core', 'reinforcement'], true)) {
+            throw new RuntimeException("Question {$id}: unknown study tier {$q['study_tier']}");
         }
 
         foreach ($q['source_keys'] as $sourceKey) {

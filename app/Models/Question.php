@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $verification_status
  * @property string $scope_status
  * @property string $exam_role
+ * @property string $study_tier
  * @property int $content_revision
  * @property string|null $content_hash
  * @property string|null $reviewed_content_hash
@@ -49,7 +50,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable([
     'unit_id', 'lesson_id', 'source_id', 'concept_key', 'learning_objective', 'variant_role',
     'misconception_key', 'type', 'category', 'difficulty',
-    'review_status', 'verification_status', 'scope_status', 'exam_role', 'content_revision', 'content_hash', 'reviewed_content_hash', 'fiscal_year',
+    'review_status', 'verification_status', 'scope_status', 'exam_role', 'study_tier', 'content_revision', 'content_hash', 'reviewed_content_hash', 'fiscal_year',
     'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback',
     'calc_params', 'reference_sheet_slugs', 'source_urls', 'review_notes', 'reviewed_at',
     'review_due_at', 'is_active',

@@ -6,7 +6,8 @@
     "reviewed_at": "2026-08-31",
     "review_due_at": "2026-11-23",
     "question_count": 831,
-    "retired_redundant_count": 59
+    "retired_redundant_count": 59,
+    "core_question_count": 289
   },
   "topics": {
     "attendance.break-minimum": "労働時間の境界に応じた最低休憩時間と自由利用原則を判断できる",
@@ -127,6 +128,7 @@
       "id": "q-0001",
       "topic_key": "labor.childcare-care",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -168,6 +170,7 @@
       "id": "q-0002",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -209,6 +212,7 @@
       "id": "q-0003",
       "topic_key": "labor.conditions-rules",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "working_conditions_2024"
       ],
@@ -250,6 +254,7 @@
       "id": "q-0004",
       "topic_key": "labor.conditions-rules",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -291,6 +296,7 @@
       "id": "q-0005",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -332,6 +338,7 @@
       "id": "q-0006",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -373,6 +380,7 @@
       "id": "q-0007",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -414,6 +422,7 @@
       "id": "q-0008",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -455,6 +464,7 @@
       "id": "q-0009",
       "topic_key": "labor.conditions-rules",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -496,6 +506,7 @@
       "id": "q-0010",
       "topic_key": "labor.contract",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_contract"
       ],
@@ -537,6 +548,7 @@
       "id": "q-0011",
       "topic_key": "labor.contract",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_contract"
       ],
@@ -578,6 +590,7 @@
       "id": "q-0012",
       "topic_key": "labor.contract",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_contract"
       ],
@@ -619,6 +632,7 @@
       "id": "q-0013",
       "topic_key": "labor.contract",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_contract"
       ],
@@ -660,6 +674,7 @@
       "id": "q-0014",
       "topic_key": "labor.part-time",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "part_time"
       ],
@@ -701,6 +716,7 @@
       "id": "q-0015",
       "topic_key": "labor.part-time",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "part_time"
       ],
@@ -742,6 +758,7 @@
       "id": "q-0016",
       "topic_key": "labor.part-time",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "part_time"
       ],
@@ -783,6 +800,7 @@
       "id": "q-0017",
       "topic_key": "labor.termination-compensation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -824,6 +842,7 @@
       "id": "q-0018",
       "topic_key": "labor.termination-compensation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -865,6 +884,7 @@
       "id": "q-0019",
       "topic_key": "labor.termination-compensation",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -906,6 +926,7 @@
       "id": "q-0020",
       "topic_key": "labor.termination-compensation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -947,6 +968,7 @@
       "id": "q-0021",
       "topic_key": "labor.termination-compensation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -988,6 +1010,7 @@
       "id": "q-0022",
       "topic_key": "labor.termination-compensation",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -1029,6 +1052,7 @@
       "id": "q-0023",
       "topic_key": "labor.termination-compensation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -1070,6 +1094,7 @@
       "id": "q-0024",
       "topic_key": "labor.termination-compensation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -1111,6 +1136,7 @@
       "id": "q-0025",
       "topic_key": "labor.termination-compensation",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -1152,6 +1178,7 @@
       "id": "q-0026",
       "topic_key": "rules.labor-contract",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards",
@@ -1197,6 +1224,7 @@
       "id": "q-0027",
       "topic_key": "rules.labor-contract",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards",
@@ -1243,6 +1271,7 @@
       "id": "q-0028",
       "topic_key": "rules.work-rules",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1284,6 +1313,7 @@
       "id": "q-0029",
       "topic_key": "rules.work-rules",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1329,6 +1359,7 @@
       "id": "q-0030",
       "topic_key": "wage.deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1370,6 +1401,7 @@
       "id": "q-0031",
       "topic_key": "wage.deductions",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1416,6 +1448,7 @@
       "id": "q-0032",
       "topic_key": "wage.payment-principles",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1457,6 +1490,7 @@
       "id": "q-0033",
       "topic_key": "wage.payment-principles",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -1503,6 +1537,7 @@
       "id": "q-0034",
       "topic_key": "attendance.break-minimum",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1548,6 +1583,7 @@
       "id": "q-0035",
       "topic_key": "attendance.break-minimum",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1592,6 +1628,7 @@
       "id": "q-0036",
       "topic_key": "attendance.statutory-holiday",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1633,6 +1670,7 @@
       "id": "q-0037",
       "topic_key": "attendance.statutory-holiday",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1679,6 +1717,7 @@
       "id": "q-0038",
       "topic_key": "attendance.statutory-hours",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1720,6 +1759,7 @@
       "id": "q-0039",
       "topic_key": "attendance.statutory-hours",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -1766,6 +1806,7 @@
       "id": "q-0040",
       "topic_key": "labor.breaks",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -1807,6 +1848,7 @@
       "id": "q-0041",
       "topic_key": "labor.breaks",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -1848,6 +1890,7 @@
       "id": "q-0042",
       "topic_key": "labor.breaks",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -1889,6 +1932,7 @@
       "id": "q-0043",
       "topic_key": "labor.breaks",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -1930,6 +1974,7 @@
       "id": "q-0044",
       "topic_key": "labor.breaks",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -1971,6 +2016,7 @@
       "id": "q-0045",
       "topic_key": "labor.breaks",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2012,6 +2058,7 @@
       "id": "q-0046",
       "topic_key": "labor.breaks",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2053,6 +2100,7 @@
       "id": "q-0047",
       "topic_key": "labor.childcare-care",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2094,6 +2142,7 @@
       "id": "q-0048",
       "topic_key": "labor.childcare-care",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2135,6 +2184,7 @@
       "id": "q-0049",
       "topic_key": "labor.childcare-care",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2176,6 +2226,7 @@
       "id": "q-0050",
       "topic_key": "labor.childcare-care",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2217,6 +2268,7 @@
       "id": "q-0051",
       "topic_key": "labor.childcare-care",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2258,6 +2310,7 @@
       "id": "q-0052",
       "topic_key": "labor.childcare-care",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2299,6 +2352,7 @@
       "id": "q-0053",
       "topic_key": "labor.childcare-care",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2340,6 +2394,7 @@
       "id": "q-0054",
       "topic_key": "labor.childcare-care",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "childcare_leave"
       ],
@@ -2381,6 +2436,7 @@
       "id": "q-0055",
       "topic_key": "labor.deemed-hours",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2422,6 +2478,7 @@
       "id": "q-0056",
       "topic_key": "labor.deemed-hours",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2463,6 +2520,7 @@
       "id": "q-0057",
       "topic_key": "labor.deemed-hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2504,6 +2562,7 @@
       "id": "q-0058",
       "topic_key": "labor.deemed-hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2545,6 +2604,7 @@
       "id": "q-0059",
       "topic_key": "labor.discretionary",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2586,6 +2646,7 @@
       "id": "q-0060",
       "topic_key": "labor.discretionary",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2627,6 +2688,7 @@
       "id": "q-0061",
       "topic_key": "labor.discretionary",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2668,6 +2730,7 @@
       "id": "q-0062",
       "topic_key": "labor.discretionary",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2709,6 +2772,7 @@
       "id": "q-0063",
       "topic_key": "labor.flex",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2750,6 +2814,7 @@
       "id": "q-0064",
       "topic_key": "labor.flex",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2791,6 +2856,7 @@
       "id": "q-0065",
       "topic_key": "labor.flex",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2832,6 +2898,7 @@
       "id": "q-0066",
       "topic_key": "labor.flex",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2873,6 +2940,7 @@
       "id": "q-0067",
       "topic_key": "labor.flex",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2914,6 +2982,7 @@
       "id": "q-0068",
       "topic_key": "labor.holidays",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2955,6 +3024,7 @@
       "id": "q-0069",
       "topic_key": "labor.holidays",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -2996,6 +3066,7 @@
       "id": "q-0070",
       "topic_key": "labor.holidays",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3037,6 +3108,7 @@
       "id": "q-0071",
       "topic_key": "labor.holidays",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3078,6 +3150,7 @@
       "id": "q-0072",
       "topic_key": "labor.holidays",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3119,6 +3192,7 @@
       "id": "q-0073",
       "topic_key": "labor.holidays",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3160,6 +3234,7 @@
       "id": "q-0074",
       "topic_key": "labor.holidays",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3201,6 +3276,7 @@
       "id": "q-0075",
       "topic_key": "labor.holidays",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3242,6 +3318,7 @@
       "id": "q-0076",
       "topic_key": "labor.hours",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3283,6 +3360,7 @@
       "id": "q-0077",
       "topic_key": "labor.hours",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3324,6 +3402,7 @@
       "id": "q-0078",
       "topic_key": "labor.hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3365,6 +3444,7 @@
       "id": "q-0079",
       "topic_key": "labor.hours",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3406,6 +3486,7 @@
       "id": "q-0080",
       "topic_key": "labor.hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3447,6 +3528,7 @@
       "id": "q-0081",
       "topic_key": "labor.hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3488,6 +3570,7 @@
       "id": "q-0082",
       "topic_key": "labor.hours",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3529,6 +3612,7 @@
       "id": "q-0083",
       "topic_key": "labor.hours",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3570,6 +3654,7 @@
       "id": "q-0084",
       "topic_key": "labor.leave-grant",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3611,6 +3696,7 @@
       "id": "q-0085",
       "topic_key": "labor.leave-grant",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3652,6 +3738,7 @@
       "id": "q-0086",
       "topic_key": "labor.leave-grant",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3693,6 +3780,7 @@
       "id": "q-0087",
       "topic_key": "labor.leave-grant",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3734,6 +3822,7 @@
       "id": "q-0088",
       "topic_key": "labor.leave-grant",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3775,6 +3864,7 @@
       "id": "q-0089",
       "topic_key": "labor.leave-grant",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3816,6 +3906,7 @@
       "id": "q-0090",
       "topic_key": "labor.leave-grant",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3857,6 +3948,7 @@
       "id": "q-0091",
       "topic_key": "labor.leave-grant",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3898,6 +3990,7 @@
       "id": "q-0092",
       "topic_key": "labor.leave-grant",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3939,6 +4032,7 @@
       "id": "q-0093",
       "topic_key": "labor.leave-grant",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -3980,6 +4074,7 @@
       "id": "q-0094",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4021,6 +4116,7 @@
       "id": "q-0095",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4062,6 +4158,7 @@
       "id": "q-0096",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4103,6 +4200,7 @@
       "id": "q-0097",
       "topic_key": "labor.leave-use",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4144,6 +4242,7 @@
       "id": "q-0098",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4185,6 +4284,7 @@
       "id": "q-0099",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4226,6 +4326,7 @@
       "id": "q-0100",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4267,6 +4368,7 @@
       "id": "q-0101",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4308,6 +4410,7 @@
       "id": "q-0102",
       "topic_key": "labor.leave-use",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4349,6 +4452,7 @@
       "id": "q-0103",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4390,6 +4494,7 @@
       "id": "q-0104",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4431,6 +4536,7 @@
       "id": "q-0105",
       "topic_key": "labor.leave-use",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4472,6 +4578,7 @@
       "id": "q-0106",
       "topic_key": "labor.leave-use",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4513,6 +4620,7 @@
       "id": "q-0107",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4554,6 +4662,7 @@
       "id": "q-0108",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4595,6 +4704,7 @@
       "id": "q-0109",
       "topic_key": "labor.leave-use",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4636,6 +4746,7 @@
       "id": "q-0110",
       "topic_key": "labor.leave-use",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4677,6 +4788,7 @@
       "id": "q-0111",
       "topic_key": "labor.leave-use",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4718,6 +4830,7 @@
       "id": "q-0112",
       "topic_key": "labor.maternity",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -4759,6 +4872,7 @@
       "id": "q-0113",
       "topic_key": "labor.maternity",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -4800,6 +4914,7 @@
       "id": "q-0114",
       "topic_key": "labor.overtime-agreement",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4841,6 +4956,7 @@
       "id": "q-0115",
       "topic_key": "labor.overtime-agreement",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4882,6 +4998,7 @@
       "id": "q-0116",
       "topic_key": "labor.overtime-agreement",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4923,6 +5040,7 @@
       "id": "q-0117",
       "topic_key": "labor.overtime-agreement",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -4964,6 +5082,7 @@
       "id": "q-0118",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5005,6 +5124,7 @@
       "id": "q-0119",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5046,6 +5166,7 @@
       "id": "q-0120",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5087,6 +5208,7 @@
       "id": "q-0121",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5128,6 +5250,7 @@
       "id": "q-0122",
       "topic_key": "labor.overtime-agreement",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5169,6 +5292,7 @@
       "id": "q-0123",
       "topic_key": "labor.overtime-agreement",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5210,6 +5334,7 @@
       "id": "q-0124",
       "topic_key": "labor.overtime-agreement",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5251,6 +5376,7 @@
       "id": "q-0125",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5292,6 +5418,7 @@
       "id": "q-0126",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5333,6 +5460,7 @@
       "id": "q-0127",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5374,6 +5502,7 @@
       "id": "q-0128",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5415,6 +5544,7 @@
       "id": "q-0129",
       "topic_key": "labor.overtime-agreement",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5456,6 +5586,7 @@
       "id": "q-0130",
       "topic_key": "labor.overtime-agreement",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5497,6 +5628,7 @@
       "id": "q-0131",
       "topic_key": "labor.supervisor",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5538,6 +5670,7 @@
       "id": "q-0132",
       "topic_key": "labor.variable-hours",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5579,6 +5712,7 @@
       "id": "q-0133",
       "topic_key": "labor.variable-hours",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5620,6 +5754,7 @@
       "id": "q-0134",
       "topic_key": "labor.variable-hours",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5661,6 +5796,7 @@
       "id": "q-0135",
       "topic_key": "labor.variable-hours",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5702,6 +5838,7 @@
       "id": "q-0136",
       "topic_key": "labor.variable-hours",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5743,6 +5880,7 @@
       "id": "q-0137",
       "topic_key": "labor.variable-hours",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5784,6 +5922,7 @@
       "id": "q-0138",
       "topic_key": "labor.variable-hours",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5825,6 +5964,7 @@
       "id": "q-0139",
       "topic_key": "labor.variable-hours",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5866,6 +6006,7 @@
       "id": "q-0140",
       "topic_key": "labor.variable-hours",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5907,6 +6048,7 @@
       "id": "q-0141",
       "topic_key": "labor.variable-hours",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "worktime_leave"
       ],
@@ -5948,6 +6090,7 @@
       "id": "q-0142",
       "topic_key": "leave.five-day-duty",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -5989,6 +6132,7 @@
       "id": "q-0143",
       "topic_key": "leave.five-day-duty",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -6033,6 +6177,7 @@
       "id": "q-0144",
       "topic_key": "leave.initial-grant",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -6074,6 +6219,7 @@
       "id": "q-0145",
       "topic_key": "leave.initial-grant",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "worktime_leave"
@@ -6119,6 +6265,7 @@
       "id": "q-0146",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6160,6 +6307,7 @@
       "id": "q-0147",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6201,6 +6349,7 @@
       "id": "q-0148",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6242,6 +6391,7 @@
       "id": "q-0149",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -6283,6 +6433,7 @@
       "id": "q-0150",
       "topic_key": "premium.base",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -6324,6 +6475,7 @@
       "id": "q-0151",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6365,6 +6517,7 @@
       "id": "q-0152",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6406,6 +6559,7 @@
       "id": "q-0153",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6447,6 +6601,7 @@
       "id": "q-0154",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6488,6 +6643,7 @@
       "id": "q-0155",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6529,6 +6685,7 @@
       "id": "q-0156",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6570,6 +6727,7 @@
       "id": "q-0157",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6611,6 +6769,7 @@
       "id": "q-0158",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6652,6 +6811,7 @@
       "id": "q-0159",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6693,6 +6853,7 @@
       "id": "q-0160",
       "topic_key": "premium.base",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -6734,6 +6895,7 @@
       "id": "q-0161",
       "topic_key": "premium.base",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6775,6 +6937,7 @@
       "id": "q-0162",
       "topic_key": "premium.base",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6816,6 +6979,7 @@
       "id": "q-0163",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6857,6 +7021,7 @@
       "id": "q-0164",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6898,6 +7063,7 @@
       "id": "q-0165",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6939,6 +7105,7 @@
       "id": "q-0166",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -6980,6 +7147,7 @@
       "id": "q-0167",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7021,6 +7189,7 @@
       "id": "q-0168",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7062,6 +7231,7 @@
       "id": "q-0169",
       "topic_key": "premium.base",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7103,6 +7273,7 @@
       "id": "q-0170",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7144,6 +7315,7 @@
       "id": "q-0171",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7185,6 +7357,7 @@
       "id": "q-0172",
       "topic_key": "premium.base",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7226,6 +7399,7 @@
       "id": "q-0173",
       "topic_key": "premium.base",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7267,6 +7441,7 @@
       "id": "q-0174",
       "topic_key": "premium.base",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7308,6 +7483,7 @@
       "id": "q-0175",
       "topic_key": "premium.base",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7349,6 +7525,7 @@
       "id": "q-0176",
       "topic_key": "premium.calculation-base",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7390,6 +7567,7 @@
       "id": "q-0177",
       "topic_key": "premium.calculation-base",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7435,6 +7613,7 @@
       "id": "q-0178",
       "topic_key": "premium.holiday-deep-night",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7476,6 +7655,7 @@
       "id": "q-0179",
       "topic_key": "premium.holiday-deep-night",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7522,6 +7702,7 @@
       "id": "q-0180",
       "topic_key": "premium.over-60-hours",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7563,6 +7744,7 @@
       "id": "q-0181",
       "topic_key": "premium.over-60-hours",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7609,6 +7791,7 @@
       "id": "q-0182",
       "topic_key": "premium.overtime-deep-night",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7650,6 +7833,7 @@
       "id": "q-0183",
       "topic_key": "premium.overtime-deep-night",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -7696,6 +7880,7 @@
       "id": "q-0184",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -7737,6 +7922,7 @@
       "id": "q-0185",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7778,6 +7964,7 @@
       "id": "q-0186",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7819,6 +8006,7 @@
       "id": "q-0187",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -7860,6 +8048,7 @@
       "id": "q-0188",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7901,6 +8090,7 @@
       "id": "q-0189",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7942,6 +8132,7 @@
       "id": "q-0190",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -7983,6 +8174,7 @@
       "id": "q-0191",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8024,6 +8216,7 @@
       "id": "q-0192",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8065,6 +8258,7 @@
       "id": "q-0193",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8106,6 +8300,7 @@
       "id": "q-0194",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8147,6 +8342,7 @@
       "id": "q-0195",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8188,6 +8384,7 @@
       "id": "q-0196",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8229,6 +8426,7 @@
       "id": "q-0197",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8270,6 +8468,7 @@
       "id": "q-0198",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8311,6 +8510,7 @@
       "id": "q-0199",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8352,6 +8552,7 @@
       "id": "q-0200",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8393,6 +8594,7 @@
       "id": "q-0201",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8434,6 +8636,7 @@
       "id": "q-0202",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8475,6 +8678,7 @@
       "id": "q-0203",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8516,6 +8720,7 @@
       "id": "q-0204",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8557,6 +8762,7 @@
       "id": "q-0205",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8598,6 +8804,7 @@
       "id": "q-0206",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8639,6 +8846,7 @@
       "id": "q-0207",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8680,6 +8888,7 @@
       "id": "q-0208",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8721,6 +8930,7 @@
       "id": "q-0209",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8762,6 +8972,7 @@
       "id": "q-0210",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8803,6 +9014,7 @@
       "id": "q-0211",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8844,6 +9056,7 @@
       "id": "q-0212",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8885,6 +9098,7 @@
       "id": "q-0213",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8926,6 +9140,7 @@
       "id": "q-0214",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -8967,6 +9182,7 @@
       "id": "q-0215",
       "topic_key": "premium.rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9008,6 +9224,7 @@
       "id": "q-0216",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9049,6 +9266,7 @@
       "id": "q-0217",
       "topic_key": "premium.rates",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9090,6 +9308,7 @@
       "id": "q-0218",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9131,6 +9350,7 @@
       "id": "q-0219",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9172,6 +9392,7 @@
       "id": "q-0220",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9213,6 +9434,7 @@
       "id": "q-0221",
       "topic_key": "premium.rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9254,6 +9476,7 @@
       "id": "q-0222",
       "topic_key": "premium.rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9295,6 +9518,7 @@
       "id": "q-0223",
       "topic_key": "premium.rounding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9336,6 +9560,7 @@
       "id": "q-0224",
       "topic_key": "premium.rounding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9377,6 +9602,7 @@
       "id": "q-0225",
       "topic_key": "premium.rounding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9418,6 +9644,7 @@
       "id": "q-0226",
       "topic_key": "premium.rounding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9459,6 +9686,7 @@
       "id": "q-0227",
       "topic_key": "premium.rounding",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9500,6 +9728,7 @@
       "id": "q-0228",
       "topic_key": "premium.rounding",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9541,6 +9770,7 @@
       "id": "q-0229",
       "topic_key": "premium.rounding",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9582,6 +9812,7 @@
       "id": "q-0230",
       "topic_key": "premium.rounding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9623,6 +9854,7 @@
       "id": "q-0231",
       "topic_key": "premium.rounding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9664,6 +9896,7 @@
       "id": "q-0232",
       "topic_key": "premium.rounding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9705,6 +9938,7 @@
       "id": "q-0233",
       "topic_key": "premium.time-unit",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9746,6 +9980,7 @@
       "id": "q-0234",
       "topic_key": "premium.time-unit",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9787,6 +10022,7 @@
       "id": "q-0235",
       "topic_key": "premium.time-unit",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9828,6 +10064,7 @@
       "id": "q-0236",
       "topic_key": "premium.time-unit",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9869,6 +10106,7 @@
       "id": "q-0237",
       "topic_key": "wage.absence-proration",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -9910,6 +10148,7 @@
       "id": "q-0238",
       "topic_key": "wage.absence-proration",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9951,6 +10190,7 @@
       "id": "q-0239",
       "topic_key": "wage.absence-proration",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -9992,6 +10232,7 @@
       "id": "q-0240",
       "topic_key": "wage.absence-proration",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10033,6 +10274,7 @@
       "id": "q-0241",
       "topic_key": "wage.absence-proration",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10074,6 +10316,7 @@
       "id": "q-0242",
       "topic_key": "wage.absence-proration",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10115,6 +10358,7 @@
       "id": "q-0243",
       "topic_key": "wage.absence-proration",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -10156,6 +10400,7 @@
       "id": "q-0244",
       "topic_key": "wage.absence-proration",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10197,6 +10442,7 @@
       "id": "q-0245",
       "topic_key": "wage.absence-proration",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10238,6 +10484,7 @@
       "id": "q-0246",
       "topic_key": "wage.absence-proration",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -10279,6 +10526,7 @@
       "id": "q-0247",
       "topic_key": "wage.absence-proration",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "overtime"
       ],
@@ -10320,6 +10568,7 @@
       "id": "q-0248",
       "topic_key": "commute.car-distance-limit",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10363,6 +10612,7 @@
       "id": "q-0249",
       "topic_key": "commute.car-distance-limit",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10409,6 +10659,7 @@
       "id": "q-0250",
       "topic_key": "commute.car-under-2km",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10452,6 +10703,7 @@
       "id": "q-0251",
       "topic_key": "commute.car-under-2km",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10498,6 +10750,7 @@
       "id": "q-0252",
       "topic_key": "commute.public-transport-limit",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10541,6 +10794,7 @@
       "id": "q-0253",
       "topic_key": "commute.public-transport-limit",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting"
@@ -10587,6 +10841,7 @@
       "id": "q-0254",
       "topic_key": "commute.tax-vs-social-insurance",
       "role": "misconception",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting",
@@ -10629,6 +10884,7 @@
       "id": "q-0255",
       "topic_key": "commute.tax-vs-social-insurance",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "commuting",
@@ -10674,6 +10930,7 @@
       "id": "q-0256",
       "topic_key": "payroll.absence-vs-disciplinary-reduction",
       "role": "misconception",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -10718,6 +10975,7 @@
       "id": "q-0257",
       "topic_key": "payroll.absence-vs-disciplinary-reduction",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -10762,6 +11020,7 @@
       "id": "q-0258",
       "topic_key": "payroll.annual-workflow",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -10803,6 +11062,7 @@
       "id": "q-0259",
       "topic_key": "payroll.annual-workflow",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -10844,6 +11104,7 @@
       "id": "q-0260",
       "topic_key": "payroll.annual-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -10885,6 +11146,7 @@
       "id": "q-0261",
       "topic_key": "payroll.mynumber-handling",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "my_number"
@@ -10929,6 +11191,7 @@
       "id": "q-0262",
       "topic_key": "payroll.mynumber-handling",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "my_number"
@@ -10973,6 +11236,7 @@
       "id": "q-0263",
       "topic_key": "payroll.pay-cycle",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11014,6 +11278,7 @@
       "id": "q-0264",
       "topic_key": "payroll.pay-cycle",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11055,6 +11320,7 @@
       "id": "q-0265",
       "topic_key": "payroll.pay-cycle",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11096,6 +11362,7 @@
       "id": "q-0266",
       "topic_key": "payroll.payslip",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11137,6 +11404,7 @@
       "id": "q-0267",
       "topic_key": "payroll.payslip",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11178,6 +11446,7 @@
       "id": "q-0268",
       "topic_key": "payroll.payslip",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11219,6 +11488,7 @@
       "id": "q-0269",
       "topic_key": "payroll.payslip",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -11260,6 +11530,7 @@
       "id": "q-0270",
       "topic_key": "payroll.workflow",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -11301,6 +11572,7 @@
       "id": "q-0271",
       "topic_key": "payroll.workflow",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -11342,6 +11614,7 @@
       "id": "q-0272",
       "topic_key": "payroll.workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -11383,6 +11656,7 @@
       "id": "q-0273",
       "topic_key": "payroll.workflow",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11424,6 +11698,7 @@
       "id": "q-0274",
       "topic_key": "payroll.workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -11465,6 +11740,7 @@
       "id": "q-0275",
       "topic_key": "payroll.workflow",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -11506,6 +11782,7 @@
       "id": "q-0276",
       "topic_key": "wage.average",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11547,6 +11824,7 @@
       "id": "q-0277",
       "topic_key": "wage.average",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11588,6 +11866,7 @@
       "id": "q-0278",
       "topic_key": "wage.average",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11629,6 +11908,7 @@
       "id": "q-0279",
       "topic_key": "wage.average",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11670,6 +11950,7 @@
       "id": "q-0280",
       "topic_key": "wage.average",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11711,6 +11992,7 @@
       "id": "q-0281",
       "topic_key": "wage.average",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11752,6 +12034,7 @@
       "id": "q-0282",
       "topic_key": "wage.average",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11793,6 +12076,7 @@
       "id": "q-0283",
       "topic_key": "wage.average",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11834,6 +12118,7 @@
       "id": "q-0284",
       "topic_key": "wage.average",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -11875,6 +12160,7 @@
       "id": "q-0285",
       "topic_key": "wage.average",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11916,6 +12202,7 @@
       "id": "q-0286",
       "topic_key": "wage.average-leave-allowance",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11957,6 +12244,7 @@
       "id": "q-0287",
       "topic_key": "wage.average-leave-allowance",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -11998,6 +12286,7 @@
       "id": "q-0288",
       "topic_key": "wage.average-leave-allowance",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12039,6 +12328,7 @@
       "id": "q-0289",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12080,6 +12370,7 @@
       "id": "q-0290",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12121,6 +12412,7 @@
       "id": "q-0291",
       "topic_key": "wage.definition",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12162,6 +12454,7 @@
       "id": "q-0292",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12203,6 +12496,7 @@
       "id": "q-0293",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12244,6 +12538,7 @@
       "id": "q-0294",
       "topic_key": "wage.definition",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12285,6 +12580,7 @@
       "id": "q-0295",
       "topic_key": "wage.definition",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12326,6 +12622,7 @@
       "id": "q-0296",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12367,6 +12664,7 @@
       "id": "q-0297",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12408,6 +12706,7 @@
       "id": "q-0298",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12449,6 +12748,7 @@
       "id": "q-0299",
       "topic_key": "wage.definition",
       "role": "misconception",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12490,6 +12790,7 @@
       "id": "q-0300",
       "topic_key": "wage.definition",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12531,6 +12832,7 @@
       "id": "q-0301",
       "topic_key": "wage.definition",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -12572,6 +12874,7 @@
       "id": "q-0302",
       "topic_key": "wage.digital",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "digital_wage"
       ],
@@ -12613,6 +12916,7 @@
       "id": "q-0303",
       "topic_key": "wage.digital",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "digital_wage"
       ],
@@ -12654,6 +12958,7 @@
       "id": "q-0304",
       "topic_key": "wage.digital",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "digital_wage"
       ],
@@ -12695,6 +13000,7 @@
       "id": "q-0305",
       "topic_key": "wage.digital",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "digital_wage"
       ],
@@ -12736,6 +13042,7 @@
       "id": "q-0306",
       "topic_key": "wage.minimum",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "minimum_wage"
       ],
@@ -12777,6 +13084,7 @@
       "id": "q-0307",
       "topic_key": "wage.minimum",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "minimum_wage"
       ],
@@ -12818,6 +13126,7 @@
       "id": "q-0308",
       "topic_key": "wage.minimum",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "minimum_wage"
       ],
@@ -12859,6 +13168,7 @@
       "id": "q-0309",
       "topic_key": "wage.minimum",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "minimum_wage"
       ],
@@ -12900,6 +13210,7 @@
       "id": "q-0310",
       "topic_key": "wage.payment-deductions",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12941,6 +13252,7 @@
       "id": "q-0311",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -12982,6 +13294,7 @@
       "id": "q-0312",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13023,6 +13336,7 @@
       "id": "q-0313",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13064,6 +13378,7 @@
       "id": "q-0314",
       "topic_key": "wage.payment-deductions",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13105,6 +13420,7 @@
       "id": "q-0315",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13146,6 +13462,7 @@
       "id": "q-0316",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13187,6 +13504,7 @@
       "id": "q-0317",
       "topic_key": "wage.payment-deductions",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13228,6 +13546,7 @@
       "id": "q-0318",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13269,6 +13588,7 @@
       "id": "q-0319",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13310,6 +13630,7 @@
       "id": "q-0320",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13351,6 +13672,7 @@
       "id": "q-0321",
       "topic_key": "wage.payment-deductions",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13392,6 +13714,7 @@
       "id": "q-0322",
       "topic_key": "wage.payment-deductions",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13433,6 +13756,7 @@
       "id": "q-0323",
       "topic_key": "wage.payment-deductions",
       "role": "misconception",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13474,6 +13798,7 @@
       "id": "q-0324",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13515,6 +13840,7 @@
       "id": "q-0325",
       "topic_key": "wage.payment-deductions",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13556,6 +13882,7 @@
       "id": "q-0326",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13597,6 +13924,7 @@
       "id": "q-0327",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13638,6 +13966,7 @@
       "id": "q-0328",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "digital_wage"
       ],
@@ -13679,6 +14008,7 @@
       "id": "q-0329",
       "topic_key": "wage.payment-deductions",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "digital_wage"
       ],
@@ -13720,6 +14050,7 @@
       "id": "q-0330",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13761,6 +14092,7 @@
       "id": "q-0331",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13802,6 +14134,7 @@
       "id": "q-0332",
       "topic_key": "wage.payment-deductions",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -13843,6 +14176,7 @@
       "id": "q-0333",
       "topic_key": "wage.payment-deductions",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13884,6 +14218,7 @@
       "id": "q-0334",
       "topic_key": "wage.piecework",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13925,6 +14260,7 @@
       "id": "q-0335",
       "topic_key": "wage.records",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -13966,6 +14302,7 @@
       "id": "q-0336",
       "topic_key": "wage.records",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -14007,6 +14344,7 @@
       "id": "q-0337",
       "topic_key": "wage.records",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -14048,6 +14386,7 @@
       "id": "q-0338",
       "topic_key": "wage.records",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14089,6 +14428,7 @@
       "id": "q-0339",
       "topic_key": "wage.records",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14130,6 +14470,7 @@
       "id": "q-0340",
       "topic_key": "wage.rounding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "rounding"
       ],
@@ -14171,6 +14512,7 @@
       "id": "q-0341",
       "topic_key": "wage.rounding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "rounding"
       ],
@@ -14212,6 +14554,7 @@
       "id": "q-0342",
       "topic_key": "wage.schedule-emergency",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14253,6 +14596,7 @@
       "id": "q-0343",
       "topic_key": "wage.schedule-emergency",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -14294,6 +14638,7 @@
       "id": "q-0344",
       "topic_key": "wage.schedule-emergency",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "labor_standards"
       ],
@@ -14335,6 +14680,7 @@
       "id": "q-0345",
       "topic_key": "wage.schedule-emergency",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14376,6 +14722,7 @@
       "id": "q-0346",
       "topic_key": "wage.schedule-emergency",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14417,6 +14764,7 @@
       "id": "q-0347",
       "topic_key": "wage.schedule-emergency",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -14458,6 +14806,7 @@
       "id": "q-0348",
       "topic_key": "exam.scope",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -14499,6 +14848,7 @@
       "id": "q-0349",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -14540,6 +14890,7 @@
       "id": "q-0350",
       "topic_key": "tax.dependents",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -14581,6 +14932,7 @@
       "id": "q-0351",
       "topic_key": "tax.dependents",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -14622,6 +14974,7 @@
       "id": "q-0352",
       "topic_key": "tax.dependents",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14663,6 +15016,7 @@
       "id": "q-0353",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14704,6 +15058,7 @@
       "id": "q-0354",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14745,6 +15100,7 @@
       "id": "q-0355",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14786,6 +15142,7 @@
       "id": "q-0356",
       "topic_key": "tax.dependents",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14827,6 +15184,7 @@
       "id": "q-0357",
       "topic_key": "tax.dependents",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14868,6 +15226,7 @@
       "id": "q-0358",
       "topic_key": "tax.dependents",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14909,6 +15268,7 @@
       "id": "q-0359",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -14950,6 +15310,7 @@
       "id": "q-0360",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -14991,6 +15352,7 @@
       "id": "q-0361",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15032,6 +15394,7 @@
       "id": "q-0362",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15073,6 +15436,7 @@
       "id": "q-0363",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -15114,6 +15478,7 @@
       "id": "q-0364",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "resident_tax"
       ],
@@ -15155,6 +15520,7 @@
       "id": "q-0365",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15196,6 +15562,7 @@
       "id": "q-0366",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15237,6 +15604,7 @@
       "id": "q-0367",
       "topic_key": "tax.resident",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15278,6 +15646,7 @@
       "id": "q-0368",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15319,6 +15688,7 @@
       "id": "q-0369",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "resident_tax"
       ],
@@ -15360,6 +15730,7 @@
       "id": "q-0370",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15401,6 +15772,7 @@
       "id": "q-0371",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15442,6 +15814,7 @@
       "id": "q-0372",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -15483,6 +15856,7 @@
       "id": "q-0373",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -15524,6 +15898,7 @@
       "id": "q-0374",
       "topic_key": "tax.withholding-table",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15565,6 +15940,7 @@
       "id": "q-0375",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15606,6 +15982,7 @@
       "id": "q-0376",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -15647,6 +16024,7 @@
       "id": "q-0377",
       "topic_key": "tax.withholding-table",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -15688,6 +16066,7 @@
       "id": "q-0378",
       "topic_key": "tax.withholding-table",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15729,6 +16108,7 @@
       "id": "q-0379",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15770,6 +16150,7 @@
       "id": "q-0380",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15811,6 +16192,7 @@
       "id": "q-0381",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15852,6 +16234,7 @@
       "id": "q-0382",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15893,6 +16276,7 @@
       "id": "q-0383",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -15934,6 +16318,7 @@
       "id": "q-0384",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -15975,6 +16360,7 @@
       "id": "q-0385",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16016,6 +16402,7 @@
       "id": "q-0386",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16057,6 +16444,7 @@
       "id": "q-0387",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16098,6 +16486,7 @@
       "id": "q-0388",
       "topic_key": "withholding.declaration-timing",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16139,6 +16528,7 @@
       "id": "q-0389",
       "topic_key": "withholding.declaration-timing",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16183,6 +16573,7 @@
       "id": "q-0390",
       "topic_key": "withholding.table-base",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16224,6 +16615,7 @@
       "id": "q-0391",
       "topic_key": "withholding.table-base",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16270,6 +16662,7 @@
       "id": "q-0392",
       "topic_key": "withholding.table-column",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16311,6 +16704,7 @@
       "id": "q-0393",
       "topic_key": "withholding.table-column",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16357,6 +16751,7 @@
       "id": "q-0394",
       "topic_key": "bonus.withholding-method",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16400,6 +16795,7 @@
       "id": "q-0395",
       "topic_key": "bonus.withholding-method",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -16447,6 +16843,7 @@
       "id": "q-0396",
       "topic_key": "exam.scope",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -16488,6 +16885,7 @@
       "id": "q-0397",
       "topic_key": "resident-tax.collection-period",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "resident_tax"
@@ -16529,6 +16927,7 @@
       "id": "q-0398",
       "topic_key": "resident-tax.collection-period",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "resident_tax"
@@ -16573,6 +16972,7 @@
       "id": "q-0399",
       "topic_key": "resident-tax.notified-amount",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "resident_tax"
@@ -16614,6 +17014,7 @@
       "id": "q-0400",
       "topic_key": "resident-tax.notified-amount",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "resident_tax"
@@ -16658,6 +17059,7 @@
       "id": "q-0401",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16699,6 +17101,7 @@
       "id": "q-0402",
       "topic_key": "tax.dependents",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16740,6 +17143,7 @@
       "id": "q-0403",
       "topic_key": "tax.dependents",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16781,6 +17185,7 @@
       "id": "q-0404",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -16822,6 +17227,7 @@
       "id": "q-0405",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16863,6 +17269,7 @@
       "id": "q-0406",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -16904,6 +17311,7 @@
       "id": "q-0407",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -16945,6 +17353,7 @@
       "id": "q-0408",
       "topic_key": "tax.income-nontaxable",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -16986,6 +17395,7 @@
       "id": "q-0409",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -17027,6 +17437,7 @@
       "id": "q-0410",
       "topic_key": "tax.income-nontaxable",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -17068,6 +17479,7 @@
       "id": "q-0411",
       "topic_key": "tax.income-nontaxable",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -17109,6 +17521,7 @@
       "id": "q-0412",
       "topic_key": "tax.income-nontaxable",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -17150,6 +17563,7 @@
       "id": "q-0413",
       "topic_key": "tax.income-nontaxable",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "commuting"
       ],
@@ -17191,6 +17605,7 @@
       "id": "q-0414",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17232,6 +17647,7 @@
       "id": "q-0415",
       "topic_key": "tax.resident",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17273,6 +17689,7 @@
       "id": "q-0416",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17314,6 +17731,7 @@
       "id": "q-0417",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17355,6 +17773,7 @@
       "id": "q-0418",
       "topic_key": "tax.resident",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17396,6 +17815,7 @@
       "id": "q-0419",
       "topic_key": "tax.resident",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17437,6 +17857,7 @@
       "id": "q-0420",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17478,6 +17899,7 @@
       "id": "q-0421",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17519,6 +17941,7 @@
       "id": "q-0422",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17560,6 +17983,7 @@
       "id": "q-0423",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17601,6 +18025,7 @@
       "id": "q-0424",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17642,6 +18067,7 @@
       "id": "q-0425",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17683,6 +18109,7 @@
       "id": "q-0426",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17724,6 +18151,7 @@
       "id": "q-0427",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17765,6 +18193,7 @@
       "id": "q-0428",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17806,6 +18235,7 @@
       "id": "q-0429",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17847,6 +18277,7 @@
       "id": "q-0430",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17888,6 +18319,7 @@
       "id": "q-0431",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17929,6 +18361,7 @@
       "id": "q-0432",
       "topic_key": "tax.resident",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -17970,6 +18403,7 @@
       "id": "q-0433",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18011,6 +18445,7 @@
       "id": "q-0434",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18052,6 +18487,7 @@
       "id": "q-0435",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18093,6 +18529,7 @@
       "id": "q-0436",
       "topic_key": "tax.resident",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18134,6 +18571,7 @@
       "id": "q-0437",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18175,6 +18613,7 @@
       "id": "q-0438",
       "topic_key": "tax.resident",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -18216,6 +18655,7 @@
       "id": "q-0439",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18257,6 +18697,7 @@
       "id": "q-0440",
       "topic_key": "tax.withholding-table",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18298,6 +18739,7 @@
       "id": "q-0441",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18339,6 +18781,7 @@
       "id": "q-0442",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18380,6 +18823,7 @@
       "id": "q-0443",
       "topic_key": "tax.withholding-table",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18421,6 +18865,7 @@
       "id": "q-0444",
       "topic_key": "tax.withholding-table",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18462,6 +18907,7 @@
       "id": "q-0445",
       "topic_key": "tax.withholding-table",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18503,6 +18949,7 @@
       "id": "q-0446",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18544,6 +18991,7 @@
       "id": "q-0447",
       "topic_key": "tax.withholding-table",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18585,6 +19033,7 @@
       "id": "q-0448",
       "topic_key": "tax.withholding-table",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18626,6 +19075,7 @@
       "id": "q-0449",
       "topic_key": "tax.withholding-table",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -18667,6 +19117,7 @@
       "id": "q-0450",
       "topic_key": "social.care",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "care_insurance"
       ],
@@ -18708,6 +19159,7 @@
       "id": "q-0451",
       "topic_key": "social.health-benefits",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18750,6 +19202,7 @@
       "id": "q-0452",
       "topic_key": "social.health-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18792,6 +19245,7 @@
       "id": "q-0453",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18834,6 +19288,7 @@
       "id": "q-0454",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18876,6 +19331,7 @@
       "id": "q-0455",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18918,6 +19374,7 @@
       "id": "q-0456",
       "topic_key": "social.health-insurers",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -18960,6 +19417,7 @@
       "id": "q-0457",
       "topic_key": "social.pension-grade-range",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -19001,6 +19459,7 @@
       "id": "q-0458",
       "topic_key": "social.pension-grade-range",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -19047,6 +19506,7 @@
       "id": "q-0459",
       "topic_key": "social.pension-insured-benefits",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -19089,6 +19549,7 @@
       "id": "q-0460",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -19131,6 +19592,7 @@
       "id": "q-0461",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview",
         "health_benefits"
@@ -19173,6 +19635,7 @@
       "id": "q-0462",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "regular_determination"
@@ -19214,6 +19677,7 @@
       "id": "q-0463",
       "topic_key": "social.regular-determination",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "regular_determination"
@@ -19259,6 +19723,7 @@
       "id": "q-0464",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -19300,6 +19765,7 @@
       "id": "q-0465",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19341,6 +19807,7 @@
       "id": "q-0466",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -19382,6 +19849,7 @@
       "id": "q-0467",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19423,6 +19891,7 @@
       "id": "q-0468",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19464,6 +19933,7 @@
       "id": "q-0469",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19505,6 +19975,7 @@
       "id": "q-0470",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19546,6 +20017,7 @@
       "id": "q-0471",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19587,6 +20059,7 @@
       "id": "q-0472",
       "topic_key": "social.remuneration-rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19628,6 +20101,7 @@
       "id": "q-0473",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19669,6 +20143,7 @@
       "id": "q-0474",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -19710,6 +20185,7 @@
       "id": "q-0475",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19752,6 +20228,7 @@
       "id": "q-0476",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19794,6 +20271,7 @@
       "id": "q-0477",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19836,6 +20314,7 @@
       "id": "q-0478",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19878,6 +20357,7 @@
       "id": "q-0479",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19920,6 +20400,7 @@
       "id": "q-0480",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -19962,6 +20443,7 @@
       "id": "q-0481",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20004,6 +20486,7 @@
       "id": "q-0482",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20046,6 +20529,7 @@
       "id": "q-0483",
       "topic_key": "social.remuneration-rates",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20088,6 +20572,7 @@
       "id": "q-0484",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20130,6 +20615,7 @@
       "id": "q-0485",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20172,6 +20658,7 @@
       "id": "q-0486",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20214,6 +20701,7 @@
       "id": "q-0487",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20256,6 +20744,7 @@
       "id": "q-0488",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20298,6 +20787,7 @@
       "id": "q-0489",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20340,6 +20830,7 @@
       "id": "q-0490",
       "topic_key": "social.remuneration-rates",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -20382,6 +20873,7 @@
       "id": "q-0491",
       "topic_key": "social.remuneration-scope",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -20423,6 +20915,7 @@
       "id": "q-0492",
       "topic_key": "social.remuneration-scope",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -20467,6 +20960,7 @@
       "id": "q-0493",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "short_worker"
       ],
@@ -20508,6 +21002,7 @@
       "id": "q-0494",
       "topic_key": "social.short-worker",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "short_worker"
       ],
@@ -20549,6 +21044,7 @@
       "id": "q-0495",
       "topic_key": "social.short-worker",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20590,6 +21086,7 @@
       "id": "q-0496",
       "topic_key": "social.short-worker",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20631,6 +21128,7 @@
       "id": "q-0497",
       "topic_key": "social.short-worker",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20672,6 +21170,7 @@
       "id": "q-0498",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20713,6 +21212,7 @@
       "id": "q-0499",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20754,6 +21254,7 @@
       "id": "q-0500",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20795,6 +21296,7 @@
       "id": "q-0501",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "short_worker"
       ],
@@ -20836,6 +21338,7 @@
       "id": "q-0502",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -20877,6 +21380,7 @@
       "id": "q-0503",
       "topic_key": "social.workplaces",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "short_worker"
       ],
@@ -20918,6 +21422,7 @@
       "id": "q-0504",
       "topic_key": "social.base-days",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "monthly_revision"
@@ -20959,6 +21464,7 @@
       "id": "q-0505",
       "topic_key": "social.base-days",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "monthly_revision"
@@ -21003,6 +21509,7 @@
       "id": "q-0506",
       "topic_key": "social.dependents",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "dependents"
       ],
@@ -21044,6 +21551,7 @@
       "id": "q-0507",
       "topic_key": "social.dependents",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "dependents"
       ],
@@ -21085,6 +21593,7 @@
       "id": "q-0508",
       "topic_key": "social.dependents",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "dependents"
       ],
@@ -21126,6 +21635,7 @@
       "id": "q-0509",
       "topic_key": "social.dependents",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -21167,6 +21677,7 @@
       "id": "q-0510",
       "topic_key": "social.dependents",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -21208,6 +21719,7 @@
       "id": "q-0511",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21249,6 +21761,7 @@
       "id": "q-0512",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21290,6 +21803,7 @@
       "id": "q-0513",
       "topic_key": "social.leave-exemption",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21331,6 +21845,7 @@
       "id": "q-0514",
       "topic_key": "social.leave-exemption",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21372,6 +21887,7 @@
       "id": "q-0515",
       "topic_key": "social.leave-exemption",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21413,6 +21929,7 @@
       "id": "q-0516",
       "topic_key": "social.leave-exemption",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -21454,6 +21971,7 @@
       "id": "q-0517",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21495,6 +22013,7 @@
       "id": "q-0518",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21536,6 +22055,7 @@
       "id": "q-0519",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21577,6 +22097,7 @@
       "id": "q-0520",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21618,6 +22139,7 @@
       "id": "q-0521",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21659,6 +22181,7 @@
       "id": "q-0522",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21700,6 +22223,7 @@
       "id": "q-0523",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21741,6 +22265,7 @@
       "id": "q-0524",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21782,6 +22307,7 @@
       "id": "q-0525",
       "topic_key": "social.monthly-revision",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21823,6 +22349,7 @@
       "id": "q-0526",
       "topic_key": "social.monthly-revision",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21864,6 +22391,7 @@
       "id": "q-0527",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21905,6 +22433,7 @@
       "id": "q-0528",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21946,6 +22475,7 @@
       "id": "q-0529",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -21987,6 +22517,7 @@
       "id": "q-0530",
       "topic_key": "social.monthly-revision-requirements",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "monthly_revision"
@@ -22028,6 +22559,7 @@
       "id": "q-0531",
       "topic_key": "social.monthly-revision-requirements",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "monthly_revision"
@@ -22072,6 +22604,7 @@
       "id": "q-0532",
       "topic_key": "social.qualification",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22114,6 +22647,7 @@
       "id": "q-0533",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22156,6 +22690,7 @@
       "id": "q-0534",
       "topic_key": "social.qualification",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22198,6 +22733,7 @@
       "id": "q-0535",
       "topic_key": "social.qualification",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22240,6 +22776,7 @@
       "id": "q-0536",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22282,6 +22819,7 @@
       "id": "q-0537",
       "topic_key": "social.qualification",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22324,6 +22862,7 @@
       "id": "q-0538",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22366,6 +22905,7 @@
       "id": "q-0539",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22408,6 +22948,7 @@
       "id": "q-0540",
       "topic_key": "social.qualification",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22450,6 +22991,7 @@
       "id": "q-0541",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22492,6 +23034,7 @@
       "id": "q-0542",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -22534,6 +23077,7 @@
       "id": "q-0543",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22575,6 +23119,7 @@
       "id": "q-0544",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -22616,6 +23161,7 @@
       "id": "q-0545",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22657,6 +23203,7 @@
       "id": "q-0546",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22698,6 +23245,7 @@
       "id": "q-0547",
       "topic_key": "social.regular-determination",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22739,6 +23287,7 @@
       "id": "q-0548",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -22780,6 +23329,7 @@
       "id": "q-0549",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22821,6 +23371,7 @@
       "id": "q-0550",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -22862,6 +23413,7 @@
       "id": "q-0551",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22903,6 +23455,7 @@
       "id": "q-0552",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22944,6 +23497,7 @@
       "id": "q-0553",
       "topic_key": "social.regular-determination",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -22985,6 +23539,7 @@
       "id": "q-0554",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -23026,6 +23581,7 @@
       "id": "q-0555",
       "topic_key": "employment.benefits",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "employment_benefits"
       ],
@@ -23067,6 +23623,7 @@
       "id": "q-0556",
       "topic_key": "employment.benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -23108,6 +23665,7 @@
       "id": "q-0557",
       "topic_key": "employment.benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -23149,6 +23707,7 @@
       "id": "q-0558",
       "topic_key": "employment.benefits",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "employment_benefits"
       ],
@@ -23190,6 +23749,7 @@
       "id": "q-0559",
       "topic_key": "labor.workers-comp",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "workers_comp"
       ],
@@ -23231,6 +23791,7 @@
       "id": "q-0560",
       "topic_key": "labor.workers-comp",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "workers_comp"
       ],
@@ -23272,6 +23833,7 @@
       "id": "q-0561",
       "topic_key": "labor.workers-comp",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "workers_comp"
       ],
@@ -23313,6 +23875,7 @@
       "id": "q-0562",
       "topic_key": "labor.workers-comp",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "workers_comp"
       ],
@@ -23354,6 +23917,7 @@
       "id": "q-0563",
       "topic_key": "payroll.my-number",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "my_number"
       ],
@@ -23395,6 +23959,7 @@
       "id": "q-0564",
       "topic_key": "rates.child-support-fund",
       "role": "misconception",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026",
@@ -23439,6 +24004,7 @@
       "id": "q-0565",
       "topic_key": "rates.child-support-fund",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026",
@@ -23486,6 +24052,7 @@
       "id": "q-0566",
       "topic_key": "rates.employee-pension",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -23529,6 +24096,7 @@
       "id": "q-0567",
       "topic_key": "rates.employee-pension",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -23575,6 +24143,7 @@
       "id": "q-0568",
       "topic_key": "rates.employment-insurance",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "employment_rates_2026"
@@ -23618,6 +24187,7 @@
       "id": "q-0569",
       "topic_key": "rates.employment-insurance",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "employment_rates_2026"
@@ -23664,6 +24234,7 @@
       "id": "q-0570",
       "topic_key": "rates.health-insurance-tokyo",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -23707,6 +24278,7 @@
       "id": "q-0571",
       "topic_key": "rates.health-insurance-tokyo",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -23753,6 +24325,7 @@
       "id": "q-0572",
       "topic_key": "social.care",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "care_insurance"
       ],
@@ -23794,6 +24367,7 @@
       "id": "q-0573",
       "topic_key": "social.care",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "care_insurance"
       ],
@@ -23835,6 +24409,7 @@
       "id": "q-0574",
       "topic_key": "social.care",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "care_insurance"
       ],
@@ -23876,6 +24451,7 @@
       "id": "q-0575",
       "topic_key": "social.care",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "care_insurance"
       ],
@@ -23917,6 +24493,7 @@
       "id": "q-0576",
       "topic_key": "social.care-insurance-age",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -23960,6 +24537,7 @@
       "id": "q-0577",
       "topic_key": "social.care-insurance-age",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -24006,6 +24584,7 @@
       "id": "q-0578",
       "topic_key": "social.employment-procedures",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss",
@@ -24049,6 +24628,7 @@
       "id": "q-0579",
       "topic_key": "social.employment-procedures",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss",
@@ -24092,6 +24672,7 @@
       "id": "q-0580",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24133,6 +24714,7 @@
       "id": "q-0581",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24174,6 +24756,7 @@
       "id": "q-0582",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24215,6 +24798,7 @@
       "id": "q-0583",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24256,6 +24840,7 @@
       "id": "q-0584",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24297,6 +24882,7 @@
       "id": "q-0585",
       "topic_key": "social.health-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24338,6 +24924,7 @@
       "id": "q-0586",
       "topic_key": "social.health-insurers",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "health_benefits"
       ],
@@ -24379,6 +24966,7 @@
       "id": "q-0587",
       "topic_key": "social.health-insurers",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "health_benefits"
       ],
@@ -24420,6 +25008,7 @@
       "id": "q-0588",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -24461,6 +25050,7 @@
       "id": "q-0589",
       "topic_key": "social.pension-insured-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24502,6 +25092,7 @@
       "id": "q-0590",
       "topic_key": "social.pension-insured-benefits",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24543,6 +25134,7 @@
       "id": "q-0591",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24584,6 +25176,7 @@
       "id": "q-0592",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24625,6 +25218,7 @@
       "id": "q-0593",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24666,6 +25260,7 @@
       "id": "q-0594",
       "topic_key": "social.pension-insured-benefits",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24707,6 +25302,7 @@
       "id": "q-0595",
       "topic_key": "social.pension-insured-benefits",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24748,6 +25344,7 @@
       "id": "q-0596",
       "topic_key": "social.pension-insured-benefits",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -24789,6 +25386,7 @@
       "id": "q-0597",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -24831,6 +25429,7 @@
       "id": "q-0598",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -24873,6 +25472,7 @@
       "id": "q-0599",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -24915,6 +25515,7 @@
       "id": "q-0600",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -24957,6 +25558,7 @@
       "id": "q-0601",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -24999,6 +25601,7 @@
       "id": "q-0602",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25041,6 +25644,7 @@
       "id": "q-0603",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25083,6 +25687,7 @@
       "id": "q-0604",
       "topic_key": "social.remuneration-rates",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25125,6 +25730,7 @@
       "id": "q-0605",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25167,6 +25773,7 @@
       "id": "q-0606",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25209,6 +25816,7 @@
       "id": "q-0607",
       "topic_key": "social.remuneration-rates",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25251,6 +25859,7 @@
       "id": "q-0608",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25293,6 +25902,7 @@
       "id": "q-0609",
       "topic_key": "social.remuneration-rates",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -25335,6 +25945,7 @@
       "id": "q-0610",
       "topic_key": "social.retirement-health",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "retirement_health"
       ],
@@ -25376,6 +25987,7 @@
       "id": "q-0611",
       "topic_key": "social.retirement-health",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "retirement_health"
       ],
@@ -25417,6 +26029,7 @@
       "id": "q-0612",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25458,6 +26071,7 @@
       "id": "q-0613",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25499,6 +26113,7 @@
       "id": "q-0614",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25540,6 +26155,7 @@
       "id": "q-0615",
       "topic_key": "social.short-worker",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25581,6 +26197,7 @@
       "id": "q-0616",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25622,6 +26239,7 @@
       "id": "q-0617",
       "topic_key": "social.short-worker",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25663,6 +26281,7 @@
       "id": "q-0618",
       "topic_key": "social.short-worker",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25704,6 +26323,7 @@
       "id": "q-0619",
       "topic_key": "social.short-worker",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25745,6 +26365,7 @@
       "id": "q-0620",
       "topic_key": "social.short-worker",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "short_worker"
       ],
@@ -25786,6 +26407,7 @@
       "id": "q-0621",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -25827,6 +26449,7 @@
       "id": "q-0622",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -25868,6 +26491,7 @@
       "id": "q-0623",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -25909,6 +26533,7 @@
       "id": "q-0624",
       "topic_key": "social.workplaces",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "social_overview"
       ],
@@ -25950,6 +26575,7 @@
       "id": "q-0625",
       "topic_key": "bonus.standard-amount",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -25993,6 +26619,7 @@
       "id": "q-0626",
       "topic_key": "bonus.standard-amount",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -26039,6 +26666,7 @@
       "id": "q-0627",
       "topic_key": "social.dependents",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -26080,6 +26708,7 @@
       "id": "q-0628",
       "topic_key": "social.dependents",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "dependents"
       ],
@@ -26121,6 +26750,7 @@
       "id": "q-0629",
       "topic_key": "social.dependents",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -26162,6 +26792,7 @@
       "id": "q-0630",
       "topic_key": "social.dependents",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -26203,6 +26834,7 @@
       "id": "q-0631",
       "topic_key": "social.dependents",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "dependents"
       ],
@@ -26244,6 +26876,7 @@
       "id": "q-0632",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26285,6 +26918,7 @@
       "id": "q-0633",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26326,6 +26960,7 @@
       "id": "q-0634",
       "topic_key": "social.leave-exemption",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26367,6 +27002,7 @@
       "id": "q-0635",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26408,6 +27044,7 @@
       "id": "q-0636",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26449,6 +27086,7 @@
       "id": "q-0637",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26490,6 +27128,7 @@
       "id": "q-0638",
       "topic_key": "social.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -26531,6 +27170,7 @@
       "id": "q-0639",
       "topic_key": "social.loss-of-qualification-premium-month",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -26577,6 +27217,7 @@
       "id": "q-0640",
       "topic_key": "social.loss-of-qualification-premium-month",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "remuneration_scope"
@@ -26618,6 +27259,7 @@
       "id": "q-0641",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26659,6 +27301,7 @@
       "id": "q-0642",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26700,6 +27343,7 @@
       "id": "q-0643",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26741,6 +27385,7 @@
       "id": "q-0644",
       "topic_key": "social.monthly-revision",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26782,6 +27427,7 @@
       "id": "q-0645",
       "topic_key": "social.monthly-revision",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26823,6 +27469,7 @@
       "id": "q-0646",
       "topic_key": "social.monthly-revision",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26864,6 +27511,7 @@
       "id": "q-0647",
       "topic_key": "social.monthly-revision",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26905,6 +27553,7 @@
       "id": "q-0648",
       "topic_key": "social.monthly-revision",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "monthly_revision"
       ],
@@ -26946,6 +27595,7 @@
       "id": "q-0649",
       "topic_key": "social.short-worker-coverage",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "short_worker_coverage"
@@ -26987,6 +27637,7 @@
       "id": "q-0650",
       "topic_key": "social.short-worker-coverage",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "short_worker_coverage"
@@ -27032,6 +27683,7 @@
       "id": "q-0651",
       "topic_key": "social.acquisition-determination",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "acquisition_determination"
@@ -27076,6 +27728,7 @@
       "id": "q-0652",
       "topic_key": "social.acquisition-determination",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "acquisition_determination"
@@ -27120,6 +27773,7 @@
       "id": "q-0653",
       "topic_key": "social.qualification",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27162,6 +27816,7 @@
       "id": "q-0654",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27204,6 +27859,7 @@
       "id": "q-0655",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27246,6 +27902,7 @@
       "id": "q-0656",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27288,6 +27945,7 @@
       "id": "q-0657",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27330,6 +27988,7 @@
       "id": "q-0658",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27372,6 +28031,7 @@
       "id": "q-0659",
       "topic_key": "social.qualification",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27414,6 +28074,7 @@
       "id": "q-0660",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27456,6 +28117,7 @@
       "id": "q-0661",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27498,6 +28160,7 @@
       "id": "q-0662",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27540,6 +28203,7 @@
       "id": "q-0663",
       "topic_key": "social.qualification",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27582,6 +28246,7 @@
       "id": "q-0664",
       "topic_key": "social.qualification",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27624,6 +28289,7 @@
       "id": "q-0665",
       "topic_key": "social.qualification",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "qualification_acquisition",
         "qualification_loss"
@@ -27666,6 +28332,7 @@
       "id": "q-0666",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27707,6 +28374,7 @@
       "id": "q-0667",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27748,6 +28416,7 @@
       "id": "q-0668",
       "topic_key": "social.regular-determination",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27789,6 +28458,7 @@
       "id": "q-0669",
       "topic_key": "social.regular-determination",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27830,6 +28500,7 @@
       "id": "q-0670",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27871,6 +28542,7 @@
       "id": "q-0671",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination"
       ],
@@ -27912,6 +28584,7 @@
       "id": "q-0672",
       "topic_key": "social.regular-determination",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -27953,6 +28626,7 @@
       "id": "q-0673",
       "topic_key": "labor-insurance.annual-renewal",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_insurance",
@@ -28000,6 +28674,7 @@
       "id": "q-0674",
       "topic_key": "labor-insurance.annual-renewal",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_insurance",
@@ -28045,6 +28720,7 @@
       "id": "q-0675",
       "topic_key": "calculation.monthly-withholding",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -28097,6 +28773,7 @@
       "id": "q-0676",
       "topic_key": "calculation.monthly-withholding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026"
@@ -28151,6 +28828,7 @@
       "id": "q-0677",
       "topic_key": "calculation.overtime-pay",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -28210,6 +28888,7 @@
       "id": "q-0678",
       "topic_key": "calculation.overtime-pay",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "labor_standards"
@@ -28272,6 +28951,7 @@
       "id": "q-0679",
       "topic_key": "calculation.social-insurance",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"
@@ -28330,6 +29010,7 @@
       "id": "q-0680",
       "topic_key": "labor.insurance-calculation",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28371,6 +29052,7 @@
       "id": "q-0681",
       "topic_key": "labor.insurance-calculation",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28412,6 +29094,7 @@
       "id": "q-0682",
       "topic_key": "labor.insurance-calculation",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28453,6 +29136,7 @@
       "id": "q-0683",
       "topic_key": "labor.insurance-calculation",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28494,6 +29178,7 @@
       "id": "q-0684",
       "topic_key": "labor.insurance-calculation",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_insurance"
       ],
@@ -28535,6 +29220,7 @@
       "id": "q-0685",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope"
       ],
@@ -28576,6 +29262,7 @@
       "id": "q-0686",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -28617,6 +29304,7 @@
       "id": "q-0687",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -28658,6 +29346,7 @@
       "id": "q-0688",
       "topic_key": "payroll.integrated-components",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "commuting"
       ],
@@ -28699,6 +29388,7 @@
       "id": "q-0689",
       "topic_key": "payroll.integrated-components",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -28741,6 +29431,7 @@
       "id": "q-0690",
       "topic_key": "payroll.integrated-components",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -28783,6 +29474,7 @@
       "id": "q-0691",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28824,6 +29516,7 @@
       "id": "q-0692",
       "topic_key": "payroll.integrated-components",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -28865,6 +29558,7 @@
       "id": "q-0693",
       "topic_key": "payroll.integrated-components",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -28906,6 +29600,7 @@
       "id": "q-0694",
       "topic_key": "payroll.integrated-components",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -28947,6 +29642,7 @@
       "id": "q-0695",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -28988,6 +29684,7 @@
       "id": "q-0696",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -29029,6 +29726,7 @@
       "id": "q-0697",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "employment_benefits",
@@ -29073,6 +29771,7 @@
       "id": "q-0698",
       "topic_key": "payroll.integrated-components",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "labor_standards"
       ],
@@ -29114,6 +29813,7 @@
       "id": "q-0699",
       "topic_key": "payroll.integrated-workflow",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -29155,6 +29855,7 @@
       "id": "q-0700",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "overtime"
       ],
@@ -29196,6 +29897,7 @@
       "id": "q-0701",
       "topic_key": "payroll.integrated-workflow",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -29237,6 +29939,7 @@
       "id": "q-0702",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29278,6 +29981,7 @@
       "id": "q-0703",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29319,6 +30023,7 @@
       "id": "q-0704",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -29361,6 +30066,7 @@
       "id": "q-0705",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -29403,6 +30109,7 @@
       "id": "q-0706",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -29445,6 +30152,7 @@
       "id": "q-0707",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -29487,6 +30195,7 @@
       "id": "q-0708",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -29528,6 +30237,7 @@
       "id": "q-0709",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29569,6 +30279,7 @@
       "id": "q-0710",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29610,6 +30321,7 @@
       "id": "q-0711",
       "topic_key": "payroll.integrated-workflow",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29651,6 +30363,7 @@
       "id": "q-0712",
       "topic_key": "payroll.integrated-workflow",
       "role": "workflow",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -29692,6 +30405,7 @@
       "id": "q-0713",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29733,6 +30447,7 @@
       "id": "q-0714",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29774,6 +30489,7 @@
       "id": "q-0715",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -29815,6 +30531,7 @@
       "id": "q-0716",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -29856,6 +30573,7 @@
       "id": "q-0717",
       "topic_key": "payroll.integrated-workflow",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -29897,6 +30615,7 @@
       "id": "q-0718",
       "topic_key": "payroll.integrated-workflow",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -29938,6 +30657,7 @@
       "id": "q-0719",
       "topic_key": "payroll.integrated-workflow",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -29979,6 +30699,7 @@
       "id": "q-0720",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting"
       ],
@@ -30020,6 +30741,7 @@
       "id": "q-0721",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -30061,6 +30783,7 @@
       "id": "q-0722",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -30102,6 +30825,7 @@
       "id": "q-0723",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -30143,6 +30867,7 @@
       "id": "q-0724",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "commuting",
         "withholding"
@@ -30185,6 +30910,7 @@
       "id": "q-0725",
       "topic_key": "payroll.integrated-workflow",
       "role": "misconception",
+      "study_tier": "reinforcement",
       "source_keys": [
         "employment_benefits"
       ],
@@ -30226,6 +30952,7 @@
       "id": "q-0726",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -30267,6 +30994,7 @@
       "id": "q-0727",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination"
       ],
@@ -30308,6 +31036,7 @@
       "id": "q-0728",
       "topic_key": "payroll.integrated-workflow",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -30349,6 +31078,7 @@
       "id": "q-0729",
       "topic_key": "payroll.integrated-workflow",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -30390,6 +31120,7 @@
       "id": "q-0730",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -30431,6 +31162,7 @@
       "id": "q-0731",
       "topic_key": "payroll.integrated-workflow",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -30472,6 +31204,7 @@
       "id": "q-0732",
       "topic_key": "payroll.integrated-workflow",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -30513,6 +31246,7 @@
       "id": "q-0733",
       "topic_key": "payroll.integrated-workflow",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "exam_scope"
       ],
@@ -30554,6 +31288,7 @@
       "id": "q-0734",
       "topic_key": "social.premium-calculation",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30596,6 +31331,7 @@
       "id": "q-0735",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30638,6 +31374,7 @@
       "id": "q-0736",
       "topic_key": "social.premium-calculation",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30680,6 +31417,7 @@
       "id": "q-0737",
       "topic_key": "social.premium-calculation",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30722,6 +31460,7 @@
       "id": "q-0738",
       "topic_key": "social.premium-calculation",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30764,6 +31503,7 @@
       "id": "q-0739",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30806,6 +31546,7 @@
       "id": "q-0740",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30848,6 +31589,7 @@
       "id": "q-0741",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30890,6 +31632,7 @@
       "id": "q-0742",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30932,6 +31675,7 @@
       "id": "q-0743",
       "topic_key": "social.premium-calculation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -30974,6 +31718,7 @@
       "id": "q-0744",
       "topic_key": "social.premium-calculation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31016,6 +31761,7 @@
       "id": "q-0745",
       "topic_key": "social.premium-calculation",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31058,6 +31804,7 @@
       "id": "q-0746",
       "topic_key": "social.premium-calculation",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31100,6 +31847,7 @@
       "id": "q-0747",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31142,6 +31890,7 @@
       "id": "q-0748",
       "topic_key": "social.premium-calculation",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31184,6 +31933,7 @@
       "id": "q-0749",
       "topic_key": "social.premium-calculation",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31226,6 +31976,7 @@
       "id": "q-0750",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31268,6 +32019,7 @@
       "id": "q-0751",
       "topic_key": "social.premium-calculation",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31310,6 +32062,7 @@
       "id": "q-0752",
       "topic_key": "social.premium-calculation",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31352,6 +32105,7 @@
       "id": "q-0753",
       "topic_key": "social.premium-calculation",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31394,6 +32148,7 @@
       "id": "q-0754",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31436,6 +32191,7 @@
       "id": "q-0755",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31478,6 +32234,7 @@
       "id": "q-0756",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31520,6 +32277,7 @@
       "id": "q-0757",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31562,6 +32320,7 @@
       "id": "q-0758",
       "topic_key": "social.premium-calculation",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31604,6 +32363,7 @@
       "id": "q-0759",
       "topic_key": "social.premium-calculation",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31646,6 +32406,7 @@
       "id": "q-0760",
       "topic_key": "social.remuneration-application",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31688,6 +32449,7 @@
       "id": "q-0761",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31730,6 +32492,7 @@
       "id": "q-0762",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31772,6 +32535,7 @@
       "id": "q-0763",
       "topic_key": "social.remuneration-application",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31814,6 +32578,7 @@
       "id": "q-0764",
       "topic_key": "social.remuneration-application",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31856,6 +32621,7 @@
       "id": "q-0765",
       "topic_key": "social.remuneration-application",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31898,6 +32664,7 @@
       "id": "q-0766",
       "topic_key": "social.remuneration-application",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31940,6 +32707,7 @@
       "id": "q-0767",
       "topic_key": "social.remuneration-application",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -31982,6 +32750,7 @@
       "id": "q-0768",
       "topic_key": "social.remuneration-application",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32024,6 +32793,7 @@
       "id": "q-0769",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32066,6 +32836,7 @@
       "id": "q-0770",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32108,6 +32879,7 @@
       "id": "q-0771",
       "topic_key": "social.remuneration-application",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32150,6 +32922,7 @@
       "id": "q-0772",
       "topic_key": "social.remuneration-application",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32192,6 +32965,7 @@
       "id": "q-0773",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32234,6 +33008,7 @@
       "id": "q-0774",
       "topic_key": "social.remuneration-application",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32276,6 +33051,7 @@
       "id": "q-0775",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32318,6 +33094,7 @@
       "id": "q-0776",
       "topic_key": "social.remuneration-application",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "regular_determination",
         "social_rates"
@@ -32360,6 +33137,7 @@
       "id": "q-0777",
       "topic_key": "bonus.insurance",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32401,6 +33179,7 @@
       "id": "q-0778",
       "topic_key": "bonus.insurance",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32442,6 +33221,7 @@
       "id": "q-0779",
       "topic_key": "bonus.insurance",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32483,6 +33263,7 @@
       "id": "q-0780",
       "topic_key": "bonus.insurance",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32524,6 +33305,7 @@
       "id": "q-0781",
       "topic_key": "bonus.insurance",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32565,6 +33347,7 @@
       "id": "q-0782",
       "topic_key": "bonus.insurance",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32606,6 +33389,7 @@
       "id": "q-0783",
       "topic_key": "bonus.insurance",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32647,6 +33431,7 @@
       "id": "q-0784",
       "topic_key": "bonus.insurance",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32688,6 +33473,7 @@
       "id": "q-0785",
       "topic_key": "bonus.insurance",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32729,6 +33515,7 @@
       "id": "q-0786",
       "topic_key": "bonus.insurance",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32770,6 +33557,7 @@
       "id": "q-0787",
       "topic_key": "bonus.insurance",
       "role": "workflow",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32811,6 +33599,7 @@
       "id": "q-0788",
       "topic_key": "bonus.insurance",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32852,6 +33641,7 @@
       "id": "q-0789",
       "topic_key": "bonus.insurance",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32893,6 +33683,7 @@
       "id": "q-0790",
       "topic_key": "bonus.insurance",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -32934,6 +33725,7 @@
       "id": "q-0791",
       "topic_key": "bonus.leave-exemption",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -32975,6 +33767,7 @@
       "id": "q-0792",
       "topic_key": "bonus.leave-exemption",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -33016,6 +33809,7 @@
       "id": "q-0793",
       "topic_key": "bonus.leave-exemption",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -33057,6 +33851,7 @@
       "id": "q-0794",
       "topic_key": "bonus.leave-exemption",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -33098,6 +33893,7 @@
       "id": "q-0795",
       "topic_key": "bonus.leave-exemption",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "leave_exemption"
       ],
@@ -33139,6 +33935,7 @@
       "id": "q-0796",
       "topic_key": "bonus.leave-exemption",
       "role": "application",
+      "study_tier": "reinforcement",
       "source_keys": [
         "leave_exemption"
       ],
@@ -33180,6 +33977,7 @@
       "id": "q-0797",
       "topic_key": "bonus.net-pay",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "resident_tax"
       ],
@@ -33221,6 +34019,7 @@
       "id": "q-0798",
       "topic_key": "bonus.net-pay",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -33262,6 +34061,7 @@
       "id": "q-0799",
       "topic_key": "bonus.net-pay",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "resident_tax"
       ],
@@ -33303,6 +34103,7 @@
       "id": "q-0800",
       "topic_key": "bonus.net-pay",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance",
         "withholding"
@@ -33345,6 +34146,7 @@
       "id": "q-0801",
       "topic_key": "bonus.net-pay",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33386,6 +34188,7 @@
       "id": "q-0802",
       "topic_key": "bonus.net-pay",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -33427,6 +34230,7 @@
       "id": "q-0803",
       "topic_key": "bonus.standard",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33468,6 +34272,7 @@
       "id": "q-0804",
       "topic_key": "bonus.standard",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33509,6 +34314,7 @@
       "id": "q-0805",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33550,6 +34356,7 @@
       "id": "q-0806",
       "topic_key": "bonus.standard",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33591,6 +34398,7 @@
       "id": "q-0807",
       "topic_key": "bonus.standard",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33632,6 +34440,7 @@
       "id": "q-0808",
       "topic_key": "bonus.standard",
       "role": "recall",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33673,6 +34482,7 @@
       "id": "q-0809",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33714,6 +34524,7 @@
       "id": "q-0810",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33755,6 +34566,7 @@
       "id": "q-0811",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33796,6 +34608,7 @@
       "id": "q-0812",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33837,6 +34650,7 @@
       "id": "q-0813",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33878,6 +34692,7 @@
       "id": "q-0814",
       "topic_key": "bonus.standard",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "bonus_insurance"
       ],
@@ -33919,6 +34734,7 @@
       "id": "q-0815",
       "topic_key": "bonus.withholding",
       "role": "recall",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -33960,6 +34776,7 @@
       "id": "q-0816",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34001,6 +34818,7 @@
       "id": "q-0817",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34042,6 +34860,7 @@
       "id": "q-0818",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34083,6 +34902,7 @@
       "id": "q-0819",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34124,6 +34944,7 @@
       "id": "q-0820",
       "topic_key": "bonus.withholding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "withholding"
       ],
@@ -34165,6 +34986,7 @@
       "id": "q-0821",
       "topic_key": "bonus.withholding",
       "role": "boundary",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34206,6 +35028,7 @@
       "id": "q-0822",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34247,6 +35070,7 @@
       "id": "q-0823",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34288,6 +35112,7 @@
       "id": "q-0824",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34329,6 +35154,7 @@
       "id": "q-0825",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34370,6 +35196,7 @@
       "id": "q-0826",
       "topic_key": "bonus.withholding",
       "role": "calculation",
+      "study_tier": "reinforcement",
       "source_keys": [
         "withholding"
       ],
@@ -34411,6 +35238,7 @@
       "id": "q-0827",
       "topic_key": "calculation.bonus-withholding",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026",
@@ -34469,6 +35297,7 @@
       "id": "q-0828",
       "topic_key": "calculation.bonus-withholding",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026",
@@ -34529,6 +35358,7 @@
       "id": "q-0829",
       "topic_key": "calculation.net-pay",
       "role": "calculation",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026",
@@ -34580,6 +35410,7 @@
       "id": "q-0830",
       "topic_key": "calculation.net-pay",
       "role": "application",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "withholding_table_2026",
@@ -34635,6 +35466,7 @@
       "id": "q-0831",
       "topic_key": "calculation.social-insurance",
       "role": "boundary",
+      "study_tier": "core",
       "source_keys": [
         "exam_scope",
         "health_rates_tokyo_2026"

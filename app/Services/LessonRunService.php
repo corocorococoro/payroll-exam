@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Lesson;
-use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 
@@ -28,7 +27,7 @@ class LessonRunService
             }
         }
 
-        $bank = $lesson->questions()->get(['id']);
+        $bank = $lesson->questions()->get(['id', 'study_tier']);
 
         $lastAttempts = $request->user()->attempts()
             ->whereIn('question_id', $bank->pluck('id'))
@@ -36,15 +35,38 @@ class LessonRunService
             ->groupBy('question_id')
             ->pluck('last_attempted_at', 'question_id');
 
-        // 未出問題を先に、既出問題は最終出題が古い順に選ぶ。
-        // トピック数をセッション上限に使わないため、広いトピックでも常に最大10問を出せる。
+        $progresses = $request->user()->questionProgresses()
+            ->whereIn('question_id', $bank->pluck('id'))
+            ->get()
+            ->keyBy('question_id');
+
+        // 合格への近さを優先する。誤答・期限到来 → 未出の合格コア → 未出の補強 →
+        // 既出未定着 → 定着済みの順。各群では古いものから選び、全問へ有限回で到達する。
         $candidates = $bank
-            ->sortBy(fn ($question): string => sprintf(
-                '%d|%s|%010d',
-                $lastAttempts->has($question->id) ? 1 : 0,
-                (string) ($lastAttempts[$question->id] ?? ''),
-                $question->id,
-            ))
+            ->sortBy(function ($question) use ($lastAttempts, $progresses): string {
+                $progress = $progresses->get($question->id);
+                $seen = $lastAttempts->has($question->id) || $progress?->first_seen_at !== null;
+                $needsRecovery = $progress !== null && (
+                    $progress->state === 'learning'
+                    || ($progress->due_at?->isPast() ?? false)
+                );
+
+                $bucket = match (true) {
+                    $needsRecovery => 0,
+                    ! $seen && $question->study_tier === 'core' => 1,
+                    ! $seen => 2,
+                    $progress?->state !== 'mastered' => 3,
+                    default => 4,
+                };
+
+                return sprintf(
+                    '%d|%05d|%s|%010d',
+                    $bucket,
+                    99999 - (int) ($progress->lapses ?? 0),
+                    (string) ($progress->last_seen_at ?? $lastAttempts[$question->id] ?? ''),
+                    $question->id,
+                );
+            })
             ->values();
 
         /** @var list<int> $questionIds */
@@ -89,24 +111,6 @@ class LessonRunService
     public function clear(Request $request, Lesson $lesson): void
     {
         $request->session()->forget($this->key($lesson));
-    }
-
-    public function isUnlocked(User $user, Lesson $lesson): bool
-    {
-        $previous = Lesson::query()
-            ->where('unit_id', $lesson->unit_id)
-            ->where('sort_order', '<', $lesson->sort_order)
-            ->orderByDesc('sort_order')
-            ->first();
-
-        if ($previous === null) {
-            return true;
-        }
-
-        return $user->lessonProgresses()
-            ->where('lesson_id', $previous->id)
-            ->where('crown_level', '>=', 1)
-            ->exists();
     }
 
     private function key(Lesson $lesson): string

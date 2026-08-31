@@ -30,9 +30,17 @@ type Summary = {
     mastered_questions: number;
     coverage_percent: number;
     mastery_percent: number;
+    core_question_count: number;
+    core_seen_questions: number;
+    core_mastered_questions: number;
+    core_coverage_percent: number;
+    core_mastery_percent: number;
+    latest_mock_score: number | null;
+    readiness_label: string;
+    readiness_detail: string;
     daily_new_target: number;
+    daily_new_label: string;
     new_completed_today: number;
-    coverage_target_date: string;
     recommended_lesson_id: number | null;
     recommended_lesson_name: string | null;
     next_action_href: string;
@@ -348,14 +356,17 @@ function heatLevel(day: HeatmapDay): string {
         <div class="mb-3 flex items-end justify-between">
             <div>
                 <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                    全{{ summary.total_questions }}問の進み具合
+                    合格コアの進み具合
                 </h2>
                 <p class="text-[11px] text-gray-400">
-                    試験14日前までの全問着手を基準にした学習計画
+                    {{ summary.readiness_label }}・{{
+                        summary.readiness_detail
+                    }}
                 </p>
             </div>
             <p class="text-3xl font-semibold text-[#285ac8]">
-                {{ summary.coverage_percent }}<span class="text-sm">%</span>
+                {{ summary.core_coverage_percent
+                }}<span class="text-sm">%</span>
             </p>
         </div>
         <div
@@ -363,7 +374,7 @@ function heatLevel(day: HeatmapDay): string {
         >
             <div
                 class="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-400 transition-all"
-                :style="{ width: `${summary.coverage_percent}%` }"
+                :style="{ width: `${summary.core_coverage_percent}%` }"
             />
         </div>
         <div class="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -373,27 +384,31 @@ function heatLevel(day: HeatmapDay): string {
                         summary.daily_new_target
                     }}
                 </p>
-                <p class="text-[10px] font-bold text-gray-400">今日の新規</p>
+                <p class="text-[10px] font-bold text-gray-400">
+                    {{ summary.daily_new_label }}
+                </p>
             </div>
             <div class="rounded-md bg-emerald-50 p-2 dark:bg-emerald-950">
                 <p class="text-lg font-semibold text-emerald-600">
-                    {{ summary.mastered_questions }}
+                    {{ summary.core_mastered_questions }}
                 </p>
-                <p class="text-[10px] font-bold text-gray-400">定着済み</p>
+                <p class="text-[10px] font-bold text-gray-400">コア定着済み</p>
             </div>
             <div class="rounded-md bg-rose-50 p-2 dark:bg-rose-950">
                 <p class="text-lg font-semibold text-rose-500">
-                    {{ summary.review_due }}
+                    {{ summary.latest_mock_score ?? '—' }}
                 </p>
-                <p class="text-[10px] font-bold text-gray-400">期限到来</p>
+                <p class="text-[10px] font-bold text-gray-400">直近模試</p>
             </div>
         </div>
         <p class="mt-3 text-[11px] leading-5 text-gray-400">
-            {{ summary.seen_questions }} /
-            {{ summary.total_questions }}問に着手。 定着率
-            {{
-                summary.mastery_percent
-            }}%。「得点予測」ではなく、実際の着手と間隔反復で表示しています。
+            合格コア {{ summary.core_seen_questions }} /
+            {{ summary.core_question_count }}問に着手、定着
+            {{ summary.core_mastery_percent }}%。全問題は
+            {{ summary.seen_questions }}/{{
+                summary.total_questions
+            }}問に着手済みです。
+            合格表示は問題数ではなく、模試70点以上の実績で判定します。
         </p>
     </section>
 

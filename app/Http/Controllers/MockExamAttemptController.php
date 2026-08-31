@@ -67,7 +67,7 @@ class MockExamAttemptController extends Controller
             return to_route('mock-attempts.result', $attempt);
         }
 
-        $attempt->load('mockExam.examQuestions.question.unit');
+        $attempt->load('mockExam.examQuestions.question.unit', 'mockExam.examQuestions.question.lesson');
         $questions = $attempt->mockExam->examQuestions->map(fn ($examQuestion) => [
             'id' => $examQuestion->question->id,
             'position' => $examQuestion->position,
@@ -157,7 +157,7 @@ class MockExamAttemptController extends Controller
             return to_route('mock-attempts.show', $attempt);
         }
 
-        $attempt->load('mockExam.examQuestions.question.unit');
+        $attempt->load('mockExam.examQuestions.question.unit', 'mockExam.examQuestions.question.lesson');
         $answers = $attempt->answers ?? [];
         $review = $attempt->mockExam->examQuestions->map(function ($examQuestion) use ($answers, $officialSources): array {
             $question = $examQuestion->question;
@@ -179,6 +179,29 @@ class MockExamAttemptController extends Controller
         });
 
         $weakest = collect($attempt->section_scores ?? [])->sortBy('accuracy')->keys()->take(2)->values();
+        $remediation = $attempt->mockExam->examQuestions
+            ->filter(function ($examQuestion) use ($answers): bool {
+                $given = $answers[$examQuestion->question->id] ?? null;
+
+                return $given === null || ! $examQuestion->question->checkAnswer($given);
+            })
+            ->filter(fn ($examQuestion): bool => $examQuestion->question->lesson !== null)
+            ->groupBy('question.lesson_id')
+            ->map(function ($items): array {
+                $lesson = $items->first()->question->lesson;
+
+                return [
+                    'lesson_id' => $lesson->id,
+                    'lesson_name' => $lesson->name,
+                    'unit_name' => $items->first()->question->unit->name,
+                    'missed_count' => $items->count(),
+                    'missed_points' => $items->sum('points'),
+                    'href' => "/lessons/{$lesson->id}",
+                ];
+            })
+            ->sortByDesc('missed_points')
+            ->take(2)
+            ->values();
 
         return Inertia::render('mock/Result', [
             'result' => [
@@ -191,6 +214,7 @@ class MockExamAttemptController extends Controller
                 'weakest_sections' => $weakest,
                 'finished_at' => $attempt->finished_at?->toIso8601String(),
             ],
+            'remediation' => $remediation,
             'review' => $review,
         ]);
     }

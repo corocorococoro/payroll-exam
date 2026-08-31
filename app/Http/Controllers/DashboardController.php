@@ -66,16 +66,25 @@ class DashboardController extends Controller
         })->values();
 
         $questionProgresses = $user->questionProgresses()->get();
+        $progressByQuestion = $questionProgresses->keyBy('question_id');
         $totalQuestions = Question::query()->published()->count();
         $seenQuestions = $questionProgresses->whereNotNull('first_seen_at')->count();
         $masteredQuestions = $questionProgresses->where('state', 'mastered')->count();
         $unseenQuestions = max(0, $totalQuestions - $seenQuestions);
-        $coverageTargetDate = ($user->exam_date ?? today()->addDays(84))->copy()->subDays(14);
-        $coverageDays = max(1, today()->diffInDays($coverageTargetDate, false) + 1);
-        $dailyNewTarget = (int) ceil($unseenQuestions / $coverageDays);
-        $newCompletedToday = $questionProgresses
-            ->filter(fn ($progress) => $progress->first_seen_at?->isToday() ?? false)
-            ->count();
+        $coreQuestionIds = Question::query()->published()->where('study_tier', 'core')->pluck('id');
+        $coreProgresses = $questionProgresses->whereIn('question_id', $coreQuestionIds);
+        $coreQuestionCount = $coreQuestionIds->count();
+        $coreSeenQuestions = $coreProgresses->whereNotNull('first_seen_at')->count();
+        $coreMasteredQuestions = $coreProgresses->where('state', 'mastered')->count();
+        $coreUnseenQuestions = max(0, $coreQuestionCount - $coreSeenQuestions);
+        $dailyNewTarget = min(10, $coreUnseenQuestions > 0 ? $coreUnseenQuestions : $unseenQuestions);
+        $firstSeenToday = $questionProgresses
+            ->filter(fn ($progress) => $progress->first_seen_at?->isToday() ?? false);
+        $newCompletedToday = $coreUnseenQuestions > 0
+            ? $firstSeenToday->whereIn('question_id', $coreQuestionIds)->count()
+            : $firstSeenToday->count();
+        $newCompletedToday = min($dailyNewTarget, $newCompletedToday);
+        $dailyNewLabel = $coreUnseenQuestions > 0 ? '今日のコア' : '今日の新規';
         $reviewDue = $user->reviewItems()
             ->whereDate('due_date', '<=', today())
             ->whereHas('question', function (Builder $query): void {
@@ -84,15 +93,50 @@ class DashboardController extends Controller
             })
             ->count();
 
-        $recommendedLesson = Lesson::query()
-            ->whereHas('unit', fn (Builder $query) => $query->where('course_id', $course->id))
-            ->orderBy('id')
-            ->get()
-            ->first(function (Lesson $lesson) use ($questionProgresses): bool {
-                $questionIds = $lesson->questions()->published()->pluck('id');
+        $allLessons = $units->flatMap(fn (Unit $unit) => $unit->lessons)->values();
 
-                return $questionIds->diff($questionProgresses->pluck('question_id'))->isNotEmpty();
+        $needsRecovery = function (Lesson $lesson) use ($progressByQuestion): bool {
+            return $lesson->questions()->published()->pluck('id')->contains(function (int $questionId) use ($progressByQuestion): bool {
+                $progress = $progressByQuestion->get($questionId);
+
+                return $progress !== null && (
+                    $progress->state === 'learning'
+                    || ($progress->due_at?->isPast() ?? false)
+                );
             });
+        };
+        $hasUnseen = function (Lesson $lesson, ?string $tier = null) use ($progressByQuestion): bool {
+            $query = $lesson->questions()->published();
+            if ($tier !== null) {
+                $query->where('study_tier', $tier);
+            }
+
+            return $query->pluck('id')->contains(
+                fn (int $questionId): bool => ! $progressByQuestion->has($questionId),
+            );
+        };
+
+        $recommendedLesson = $allLessons->first($needsRecovery);
+        $recommendationKind = $recommendedLesson === null ? null : 'recovery';
+        if ($recommendedLesson === null) {
+            $recommendedLesson = $allLessons->first(fn (Lesson $lesson): bool => $hasUnseen($lesson, 'core'));
+            $recommendationKind = $recommendedLesson === null ? null : 'core';
+        }
+        if ($recommendedLesson === null) {
+            $recommendedLesson = $allLessons->first(fn (Lesson $lesson): bool => $hasUnseen($lesson));
+            $recommendationKind = $recommendedLesson === null ? null : 'reinforcement';
+        }
+
+        $latestMockScore = $user->mockExamAttempts()
+            ->whereNotNull('finished_at')
+            ->latest('finished_at')
+            ->value('score');
+        [$readinessLabel, $readinessDetail] = match (true) {
+            $latestMockScore !== null && $latestMockScore >= 70 => ['合格ライン到達', '模試70点以上。弱点復習で再現性を高める'],
+            $latestMockScore !== null => ['弱点補強中', "直近模試{$latestMockScore}点。誤答分野を優先する"],
+            $coreSeenQuestions < (int) ceil($coreQuestionCount * 0.6) => ['基礎構築中', 'まず合格コアを広く一周する'],
+            default => ['模試で確認', '合格コアを進めたら模試で70点との差を測る'],
+        };
 
         /** @var Collection<string, DailyActivity> $activities */
         $activities = $user->dailyActivities()
@@ -128,9 +172,17 @@ class DashboardController extends Controller
                 'mastered_questions' => $masteredQuestions,
                 'coverage_percent' => $totalQuestions === 0 ? 0 : (int) round($seenQuestions / $totalQuestions * 100),
                 'mastery_percent' => $totalQuestions === 0 ? 0 : (int) round($masteredQuestions / $totalQuestions * 100),
+                'core_question_count' => $coreQuestionCount,
+                'core_seen_questions' => $coreSeenQuestions,
+                'core_mastered_questions' => $coreMasteredQuestions,
+                'core_coverage_percent' => $coreQuestionCount === 0 ? 0 : (int) round($coreSeenQuestions / $coreQuestionCount * 100),
+                'core_mastery_percent' => $coreQuestionCount === 0 ? 0 : (int) round($coreMasteredQuestions / $coreQuestionCount * 100),
+                'latest_mock_score' => $latestMockScore,
+                'readiness_label' => $readinessLabel,
+                'readiness_detail' => $readinessDetail,
                 'daily_new_target' => $dailyNewTarget,
+                'daily_new_label' => $dailyNewLabel,
                 'new_completed_today' => $newCompletedToday,
-                'coverage_target_date' => $coverageTargetDate->toDateString(),
                 'recommended_lesson_id' => $recommendedLesson?->id,
                 'recommended_lesson_name' => $recommendedLesson?->name,
                 'next_action_href' => $reviewDue > 0
@@ -138,7 +190,12 @@ class DashboardController extends Controller
                     : ($recommendedLesson === null ? '/learn' : "/lessons/{$recommendedLesson->id}"),
                 'next_action_label' => $reviewDue > 0
                     ? "期限到来の復習{$reviewDue}問をはじめる"
-                    : ($recommendedLesson === null ? '学習一覧を見る' : '今日の新規問題をはじめる'),
+                    : match ($recommendationKind) {
+                        'recovery' => "「{$recommendedLesson->name}」の弱点を補強する",
+                        'core' => "「{$recommendedLesson->name}」の合格コアを進める",
+                        'reinforcement' => "「{$recommendedLesson->name}」を補強する",
+                        default => '学習一覧を見る',
+                    },
                 'xp_progress' => app(XpLevelService::class)->progress($user),
             ],
             'accuracy_by_unit' => $accuracyByUnit,

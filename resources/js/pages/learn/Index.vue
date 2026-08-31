@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { CheckCircle2, Lock } from '@lucide/vue';
+import { CheckCircle2 } from '@lucide/vue';
 import { computed } from 'vue';
 import KyuchanMoment from '@/components/KyuchanMoment.vue';
 import type { SkillTreeUnit } from '@/types';
@@ -10,14 +10,16 @@ const props = defineProps<{
     units: SkillTreeUnit[];
 }>();
 
-const nextLesson = computed(() =>
-    props.units
-        .flatMap((unit) => unit.lessons)
-        .find(
-            (lesson) =>
-                lesson.unlocked &&
-                (lesson.due_count > 0 ||
-                    lesson.seen_count < lesson.question_count),
+const allLessons = computed(() => props.units.flatMap((unit) => unit.lessons));
+
+const nextLesson = computed(
+    () =>
+        allLessons.value.find((lesson) => lesson.due_count > 0) ??
+        allLessons.value.find(
+            (lesson) => lesson.core_seen_count < lesson.core_question_count,
+        ) ??
+        allLessons.value.find(
+            (lesson) => lesson.seen_count < lesson.question_count,
         ),
 );
 
@@ -27,6 +29,19 @@ const bankQuestionCount = computed(() =>
             total +
             unit.lessons.reduce(
                 (lessonTotal, lesson) => lessonTotal + lesson.question_count,
+                0,
+            ),
+        0,
+    ),
+);
+
+const coreQuestionCount = computed(() =>
+    props.units.reduce(
+        (total, unit) =>
+            total +
+            unit.lessons.reduce(
+                (lessonTotal, lesson) =>
+                    lessonTotal + lesson.core_question_count,
                 0,
             ),
         0,
@@ -48,9 +63,9 @@ const unitClasses = {
         {{ course.name }}
     </h1>
     <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
-        全{{
+        まず合格コア{{ coreQuestionCount }}問。その後に補強問題を進めます（全{{
             bankQuestionCount
-        }}問を10問ずつ。初見・復習・定着を分けて進めます。
+        }}問）。
     </p>
 
     <Link
@@ -95,19 +110,14 @@ const unitClasses = {
             </div>
 
             <div class="flex flex-col gap-2">
-                <component
-                    :is="lesson.unlocked ? Link : 'div'"
+                <Link
                     v-for="lesson in unit.lessons"
                     :key="lesson.id"
-                    :href="
-                        lesson.unlocked ? `/lessons/${lesson.id}` : undefined
-                    "
+                    :href="`/lessons/${lesson.id}`"
                     :class="[
                         'flex items-center justify-between rounded-sm border bg-white p-3 transition-colors dark:bg-gray-900',
                         unitClasses.border,
-                        lesson.unlocked
-                            ? 'cursor-pointer hover:border-[#2864f0] hover:bg-blue-50/30 dark:hover:bg-blue-950/20'
-                            : 'opacity-50',
+                        'cursor-pointer hover:border-[#2864f0] hover:bg-blue-50/30 dark:hover:bg-blue-950/20',
                     ]"
                 >
                     <div class="flex items-center gap-3">
@@ -117,9 +127,8 @@ const unitClasses = {
                                 unitClasses.chip,
                             ]"
                         >
-                            <Lock v-if="!lesson.unlocked" class="size-4" />
                             <CheckCircle2
-                                v-else-if="lesson.coverage_percent === 100"
+                                v-if="lesson.core_coverage_percent === 100"
                                 class="size-5"
                             />
                             <span v-else>▶</span>
@@ -131,9 +140,9 @@ const unitClasses = {
                                 {{ lesson.name }}
                             </p>
                             <p class="text-xs text-gray-400">
-                                1回{{ lesson.session_question_count }}問 · 全{{
-                                    lesson.question_count
-                                }}問中 {{ lesson.seen_count }}問に着手
+                                合格コア {{ lesson.core_seen_count }}/{{
+                                    lesson.core_question_count
+                                }}問 · 1回{{ lesson.session_question_count }}問
                             </p>
                             <div
                                 class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
@@ -141,7 +150,7 @@ const unitClasses = {
                                 <div
                                     class="h-full rounded-full bg-[#2864f0]"
                                     :style="{
-                                        width: `${lesson.coverage_percent}%`,
+                                        width: `${lesson.core_coverage_percent}%`,
                                     }"
                                 />
                             </div>
@@ -151,12 +160,17 @@ const unitClasses = {
                     <div
                         class="shrink-0 text-right text-[11px] font-bold text-gray-400"
                     >
-                        <p>{{ lesson.coverage_percent }}%</p>
+                        <p>コア {{ lesson.core_coverage_percent }}%</p>
                         <p v-if="lesson.due_count > 0" class="text-rose-500">
                             復習 {{ lesson.due_count }}
                         </p>
+                        <p v-else class="font-normal text-gray-300">
+                            全体 {{ lesson.seen_count }}/{{
+                                lesson.question_count
+                            }}
+                        </p>
                     </div>
-                </component>
+                </Link>
             </div>
         </section>
     </div>

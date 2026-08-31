@@ -109,7 +109,7 @@ class AnswerService
                 $awards = [...$awards, ...app(DailyQuestService::class)->recordXp($user, $directAward['amount'])];
             }
 
-            $progress = $this->updateReviewItem($user, $question, $correct, $context);
+            $progress = $this->updateLearningProgress($user, $question, $correct, $context);
             $awards = [...$awards, ...app(DailyQuestService::class)->recordAnswer($user, $context)];
             app(AchievementService::class)->evaluate($user);
             app(XpLevelService::class)->syncRewardUnlocks($user);
@@ -147,8 +147,13 @@ class AnswerService
      * 正解を一度きりの「完了」にせず、忘却前の再出題につなげる。
      */
     /** @return array{state: string, due_at: string} */
-    private function updateReviewItem(User $user, Question $question, bool $correct, AttemptContext $context): array
-    {
+    public function updateLearningProgress(
+        User $user,
+        Question $question,
+        bool $correct,
+        AttemptContext $context,
+        bool $markSeen = true,
+    ): array {
         $item = $user->reviewItems()->where('question_id', $question->id)->first();
         $progress = $user->questionProgresses()->firstOrCreate(
             ['question_id' => $question->id],
@@ -179,7 +184,7 @@ class AnswerService
                 'lapses' => $progress->lapses + 1,
                 'incorrect_count' => $progress->incorrect_count + 1,
                 'content_revision_seen' => $question->content_revision,
-                'first_seen_at' => $progress->first_seen_at ?? $now,
+                'first_seen_at' => $progress->first_seen_at ?? ($markSeen ? $now : null),
                 'last_seen_at' => $now,
             ]);
 

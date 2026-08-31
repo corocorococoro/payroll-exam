@@ -41,6 +41,13 @@ class QuestionForm
                         fn (QuestionVariantRole $role): array => [$role->value => $role->label()],
                     )->all())
                     ->required(),
+                Select::make('study_tier')
+                    ->label('学習優先度')
+                    ->options([
+                        'core' => '合格コア',
+                        'reinforcement' => '上積み演習',
+                    ])
+                    ->required(),
                 TextInput::make('misconception_key')
                     ->label('狙う誤概念キー')
                     ->helperText('例: statutory-vs-company-holiday'),

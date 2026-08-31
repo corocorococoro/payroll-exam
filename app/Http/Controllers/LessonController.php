@@ -27,8 +27,6 @@ class LessonController extends Controller
      */
     public function show(Request $request, Lesson $lesson, LessonRunService $runs): Response
     {
-        abort_unless($runs->isUnlocked($request->user(), $lesson), 403, '前のレッスンをクリアすると開放されます。');
-
         $lesson->load('unit');
         $run = $runs->getOrStart($request, $lesson);
         abort_if($run['question_ids'] === [], 404, 'このレッスンには有効な問題がありません。');
@@ -38,6 +36,22 @@ class LessonController extends Controller
             ->get()
             ->sortBy(fn ($question) => array_search($question->id, $run['question_ids'], true))
             ->values();
+
+        $runProgresses = $request->user()->questionProgresses()
+            ->whereIn('question_id', $run['question_ids'])
+            ->get()
+            ->keyBy('question_id');
+        $hasRecovery = $questions->contains(function ($question) use ($runProgresses): bool {
+            $progress = $runProgresses->get($question->id);
+
+            return $progress !== null && (
+                $progress->state === 'learning'
+                || ($progress->due_at?->isPast() ?? false)
+            );
+        });
+        $focusLabel = $hasRecovery
+            ? '弱点補強'
+            : ($questions->contains('study_tier', 'core') ? '合格コア' : '定着演習');
 
         $sheetSlugs = $questions->pluck('reference_sheet_slugs')->flatten()->filter()->unique()->values();
 
@@ -52,6 +66,9 @@ class LessonController extends Controller
                 'name' => $lesson->name,
                 'unit_name' => $lesson->unit->name,
                 'unit_color' => $lesson->unit->color,
+                'description' => $lesson->description,
+                'study_guide' => $lesson->study_guide,
+                'focus_label' => $focusLabel,
             ],
             'questions' => $questions->map(fn ($q) => [
                 'id' => $q->id,
@@ -79,8 +96,6 @@ class LessonController extends Controller
         AchievementService $achievements,
     ): JsonResponse {
         $user = $request->user();
-        abort_unless($runs->isUnlocked($user, $lesson), 403);
-
         $run = $runs->current($request, $lesson);
 
         if ($run === null || $run['question_ids'] === []) {

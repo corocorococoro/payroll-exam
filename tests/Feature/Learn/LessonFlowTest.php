@@ -23,7 +23,9 @@ test('スキルツリーが表示され、ユニットとレッスンが並ぶ',
         ->assertInertia(fn ($page) => $page
             ->component('learn/Index')
             ->has('units', 5)
-            ->where('units.0.name', '労働法・勤怠'),
+            ->where('units.0.name', '給与基礎・支給控除')
+            ->where('units.0.lessons.0.name', '給与処理と情報管理')
+            ->missing('units.0.lessons.0.unlocked'),
         );
 });
 
@@ -34,7 +36,12 @@ test('問題配信レスポンスに正解・解説が含まれない', function
 
     $response->assertOk();
     $expectedCount = min(LessonRunService::QUESTION_COUNT, $lesson->questions()->count());
-    $response->assertInertia(fn ($page) => $page->has('questions', $expectedCount));
+    $response->assertInertia(fn ($page) => $page
+        ->has('questions', $expectedCount)
+        ->where('lesson.focus_label', '合格コア')
+        ->where('lesson.study_guide.goal', fn (string $goal): bool => $goal !== '')
+        ->has('lesson.study_guide.key_points', 3),
+    );
 
     $html = $response->getContent();
 
@@ -146,6 +153,41 @@ test('再受講では未出問題を優先する', function () {
     $second = $service->getOrStart($request, $lesson);
 
     expect(array_intersect($first['question_ids'], $second['question_ids']))->toBe([]);
+});
+
+test('初回レッスンは補強問題より合格コアを優先する', function () {
+    $lesson = Lesson::where('slug', 'payroll-flow')->firstOrFail();
+    $request = Request::create("/lessons/{$lesson->id}");
+    $request->setUserResolver(fn () => $this->user);
+    $request->setLaravelSession(app('session')->driver());
+
+    $run = app(LessonRunService::class)->getOrStart($request, $lesson);
+
+    expect(Question::whereIn('id', $run['question_ids'])->pluck('study_tier')->unique()->all())
+        ->toBe(['core']);
+});
+
+test('誤答した問題は未出の合格コアより先に補強する', function () {
+    $lesson = Lesson::where('slug', 'payroll-flow')->firstOrFail();
+    $weakQuestion = $lesson->questions()->where('study_tier', 'reinforcement')->firstOrFail();
+    $this->user->questionProgresses()->create([
+        'question_id' => $weakQuestion->id,
+        'state' => 'learning',
+        'box' => 1,
+        'due_at' => now(),
+        'lapses' => 2,
+        'incorrect_count' => 2,
+        'content_revision_seen' => $weakQuestion->content_revision,
+        'first_seen_at' => now()->subDay(),
+        'last_seen_at' => now()->subDay(),
+    ]);
+    $request = Request::create("/lessons/{$lesson->id}");
+    $request->setUserResolver(fn () => $this->user);
+    $request->setLaravelSession(app('session')->driver());
+
+    $run = app(LessonRunService::class)->getOrStart($request, $lesson);
+
+    expect($run['question_ids'][0])->toBe($weakQuestion->id);
 });
 
 test('有限回のレッスン受講ですべての公開問題へ到達できる', function () {
@@ -344,8 +386,8 @@ test('期限の来ていない問題を復習として送信できない', funct
     ])->assertStatus(422);
 });
 
-test('ロック中レッスンへの直接アクセスを拒否する', function () {
+test('模試の弱点から戻れるよう全レッスンへ直接アクセスできる', function () {
     $lesson = Lesson::where('sort_order', '>', 1)->firstOrFail();
 
-    actingAs($this->user)->get("/lessons/{$lesson->id}")->assertForbidden();
+    actingAs($this->user)->get("/lessons/{$lesson->id}")->assertOk();
 });

@@ -22,6 +22,14 @@ type Review = {
     official_sources: { label: string; url: string }[];
     points: number;
 };
+type Remediation = {
+    lesson_id: number;
+    lesson_name: string;
+    unit_name: string;
+    missed_count: number;
+    missed_points: number;
+    href: string;
+};
 defineProps<{
     result: {
         id: number;
@@ -33,6 +41,7 @@ defineProps<{
         weakest_sections: string[];
         finished_at: string;
     };
+    remediation: Remediation[];
     review: Review[];
 }>();
 const open = ref<number[]>([]);
@@ -108,8 +117,25 @@ function toggle(position: number) {
             v-if="result.weakest_sections.length"
             class="mt-4 rounded-md bg-blue-50 p-3 text-xs text-blue-700 dark:bg-blue-950 dark:text-blue-300"
         >
-            優先復習: <strong>{{ result.weakest_sections.join('・') }}</strong
-            ><Link href="/learn" class="ml-2 underline">レッスンへ</Link>
+            優先復習: <strong>{{ result.weakest_sections.join('・') }}</strong>
+        </div>
+        <div v-if="remediation.length" class="mt-3 grid gap-2 sm:grid-cols-2">
+            <Link
+                v-for="item in remediation"
+                :key="item.lesson_id"
+                :href="item.href"
+                class="rounded-md border border-blue-200 bg-white p-3 text-left transition hover:border-[#2864f0] dark:border-blue-900 dark:bg-gray-900"
+            >
+                <p class="text-[10px] font-bold text-gray-400">
+                    {{ item.unit_name }}・失点{{ item.missed_points }}点
+                </p>
+                <p class="mt-1 text-sm font-semibold text-[#285ac8]">
+                    {{ item.lesson_name }}を補強 →
+                </p>
+                <p class="mt-1 text-[10px] text-gray-400">
+                    誤答・無回答 {{ item.missed_count }}問
+                </p>
+            </Link>
         </div>
     </section>
     <div class="mt-4 grid grid-cols-2 gap-3">
@@ -120,7 +146,7 @@ function toggle(position: number) {
         ><Link
             href="/review"
             class="rounded-md bg-[#2864f0] py-3 text-center text-sm font-semibold text-white"
-            >復習する</Link
+            >模試の誤答を復習</Link
         >
     </div>
     <section class="mt-6">

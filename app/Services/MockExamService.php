@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\AttemptContext;
 use App\Models\MockExamAttempt;
 use App\Models\QuestionAttempt;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class MockExamService
@@ -29,6 +30,7 @@ class MockExamService
             }
 
             $answers = $attempt->answers ?? [];
+            $user = User::query()->findOrFail($attempt->user_id);
             $score = 0;
             /** @var array<string, array{correct: int, total: int, earned: int, max: int, accuracy: int}> $sections */
             $sections = [];
@@ -62,7 +64,17 @@ class MockExamService
                         'given_answer' => ['given' => $given],
                         'xp_earned' => 0,
                     ]);
+
                 }
+
+                // 無回答も含め、模試で判明した弱点をそのまま復習キューへつなぐ。
+                app(AnswerService::class)->updateLearningProgress(
+                    $user,
+                    $question,
+                    $correct,
+                    AttemptContext::Mock,
+                    $given !== null,
+                );
             }
 
             foreach ($sections as &$section) {

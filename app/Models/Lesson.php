@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['unit_id', 'slug', 'name', 'description', 'sort_order'])]
+#[Fillable(['unit_id', 'slug', 'name', 'description', 'study_guide', 'sort_order'])]
 class Lesson extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'study_guide' => 'array',
+        ];
+    }
+
     /** @return BelongsTo<Unit, $this> */
     public function unit(): BelongsTo
     {

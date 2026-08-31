@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Head, Link, router } from '@inertiajs/vue3';
-import { BookOpen, Crown, RotateCcw, X } from '@lucide/vue';
+import {
+    ArrowRight,
+    BookOpen,
+    CircleAlert,
+    Crown,
+    RotateCcw,
+    Target,
+    X,
+} from '@lucide/vue';
 import { computed, ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
@@ -16,12 +24,26 @@ import type {
 } from '@/types';
 
 const props = defineProps<{
-    lesson: { id: number; name: string; unit_name: string; unit_color: string };
+    lesson: {
+        id: number;
+        name: string;
+        unit_name: string;
+        unit_color: string;
+        description: string;
+        focus_label: string;
+        study_guide: {
+            why: string;
+            goal: string;
+            key_points: string[];
+            common_traps: string[];
+        };
+    };
     questions: PlayerQuestion[];
     reference_sheets: ReferenceSheetData[];
 }>();
 
 const index = ref(0);
+const started = ref(false);
 const selectedChoice = ref<string | null>(null);
 const numericInput = ref('');
 const result = ref<AnswerResult | null>(null);
@@ -251,6 +273,113 @@ const accuracy = computed(() =>
                 スキルツリーへもどる
             </button>
         </div>
+
+        <!-- 導入: 問題を解く前に、得点につながる判断軸をつかむ。 -->
+        <main
+            v-else-if="!started"
+            class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5"
+        >
+            <div class="mb-3 flex items-center justify-between">
+                <Link
+                    href="/learn"
+                    class="rounded-full p-2 text-gray-400 hover:bg-white dark:hover:bg-gray-900"
+                    aria-label="もどる"
+                >
+                    <X class="size-5" />
+                </Link>
+                <span
+                    class="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-[#285ac8] dark:bg-blue-950"
+                >
+                    {{ lesson.focus_label }}・{{ questions.length }}問
+                </span>
+            </div>
+
+            <section
+                class="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
+            >
+                <div class="flex items-start gap-3">
+                    <Kyuchan mood="study" effect="focus" :size="88" />
+                    <div>
+                        <p class="text-xs font-bold text-gray-400">
+                            {{ lesson.unit_name }}
+                        </p>
+                        <h1
+                            class="mt-1 text-xl font-semibold text-gray-800 dark:text-gray-100"
+                        >
+                            {{ lesson.name }}
+                        </h1>
+                        <p
+                            class="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
+                        >
+                            {{ lesson.study_guide.why }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 rounded-lg bg-blue-50 p-4 dark:bg-blue-950/50">
+                    <p
+                        class="flex items-center gap-2 text-xs font-bold text-[#285ac8]"
+                    >
+                        <Target class="size-4" /> このレッスンの到達点
+                    </p>
+                    <p
+                        class="mt-2 text-sm font-semibold text-gray-700 dark:text-gray-200"
+                    >
+                        {{ lesson.study_guide.goal }}
+                    </p>
+                </div>
+
+                <div class="mt-5">
+                    <h2
+                        class="text-sm font-semibold text-gray-700 dark:text-gray-200"
+                    >
+                        先に押さえる3点
+                    </h2>
+                    <ol class="mt-2 space-y-2">
+                        <li
+                            v-for="(point, pointIndex) in lesson.study_guide
+                                .key_points"
+                            :key="point"
+                            class="flex gap-3 text-sm leading-6 text-gray-600 dark:text-gray-300"
+                        >
+                            <span
+                                class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-[11px] font-bold text-emerald-700 dark:bg-emerald-950"
+                            >
+                                {{ pointIndex + 1 }}
+                            </span>
+                            {{ point }}
+                        </li>
+                    </ol>
+                </div>
+
+                <div
+                    class="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/40"
+                >
+                    <p
+                        class="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-300"
+                    >
+                        <CircleAlert class="size-4" /> 間違えやすいところ
+                    </p>
+                    <ul
+                        class="mt-2 list-disc space-y-1 pl-5 text-xs leading-5 text-gray-600 dark:text-gray-300"
+                    >
+                        <li
+                            v-for="trap in lesson.study_guide.common_traps"
+                            :key="trap"
+                        >
+                            {{ trap }}
+                        </li>
+                    </ul>
+                </div>
+
+                <button
+                    class="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm hover:bg-[#285ac8]"
+                    @click="started = true"
+                >
+                    この判断軸で解いてみる <ArrowRight class="size-4" />
+                </button>
+            </section>
+        </main>
 
         <!-- プレイヤー画面 -->
         <template v-else>

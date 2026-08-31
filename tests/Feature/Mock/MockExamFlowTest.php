@@ -53,7 +53,8 @@ test('40問をサーバー採点し100点と分野別診断を返す', function 
     $attempt->refresh();
     expect($attempt->score)->toBe(100)
         ->and($attempt->finished_at)->not->toBeNull()
-        ->and(array_sum(array_column($attempt->section_scores, 'max')))->toBe(100);
+        ->and(array_sum(array_column($attempt->section_scores, 'max')))->toBe(100)
+        ->and($this->user->questionProgresses()->whereNotNull('first_seen_at')->count())->toBe(40);
 
     actingAs($this->user)->get("/mock-attempts/{$attempt->id}/result")
         ->assertOk()
@@ -62,6 +63,32 @@ test('40問をサーバー採点し100点と分野別診断を返す', function 
             ->where('result.score', 100)
             ->where('result.passed', true)
             ->has('review', 40),
+        );
+});
+
+test('模試の誤答と無回答を即日復習と補強レッスンへつなぐ', function () {
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id,
+        'time_limit_minutes' => 120,
+        'started_at' => now(),
+        'answers' => [],
+    ]);
+
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+
+    expect($this->user->reviewItems()->whereDate('due_date', today())->count())->toBe(40)
+        ->and($this->user->questionProgresses()->where('state', 'learning')->count())->toBe(40)
+        ->and($this->user->questionProgresses()->whereNotNull('first_seen_at')->count())->toBe(0);
+
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}/result")
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('mock/Result')
+            ->where('result.score', 0)
+            ->has('remediation', 2)
+            ->where('remediation.0.missed_count', fn (int $count): bool => $count > 0)
+            ->where('remediation.0.missed_points', fn (int $points): bool => $points > 0)
+            ->where('remediation.0.href', fn (string $href): bool => str_starts_with($href, '/lessons/')),
         );
 });
 

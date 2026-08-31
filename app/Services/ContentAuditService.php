@@ -125,6 +125,7 @@ class ContentAuditService
             'stats' => [
                 'published_questions' => $questions->count(),
                 'learning_objectives' => $questions->pluck('concept_key')->unique()->count(),
+                'core_questions' => $questions->where('study_tier', 'core')->count(),
                 'variant_roles' => $questions->pluck('variant_role')->unique()->count(),
                 'retired_generated_questions' => Question::query()
                     ->where('source_id', 'like', 'gen-%')
@@ -158,6 +159,10 @@ class ContentAuditService
         foreach ($questions->groupBy('concept_key') as $conceptKey => $variants) {
             if ($variants->pluck('learning_objective')->filter()->unique()->count() !== 1) {
                 $errors[] = "concept_key={$conceptKey}: learning_objectiveが変種間で一致していません。";
+            }
+
+            if ($variants->where('study_tier', 'core')->isEmpty()) {
+                $errors[] = "concept_key={$conceptKey}: 合格コア問題がありません。";
             }
         }
     }

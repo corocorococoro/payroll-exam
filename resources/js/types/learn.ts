@@ -125,13 +125,16 @@ export type SkillTreeLesson = {
     name: string;
     description: string;
     crown_level: number;
-    unlocked: boolean;
     question_count: number;
     session_question_count: number;
     seen_count: number;
     mastered_count: number;
     due_count: number;
     coverage_percent: number;
+    core_question_count: number;
+    core_seen_count: number;
+    core_mastered_count: number;
+    core_coverage_percent: number;
 };
 
 export type SkillTreeUnit = {

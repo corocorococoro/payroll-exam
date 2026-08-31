@@ -33,6 +33,10 @@ class QuestionsTable
                     ->label('役割')
                     ->badge()
                     ->formatStateUsing(fn ($state): string => $state?->label() ?? '未設定'),
+                TextColumn::make('study_tier')
+                    ->label('学習優先度')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => $state === 'core' ? '合格コア' : '上積み演習'),
                 TextColumn::make('type')
                     ->badge()
                     ->searchable(),
@@ -71,6 +75,12 @@ class QuestionsTable
                     ->options(collect(QuestionReviewStatus::cases())->mapWithKeys(
                         fn (QuestionReviewStatus $status): array => [$status->value => $status->label()],
                     )->all()),
+                SelectFilter::make('study_tier')
+                    ->label('学習優先度')
+                    ->options([
+                        'core' => '合格コア',
+                        'reinforcement' => '上積み演習',
+                    ]),
                 TernaryFilter::make('is_active'),
                 Filter::make('review_due')
                     ->label('レビュー期限切れ')
