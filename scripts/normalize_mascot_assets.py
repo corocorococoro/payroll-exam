@@ -8,7 +8,6 @@ from pathlib import Path
 
 from PIL import Image
 
-
 CANVAS_SIZE = 627
 TARGET_HEIGHT = 570
 MAX_WIDTH = 585
@@ -26,10 +25,9 @@ def visible_bounds(image: Image.Image) -> tuple[int, int, int, int]:
     return bounds
 
 
-def normalize(path: Path) -> None:
-    with Image.open(path) as source:
-        sprite = source.convert("RGBA")
-
+def normalized_sprite(image: Image.Image) -> Image.Image:
+    """Return a sprite aligned to the shared mascot scale and baseline."""
+    sprite = image.convert("RGBA")
     sprite = sprite.crop(visible_bounds(sprite))
     scale = min(TARGET_HEIGHT / sprite.height, MAX_WIDTH / sprite.width)
     width = round(sprite.width * scale)
@@ -40,6 +38,13 @@ def normalize(path: Path) -> None:
     x = (CANVAS_SIZE - width) // 2
     y = BASELINE - height
     canvas.alpha_composite(sprite, (x, y))
+
+    return canvas
+
+
+def normalize(path: Path) -> None:
+    with Image.open(path) as source:
+        canvas = normalized_sprite(source)
 
     temporary = path.with_name(f"{path.stem}.normalized.webp")
     canvas.save(temporary, "WEBP", quality=88, method=6)

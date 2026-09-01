@@ -102,16 +102,37 @@ class XpLevelService
         ));
     }
 
+    /**
+     * @return list<array{
+     *     slug: string,
+     *     name: string,
+     *     level: int,
+     *     threshold: int
+     * }>
+     */
+    public function styleCatalog(): array
+    {
+        return array_values(array_map(
+            static fn (array $style): array => [
+                'slug' => (string) $style['slug'],
+                'name' => (string) $style['name'],
+                'level' => (int) $style['level'],
+                'threshold' => (int) $style['threshold'],
+            ],
+            config('xp.styles', []),
+        ));
+    }
+
     /** @return list<string> */
     public function syncRewardUnlocks(User $user): array
     {
         $totalXp = $user->statOrCreate()->refresh()->total_xp;
         $unlocked = [];
 
-        foreach ($this->levels() as $level) {
-            $slug = $level['style'];
+        foreach ($this->styleCatalog() as $style) {
+            $slug = $style['slug'];
 
-            if ($slug === null || $slug === 'default' || $level['threshold'] > $totalXp) {
+            if ($slug === 'default' || $style['threshold'] > $totalXp) {
                 continue;
             }
 
@@ -134,18 +155,18 @@ class XpLevelService
         $unlocked = $user->rewardUnlocks()->pluck('reward_slug')->all();
         $equipped = $user->statOrCreate()->mascot_style;
 
-        return array_values(array_map(function (array $level) use ($unlocked, $equipped): array {
-            $slug = (string) $level['style'];
+        return array_values(array_map(function (array $style) use ($unlocked, $equipped): array {
+            $slug = $style['slug'];
 
             return [
                 'slug' => $slug,
-                'name' => (string) $level['style_name'],
-                'level' => (int) $level['level'],
-                'threshold' => (int) $level['threshold'],
+                'name' => $style['name'],
+                'level' => $style['level'],
+                'threshold' => $style['threshold'],
                 'unlocked' => $slug === 'default' || in_array($slug, $unlocked, true),
                 'equipped' => $slug === $equipped,
             ];
-        }, array_filter($this->levels(), fn (array $level): bool => $level['style'] !== null)));
+        }, $this->styleCatalog()));
     }
 
     public function canEquip(User $user, string $slug): bool

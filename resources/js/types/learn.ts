@@ -20,7 +20,17 @@ export type MascotStyleSlug =
     | 'focus-glasses'
     | 'library-jacket'
     | 'starry-academy'
-    | 'exam-wish';
+    | 'exam-wish'
+    | 'mint-overalls'
+    | 'cozy-pajamas'
+    | 'sunny-raincoat'
+    | 'sky-sailor'
+    | 'payroll-labcoat'
+    | 'autumn-poncho'
+    | 'scholar-vest'
+    | 'winter-duffle'
+    | 'festival-happi'
+    | 'celebration-hakama';
 
 export type KyuchanMood =
     | 'normal'

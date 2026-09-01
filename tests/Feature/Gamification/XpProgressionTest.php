@@ -123,14 +123,20 @@ test('レベル境界で衣装を解放し未解放衣装の装備を拒否す�
         ->level->toBe(3)
         ->title->toBe('いつもの相棒')
         ->xp_to_next->toBe(250)
+        ->and($user->rewardUnlocks()->where('reward_slug', 'mint-overalls')->exists())->toBeTrue()
         ->and($user->rewardUnlocks()->where('reward_slug', 'cozy-study')->exists())->toBeTrue()
-        ->and($user->rewardUnlocks()->where('reward_slug', 'study-parka')->exists())->toBeTrue();
+        ->and($user->rewardUnlocks()->where('reward_slug', 'cozy-pajamas')->exists())->toBeTrue()
+        ->and($user->rewardUnlocks()->where('reward_slug', 'study-parka')->exists())->toBeTrue()
+        ->and($user->rewardUnlocks()->where('reward_slug', 'sunny-raincoat')->exists())->toBeTrue();
 
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'payroll-cardigan'])
         ->assertUnprocessable();
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'study-parka'])
         ->assertOk()
         ->assertJsonPath('xp_progress.mascot_style', 'study-parka');
+    actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'sunny-raincoat'])
+        ->assertOk()
+        ->assertJsonPath('xp_progress.mascot_style', 'sunny-raincoat');
 });
 
 test('成長画面にレベル進捗と衣装一覧を返す', function () {
@@ -139,9 +145,29 @@ test('成長画面にレベル進捗と衣装一覧を返す', function () {
     actingAs($user)->get('/league')->assertOk()->assertInertia(fn ($page) => $page
         ->component('league/Index')
         ->where('xp_progress.level', 1)
-        ->has('styles', 10)
+        ->has('styles', 20)
+        ->where('styles.1.slug', 'mint-overalls')
+        ->where('styles.1.unlocked', true)
         ->has('levels', 10)
         ->has('badges', 10)
         ->has('leaderboard')
     );
+});
+
+test('最高レベルでは全20着を解放して追加衣装を装備できる', function () {
+    $user = User::factory()->create(['onboarded' => true]);
+    $xp = app(XpService::class);
+    $levels = app(XpLevelService::class);
+    $xp->award($user, 5200, 'question', 'question:max-style-catalog');
+    $levels->syncRewardUnlocks($user);
+
+    $styles = collect($levels->styles($user));
+
+    expect($user->rewardUnlocks)->toHaveCount(19)
+        ->and($styles)->toHaveCount(20)
+        ->and($styles->every(fn (array $style): bool => $style['unlocked']))->toBeTrue();
+
+    actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'celebration-hakama'])
+        ->assertOk()
+        ->assertJsonPath('xp_progress.mascot_style', 'celebration-hakama');
 });

@@ -141,7 +141,7 @@ async function equip(style: MascotStyle) {
                         />きゅーちゃんの衣装
                     </h2>
                     <p class="mt-1 text-xs text-gray-500">
-                        レベルアップするたび、新しい衣装が1着増えます。
+                        各レベルで、新しい衣装が2着ずつ増えます。
                     </p>
                 </div>
                 <p
