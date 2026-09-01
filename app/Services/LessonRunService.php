@@ -20,14 +20,19 @@ class LessonRunService
         $existing = $this->current($request, $lesson);
 
         if ($existing !== null) {
-            $activeCount = $lesson->questions()->whereIn('id', $existing['question_ids'])->count();
+            $activeCount = $lesson->questions()
+                ->practiceAvailableFor($request->user())
+                ->whereIn('id', $existing['question_ids'])
+                ->count();
 
             if ($activeCount === count($existing['question_ids'])) {
                 return $existing;
             }
         }
 
-        $bank = $lesson->questions()->get(['id', 'study_tier']);
+        $bank = $lesson->questions()
+            ->practiceAvailableFor($request->user())
+            ->get(['id', 'study_tier']);
 
         $lastAttempts = $request->user()->attempts()
             ->whereIn('question_id', $bank->pluck('id'))

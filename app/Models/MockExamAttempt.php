@@ -17,10 +17,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<int, string>|null $answers
  * @property int|null $score
  * @property array<string, mixed>|null $section_scores
+ * @property array<string, mixed>|null $unit_scores
+ * @property int|null $knowledge_score
+ * @property int|null $calculation_score
+ * @property array<int, array<string, mixed>>|null $review_snapshot
  */
 #[Fillable([
     'user_id', 'mock_exam_id', 'time_limit_minutes', 'started_at', 'finished_at',
-    'answers', 'score', 'section_scores',
+    'answers', 'score', 'section_scores', 'unit_scores', 'knowledge_score', 'calculation_score', 'review_snapshot',
 ])]
 class MockExamAttempt extends Model
 {
@@ -31,6 +35,8 @@ class MockExamAttempt extends Model
             'finished_at' => 'datetime',
             'answers' => 'array',
             'section_scores' => 'array',
+            'unit_scores' => 'array',
+            'review_snapshot' => 'array',
         ];
     }
 

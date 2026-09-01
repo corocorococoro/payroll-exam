@@ -7,7 +7,7 @@ use App\Models\MockExamAttempt;
 use App\Models\ReferenceSheet;
 use App\Models\User;
 use App\Services\MockExamService;
-use App\Services\OfficialSourceService;
+use App\Services\MockExamSnapshotService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ use Inertia\Response;
 
 class MockExamAttemptController extends Controller
 {
-    public function store(Request $request, MockExam $mockExam): RedirectResponse
+    public function store(Request $request, MockExam $mockExam, MockExamSnapshotService $snapshots): RedirectResponse
     {
         abort_unless($mockExam->isAvailableForNewAttempt(), 404);
 
@@ -26,7 +26,7 @@ class MockExamAttemptController extends Controller
             'mode' => ['required', Rule::in(['standard', 'compressed'])],
         ]);
 
-        $attempt = DB::transaction(function () use ($request, $mockExam, $validated): MockExamAttempt {
+        $attempt = DB::transaction(function () use ($request, $mockExam, $snapshots, $validated): MockExamAttempt {
             $user = User::query()->lockForUpdate()->findOrFail($request->user()->id);
             $existing = $user->mockExamAttempts()
                 ->where('mock_exam_id', $mockExam->id)
@@ -47,14 +47,19 @@ class MockExamAttemptController extends Controller
                 'time_limit_minutes' => $validated['mode'] === 'compressed' ? 90 : $mockExam->time_limit_minutes,
                 'started_at' => now(),
                 'answers' => [],
+                'review_snapshot' => $snapshots->build($mockExam),
             ]);
         });
 
         return to_route('mock-attempts.show', $attempt);
     }
 
-    public function show(Request $request, MockExamAttempt $attempt, MockExamService $service): Response|RedirectResponse
-    {
+    public function show(
+        Request $request,
+        MockExamAttempt $attempt,
+        MockExamService $service,
+        MockExamSnapshotService $snapshots,
+    ): Response|RedirectResponse {
         $this->authorizeOwner($request, $attempt);
 
         if ($attempt->finished_at !== null) {
@@ -67,21 +72,9 @@ class MockExamAttemptController extends Controller
             return to_route('mock-attempts.result', $attempt);
         }
 
-        $attempt->load('mockExam.examQuestions.question.unit', 'mockExam.examQuestions.question.lesson');
-        $questions = $attempt->mockExam->examQuestions->map(fn ($examQuestion) => [
-            'id' => $examQuestion->question->id,
-            'position' => $examQuestion->position,
-            'points' => $examQuestion->points,
-            'type' => $examQuestion->question->type,
-            'question_text' => $examQuestion->question->question_text,
-            'choices' => $examQuestion->question->choices,
-            'is_calculation' => $examQuestion->question->isCalculation(),
-            'reference_sheet_slugs' => $examQuestion->question->reference_sheet_slugs ?? [],
-            'unit_name' => $examQuestion->question->unit->name,
-        ]);
-
-        $sheetSlugs = $attempt->mockExam->examQuestions
-            ->pluck('question.reference_sheet_slugs')->flatten()->filter()->unique();
+        $snapshot = $attempt->review_snapshot ?? $snapshots->build($attempt->mockExam);
+        $questions = $snapshots->playerItems($snapshot);
+        $sheetSlugs = collect($snapshot)->pluck('reference_sheet_slugs')->flatten()->filter()->unique();
 
         return Inertia::render('mock/Player', [
             'attempt' => [
@@ -97,15 +90,19 @@ class MockExamAttemptController extends Controller
         ]);
     }
 
-    public function update(Request $request, MockExamAttempt $attempt, MockExamService $service): JsonResponse
-    {
+    public function update(
+        Request $request,
+        MockExamAttempt $attempt,
+        MockExamService $service,
+        MockExamSnapshotService $snapshots,
+    ): JsonResponse {
         $this->authorizeOwner($request, $attempt);
         $validated = $request->validate([
             'answers' => ['required', 'array'],
             'answers.*' => ['nullable', 'string', 'max:100'],
         ]);
 
-        return DB::transaction(function () use ($request, $attempt, $service, $validated): JsonResponse {
+        return DB::transaction(function () use ($request, $attempt, $service, $snapshots, $validated): JsonResponse {
             $attempt = MockExamAttempt::query()->lockForUpdate()->findOrFail($attempt->id);
             $this->authorizeOwner($request, $attempt);
             abort_if($attempt->finished_at !== null, 422, 'この模試は終了しています。');
@@ -116,7 +113,8 @@ class MockExamAttemptController extends Controller
                 return response()->json(['message' => '制限時間を過ぎたため、自動採点しました。'], 422);
             }
 
-            $questionIds = $attempt->mockExam->examQuestions()
+            $snapshot = $attempt->review_snapshot ?? $snapshots->build($attempt->mockExam);
+            $questionIds = collect($snapshot)
                 ->pluck('question_id')
                 ->map(fn ($id) => (int) $id)
                 ->all();
@@ -149,7 +147,7 @@ class MockExamAttemptController extends Controller
     public function result(
         Request $request,
         MockExamAttempt $attempt,
-        OfficialSourceService $officialSources,
+        MockExamSnapshotService $snapshots,
     ): Response|RedirectResponse {
         $this->authorizeOwner($request, $attempt);
 
@@ -157,46 +155,31 @@ class MockExamAttemptController extends Controller
             return to_route('mock-attempts.show', $attempt);
         }
 
-        $attempt->load('mockExam.examQuestions.question.unit', 'mockExam.examQuestions.question.lesson');
-        $answers = $attempt->answers ?? [];
-        $review = $attempt->mockExam->examQuestions->map(function ($examQuestion) use ($answers, $officialSources): array {
-            $question = $examQuestion->question;
-            $given = $answers[$question->id] ?? null;
+        $snapshot = $attempt->review_snapshot ?? $snapshots->grade(
+            $snapshots->build($attempt->mockExam),
+            $attempt->answers ?? [],
+        );
+        $review = collect($snapshots->reviewItems($snapshot));
 
-            return [
-                'position' => $examQuestion->position,
-                'question_text' => $question->question_text,
-                'unit_name' => $question->unit->name,
-                'given_answer' => $given,
-                'correct' => $given !== null && $question->checkAnswer($given),
-                'correct_answer' => $question->type->value === 'choice'
-                    ? (string) $question->answer['choice']
-                    : number_format((float) $question->answer['value']),
-                'explanation' => $question->explanation,
-                'official_sources' => $officialSources->forQuestion($question),
-                'points' => $examQuestion->points,
-            ];
-        });
-
-        $weakest = collect($attempt->section_scores ?? [])->sortBy('accuracy')->keys()->take(2)->values();
-        $remediation = $attempt->mockExam->examQuestions
-            ->filter(function ($examQuestion) use ($answers): bool {
-                $given = $answers[$examQuestion->question->id] ?? null;
-
-                return $given === null || ! $examQuestion->question->checkAnswer($given);
-            })
-            ->filter(fn ($examQuestion): bool => $examQuestion->question->lesson !== null)
-            ->groupBy('question.lesson_id')
+        $weakest = collect($attempt->unit_scores ?? [])
+            ->sortBy('accuracy')
+            ->filter(fn (array $score): bool => ($score['accuracy'] ?? 0) < 70)
+            ->take(2)
+            ->pluck('name')
+            ->values();
+        $remediation = $review
+            ->filter(fn (array $item): bool => ! $item['correct'] && $item['lesson_id'] !== null)
+            ->groupBy('lesson_id')
             ->map(function ($items): array {
-                $lesson = $items->first()->question->lesson;
+                $first = $items->first();
 
                 return [
-                    'lesson_id' => $lesson->id,
-                    'lesson_name' => $lesson->name,
-                    'unit_name' => $items->first()->question->unit->name,
+                    'lesson_id' => $first['lesson_id'],
+                    'lesson_name' => $first['lesson_name'],
+                    'unit_name' => $first['unit_name'],
                     'missed_count' => $items->count(),
                     'missed_points' => $items->sum('points'),
-                    'href' => "/lessons/{$lesson->id}",
+                    'href' => "/lessons/{$first['lesson_id']}",
                 ];
             })
             ->sortByDesc('missed_points')
@@ -211,8 +194,11 @@ class MockExamAttemptController extends Controller
                 'passing_score' => $attempt->mockExam->passing_score,
                 'passed' => ($attempt->score ?? 0) >= $attempt->mockExam->passing_score,
                 'section_scores' => $attempt->section_scores ?? [],
+                'unit_scores' => $attempt->unit_scores ?? [],
+                'knowledge_score' => $attempt->knowledge_score ?? 0,
+                'calculation_score' => $attempt->calculation_score ?? 0,
                 'weakest_sections' => $weakest,
-                'finished_at' => $attempt->finished_at?->toIso8601String(),
+                'finished_at' => $attempt->finished_at->toIso8601String(),
             ],
             'remediation' => $remediation,
             'review' => $review,

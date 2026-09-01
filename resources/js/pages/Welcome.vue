@@ -114,7 +114,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         <span class="flex items-center gap-1.5"
                             ><Trophy
                                 class="size-4 text-amber-500"
-                            />合格ライン70点</span
+                            />合格基準70点</span
                         >
                         <span class="flex items-center gap-1.5"
                             ><ShieldCheck

@@ -3,7 +3,7 @@
 Duolingo型ゲーミフィケーションで毎日コツコツ学ぶ検定対策Webアプリ。
 目標: 2026年11月22日の給与計算実務能力検定2級に合格する。
 
-設計の一次資料: `docs/deep-research-report.md`（模試48問・出題範囲・分野配点・学習タイムライン）
+実装設計の一次資料: `docs/question-design.md`、`docs/content-review-policy.md`、`database/seeders/data/question-bank.json`
 
 ## スタック
 
@@ -32,5 +32,6 @@ docker compose exec app php artisan wayfinder:generate --with-form
 - 計算問題はシードJSONに計算パラメータを構造化して持ち、Pestで正答を再計算検証する
 - 料率・税額は `fiscal_year`（2026年度=法令基準日2026-09-01）でバージョニング。ハードコード禁止
 - 2級の試験仕様: 知識35問×2点 + 計算5問×6点 = 100点、70点合格、120分
+- 模試採用問は採点前の通常レッスンへ出さない。合格圏は別模試2回の初回120分受験と単元・計算下限で判定する
 - UIは日本語・モバイルファースト。かわいさ重視（パステル、丸ゴシック、マスコット「きゅーちゃん」）
 - User モデルは PHP Attribute スタイル（`#[Fillable]`）— Laravel 13 の新規約に合わせる

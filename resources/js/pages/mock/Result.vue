@@ -5,6 +5,7 @@ import { ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 
 type Section = {
+    name: string;
     correct: number;
     total: number;
     earned: number;
@@ -38,6 +39,9 @@ defineProps<{
         passing_score: number;
         passed: boolean;
         section_scores: Record<string, Section>;
+        unit_scores: Record<string, Section>;
+        knowledge_score: number;
+        calculation_score: number;
         weakest_sections: string[];
         finished_at: string;
     };
@@ -66,7 +70,7 @@ function toggle(position: number) {
                 result.passed ? 'text-emerald-500' : 'text-[#285ac8]',
             ]"
         >
-            {{ result.passed ? '合格ライン突破！' : 'もうひと伸び！' }}
+            {{ result.passed ? 'この模試で70点到達！' : 'もうひと伸び！' }}
         </p>
         <h1
             class="mt-1 text-5xl font-semibold text-gray-700 dark:text-gray-100"
@@ -74,19 +78,23 @@ function toggle(position: number) {
             {{ result.score }}<span class="text-lg text-gray-400"> / 100</span>
         </h1>
         <p class="mt-1 text-xs text-gray-400">
-            合格ライン {{ result.passing_score }}点
+            合格基準 {{ result.passing_score }}点
         </p>
     </div>
     <section
         class="mt-5 rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
         <h2 class="mb-3 flex items-center gap-2 font-semibold">
-            <Trophy class="size-5 text-amber-500" />分野別診断
+            <Trophy class="size-5 text-amber-500" />単元別診断
         </h2>
+        <p class="mb-3 text-xs text-gray-500">
+            知識 {{ result.knowledge_score }}/70点・計算
+            {{ result.calculation_score }}/30点
+        </p>
         <div class="space-y-3">
-            <div v-for="(section, name) in result.section_scores" :key="name">
+            <div v-for="(section, slug) in result.unit_scores" :key="slug">
                 <div class="mb-1 flex justify-between text-xs">
-                    <span class="font-bold">{{ name }}</span
+                    <span class="font-bold">{{ section.name }}</span
                     ><span
                         :class="
                             section.accuracy >= 70

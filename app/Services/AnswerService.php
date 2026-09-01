@@ -70,6 +70,7 @@ class AnswerService
             $correct = $question->checkAnswer($given);
             $hasPriorCorrect = $user->attempts()
                 ->where('question_id', $question->id)
+                ->where('content_revision', $question->content_revision)
                 ->where('is_correct', true)
                 ->exists();
             $xp = $correct && ($context === AttemptContext::Review || ! $hasPriorCorrect)
@@ -78,6 +79,7 @@ class AnswerService
 
             $attempt = $user->attempts()->create([
                 'question_id' => $question->id,
+                'content_revision' => $question->content_revision,
                 'lesson_id' => $lessonId,
                 'context' => $context,
                 'is_correct' => $correct,

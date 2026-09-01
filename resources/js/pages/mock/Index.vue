@@ -60,7 +60,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                         2級 診断模試
                     </h1>
                     <p class="text-xs text-gray-500">
-                        40問・100点満点・70点合格
+                        40問・100点満点・合格基準70点
                     </p>
                 </div>
             </div>
@@ -83,9 +83,19 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
         >
             <div class="flex items-start justify-between gap-3">
                 <div>
-                    <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                        {{ exam.name }}
-                    </h2>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <h2
+                            class="font-semibold text-gray-700 dark:text-gray-100"
+                        >
+                            {{ exam.name }}
+                        </h2>
+                        <span
+                            class="rounded-full bg-sky-100 px-2 py-0.5 text-[10px] font-bold text-sky-700 dark:bg-sky-950 dark:text-sky-300"
+                            >{{
+                                exam.attempt_count === 0 ? '初見判定' : '再受験'
+                            }}</span
+                        >
+                    </div>
                     <p class="mt-1 text-xs leading-relaxed text-gray-400">
                         {{ exam.description }}
                     </p>

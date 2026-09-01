@@ -37,6 +37,8 @@ type Summary = {
     latest_mock_score: number | null;
     readiness_label: string;
     readiness_detail: string;
+    qualifying_mock_count: number;
+    mock_average: number | null;
     daily_new_target: number;
     daily_new_label: string;
     new_completed_today: number;
@@ -398,7 +400,11 @@ function heatLevel(day: HeatmapDay): string {
             {{ summary.seen_questions }}/{{
                 summary.total_questions
             }}問に着手済みです。
-            合格表示は問題数ではなく、模試70点以上の実績で判定します。
+            合格圏は、未見の問題で受けた初回120分の別模試2回と計算・単元別の下限で判定します（現在
+            {{ summary.qualifying_mock_count }}/2回<span
+                v-if="summary.mock_average !== null"
+                >・平均{{ summary.mock_average }}点</span
+            >）。
         </p>
     </section>
 

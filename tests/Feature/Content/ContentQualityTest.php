@@ -2,6 +2,7 @@
 
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Models\Lesson;
 use App\Models\MockExam;
 use App\Models\Question;
 use App\Models\Unit;
@@ -160,9 +161,11 @@ test('公開コンテンツ監査にエラーがない', function () {
 
 test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', function () {
     expect(MockExam::where('is_published', true)->count())->toBe(3);
+    $allQuestionIds = collect();
 
     foreach (MockExam::where('is_published', true)->get() as $exam) {
-        $items = $exam->examQuestions()->with('question')->get();
+        $items = $exam->examQuestions()->with('question.unit')->get();
+        $unitCounts = $items->countBy(fn ($item): string => $item->question->unit->slug);
 
         expect($items)->toHaveCount(40)
             ->and($items->sum('points'))->toBe(100)
@@ -170,8 +173,68 @@ test('公開模試は公式公開仕様の40問100点かつ全問四肢択一', 
             ->and($items->skip(35)->every(fn ($item): bool => $item->points === 6 && $item->question->isCalculation()))->toBeTrue()
             ->and($items->every(fn ($item): bool => $item->question->type === QuestionType::Choice))->toBeTrue()
             ->and($items->every(fn ($item): bool => count($item->question->choices) === 4))->toBeTrue()
-            ->and($items->every(fn ($item): bool => $item->question->review_status === QuestionReviewStatus::Approved))->toBeTrue();
+            ->and($items->every(fn ($item): bool => $item->question->review_status === QuestionReviewStatus::Approved))->toBeTrue()
+            ->and($items->pluck('question.concept_key')->unique())->toHaveCount(40)
+            ->and($unitCounts->keys()->sort()->values()->all())->toBe(['keisan', 'roudou', 'shaho', 'shikyu', 'zei'])
+            ->and($unitCounts->every(fn (int $count): bool => $count >= 3 && $count <= 14))->toBeTrue();
+
+        $allQuestionIds = $allQuestionIds->merge($items->pluck('question_id'));
     }
+
+    expect($allQuestionIds)->toHaveCount(120)
+        ->and($allQuestionIds->unique())->toHaveCount(120);
+});
+
+test('すべてのレッスンに模試前から使える通常学習問題がある', function () {
+    $lessons = Lesson::query()->whereHas('questions', fn ($questions) => $questions->published())->get();
+
+    expect($lessons)->not->toBeEmpty()
+        ->and($lessons->every(
+            fn (Lesson $lesson): bool => $lesson->questions()->published()->practiceBank()->exists(),
+        ))->toBeTrue();
+});
+
+test('監査は公開模試数の不足を検出する', function () {
+    MockExam::query()->orderByDesc('sort_order')->firstOrFail()->update(['is_published' => false]);
+
+    expect(app(ContentAuditService::class)->audit()['errors'])
+        ->toContain('公開模試は3回必要です（現在2回）。');
+});
+
+test('監査は同じ模試内の問題重複を検出する', function () {
+    $exam = MockExam::where('slug', 'mogi-1')->firstOrFail();
+    $items = $exam->examQuestions()->orderBy('position')->take(2)->get();
+    $sourceId = $items->first()->question()->value('source_id');
+    $items->last()->update(['question_id' => $items->first()->question_id]);
+
+    expect(app(ContentAuditService::class)->audit()['errors'])
+        ->toContain("mogi-1: 同じ問題が模試内で重複しています（{$sourceId}）。");
+});
+
+test('監査は同じ模試内の論点重複を検出する', function () {
+    $exam = MockExam::where('slug', 'mogi-1')->firstOrFail();
+    $items = $exam->examQuestions()->with('question')->orderBy('position')->take(2)->get();
+    $conceptKey = $items->first()->question->concept_key;
+    $items->last()->question->update([
+        'concept_key' => $conceptKey,
+        'learning_objective' => $items->first()->question->learning_objective,
+    ]);
+
+    expect(app(ContentAuditService::class)->audit()['errors'])
+        ->toContain("mogi-1: 同じ論点が模試内で重複しています（{$conceptKey}=2）。");
+});
+
+test('監査は通常学習問題がゼロになるレッスンを検出する', function () {
+    $question = Question::where('source_id', 'q-0674')->firstOrFail();
+    $examItem = MockExam::where('slug', 'mogi-1')->firstOrFail()
+        ->examQuestions()
+        ->whereBetween('position', [1, 35])
+        ->whereHas('question.unit', fn ($unit) => $unit->where('slug', 'shaho'))
+        ->firstOrFail();
+    $examItem->update(['question_id' => $question->id]);
+
+    expect(app(ContentAuditService::class)->audit()['errors'])
+        ->toContain('労働保険の年度更新: 通常学習に出題できる問題がありません。');
 });
 
 test('正解位置は問題バンク全体と模試で偏らない', function () {

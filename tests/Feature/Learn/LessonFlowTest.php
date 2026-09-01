@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Lesson;
+use App\Models\MockExam;
 use App\Models\Question;
 use App\Models\User;
 use App\Services\LessonRunService;
+use App\Services\MockExamService;
 use Database\Seeders\ContentSeeder;
 use Illuminate\Http\Request;
 
@@ -198,7 +200,7 @@ test('有限回のレッスン受講ですべての公開問題へ到達でき�
         $request = Request::create("/lessons/{$lesson->id}");
         $request->setUserResolver(fn () => $this->user);
         $request->setLaravelSession(app('session')->driver());
-        $expectedIds = $lesson->questions()->pluck('id')->sort()->values();
+        $expectedIds = $lesson->questions()->practiceBank()->pluck('id')->sort()->values();
         $lessonReached = collect();
         $maximumRuns = $expectedIds->count() + 1;
 
@@ -226,7 +228,51 @@ test('有限回のレッスン受講ですべての公開問題へ到達でき�
         $reached = $reached->merge($lessonReached);
     }
 
-    expect($reached->unique())->toHaveCount(Question::query()->published()->count());
+    expect($reached->unique())->toHaveCount(Question::query()->published()->practiceBank()->count());
+});
+
+test('模試問題は採点前のレッスンに出ず採点後に補強対象となる', function () {
+    $exam = MockExam::where('slug', 'mogi-1')->firstOrFail();
+    $holdoutIds = $exam->examQuestions()->pluck('question_id');
+
+    expect(Question::query()->published()->practiceAvailableFor($this->user)->whereIn('id', $holdoutIds)->count())
+        ->toBe(0);
+
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $exam->id,
+        'time_limit_minutes' => 120,
+        'started_at' => now(),
+        'answers' => [],
+    ]);
+    app(MockExamService::class)->finish($attempt);
+
+    expect(Question::query()->published()->practiceAvailableFor($this->user)->whereIn('id', $holdoutIds)->count())
+        ->toBe(40);
+
+    $practiceCount = Question::query()->published()->practiceBank()->count();
+    actingAs($this->user)->get('/learn')->assertInertia(fn ($page) => $page
+        ->where('units', fn ($units): bool => collect($units)
+            ->flatMap(fn (array $unit): array => $unit['lessons'])
+            ->sum('question_count') === $practiceCount),
+    );
+});
+
+test('既存レッスンセッションに模試問題が残っていても採点前は再発行する', function () {
+    $holdoutQuestion = MockExam::where('slug', 'mogi-1')->firstOrFail()
+        ->examQuestions()->with('question')->get()->pluck('question')
+        ->first(fn (Question $question): bool => $question->lesson_id !== null);
+    $lesson = $holdoutQuestion->lesson;
+    $request = Request::create("/lessons/{$lesson->id}");
+    $request->setUserResolver(fn () => $this->user);
+    $request->setLaravelSession(app('session')->driver());
+    $request->session()->put("lesson_runs.{$lesson->id}", [
+        'question_ids' => [$holdoutQuestion->id],
+        'started_at' => now()->toIso8601String(),
+    ]);
+
+    $run = app(LessonRunService::class)->getOrStart($request, $lesson);
+
+    expect($run['question_ids'])->not->toContain($holdoutQuestion->id);
 });
 
 test('復習は期限到来数を保ったまま20問ずつ出題する', function () {

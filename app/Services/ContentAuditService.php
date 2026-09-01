@@ -4,12 +4,20 @@ namespace App\Services;
 
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
+use App\Models\Lesson;
 use App\Models\MockExam;
 use App\Models\Question;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class ContentAuditService
 {
+    private const int EXPECTED_PUBLISHED_MOCK_EXAMS = 3;
+
+    /** @var list<string> */
+    private const array EXPECTED_UNIT_SLUGS = ['shikyu', 'roudou', 'shaho', 'zei', 'keisan'];
+
     public function __construct(
         private readonly CalcVerifier $calcVerifier,
         private readonly OfficialSourceService $officialSources,
@@ -118,6 +126,7 @@ class ContentAuditService
         $this->auditLearningObjectives($questions, $errors);
         $this->auditAnswerPositionBalance($questions, $errors);
         $this->auditMockExams($errors);
+        $this->auditPracticeBankCoverage($errors);
 
         return [
             'errors' => array_values(array_unique($errors)),
@@ -172,8 +181,15 @@ class ContentAuditService
     {
         $exams = MockExam::query()
             ->where('is_published', true)
-            ->with('examQuestions.question')
+            ->with('examQuestions.question.unit')
             ->get();
+
+        if ($exams->count() !== self::EXPECTED_PUBLISHED_MOCK_EXAMS) {
+            $errors[] = '公開模試は'.self::EXPECTED_PUBLISHED_MOCK_EXAMS.'回必要です（現在'.$exams->count().'回）。';
+        }
+
+        /** @var array<int, list<string>> $questionExams */
+        $questionExams = [];
 
         foreach ($exams as $exam) {
             $items = $exam->examQuestions->values();
@@ -184,7 +200,9 @@ class ContentAuditService
                 continue;
             }
 
-            $unitIds = collect();
+            $unitSlugs = collect();
+            $questionIds = collect();
+            $conceptKeys = collect();
 
             foreach ($items as $index => $item) {
                 $position = $index + 1;
@@ -211,11 +229,45 @@ class ContentAuditService
                     $errors[] = "{$exam->slug}: {$position}問目が公開承認済みではありません。";
                 }
 
-                $unitIds->push($question->unit_id);
+                $unitSlugs->push($question->unit->slug);
+                $questionIds->push($question->id);
+                $conceptKeys->push($question->concept_key);
+                $questionExams[$question->id] ??= [];
+                $questionExams[$question->id][] = $exam->slug;
             }
 
-            if ($unitIds->unique()->count() < 3) {
-                $errors[] = "{$exam->slug}: 模試が3ユニット以上を横断していません。";
+            $duplicateQuestionIds = $questionIds->countBy()->filter(fn (int $count): bool => $count > 1)->keys();
+            if ($duplicateQuestionIds->isNotEmpty()) {
+                $sourceIds = Question::query()
+                    ->whereKey($duplicateQuestionIds)
+                    ->pluck('source_id')
+                    ->filter()
+                    ->implode('、');
+                $errors[] = "{$exam->slug}: 同じ問題が模試内で重複しています（{$sourceIds}）。";
+            }
+
+            $duplicateConcepts = $conceptKeys->filter()->countBy()->filter(fn (int $count): bool => $count > 1);
+            if ($duplicateConcepts->isNotEmpty()) {
+                $detail = $duplicateConcepts
+                    ->map(fn (int $count, string $concept): string => "{$concept}={$count}")
+                    ->implode('、');
+                $errors[] = "{$exam->slug}: 同じ論点が模試内で重複しています（{$detail}）。";
+            }
+
+            $unitCounts = $unitSlugs->countBy();
+            $missingUnits = collect(self::EXPECTED_UNIT_SLUGS)->diff($unitCounts->keys());
+            if ($missingUnits->isNotEmpty()) {
+                $errors[] = "{$exam->slug}: 模試に未出の単元があります（{$missingUnits->implode('、')}）。";
+            }
+
+            $imbalancedUnits = $unitCounts->filter(
+                fn (int $count): bool => $count < 3 || $count > 14,
+            );
+            if ($imbalancedUnits->isNotEmpty()) {
+                $detail = $imbalancedUnits
+                    ->map(fn (int $count, string $slug): string => "{$slug}={$count}")
+                    ->implode('、');
+                $errors[] = "{$exam->slug}: 単元別出題数が許容範囲（3〜14問）外です（{$detail}）。";
             }
 
             $answerCounts = $this->answerPositionCounts($items->pluck('question'));
@@ -223,6 +275,48 @@ class ContentAuditService
                 $errors[] = "{$exam->slug}: 正解位置が偏っています（{$this->formatAnswerPositionCounts($answerCounts)}）。";
             }
         }
+
+        foreach ($questionExams as $questionId => $examSlugs) {
+            $examSlugs = array_values(array_unique($examSlugs));
+
+            if (count($examSlugs) > 1) {
+                $sourceId = Question::query()->whereKey($questionId)->value('source_id') ?? (string) $questionId;
+                $errors[] = "{$sourceId}: 公開模試間で問題が重複しています（".implode('、', $examSlugs).'）。';
+            }
+        }
+    }
+
+    /** @param list<string> $errors */
+    private function auditPracticeBankCoverage(array &$errors): void
+    {
+        $unavailableLessons = Lesson::query()
+            ->whereHas('questions', fn (Builder $questions): Builder => $this->publishableQuestions($questions))
+            ->whereDoesntHave('questions', fn (Builder $questions): Builder => $this->publishableQuestions($questions)
+                ->whereDoesntHave(
+                    'mockExamQuestions.mockExam',
+                    fn (Builder $mockExam): Builder => $mockExam->where('is_published', true),
+                ))
+            ->pluck('name');
+
+        foreach ($unavailableLessons as $lessonName) {
+            $errors[] = "{$lessonName}: 通常学習に出題できる問題がありません。";
+        }
+    }
+
+    /**
+     * @param  Builder<Model>  $questions
+     * @return Builder<Model>
+     */
+    private function publishableQuestions(Builder $questions): Builder
+    {
+        return $questions
+            ->where('is_active', true)
+            ->where('review_status', QuestionReviewStatus::Approved->value)
+            ->where('reviewed_content_hash', '!=', '')
+            ->whereColumn('reviewed_content_hash', 'content_hash')
+            ->whereNotNull('reviewed_at')
+            ->whereNotNull('review_due_at')
+            ->where('review_due_at', '>=', now());
     }
 
     /**

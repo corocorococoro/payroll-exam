@@ -2,6 +2,7 @@
 
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
+use App\Models\Question;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
 use Database\Seeders\GamificationSeeder;
@@ -21,7 +22,8 @@ test('模試を開始して正解を漏らさず途中保存できる', function
     ])->assertRedirect();
 
     $attempt = MockExamAttempt::where('user_id', $this->user->id)->firstOrFail();
-    expect($attempt->time_limit_minutes)->toBe(120);
+    expect($attempt->time_limit_minutes)->toBe(120)
+        ->and($attempt->review_snapshot)->toHaveCount(40);
 
     $response = actingAs($this->user)->get("/mock-attempts/{$attempt->id}");
     $response->assertOk()->assertInertia(fn ($page) => $page
@@ -40,6 +42,54 @@ test('模試を開始して正解を漏らさず途中保存できる', function
     expect($attempt->refresh()->answers)->toBe([$questionId => 'D']);
 });
 
+test('開始後に問題が改訂されても開始時スナップショットで表示採点する', function () {
+    actingAs($this->user)->post("/mock-exams/{$this->exam->id}/attempts", [
+        'mode' => 'standard',
+    ])->assertRedirect();
+
+    $attempt = MockExamAttempt::where('user_id', $this->user->id)->firstOrFail();
+    $snapshot = $attempt->review_snapshot;
+    $first = $snapshot[0];
+    $question = Question::findOrFail($first['question_id']);
+    $question->update([
+        'question_text' => '開始後に改訂された問題文',
+        'content_revision' => $question->content_revision + 1,
+    ]);
+
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}")
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->where('questions.0.question_text', $first['question_text'])
+            ->missing('questions.0.answer')
+            ->missing('questions.0.explanation'),
+        );
+
+    $answers = collect($snapshot)->mapWithKeys(function (array $item): array {
+        $answer = $item['answer'];
+
+        return [(string) $item['question_id'] => (string) ($answer['choice'] ?? $answer['value'])];
+    })->all();
+    $attempt->update(['answers' => $answers]);
+
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+
+    expect($attempt->refresh()->score)->toBe(100)
+        ->and($this->user->attempts()
+            ->where('question_id', $question->id)
+            ->value('content_revision'))->toBe($first['content_revision'])
+        ->and($this->user->questionProgresses()->where('question_id', $question->id)->exists())->toBeFalse();
+
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}/result")
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->where('result.score', 100)
+            ->where('review.0.question_text', $first['question_text'])
+            ->where('review.0.correct', true)
+            ->missing('review.0.answer')
+            ->missing('review.0.choices'),
+        );
+});
+
 test('40問をサーバー採点し100点と分野別診断を返す', function () {
     $attempt = $this->user->mockExamAttempts()->create([
         'mock_exam_id' => $this->exam->id,
@@ -54,6 +104,11 @@ test('40問をサーバー採点し100点と分野別診断を返す', function 
     expect($attempt->score)->toBe(100)
         ->and($attempt->finished_at)->not->toBeNull()
         ->and(array_sum(array_column($attempt->section_scores, 'max')))->toBe(100)
+        ->and(array_sum(array_column($attempt->unit_scores, 'max')))->toBe(100)
+        ->and($attempt->knowledge_score)->toBe(70)
+        ->and($attempt->calculation_score)->toBe(30)
+        ->and($attempt->review_snapshot)->toHaveCount(40)
+        ->and(collect($attempt->unit_scores)->keys()->sort()->values()->all())->toBe(['keisan', 'roudou', 'shaho', 'shikyu', 'zei'])
         ->and($this->user->questionProgresses()->whereNotNull('first_seen_at')->count())->toBe(40);
 
     actingAs($this->user)->get("/mock-attempts/{$attempt->id}/result")
@@ -62,6 +117,9 @@ test('40問をサーバー採点し100点と分野別診断を返す', function 
             ->component('mock/Result')
             ->where('result.score', 100)
             ->where('result.passed', true)
+            ->where('result.knowledge_score', 70)
+            ->where('result.calculation_score', 30)
+            ->has('result.unit_scores', 5)
             ->has('review', 40),
         );
 });

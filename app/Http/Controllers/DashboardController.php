@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\QuestionAttempt;
 use App\Models\Unit;
 use App\Services\DailyQuestService;
+use App\Services\PassReadinessService;
 use App\Services\XpLevelService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -65,13 +66,15 @@ class DashboardController extends Controller
             ];
         })->values();
 
-        $questionProgresses = $user->questionProgresses()->get();
-        $progressByQuestion = $questionProgresses->keyBy('question_id');
-        $totalQuestions = Question::query()->published()->count();
+        $practiceQuestionIds = Question::query()->published()->practiceBank()->pluck('id');
+        $allQuestionProgresses = $user->questionProgresses()->get();
+        $questionProgresses = $allQuestionProgresses->whereIn('question_id', $practiceQuestionIds);
+        $progressByQuestion = $allQuestionProgresses->keyBy('question_id');
+        $totalQuestions = $practiceQuestionIds->count();
         $seenQuestions = $questionProgresses->whereNotNull('first_seen_at')->count();
         $masteredQuestions = $questionProgresses->where('state', 'mastered')->count();
         $unseenQuestions = max(0, $totalQuestions - $seenQuestions);
-        $coreQuestionIds = Question::query()->published()->where('study_tier', 'core')->pluck('id');
+        $coreQuestionIds = Question::query()->published()->practiceBank()->where('study_tier', 'core')->pluck('id');
         $coreProgresses = $questionProgresses->whereIn('question_id', $coreQuestionIds);
         $coreQuestionCount = $coreQuestionIds->count();
         $coreSeenQuestions = $coreProgresses->whereNotNull('first_seen_at')->count();
@@ -95,8 +98,8 @@ class DashboardController extends Controller
 
         $allLessons = $units->flatMap(fn (Unit $unit) => $unit->lessons)->values();
 
-        $needsRecovery = function (Lesson $lesson) use ($progressByQuestion): bool {
-            return $lesson->questions()->published()->pluck('id')->contains(function (int $questionId) use ($progressByQuestion): bool {
+        $needsRecovery = function (Lesson $lesson) use ($progressByQuestion, $user): bool {
+            return $lesson->questions()->practiceAvailableFor($user)->pluck('id')->contains(function (int $questionId) use ($progressByQuestion): bool {
                 $progress = $progressByQuestion->get($questionId);
 
                 return $progress !== null && (
@@ -105,8 +108,8 @@ class DashboardController extends Controller
                 );
             });
         };
-        $hasUnseen = function (Lesson $lesson, ?string $tier = null) use ($progressByQuestion): bool {
-            $query = $lesson->questions()->published();
+        $hasUnseen = function (Lesson $lesson, ?string $tier = null) use ($progressByQuestion, $user): bool {
+            $query = $lesson->questions()->practiceAvailableFor($user);
             if ($tier !== null) {
                 $query->where('study_tier', $tier);
             }
@@ -131,12 +134,7 @@ class DashboardController extends Controller
             ->whereNotNull('finished_at')
             ->latest('finished_at')
             ->value('score');
-        [$readinessLabel, $readinessDetail] = match (true) {
-            $latestMockScore !== null && $latestMockScore >= 70 => ['合格ライン到達', '模試70点以上。弱点復習で再現性を高める'],
-            $latestMockScore !== null => ['弱点補強中', "直近模試{$latestMockScore}点。誤答分野を優先する"],
-            $coreSeenQuestions < (int) ceil($coreQuestionCount * 0.6) => ['基礎構築中', 'まず合格コアを広く一周する'],
-            default => ['模試で確認', '合格コアを進めたら模試で70点との差を測る'],
-        };
+        $readiness = app(PassReadinessService::class)->evaluate($user, $coreSeenQuestions, $coreQuestionCount);
 
         /** @var Collection<string, DailyActivity> $activities */
         $activities = $user->dailyActivities()
@@ -178,8 +176,10 @@ class DashboardController extends Controller
                 'core_coverage_percent' => $coreQuestionCount === 0 ? 0 : (int) round($coreSeenQuestions / $coreQuestionCount * 100),
                 'core_mastery_percent' => $coreQuestionCount === 0 ? 0 : (int) round($coreMasteredQuestions / $coreQuestionCount * 100),
                 'latest_mock_score' => $latestMockScore,
-                'readiness_label' => $readinessLabel,
-                'readiness_detail' => $readinessDetail,
+                'readiness_label' => $readiness['label'],
+                'readiness_detail' => $readiness['detail'],
+                'qualifying_mock_count' => $readiness['qualifying_mock_count'],
+                'mock_average' => $readiness['mock_average'],
                 'daily_new_target' => $dailyNewTarget,
                 'daily_new_label' => $dailyNewLabel,
                 'new_completed_today' => $newCompletedToday,

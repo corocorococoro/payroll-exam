@@ -6,11 +6,13 @@ use App\Enums\Difficulty;
 use App\Enums\QuestionReviewStatus;
 use App\Enums\QuestionType;
 use App\Enums\QuestionVariantRole;
+use App\Services\QuestionRevisionService;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -57,6 +59,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 ])]
 class Question extends Model
 {
+    protected static function booted(): void
+    {
+        static::updated(function (Question $question): void {
+            if ($question->wasChanged('content_revision')) {
+                app(QuestionRevisionService::class)->invalidate($question);
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [
@@ -95,6 +106,41 @@ class Question extends Model
             ->where('review_due_at', '>=', now());
     }
 
+    /**
+     * 初見模試のために確保した問題を除く、通常学習の問題バンク。
+     *
+     * @param  Builder<Question>  $query
+     * @return Builder<Question>
+     */
+    public function scopePracticeBank(Builder $query): Builder
+    {
+        return $query->published()->whereDoesntHave(
+            'mockExamQuestions.mockExam',
+            fn (Builder $mockExam): Builder => $mockExam->where('is_published', true),
+        );
+    }
+
+    /**
+     * 模試問題はそのユーザーが一度採点を終えた後だけ補強学習へ解放する。
+     *
+     * @param  Builder<Question>  $query
+     * @return Builder<Question>
+     */
+    public function scopePracticeAvailableFor(Builder $query, User $user): Builder
+    {
+        return $query->published()->where(function (Builder $available) use ($user): void {
+            $available
+                ->whereDoesntHave(
+                    'mockExamQuestions.mockExam',
+                    fn (Builder $mockExam): Builder => $mockExam->where('is_published', true),
+                )
+                ->orWhereHas(
+                    'progresses',
+                    fn (Builder $progress): Builder => $progress->where('user_id', $user->id),
+                );
+        });
+    }
+
     /** @return BelongsTo<Unit, $this> */
     public function unit(): BelongsTo
     {
@@ -105,6 +151,18 @@ class Question extends Model
     public function lesson(): BelongsTo
     {
         return $this->belongsTo(Lesson::class);
+    }
+
+    /** @return HasMany<MockExamQuestion, $this> */
+    public function mockExamQuestions(): HasMany
+    {
+        return $this->hasMany(MockExamQuestion::class);
+    }
+
+    /** @return HasMany<UserQuestionProgress, $this> */
+    public function progresses(): HasMany
+    {
+        return $this->hasMany(UserQuestionProgress::class);
     }
 
     public function isCalculation(): bool

@@ -24,7 +24,7 @@ class LearnController extends Controller
         // モデル自身の主キーで抽出するため、手動keyByとの組合せでは誤集計になる。
         $questionProgresses = $request->user()->questionProgresses()->get()->toBase()->keyBy('question_id');
 
-        $units = $course->units->map(function (Unit $unit) use ($progresses, $questionProgresses): array {
+        $units = $course->units->map(function (Unit $unit) use ($progresses, $questionProgresses, $request): array {
             return [
                 'id' => $unit->id,
                 'slug' => $unit->slug,
@@ -33,18 +33,21 @@ class LearnController extends Controller
                 'icon' => $unit->icon,
                 'color' => $unit->color,
                 'is_advanced' => $unit->is_advanced,
-                'lessons' => $unit->lessons->map(function (Lesson $lesson) use ($progresses, $questionProgresses) {
+                'lessons' => $unit->lessons->map(function (Lesson $lesson) use ($progresses, $questionProgresses, $request) {
                     $crown = $progresses[$lesson->id]->crown_level ?? 0;
-                    $lessonQuestions = $lesson->questions()->published()->get(['id', 'study_tier']);
+                    $lessonQuestions = $lesson->questions()->practiceBank()->get(['id', 'study_tier']);
                     $questionIds = $lessonQuestions->pluck('id');
+                    $availableQuestionIds = $lesson->questions()
+                        ->practiceAvailableFor($request->user())
+                        ->pluck('id');
                     $sessionQuestionCount = min(
                         LessonRunService::QUESTION_COUNT,
-                        $questionIds->count(),
+                        $availableQuestionIds->count(),
                     );
                     $lessonQuestionProgresses = $questionProgresses->only($questionIds->all());
                     $seenCount = $lessonQuestionProgresses->whereNotNull('first_seen_at')->count();
                     $masteredCount = $lessonQuestionProgresses->where('state', 'mastered')->count();
-                    $dueCount = $lessonQuestionProgresses
+                    $dueCount = $questionProgresses->only($availableQuestionIds->all())
                         ->filter(fn ($progress) => $progress->due_at?->isPast() ?? false)
                         ->count();
                     $questionCount = $questionIds->count();

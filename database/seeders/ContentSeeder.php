@@ -187,6 +187,15 @@ class ContentSeeder extends Seeder
                 'calc_params' => $q['calc_params'],
             ];
             $contentHash = Question::contentHash($content);
+            $existing = Question::where('source_id', $q['id'])->first();
+            $configuredRevision = (int) ($q['content_revision'] ?? 1);
+            $contentChanged = $existing !== null && $existing->content_hash !== $contentHash;
+            $contentRevision = $existing === null
+                ? $configuredRevision
+                : max(
+                    $configuredRevision,
+                    $existing->content_revision + ($contentChanged ? 1 : 0),
+                );
 
             Question::updateOrCreate(
                 ['source_id' => $q['id']],
@@ -207,7 +216,7 @@ class ContentSeeder extends Seeder
                     'scope_status' => 'exam_'.($release['legal_as_of'] ?? throw new RuntimeException('法令基準日がありません。')),
                     'exam_role' => $q['exam_role'] ?? ($content['calc_params'] === null ? 'knowledge' : 'calculation'),
                     'study_tier' => $q['study_tier'],
-                    'content_revision' => $q['content_revision'] ?? 1,
+                    'content_revision' => $contentRevision,
                     'content_hash' => $contentHash,
                     'reviewed_content_hash' => $contentHash,
                     'fiscal_year' => self::FISCAL_YEAR,
