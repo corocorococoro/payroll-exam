@@ -7,6 +7,7 @@ import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
 import { useSoundEffects } from '@/composables/useSoundEffects';
 import { useXpProgress } from '@/composables/useXpProgress';
 import { postJson } from '@/lib/api';
+import { formatReviewDate } from '@/lib/date';
 import type { AnswerResult, PlayerQuestion, ReferenceSheetData } from '@/types';
 
 type ReviewQuestion = PlayerQuestion & { unit_name: string; box: number };
@@ -315,7 +316,7 @@ function next() {
                 >
                     {{ result.explanation }}
                     <span class="mt-2 block text-xs font-bold text-[#285ac8]">
-                        次回復習: {{ result.next_review_at }}
+                        次回復習: {{ formatReviewDate(result.next_review_at) }}
                     </span>
                 </p>
                 <div

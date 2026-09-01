@@ -15,6 +15,7 @@ import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
 import { useSoundEffects } from '@/composables/useSoundEffects';
 import { useXpProgress } from '@/composables/useXpProgress';
 import { postJson } from '@/lib/api';
+import { formatReviewDate } from '@/lib/date';
 import type {
     AnswerResult,
     LessonComplete,
@@ -628,7 +629,8 @@ const accuracy = computed(() =>
                                 </a>
                             </div>
                             <p class="mt-2 text-xs font-bold text-[#285ac8]">
-                                次回復習: {{ result.next_review_at }}
+                                次回復習:
+                                {{ formatReviewDate(result.next_review_at) }}
                             </p>
                             <p
                                 v-if="result.common_mistake"
