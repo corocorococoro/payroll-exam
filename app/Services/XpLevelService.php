@@ -155,7 +155,7 @@ class XpLevelService
         $unlocked = $user->rewardUnlocks()->pluck('reward_slug')->all();
         $equipped = $user->statOrCreate()->mascot_style;
 
-        return array_values(array_map(function (array $style) use ($unlocked, $equipped): array {
+        return array_map(function (array $style) use ($unlocked, $equipped): array {
             $slug = $style['slug'];
 
             return [
@@ -166,7 +166,7 @@ class XpLevelService
                 'unlocked' => $slug === 'default' || in_array($slug, $unlocked, true),
                 'equipped' => $slug === $equipped,
             ];
-        }, $this->styleCatalog()));
+        }, $this->styleCatalog());
     }
 
     public function canEquip(User $user, string $slug): bool
