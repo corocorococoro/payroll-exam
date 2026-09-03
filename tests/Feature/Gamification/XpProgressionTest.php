@@ -127,13 +127,19 @@ test('レベル境界で衣装を解放し未解放衣装の装備を拒否す�
         ->and($user->rewardUnlocks()->where('reward_slug', 'cozy-study')->exists())->toBeTrue()
         ->and($user->rewardUnlocks()->where('reward_slug', 'cozy-pajamas')->exists())->toBeTrue()
         ->and($user->rewardUnlocks()->where('reward_slug', 'study-parka')->exists())->toBeTrue()
-        ->and($user->rewardUnlocks()->where('reward_slug', 'sunny-raincoat')->exists())->toBeTrue();
+        ->and($user->rewardUnlocks()->where('reward_slug', 'sunny-raincoat')->exists())->toBeFalse();
 
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'payroll-cardigan'])
         ->assertUnprocessable();
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'study-parka'])
         ->assertOk()
         ->assertJsonPath('xp_progress.mascot_style', 'study-parka');
+    actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'sunny-raincoat'])
+        ->assertUnprocessable();
+
+    $xp->award($user, 125, 'question', 'question:next-outfit');
+    $levels->syncRewardUnlocks($user);
+
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'sunny-raincoat'])
         ->assertOk()
         ->assertJsonPath('xp_progress.mascot_style', 'sunny-raincoat');
@@ -147,14 +153,42 @@ test('成長画面にレベル進捗と衣装一覧を返す', function () {
         ->where('xp_progress.level', 1)
         ->has('styles', 20)
         ->where('styles.1.slug', 'mint-overalls')
-        ->where('styles.1.unlocked', true)
+        ->where('styles.1.threshold', 50)
+        ->where('styles.1.unlocked', false)
         ->has('levels', 10)
         ->has('badges', 10)
         ->has('leaderboard')
     );
 });
 
-test('最高レベルでは全20着を解放して追加衣装を装備できる', function () {
+test('全衣装をそれぞれ設定XPの到達時だけ解放する', function () {
+    $user = User::factory()->create(['onboarded' => true]);
+    $xp = app(XpService::class);
+    $levels = app(XpLevelService::class);
+    $currentXp = 0;
+
+    foreach (array_slice($levels->styleCatalog(), 1) as $index => $style) {
+        $beforeThreshold = $style['threshold'] - $currentXp - 1;
+        if ($beforeThreshold > 0) {
+            $xp->award($user, $beforeThreshold, 'question', "question:style-before-{$index}");
+        }
+
+        $levels->syncRewardUnlocks($user);
+        expect($levels->canEquip($user, $style['slug']))->toBeFalse(
+            "{$style['slug']} was unlocked before {$style['threshold']} XP.",
+        );
+
+        $xp->award($user, 1, 'question', "question:style-at-{$index}");
+        $levels->syncRewardUnlocks($user);
+        expect($levels->canEquip($user, $style['slug']))->toBeTrue(
+            "{$style['slug']} was not unlocked at {$style['threshold']} XP.",
+        );
+
+        $currentXp = $style['threshold'];
+    }
+});
+
+test('最高レベル後も6000 XPまで最後の衣装を目標にできる', function () {
     $user = User::factory()->create(['onboarded' => true]);
     $xp = app(XpService::class);
     $levels = app(XpLevelService::class);
@@ -163,11 +197,40 @@ test('最高レベルでは全20着を解放して追加衣装を装備できる
 
     $styles = collect($levels->styles($user));
 
-    expect($user->rewardUnlocks)->toHaveCount(19)
+    expect($user->rewardUnlocks()->count())->toBe(18)
         ->and($styles)->toHaveCount(20)
-        ->and($styles->every(fn (array $style): bool => $style['unlocked']))->toBeTrue();
+        ->and($styles->where('unlocked', true))->toHaveCount(19)
+        ->and($styles->firstWhere('slug', 'celebration-hakama')['unlocked'])->toBeFalse();
+
+    actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'celebration-hakama'])
+        ->assertUnprocessable();
+
+    $xp->award($user, 800, 'question', 'question:last-style');
+    $levels->syncRewardUnlocks($user);
 
     actingAs($user)->patchJson('/rewards/mascot-style', ['style' => 'celebration-hakama'])
         ->assertOk()
         ->assertJsonPath('xp_progress.mascot_style', 'celebration-hakama');
+
+    expect($user->rewardUnlocks()->count())->toBe(19)
+        ->and(collect($levels->styles($user))->every(fn (array $style): bool => $style['unlocked']))->toBeTrue();
+});
+
+test('旧条件で解放された衣装を現在XPで再照合する', function () {
+    $user = User::factory()->create(['onboarded' => true]);
+    $stat = $user->statOrCreate();
+    $stat->update(['mascot_style' => 'celebration-hakama']);
+    $user->rewardUnlocks()->create([
+        'reward_slug' => 'celebration-hakama',
+        'unlocked_at' => now(),
+    ]);
+    $levels = app(XpLevelService::class);
+
+    expect($levels->progress($user)['mascot_style'])->toBe('default')
+        ->and($levels->canEquip($user, 'celebration-hakama'))->toBeFalse();
+
+    $levels->syncRewardUnlocks($user);
+
+    expect($user->rewardUnlocks()->where('reward_slug', 'celebration-hakama')->exists())->toBeFalse()
+        ->and($stat->refresh()->mascot_style)->toBe('default');
 });

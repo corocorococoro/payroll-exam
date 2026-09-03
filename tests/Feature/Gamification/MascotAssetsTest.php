@@ -9,17 +9,29 @@ it('configures exactly two unique mascot styles for every relationship level', f
     expect($levels)->toHaveCount(10)
         ->and($styles)->toHaveCount(20)
         ->and($styles->pluck('slug')->unique())->toHaveCount(20)
-        ->and($styles->pluck('name')->unique())->toHaveCount(20);
+        ->and($styles->pluck('name')->unique())->toHaveCount(20)
+        ->and($styles->pluck('threshold')->all())->toBe([
+            0, 50, 100, 175, 250, 375, 500, 700, 900, 1150,
+            1400, 1750, 2100, 2500, 2900, 3400, 3900, 4550, 5200, 6000,
+        ])
+        ->and($styles->pluck('threshold')->unique())->toHaveCount(20);
 
     foreach ($levels as $level => $reward) {
         $levelStyles = $styles->where('level', $level)->values();
         $primaryStyle = $levelStyles->firstWhere('slug', $reward['style']);
+        $bonusStyle = $levelStyles->firstWhere('slug', '!=', $reward['style']);
+        $nextThreshold = $levels->get($level + 1)['threshold'] ?? null;
 
         expect($levelStyles)->toHaveCount(2)
-            ->and($levelStyles->pluck('threshold')->unique()->values()->all())
-            ->toBe([(int) $reward['threshold']])
             ->and($primaryStyle)->not->toBeNull()
-            ->and($primaryStyle['name'])->toBe($reward['style_name']);
+            ->and($primaryStyle['name'])->toBe($reward['style_name'])
+            ->and($primaryStyle['threshold'])->toBe((int) $reward['threshold'])
+            ->and($bonusStyle)->not->toBeNull()
+            ->and($bonusStyle['threshold'])->toBeGreaterThan((int) $reward['threshold']);
+
+        if ($nextThreshold !== null) {
+            expect($bonusStyle['threshold'])->toBeLessThan((int) $nextThreshold);
+        }
     }
 });
 

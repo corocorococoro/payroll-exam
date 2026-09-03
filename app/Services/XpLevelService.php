@@ -67,6 +67,9 @@ class XpLevelService
             : (int) floor(
                 (($stat->total_xp - $current['threshold']) / ($next['threshold'] - $current['threshold'])) * 100,
             );
+        $mascotStyle = $this->isStyleUnlocked($stat->mascot_style, $stat->total_xp)
+            ? $stat->mascot_style
+            : 'default';
 
         return [
             'total_xp' => $stat->total_xp,
@@ -76,7 +79,7 @@ class XpLevelService
             'next_level_xp' => $next['threshold'] ?? null,
             'xp_to_next' => $next === null ? null : max(0, $next['threshold'] - $stat->total_xp),
             'progress_percent' => max(0, min(100, $progress)),
-            'mascot_style' => $stat->mascot_style,
+            'mascot_style' => $mascotStyle,
             'today_xp' => $activity->xp ?? 0,
             'daily_goal' => (int) ($user->daily_goal ?: 20),
             'goal_met' => $activity->goal_met ?? false,
@@ -126,10 +129,21 @@ class XpLevelService
     /** @return list<string> */
     public function syncRewardUnlocks(User $user): array
     {
-        $totalXp = $user->statOrCreate()->refresh()->total_xp;
+        $stat = $user->statOrCreate()->refresh();
+        $totalXp = $stat->total_xp;
+        $styles = collect($this->styleCatalog());
         $unlocked = [];
 
-        foreach ($this->styleCatalog() as $style) {
+        $lockedSlugs = $styles
+            ->filter(fn (array $style): bool => $style['slug'] !== 'default' && $style['threshold'] > $totalXp)
+            ->pluck('slug');
+        $user->rewardUnlocks()->whereIn('reward_slug', $lockedSlugs)->delete();
+
+        if (! $this->isStyleUnlocked($stat->mascot_style, $totalXp)) {
+            $stat->update(['mascot_style' => 'default']);
+        }
+
+        foreach ($styles as $style) {
             $slug = $style['slug'];
 
             if ($slug === 'default' || $style['threshold'] > $totalXp) {
@@ -152,10 +166,12 @@ class XpLevelService
     /** @return list<array<string, int|string|bool>> */
     public function styles(User $user): array
     {
-        $unlocked = $user->rewardUnlocks()->pluck('reward_slug')->all();
-        $equipped = $user->statOrCreate()->mascot_style;
+        $stat = $user->statOrCreate()->refresh();
+        $equipped = $this->isStyleUnlocked($stat->mascot_style, $stat->total_xp)
+            ? $stat->mascot_style
+            : 'default';
 
-        return array_map(function (array $style) use ($unlocked, $equipped): array {
+        return array_map(function (array $style) use ($stat, $equipped): array {
             $slug = $style['slug'];
 
             return [
@@ -163,7 +179,7 @@ class XpLevelService
                 'name' => $style['name'],
                 'level' => $style['level'],
                 'threshold' => $style['threshold'],
-                'unlocked' => $slug === 'default' || in_array($slug, $unlocked, true),
+                'unlocked' => $this->isStyleUnlocked($slug, $stat->total_xp),
                 'equipped' => $slug === $equipped,
             ];
         }, $this->styleCatalog());
@@ -174,5 +190,12 @@ class XpLevelService
         $known = collect($this->styles($user))->firstWhere('slug', $slug);
 
         return $known !== null && $known['unlocked'];
+    }
+
+    private function isStyleUnlocked(string $slug, int $totalXp): bool
+    {
+        $style = collect($this->styleCatalog())->firstWhere('slug', $slug);
+
+        return $style !== null && ($slug === 'default' || $style['threshold'] <= $totalXp);
     }
 }

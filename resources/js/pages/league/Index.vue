@@ -141,7 +141,7 @@ async function equip(style: MascotStyle) {
                         />きゅーちゃんの衣装
                     </h2>
                     <p class="mt-1 text-xs text-gray-500">
-                        各レベルで、新しい衣装が2着ずつ増えます。
+                        衣装はXPをためるごとに1着ずつ解放されます。
                     </p>
                 </div>
                 <p
@@ -201,9 +201,10 @@ async function equip(style: MascotStyle) {
                             }}
                         </template>
                         <template v-else>
-                            <Lock class="mr-1 inline size-3" />Lv.{{
-                                style.level
-                            }}・{{ style.threshold.toLocaleString() }} XP
+                            <Lock class="mr-1 inline size-3" />{{
+                                style.threshold.toLocaleString()
+                            }}
+                            XPで解放
                         </template>
                     </p>
                 </button>
