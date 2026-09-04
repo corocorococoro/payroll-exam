@@ -57,13 +57,15 @@ const unitClasses = {
 </script>
 
 <template>
-    <Head title="まなぶ" />
+    <Head title="学習" />
 
     <h1 class="mb-1 text-xl font-semibold text-gray-700 dark:text-gray-200">
         {{ course.name }}
     </h1>
     <p class="mb-5 text-sm text-gray-500 dark:text-gray-400">
-        まず合格コア{{ coreQuestionCount }}問。その後に補強問題を進めます（全{{
+        まず重要問題{{
+            coreQuestionCount
+        }}問に取り組み、その後に追加問題へ進みます（全{{
             bankQuestionCount
         }}問）。
     </p>
@@ -76,7 +78,7 @@ const unitClasses = {
         <KyuchanMoment
             mood="point"
             effect="sparkle"
-            :message="`次は「${nextLesson.name}」がおすすめだよ`"
+            :message="`次は「${nextLesson.name}」がおすすめです`"
             :size="88"
             compact
         />
@@ -140,7 +142,7 @@ const unitClasses = {
                                 {{ lesson.name }}
                             </p>
                             <p class="text-xs text-gray-400">
-                                合格コア {{ lesson.core_seen_count }}/{{
+                                重要問題 {{ lesson.core_seen_count }}/{{
                                     lesson.core_question_count
                                 }}問 · 1回{{ lesson.session_question_count }}問
                             </p>
@@ -160,14 +162,14 @@ const unitClasses = {
                     <div
                         class="shrink-0 text-right text-[11px] font-bold text-gray-400"
                     >
-                        <p>コア {{ lesson.core_coverage_percent }}%</p>
+                        <p>重要問題 {{ lesson.core_coverage_percent }}%</p>
                         <p v-if="lesson.due_count > 0" class="text-rose-500">
-                            復習 {{ lesson.due_count }}
+                            復習 {{ lesson.due_count }}問
                         </p>
                         <p v-else class="font-normal text-gray-300">
                             全体 {{ lesson.seen_count }}/{{
                                 lesson.question_count
-                            }}
+                            }}問
                         </p>
                     </div>
                 </Link>

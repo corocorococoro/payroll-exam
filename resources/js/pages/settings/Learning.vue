@@ -62,7 +62,7 @@ function submit() {
             v-if="saved"
             mood="approve"
             effect="sparkle"
-            message="設定したよ。無理なく続けよう！"
+            message="学習設定を保存しました。"
             :size="76"
             compact
             class="mt-4 max-w-sm"
@@ -70,8 +70,7 @@ function submit() {
         <form class="mt-6 space-y-6" @submit.prevent="submit">
             <section>
                 <label class="mb-2 flex items-center gap-2 text-sm font-bold"
-                    ><Flame class="size-4 text-[#285ac8]" />1日の XP
-                    ゴール</label
+                    ><Flame class="size-4 text-[#285ac8]" />1日のXP目標</label
                 >
                 <div class="grid grid-cols-4 gap-2">
                     <button
@@ -96,7 +95,7 @@ function submit() {
                     ><span class="flex items-center gap-2 text-sm font-bold"
                         ><Bell
                             class="size-4 text-sky-500"
-                        />リマインダーメール</span
+                        />学習のお知らせメール</span
                     ><input
                         v-model="reminderEnabled"
                         type="checkbox"

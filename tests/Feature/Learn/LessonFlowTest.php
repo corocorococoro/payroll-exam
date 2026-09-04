@@ -40,7 +40,7 @@ test('問題配信レスポンスに正解・解説が含まれない', function
     $expectedCount = min(LessonRunService::QUESTION_COUNT, $lesson->questions()->count());
     $response->assertInertia(fn ($page) => $page
         ->has('questions', $expectedCount)
-        ->where('lesson.focus_label', '合格コア')
+        ->where('lesson.focus_label', '重要問題')
         ->where('lesson.study_guide.goal', fn (string $goal): bool => $goal !== '')
         ->has('lesson.study_guide.key_points', 3),
     );

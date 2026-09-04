@@ -39,10 +39,10 @@ const stepEffect: Record<number, KyuchanEffect> = {
 };
 
 const goals = [
-    { value: 10, label: 'ゆるっと', note: '約3分' },
-    { value: 20, label: 'コツコツ', note: '約5分' },
+    { value: 10, label: '軽め', note: '約3分' },
+    { value: 20, label: '標準', note: '約5分' },
     { value: 30, label: 'しっかり', note: '約10分' },
-    { value: 50, label: '本気！', note: '約15分' },
+    { value: 50, label: '集中', note: '約15分' },
 ];
 
 function submit() {
@@ -77,13 +77,11 @@ function submit() {
         >
             <div class="mb-4 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-semibold text-[#2864f0]">
-                        きゅーよ！をはじめよう
-                    </p>
+                    <p class="text-xs font-semibold text-[#2864f0]">初回設定</p>
                     <h1
                         class="text-xl font-semibold text-gray-700 dark:text-gray-100"
                     >
-                        あなたの学習プラン
+                        学習プランを設定
                     </h1>
                 </div>
                 <Kyuchan
@@ -112,10 +110,10 @@ function submit() {
                         <h2
                             class="font-semibold text-gray-700 dark:text-gray-100"
                         >
-                            1日の目標を選ぼう
+                            1日のXP目標
                         </h2>
                         <p class="text-xs text-gray-400">
-                            無理なく続けられる量がおすすめ
+                            学習時間の目安から選んでください
                         </p>
                     </div>
                 </div>
@@ -153,10 +151,10 @@ function submit() {
                         <h2
                             class="font-semibold text-gray-700 dark:text-gray-100"
                         >
-                            リマインダー
+                            学習のお知らせ
                         </h2>
                         <p class="text-xs text-gray-400">
-                            学習を忘れない時間を決めよう
+                            お知らせを受け取る時刻を設定します
                         </p>
                     </div>
                 </div>
@@ -196,10 +194,10 @@ function submit() {
                         <h2
                             class="font-semibold text-gray-700 dark:text-gray-100"
                         >
-                            試験日を確認
+                            試験日
                         </h2>
                         <p class="text-xs text-gray-400">
-                            カウントダウンを表示します
+                            ホームに試験までの日数を表示します
                         </p>
                     </div>
                 </div>
@@ -234,7 +232,7 @@ function submit() {
                     class="flex flex-1 items-center justify-center rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none"
                     @click="step++"
                 >
-                    つぎへ<ChevronRight class="size-4" />
+                    次へ<ChevronRight class="size-4" />
                 </button>
                 <button
                     v-else
@@ -242,7 +240,7 @@ function submit() {
                     :disabled="processing"
                     @click="submit"
                 >
-                    {{ processing ? '保存中…' : '学習をはじめる！' }}
+                    {{ processing ? '保存中…' : '設定を保存して始める' }}
                 </button>
             </div>
         </div>

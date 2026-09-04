@@ -36,7 +36,7 @@ class AnswerService
             if ($context === AttemptContext::Lesson) {
                 if ($lessonId === null || $runStartedAt === null) {
                     throw ValidationException::withMessages([
-                        'question_id' => '有効なレッスンセッションがありません。',
+                        'question_id' => 'このレッスンを続けられません。学習一覧から開き直してください。',
                     ]);
                 }
 
@@ -61,7 +61,7 @@ class AnswerService
 
                 if (! $isDue) {
                     throw ValidationException::withMessages([
-                        'question_id' => 'この問題は現在の復習対象ではありません。',
+                        'question_id' => 'この問題は今日の復習には含まれていません。',
                     ]);
                 }
             }

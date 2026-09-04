@@ -207,6 +207,16 @@ test('未達成ユーザーに設定時刻でリマインダーを一日一度�
     artisan('reminders:send')->assertSuccessful();
 
     Notification::assertSentToTimes($user, StudyReminder::class, 1);
+    Notification::assertSentTo(
+        $user,
+        StudyReminder::class,
+        function (StudyReminder $notification) use ($user): bool {
+            $mail = $notification->toMail($user);
+
+            return in_array('今日はまだ1日のXP目標を達成していません。', $mail->introLines, true)
+                && in_array('少しだけでも学習して、連続記録を伸ばしましょう。', $mail->introLines, true);
+        },
+    );
     expect($user->refresh()->last_reminded_on->isToday())->toBeTrue();
 });
 

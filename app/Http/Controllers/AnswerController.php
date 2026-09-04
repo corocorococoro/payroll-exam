@@ -35,7 +35,7 @@ class AnswerController extends Controller
         $runStartedAt = null;
 
         if ($context === AttemptContext::Lesson) {
-            abort_if($lessonId === null, 422, 'レッスンIDが必要です。');
+            abort_if($lessonId === null, 422, 'このレッスンを続けられません。学習一覧から開き直してください。');
             $lesson = Lesson::findOrFail($lessonId);
             $run = $runs->current($request, $lesson);
 
@@ -44,7 +44,7 @@ class AnswerController extends Controller
                 || $run === null
                 || ! in_array($question->id, $run['question_ids'], true),
                 422,
-                'この問題は現在のレッスンには含まれていません。',
+                'この問題を続けられません。学習一覧からレッスンを開き直してください。',
             );
 
             $runStartedAt = CarbonImmutable::parse($run['started_at']);
@@ -57,12 +57,12 @@ class AnswerController extends Controller
                 ->exists();
             abort_if($alreadyAnswered, 422, 'この問題にはすでに解答済みです。');
         } else {
-            abort_if($lessonId !== null, 422, '復習ではレッスンIDを指定できません。');
+            abort_if($lessonId !== null, 422, 'この復習を続けられません。復習画面から開き直してください。');
             $isDue = $request->user()->reviewItems()
                 ->where('question_id', $question->id)
                 ->whereDate('due_date', '<=', today())
                 ->exists();
-            abort_unless($isDue, 422, 'この問題は現在の復習対象ではありません。');
+            abort_unless($isDue, 422, 'この問題は今日の復習には含まれていません。');
         }
 
         $result = $answerService->answer(

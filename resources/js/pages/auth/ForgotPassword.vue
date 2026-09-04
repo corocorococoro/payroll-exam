@@ -59,7 +59,7 @@ defineProps<{
         </Form>
 
         <div class="space-x-1 text-center text-sm text-muted-foreground">
-            <TextLink :href="login()">ログイン画面にもどる</TextLink>
+            <TextLink :href="login()">ログイン画面に戻る</TextLink>
         </div>
     </div>
 </template>

@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
 use Database\Seeders\GamificationSeeder;
+use Illuminate\Support\Facades\DB;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -14,6 +15,33 @@ beforeEach(function () {
     seed([ContentSeeder::class, GamificationSeeder::class]);
     $this->user = User::factory()->create(['onboarded' => true])->refresh();
     $this->exam = MockExam::where('slug', 'mogi-1')->firstOrFail();
+});
+
+test('模試一覧には分かりやすい名称と説明を表示する', function () {
+    actingAs($this->user)
+        ->get('/mock-exams')
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('mock/Index')
+            ->where('exams.0.name', '2級 模擬試験 第1回')
+            ->where('exams.0.description', '本番と同じ40問・120分・合格基準70点の模擬試験です。今の実力と復習すべき分野を確認できます。'),
+        );
+});
+
+test('既存の模試文言を分かりやすい表現へ更新できる', function () {
+    $migration = require database_path('migrations/2026_09_04_000010_update_mock_exam_copy.php');
+
+    $migration->down();
+    expect(DB::table('mock_exams')->where('slug', 'mogi-1')->value('name'))
+        ->toBe('2級 診断模試 第1回');
+
+    $migration->up();
+    expect(DB::table('mock_exams')->where('slug', 'mogi-1')->value('name'))
+        ->toBe('2級 模擬試験 第1回')
+        ->and(DB::table('mock_exams')->where('slug', 'mogi-2')->value('name'))
+        ->toBe('2級 模擬試験 第2回')
+        ->and(DB::table('mock_exams')->where('slug', 'mogi-3')->value('name'))
+        ->toBe('2級 模擬試験 第3回');
 });
 
 test('模試を開始して正解を漏らさず途中保存できる', function () {

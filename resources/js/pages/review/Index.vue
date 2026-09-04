@@ -77,7 +77,9 @@ async function check() {
         }
     } catch (error) {
         errorMessage.value =
-            error instanceof Error ? error.message : '通信エラーが発生しました';
+            error instanceof Error
+                ? error.message
+                : '通信できませんでした。時間をおいてもう一度お試しください。';
     } finally {
         checking.value = false;
     }
@@ -98,7 +100,7 @@ function next() {
 </script>
 
 <template>
-    <Head title="ふくしゅう" />
+    <Head title="復習" />
 
     <div
         v-if="questions.length === 0"
@@ -106,10 +108,10 @@ function next() {
     >
         <Kyuchan mood="sleepy" effect="zzz" :size="140" />
         <h1 class="mt-3 text-xl font-semibold text-gray-700 dark:text-gray-100">
-            今日の復習は完了！
+            今日の復習は完了しました
         </h1>
         <p class="mt-1 text-sm text-gray-400">
-            忘れたころに、またきゅーちゃんがお知らせします。
+            次の復習日になったら、ここに問題が表示されます。
         </p>
         <Link
             href="/learn"
@@ -127,7 +129,7 @@ function next() {
         <h1
             class="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-100"
         >
-            復習おつかれさま！
+            復習が完了しました
         </h1>
         <p class="mt-1 text-sm font-bold text-gray-500">
             {{ correctCount }} / {{ questions.length }} 問正解
@@ -184,14 +186,10 @@ function next() {
             <section
                 class="rounded-lg border border-blue-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
             >
-                <div class="mb-3 flex items-center justify-between">
+                <div class="mb-3 flex items-center">
                     <span class="text-xs font-bold text-[#285ac8]">{{
                         current.unit_name
-                    }}</span
-                    ><span
-                        class="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-[#2864f0] dark:bg-blue-950"
-                        >復習ボックス {{ current.box }}</span
-                    >
+                    }}</span>
                 </div>
                 <p
                     class="text-[15px] leading-relaxed font-medium whitespace-pre-wrap text-gray-700 dark:text-gray-200"
@@ -206,7 +204,7 @@ function next() {
                     class="mt-3 inline-flex items-center gap-1 rounded-full bg-sky-100 px-3 py-1.5 text-xs font-bold text-sky-600 dark:bg-sky-950"
                     @click="sheetsOpen = true"
                 >
-                    <BookOpen class="size-4" />資料集をひらく
+                    <BookOpen class="size-4" />資料集を開く
                 </button>
             </section>
 
@@ -254,7 +252,7 @@ function next() {
                 <label
                     for="review-answer"
                     class="mb-2 block text-xs font-bold text-gray-400"
-                    >こたえ（円）</label
+                    >答え（円）</label
                 ><input
                     id="review-answer"
                     v-model="numericInput"
@@ -292,16 +290,16 @@ function next() {
                             {{
                                 result.correct
                                     ? result.xp_earned > 0
-                                        ? `せいかい！ +${result.xp_earned} XP`
-                                        : 'せいかい！ XP獲得済み'
-                                    : 'もう一度覚えよう！'
+                                        ? `正解！ +${result.xp_earned} XP`
+                                        : '正解！ XP獲得済み'
+                                    : 'もう一度確認してください'
                             }}
                         </p>
                         <p
                             v-if="!result.correct"
                             class="text-xs font-bold text-gray-600 dark:text-gray-300"
                         >
-                            こたえ: {{ result.correct_answer }}
+                            答え：{{ result.correct_answer }}
                         </p>
                     </div>
                 </div>
@@ -309,14 +307,16 @@ function next() {
                     v-if="result.selected_feedback"
                     class="mb-2 rounded-md bg-rose-100 px-3 py-2 text-xs font-bold text-rose-700 dark:bg-rose-900/50 dark:text-rose-200"
                 >
-                    この選択肢が違う理由: {{ result.selected_feedback }}
+                    この選択肢が違う理由：{{ result.selected_feedback }}
                 </p>
                 <p
                     class="text-xs leading-relaxed text-gray-600 dark:text-gray-300"
                 >
                     {{ result.explanation }}
                     <span class="mt-2 block text-xs font-bold text-[#285ac8]">
-                        次回復習: {{ formatReviewDate(result.next_review_at) }}
+                        次回の復習：{{
+                            formatReviewDate(result.next_review_at)
+                        }}
                     </span>
                 </p>
                 <div
@@ -368,9 +368,7 @@ function next() {
                     class="mt-4 w-full rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm active:shadow-none"
                     @click="next"
                 >
-                    {{
-                        index === questions.length - 1 ? '結果を見る' : 'つぎへ'
-                    }}
+                    {{ index === questions.length - 1 ? '結果を見る' : '次へ' }}
                 </button>
             </div>
             <button
@@ -379,7 +377,7 @@ function next() {
                 :disabled="!canCheck || checking"
                 @click="check"
             >
-                {{ checking ? 'チェック中…' : 'チェック！' }}
+                {{ checking ? '確認中…' : '答え合わせ' }}
             </button>
             <p
                 v-if="errorMessage"

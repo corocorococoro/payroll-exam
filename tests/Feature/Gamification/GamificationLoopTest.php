@@ -4,6 +4,7 @@ use App\Models\Lesson;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
 use Database\Seeders\GamificationSeeder;
+use Illuminate\Support\Facades\DB;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -41,6 +42,25 @@ test('リーグとバッジ画面を表示できる', function () {
     actingAs($user)->get('/league')->assertOk()->assertInertia(fn ($page) => $page
         ->component('league/Index')
         ->has('badges', 10)
+        ->where('badges.3.description', '7日連続で目標を達成した')
+        ->where('badges.6.name', 'レッスン完了の達人')
+        ->where('badges.8.name', '80点突破')
         ->has('leaderboard'),
     );
+});
+
+test('既存のバッジ文言を分かりやすい表現へ更新できる', function () {
+    $migration = require database_path('migrations/2026_09_04_000000_update_gamification_copy.php');
+
+    $migration->down();
+    expect(DB::table('badges')->where('slug', 'lesson-master')->value('name'))
+        ->toBe('クラウンマスター');
+
+    $migration->up();
+    expect(DB::table('badges')->where('slug', 'streak-7')->value('description'))
+        ->toBe('7日連続で目標を達成した')
+        ->and(DB::table('badges')->where('slug', 'lesson-master')->value('name'))
+        ->toBe('レッスン完了の達人')
+        ->and(DB::table('badges')->where('slug', 'mock-80')->value('name'))
+        ->toBe('80点突破');
 });

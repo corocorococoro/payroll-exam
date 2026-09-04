@@ -38,7 +38,7 @@ const { isCurrentOrParentUrl } = useCurrentUrl();
     <div class="mx-auto w-full max-w-4xl">
         <header class="mb-5">
             <p class="text-xs font-bold tracking-wide text-[#285ac8]">
-                ACCOUNT
+                アカウント
             </p>
             <h1
                 class="mt-1 text-2xl font-semibold text-gray-800 dark:text-gray-100"

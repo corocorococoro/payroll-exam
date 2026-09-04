@@ -4,7 +4,7 @@ import {
     ArrowRight,
     BookOpen,
     CircleAlert,
-    Crown,
+    CheckCircle2,
     RotateCcw,
     Target,
     X,
@@ -110,7 +110,9 @@ async function check() {
         }
     } catch (e) {
         errorMessage.value =
-            e instanceof Error ? e.message : '通信エラーが発生しました';
+            e instanceof Error
+                ? e.message
+                : '通信できませんでした。時間をおいてもう一度お試しください。';
     } finally {
         checking.value = false;
     }
@@ -153,7 +155,9 @@ async function finish() {
         sound.complete();
     } catch (e) {
         errorMessage.value =
-            e instanceof Error ? e.message : '通信エラーが発生しました';
+            e instanceof Error
+                ? e.message
+                : '通信できませんでした。時間をおいてもう一度お試しください。';
     } finally {
         finishing.value = false;
     }
@@ -181,41 +185,48 @@ const accuracy = computed(() =>
         >
             <Kyuchan mood="clap" effect="confetti" :size="140" />
             <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-100">
-                レッスンクリア！🎉
+                レッスン完了！🎉
             </h1>
 
-            <div class="flex gap-1">
-                <Crown
-                    v-for="i in 5"
-                    :key="i"
-                    :class="[
-                        'size-8',
-                        i <= completion.crown_level
-                            ? 'fill-amber-400 text-amber-400'
-                            : 'text-gray-200 dark:text-gray-700',
-                    ]"
-                />
+            <div class="text-center">
+                <p class="mb-2 text-xs font-bold text-gray-500">
+                    完了ボーナス {{ completion.crown_level }}/5回獲得
+                </p>
+                <div class="flex gap-1" aria-hidden="true">
+                    <CheckCircle2
+                        v-for="i in 5"
+                        :key="i"
+                        :class="[
+                            'size-8',
+                            i <= completion.crown_level
+                                ? 'fill-amber-100 text-amber-500'
+                                : 'text-gray-200 dark:text-gray-700',
+                        ]"
+                    />
+                </div>
             </div>
 
             <div class="grid w-full max-w-sm grid-cols-2 gap-3">
                 <div
                     class="rounded-md border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-gray-900"
                 >
-                    <p class="text-xs font-bold text-gray-400">かくとくXP</p>
+                    <p class="text-xs font-bold text-gray-400">獲得XP</p>
                     <p class="text-2xl font-semibold text-amber-500">
                         +{{ earnedXp + completion.xp_total_earned }}
                     </p>
                     <p class="text-[10px] text-gray-400">
                         <template v-if="completion.bonus_xp > 0">
-                            クラウンボーナス +{{ completion.bonus_xp }}
+                            今回の完了ボーナス +{{ completion.bonus_xp }}
                         </template>
-                        <template v-else>クラウンXPは獲得済み</template>
+                        <template v-else
+                            >完了ボーナスは5回分すべて獲得済み</template
+                        >
                     </p>
                 </div>
                 <div
                     class="rounded-md border border-emerald-200 bg-white p-4 dark:border-emerald-900 dark:bg-gray-900"
                 >
-                    <p class="text-xs font-bold text-gray-400">せいかいりつ</p>
+                    <p class="text-xs font-bold text-gray-400">正解率</p>
                     <p class="text-2xl font-semibold text-emerald-500">
                         {{ accuracy }}%
                     </p>
@@ -229,7 +240,7 @@ const accuracy = computed(() =>
                 v-if="levelUps.length"
                 class="w-full max-w-sm rounded-lg border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-900 dark:bg-amber-950"
             >
-                <p class="text-xs font-bold text-amber-600">LEVEL UP!</p>
+                <p class="text-xs font-bold text-amber-600">レベルアップ！</p>
                 <p class="mt-1 font-semibold text-gray-800 dark:text-gray-100">
                     Lv.{{ levelUps[levelUps.length - 1].level }}
                     {{ levelUps[levelUps.length - 1].title }}
@@ -249,13 +260,14 @@ const accuracy = computed(() =>
                 v-if="completion.goal_met"
                 class="rounded-md bg-blue-100 px-4 py-2 text-sm font-bold text-[#285ac8] dark:bg-blue-950"
             >
-                🔥 今日のゴール達成！ストリーク
-                {{ completion.current_streak }} 日目
+                🔥 今日の目標を達成しました。{{
+                    completion.current_streak
+                }}日連続です
             </div>
             <p v-else class="text-sm text-gray-500">
-                今日はあと
+                今日の目標まであと
                 {{ Math.max(0, completion.daily_goal - completion.today_xp) }}
-                XP でゴール達成！
+                XPです
             </p>
 
             <Link
@@ -271,11 +283,11 @@ const accuracy = computed(() =>
                 class="w-full max-w-sm rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm transition hover:bg-[#285ac8] active:shadow-none"
                 @click="backToTree"
             >
-                スキルツリーへもどる
+                学習一覧へ戻る
             </button>
         </div>
 
-        <!-- 導入: 問題を解く前に、得点につながる判断軸をつかむ。 -->
+        <!-- 導入: 問題を解く前に、得点につながるポイントを確認する。 -->
         <main
             v-else-if="!started"
             class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5"
@@ -284,7 +296,7 @@ const accuracy = computed(() =>
                 <Link
                     href="/learn"
                     class="rounded-full p-2 text-gray-400 hover:bg-white dark:hover:bg-gray-900"
-                    aria-label="もどる"
+                    aria-label="学習一覧へ戻る"
                 >
                     <X class="size-5" />
                 </Link>
@@ -321,7 +333,7 @@ const accuracy = computed(() =>
                     <p
                         class="flex items-center gap-2 text-xs font-bold text-[#285ac8]"
                     >
-                        <Target class="size-4" /> このレッスンの到達点
+                        <Target class="size-4" /> このレッスンで学ぶこと
                     </p>
                     <p
                         class="mt-2 text-sm font-semibold text-gray-700 dark:text-gray-200"
@@ -334,7 +346,7 @@ const accuracy = computed(() =>
                     <h2
                         class="text-sm font-semibold text-gray-700 dark:text-gray-200"
                     >
-                        先に押さえる3点
+                        先に覚える3点
                     </h2>
                     <ol class="mt-2 space-y-2">
                         <li
@@ -377,7 +389,7 @@ const accuracy = computed(() =>
                     class="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm hover:bg-[#285ac8]"
                     @click="started = true"
                 >
-                    この判断軸で解いてみる <ArrowRight class="size-4" />
+                    このポイントを使って解く <ArrowRight class="size-4" />
                 </button>
             </section>
         </main>
@@ -393,7 +405,7 @@ const accuracy = computed(() =>
                     <Link
                         href="/learn"
                         class="rounded-full p-1 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                        aria-label="やめる"
+                        aria-label="レッスンを終了する"
                     >
                         <X class="size-5" />
                     </Link>
@@ -437,7 +449,7 @@ const accuracy = computed(() =>
                             class="mt-3 flex items-center gap-1 rounded-full bg-sky-100 px-3 py-1.5 text-xs font-bold text-sky-600 hover:bg-sky-200 dark:bg-sky-950 dark:text-sky-300"
                             @click="sheetsOpen = true"
                         >
-                            <BookOpen class="size-3.5" /> 資料集をひらく
+                            <BookOpen class="size-3.5" /> 資料集を開く
                         </button>
                     </div>
 
@@ -491,7 +503,7 @@ const accuracy = computed(() =>
                         <label
                             class="mb-2 block text-xs font-bold text-gray-400"
                             for="numeric-answer"
-                            >こたえ（円）</label
+                            >答え（円）</label
                         >
                         <input
                             id="numeric-answer"
@@ -543,11 +555,7 @@ const accuracy = computed(() =>
                                             : 'text-rose-500',
                                     ]"
                                 >
-                                    {{
-                                        result.correct
-                                            ? 'せいかい！'
-                                            : 'ざんねん…'
-                                    }}
+                                    {{ result.correct ? '正解！' : '不正解' }}
                                     <span
                                         v-if="result.correct"
                                         class="ml-1 text-sm"
@@ -562,7 +570,7 @@ const accuracy = computed(() =>
                                     v-if="!result.correct"
                                     class="text-sm font-bold text-gray-600 dark:text-gray-300"
                                 >
-                                    こたえ: {{ result.correct_answer }}
+                                    答え：{{ result.correct_answer }}
                                 </p>
                                 <p
                                     v-if="!result.correct"
@@ -606,7 +614,7 @@ const accuracy = computed(() =>
                                 v-if="result.selected_feedback"
                                 class="mb-2 rounded-md bg-rose-100 px-3 py-2 font-bold text-rose-700 dark:bg-rose-900/50 dark:text-rose-200"
                             >
-                                この選択肢が違う理由:
+                                この選択肢が違う理由：
                                 {{ result.selected_feedback }}
                             </p>
                             <p>{{ result.explanation }}</p>
@@ -629,14 +637,14 @@ const accuracy = computed(() =>
                                 </a>
                             </div>
                             <p class="mt-2 text-xs font-bold text-[#285ac8]">
-                                次回復習:
+                                次回の復習：
                                 {{ formatReviewDate(result.next_review_at) }}
                             </p>
                             <p
                                 v-if="result.common_mistake"
                                 class="mt-1.5 font-bold text-amber-600 dark:text-amber-400"
                             >
-                                ⚠️ よくあるミス: {{ result.common_mistake }}
+                                ⚠️ よくあるミス：{{ result.common_mistake }}
                             </p>
                         </div>
 
@@ -650,7 +658,7 @@ const accuracy = computed(() =>
                             :disabled="finishing"
                             @click="next"
                         >
-                            {{ isLast ? 'けっかをみる' : 'つぎへ' }}
+                            {{ isLast ? '結果を見る' : '次へ' }}
                         </button>
                     </div>
                 </div>
@@ -665,7 +673,7 @@ const accuracy = computed(() =>
                             :disabled="!canCheck || checking"
                             @click="check"
                         >
-                            {{ checking ? 'チェック中…' : 'チェック！' }}
+                            {{ checking ? '確認中…' : '答え合わせ' }}
                         </button>
                     </div>
                 </div>

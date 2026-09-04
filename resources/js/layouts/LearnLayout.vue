@@ -69,7 +69,7 @@ const isActive = (matches: string[]) =>
 
 <template>
     <div class="flex min-h-dvh flex-col bg-[#f7f8fb] dark:bg-gray-950">
-        <!-- ヘッダー: ストリーク / XP / 試験カウントダウン -->
+        <!-- ヘッダー: 連続記録 / XP / 試験までの日数 -->
         <header
             class="sticky top-0 z-20 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
         >
@@ -94,9 +94,13 @@ const isActive = (matches: string[]) =>
                         :class="
                             stats.goal_met ? 'text-[#285ac8]' : 'text-gray-400'
                         "
-                        :title="`ストリーク ${stats.current_streak}日`"
+                        :title="
+                            stats.current_streak > 0
+                                ? `${stats.current_streak}日連続で目標達成`
+                                : '今日の目標を達成すると連続記録が始まります'
+                        "
                     >
-                        🔥 {{ stats.current_streak }}
+                        🔥 連続記録 {{ stats.current_streak }}日
                     </span>
                     <span
                         class="flex items-center gap-1 text-[#285ac8]"
@@ -142,7 +146,7 @@ const isActive = (matches: string[]) =>
             </nav>
         </header>
 
-        <!-- 今日のゴール進捗バー -->
+        <!-- 今日の目標進捗バー -->
         <div
             v-if="stats"
             class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
@@ -159,7 +163,7 @@ const isActive = (matches: string[]) =>
                                     : 'text-gray-500'
                             "
                         >
-                            🔥 {{ stats.current_streak }}日
+                            🔥 連続記録 {{ stats.current_streak }}日
                         </span>
                         <span class="text-[#285ac8]">
                             💎 {{ stats.total_xp }} XP

@@ -19,7 +19,7 @@ class MascotStyleController extends Controller
 
         if (! $levels->canEquip($user, $style)) {
             throw ValidationException::withMessages([
-                'style' => 'この衣装はまだ解放されていません。',
+                'style' => 'この衣装はまだ選べません。必要なXPをためてください。',
             ]);
         }
 

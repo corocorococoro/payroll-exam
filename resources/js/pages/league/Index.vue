@@ -141,7 +141,7 @@ async function equip(style: MascotStyle) {
                         />きゅーちゃんの衣装
                     </h2>
                     <p class="mt-1 text-xs text-gray-500">
-                        衣装はXPをためるごとに1着ずつ解放されます。
+                        衣装はXPをためると1着ずつ選べるようになります。
                     </p>
                 </div>
                 <p
@@ -178,7 +178,7 @@ async function equip(style: MascotStyle) {
                     <span
                         v-if="style.equipped"
                         class="absolute top-2 right-2 flex size-6 items-center justify-center rounded-full bg-[#2864f0] text-white"
-                        title="装備中"
+                        title="着用中"
                     >
                         <Check class="size-4" />
                     </span>
@@ -196,15 +196,13 @@ async function equip(style: MascotStyle) {
                     </p>
                     <p class="mt-auto pt-2 text-[11px] font-bold text-gray-400">
                         <template v-if="style.unlocked">
-                            {{
-                                style.equipped ? '装備中' : 'タップして着替える'
-                            }}
+                            {{ style.equipped ? '着用中' : '選択して着替える' }}
                         </template>
                         <template v-else>
                             <Lock class="mr-1 inline size-3" />{{
                                 style.threshold.toLocaleString()
                             }}
-                            XPで解放
+                            XPで選択可能
                         </template>
                     </p>
                 </button>
@@ -218,7 +216,7 @@ async function equip(style: MascotStyle) {
             <h2
                 class="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-700 dark:text-gray-100"
             >
-                <Award class="size-5 text-amber-500" />バッジコレクション
+                <Award class="size-5 text-amber-500" />バッジ
             </h2>
             <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 <article

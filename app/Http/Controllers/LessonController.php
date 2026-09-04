@@ -29,7 +29,7 @@ class LessonController extends Controller
     {
         $lesson->load('unit');
         $run = $runs->getOrStart($request, $lesson);
-        abort_if($run['question_ids'] === [], 404, 'このレッスンには有効な問題がありません。');
+        abort_if($run['question_ids'] === [], 404, 'このレッスンには現在取り組める問題がありません。学習一覧から別のレッスンを選んでください。');
 
         $questions = $lesson->questions()
             ->whereIn('id', $run['question_ids'])
@@ -50,8 +50,8 @@ class LessonController extends Controller
             );
         });
         $focusLabel = $hasRecovery
-            ? '弱点補強'
-            : ($questions->contains('study_tier', 'core') ? '合格コア' : '定着演習');
+            ? '苦手な問題を復習'
+            : ($questions->contains('study_tier', 'core') ? '重要問題' : 'もう一度練習');
 
         $sheetSlugs = $questions->pluck('reference_sheet_slugs')->flatten()->filter()->unique()->values();
 
@@ -99,7 +99,7 @@ class LessonController extends Controller
         $run = $runs->current($request, $lesson);
 
         if ($run === null || $run['question_ids'] === []) {
-            return response()->json(['message' => '有効なレッスンセッションがありません。'], 422);
+            return response()->json(['message' => 'このレッスンを続けられません。学習一覧から開き直してください。'], 422);
         }
 
         $runStartedAt = CarbonImmutable::parse($run['started_at']);
@@ -117,7 +117,7 @@ class LessonController extends Controller
                 ->count('question_id');
 
             if ($answeredCount < count($run['question_ids'])) {
-                abort(422, 'レッスンが完了していません。');
+                abort(422, 'まだ解答していない問題があります。すべて解答してから結果を表示してください。');
             }
 
             $progress = $user->lessonProgresses()->firstOrCreate(
@@ -126,7 +126,7 @@ class LessonController extends Controller
             );
 
             if ($progress->last_completed_at?->greaterThanOrEqualTo($runStartedAt)) {
-                abort(422, 'このレッスンセッションは完了済みです。');
+                abort(422, 'このレッスンはすでに完了しています。');
             }
 
             $crownIncreased = $progress->crown_level < LessonProgress::MAX_CROWN;

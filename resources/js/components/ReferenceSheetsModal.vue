@@ -61,7 +61,7 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                 </div>
 
                 <p class="mb-4 text-xs text-gray-400">
-                    本番でも資料集が配布されるよ。表を正しく引く練習をしよう！
+                    本番でも資料集が配布されます。表から必要な数値を確認する練習に使ってください。
                 </p>
 
                 <div class="flex flex-col gap-5">

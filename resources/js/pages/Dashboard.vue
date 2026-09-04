@@ -153,15 +153,19 @@ function heatLevel(day: HeatmapDay): string {
                         class="mb-2 flex items-center gap-1 text-sm font-semibold text-[#285ac8]"
                     >
                         <Flame class="size-4 fill-blue-400" />
-                        {{ summary.current_streak }}日ストリーク
+                        {{
+                            summary.current_streak > 0
+                                ? `${summary.current_streak}日連続で目標達成`
+                                : '今日の目標達成で連続記録が始まります'
+                        }}
                     </div>
                     <p
                         class="text-xl leading-snug font-semibold whitespace-pre-line text-gray-800 dark:text-gray-100"
                     >
                         {{
                             summary.goal_met
-                                ? '今日も達成！\nすごい！'
-                                : `あと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP！`
+                                ? '今日の目標を達成しました'
+                                : `今日の目標まであと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP`
                         }}
                     </p>
                     <p class="mt-2 text-xs font-bold text-gray-500">
@@ -197,7 +201,7 @@ function heatLevel(day: HeatmapDay): string {
                         >{{ goalPercent }}%</span
                     >
                     <span class="text-[10px] font-bold text-gray-400"
-                        >今日のゴール</span
+                        >今日の目標</span
                     >
                 </div>
             </div>
@@ -206,15 +210,19 @@ function heatLevel(day: HeatmapDay): string {
                     class="flex items-center gap-1 text-sm font-semibold text-[#285ac8]"
                 >
                     <Flame class="size-4 fill-blue-400" />
-                    {{ summary.current_streak }}日ストリーク
+                    {{
+                        summary.current_streak > 0
+                            ? `${summary.current_streak}日連続で目標達成`
+                            : '今日の目標達成で連続記録が始まります'
+                    }}
                 </div>
                 <p
                     class="mt-1 text-lg font-semibold text-gray-700 dark:text-gray-100"
                 >
                     {{
                         summary.goal_met
-                            ? '今日も達成！すごい！'
-                            : `あと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP！`
+                            ? '今日の目標を達成しました'
+                            : `今日の目標まであと ${Math.max(0, summary.daily_goal - summary.today_xp)} XP`
                     }}
                 </p>
                 <p class="text-xs text-gray-500">
@@ -257,9 +265,14 @@ function heatLevel(day: HeatmapDay): string {
         >
             <ShieldCheck class="mb-1 size-5 text-sky-500" />
             <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
-                {{ summary.streak_freezes }}
+                {{ summary.streak_freezes }}枚
             </p>
-            <p class="text-[11px] font-bold text-gray-400">フリーズ</p>
+            <p class="text-[11px] font-bold text-gray-400">
+                連続記録のお休み券
+            </p>
+            <p class="mt-1 text-[10px] leading-tight text-gray-400">
+                休んだ日に自動で使います
+            </p>
         </div>
         <Link
             href="/review"
@@ -267,7 +280,7 @@ function heatLevel(day: HeatmapDay): string {
         >
             <RotateCcw class="mb-1 size-5 text-[#285ac8]" />
             <p class="text-xl font-semibold text-gray-700 dark:text-gray-100">
-                {{ summary.review_due }}
+                {{ summary.review_due }}問
             </p>
             <p class="text-[11px] font-bold text-gray-400">今日の復習</p>
         </Link>
@@ -348,10 +361,10 @@ function heatLevel(day: HeatmapDay): string {
         <div class="mb-3 flex items-end justify-between">
             <div>
                 <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                    合格コアの進み具合
+                    重要問題の学習状況
                 </h2>
                 <p class="text-[11px] text-gray-400">
-                    {{ summary.readiness_label }}・{{
+                    {{ summary.readiness_label }}：{{
                         summary.readiness_detail
                     }}
                 </p>
@@ -382,25 +395,31 @@ function heatLevel(day: HeatmapDay): string {
             </div>
             <div class="rounded-md bg-emerald-50 p-2 dark:bg-emerald-950">
                 <p class="text-lg font-semibold text-emerald-600">
-                    {{ summary.core_mastered_questions }}
+                    {{ summary.core_mastered_questions }}問
                 </p>
-                <p class="text-[10px] font-bold text-gray-400">コア定着済み</p>
+                <p class="text-[10px] font-bold text-gray-400">
+                    覚えた重要問題
+                </p>
             </div>
             <div class="rounded-md bg-rose-50 p-2 dark:bg-rose-950">
                 <p class="text-lg font-semibold text-rose-500">
-                    {{ summary.latest_mock_score ?? '—' }}
+                    {{
+                        summary.latest_mock_score === null
+                            ? '—'
+                            : `${summary.latest_mock_score}点`
+                    }}
                 </p>
-                <p class="text-[10px] font-bold text-gray-400">直近模試</p>
+                <p class="text-[10px] font-bold text-gray-400">最新の模試</p>
             </div>
         </div>
         <p class="mt-3 text-[11px] leading-5 text-gray-400">
-            合格コア {{ summary.core_seen_questions }} /
-            {{ summary.core_question_count }}問に着手、定着
-            {{ summary.core_mastery_percent }}%。全問題は
-            {{ summary.seen_questions }}/{{
-                summary.total_questions
-            }}問に着手済みです。
-            合格圏は、未見の問題で受けた初回120分の別模試2回と計算・単元別の下限で判定します（現在
+            重要問題{{ summary.core_question_count }}問のうち
+            {{ summary.core_seen_questions }}問を学習し、{{
+                summary.core_mastery_percent
+            }}%を習得済み。全{{ summary.total_questions }}問のうち
+            {{
+                summary.seen_questions
+            }}問を学習済みです。合格の目安は、初めて取り組む問題で構成された120分の模試2回と、計算問題・分野別の得点で判定します（現在
             {{ summary.qualifying_mock_count }}/2回<span
                 v-if="summary.mock_average !== null"
                 >・平均{{ summary.mock_average }}点</span
@@ -419,7 +438,7 @@ function heatLevel(day: HeatmapDay): string {
                 viewBox="0 0 200 200"
                 class="mx-auto w-full max-w-[220px] overflow-visible"
                 role="img"
-                aria-label="分野別正答率レーダーチャート"
+                aria-label="分野別正答率のグラフ"
             >
                 <circle
                     cx="100"
@@ -495,12 +514,14 @@ function heatLevel(day: HeatmapDay): string {
         <div class="mb-3 flex items-center justify-between">
             <div>
                 <h2 class="font-semibold text-gray-700 dark:text-gray-100">
-                    学習ヒートマップ
+                    12週間の学習記録
                 </h2>
-                <p class="text-[11px] text-gray-400">直近12週間</p>
+                <p class="text-[11px] text-gray-400">
+                    色が濃いほど獲得XPが多くなります
+                </p>
             </div>
             <span class="text-xs font-bold text-gray-400"
-                >最長 {{ summary.longest_streak }}日 🔥</span
+                >最長連続記録 {{ summary.longest_streak }}日 🔥</span
             >
         </div>
         <div class="grid grid-flow-col grid-rows-7 gap-1 overflow-x-auto pb-1">

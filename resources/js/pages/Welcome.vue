@@ -15,7 +15,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
     <Head title="給与計算実務能力検定2級">
         <meta
             name="description"
-            content="給与計算実務能力検定2級の合格に向けて、短いレッスン・復習・公式公開仕様に合わせた診断模試を一つにした学習アプリ。"
+            content="給与計算実務能力検定2級の合格に向けて、短いレッスン・復習・本番形式の模擬試験を一つにした学習アプリ。"
         />
     </Head>
 
@@ -79,7 +79,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     <p
                         class="mt-5 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300"
                     >
-                        労働法、給与計算、税、社会保険を短いレッスンで積み上げ、忘れた問題は自動で復習。40問の診断模試まで、一つの学習ループで仕上げます。
+                        労働法、給与計算、税、社会保険を短いレッスンで積み上げ、忘れた問題は自動で復習。40問の模擬試験まで、一つの流れで学べます。
                     </p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <Link
@@ -119,7 +119,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         <span class="flex items-center gap-1.5"
                             ><ShieldCheck
                                 class="size-4 text-emerald-500"
-                            />サーバー採点</span
+                            />解答後すぐ採点</span
                         >
                     </div>
                 </div>
@@ -131,7 +131,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         class="absolute top-6 left-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >
                         <p class="text-xs font-bold text-gray-400">
-                            今日のゴール
+                            今日の目標
                         </p>
                         <p class="text-lg font-bold text-[#285ac8]">20 XP</p>
                     </div>
@@ -139,9 +139,7 @@ import Kyuchan from '@/components/Kyuchan.vue';
                     <div
                         class="absolute right-6 bottom-6 rounded-sm border border-gray-200 bg-white px-4 py-3 shadow-xs dark:border-gray-700 dark:bg-gray-800"
                     >
-                        <p class="text-xs font-bold text-gray-400">
-                            公式公開仕様
-                        </p>
+                        <p class="text-xs font-bold text-gray-400">本番形式</p>
                         <p class="text-lg font-bold text-emerald-500">
                             40問 / 120分
                         </p>
@@ -166,18 +164,22 @@ import Kyuchan from '@/components/Kyuchan.vue';
                         class="rounded-md border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
                     >
                         <RotateCcw class="mb-4 size-7 text-[#2864f0]" />
-                        <h2 class="font-semibold">間違いを、合格力に変える</h2>
+                        <h2 class="font-semibold">
+                            間違えた問題を、そのままにしない
+                        </h2>
                         <p class="mt-2 text-sm leading-6 text-gray-500">
-                            誤答は復習キューへ。記憶の定着に合わせて出し直し、弱点を放置しません。
+                            間違えた問題は自動で復習に追加。忘れやすい頃にもう一度出題します。
                         </p>
                     </article>
                     <article
                         class="rounded-md border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
                     >
                         <Brain class="mb-4 size-7 text-[#2864f0]" />
-                        <h2 class="font-semibold">本番の配点で現在地を知る</h2>
+                        <h2 class="font-semibold">
+                            本番の配点で今の実力を知る
+                        </h2>
                         <p class="mt-2 text-sm leading-6 text-gray-500">
-                            知識35問・計算5問の模試を100点満点で採点し、次に補強する分野を示します。
+                            知識35問・計算5問の模試を100点満点で採点し、次に復習する分野を示します。
                         </p>
                     </article>
                 </div>

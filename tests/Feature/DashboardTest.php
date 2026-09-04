@@ -66,7 +66,7 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertInertia(fn ($page) => $page
                 ->where('summary.next_action_href', '/review')
-                ->where('summary.next_action_label', '期限到来の復習1問をはじめる'),
+                ->where('summary.next_action_label', '今日の復習1問を始める'),
             );
     }
 
@@ -84,9 +84,9 @@ class DashboardTest extends TestCase
                 ->where('summary.core_seen_questions', 0)
                 ->where('summary.core_coverage_percent', 0)
                 ->where('summary.daily_new_target', 10)
-                ->where('summary.daily_new_label', '今日のコア')
-                ->where('summary.readiness_label', '基礎構築中')
-                ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '合格コア')),
+                ->where('summary.daily_new_label', '今日の新しい問題')
+                ->where('summary.readiness_label', '重要問題を学習中')
+                ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '重要問題')),
             );
     }
 
@@ -106,14 +106,50 @@ class DashboardTest extends TestCase
                     ->get(route('dashboard'))
                     ->assertOk()
                     ->assertInertia(fn ($page) => $page
-                        ->where('summary.readiness_label', '基礎構築中')
-                        ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '合格コア'))
+                        ->where('summary.readiness_label', '重要問題を学習中')
+                        ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '重要問題'))
                         ->missing('season'),
                     );
             }
         } finally {
             Carbon::setTestNow();
         }
+    }
+
+    public function test_dashboard_explains_when_all_new_questions_are_complete()
+    {
+        $this->seed(ContentSeeder::class);
+        $user = User::factory()->create(['onboarded' => true])->refresh();
+        $now = now();
+
+        Question::query()
+            ->published()
+            ->practiceBank()
+            ->get(['id', 'content_revision'])
+            ->chunk(100)
+            ->each(function ($questions) use ($user, $now): void {
+                DB::table('user_question_progress')->insert(
+                    $questions->map(fn (Question $question): array => [
+                        'user_id' => $user->id,
+                        'question_id' => $question->id,
+                        'state' => 'review',
+                        'box' => 2,
+                        'content_revision_seen' => $question->content_revision,
+                        'first_seen_at' => $now,
+                        'last_seen_at' => $now,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ])->all(),
+                );
+            });
+
+        $this->actingAs($user)
+            ->get(route('dashboard'))
+            ->assertOk()
+            ->assertInertia(fn ($page) => $page
+                ->where('summary.daily_new_target', 0)
+                ->where('summary.daily_new_label', '新しい問題は完了'),
+            );
     }
 
     public function test_one_high_mock_score_does_not_claim_pass_readiness()
@@ -140,7 +176,7 @@ class DashboardTest extends TestCase
             ->assertInertia(fn ($page) => $page
                 ->where('summary.core_seen_questions', 0)
                 ->where('summary.latest_mock_score', 70)
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1),
             );
     }
@@ -171,7 +207,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '合格圏')
+                ->where('summary.readiness_label', '合格の目安に到達')
                 ->where('summary.qualifying_mock_count', 2)
                 ->where('summary.mock_average', 81),
             );
@@ -202,7 +238,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1)
                 ->where('summary.mock_average', 80),
             );
@@ -238,7 +274,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1)
                 ->where('summary.mock_average', 90),
             );
@@ -269,7 +305,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '基礎構築中')
+                ->where('summary.readiness_label', '重要問題を学習中')
                 ->where('summary.qualifying_mock_count', 0)
                 ->where('summary.mock_average', null),
             );
@@ -313,7 +349,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1),
             );
     }
@@ -356,7 +392,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1),
             );
     }
@@ -386,7 +422,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '基礎構築中')
+                ->where('summary.readiness_label', '重要問題を学習中')
                 ->where('summary.qualifying_mock_count', 0),
             );
     }
@@ -422,7 +458,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '実力確認中')
+                ->where('summary.readiness_label', '模試で実力を確認中')
                 ->where('summary.qualifying_mock_count', 1),
             );
     }
@@ -452,7 +488,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '弱点補強中')
+                ->where('summary.readiness_label', '苦手分野を復習中')
                 ->where('summary.qualifying_mock_count', 2),
             );
     }
@@ -490,8 +526,8 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '弱点補強中')
-                ->where('summary.readiness_detail', '全単元で得点率60%以上を目指す'),
+                ->where('summary.readiness_label', '苦手分野を復習中')
+                ->where('summary.readiness_detail', 'すべての分野で得点率60%以上を目指しましょう'),
             );
     }
 
@@ -533,7 +569,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard'))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->where('summary.readiness_label', '弱点補強中')
+                ->where('summary.readiness_label', '苦手分野を復習中')
                 ->where('summary.qualifying_mock_count', 2)
                 ->where('summary.mock_average', 80),
             );
@@ -562,7 +598,7 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertInertia(fn ($page) => $page
                 ->where('summary.latest_mock_score', 69)
-                ->where('summary.readiness_label', '弱点補強中'),
+                ->where('summary.readiness_label', '苦手分野を復習中'),
             );
     }
 
@@ -590,7 +626,7 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertInertia(fn ($page) => $page
                 ->where('summary.new_completed_today', 1)
-                ->where('summary.daily_new_label', '今日のコア'),
+                ->where('summary.daily_new_label', '今日の新しい問題'),
             );
     }
 

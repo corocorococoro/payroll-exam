@@ -74,43 +74,43 @@ class PassReadinessService
         if ($count < self::REQUIRED_FRESH_MOCKS) {
             if ($count === 1) {
                 if (($freshAttempts->first()->score ?? 0) < self::MINIMUM_SCORE) {
-                    return $this->result('弱点補強中', '初見模試70点との差を優先して補う', $count, $average, $unitAccuracies);
+                    return $this->result('苦手分野を復習中', '初回の模試で70点に届かなかった分野から復習しましょう', $count, $average, $unitAccuracies);
                 }
 
-                return $this->result('実力確認中', '初見120分模試をあと1回受験する', $count, $average, $unitAccuracies);
+                return $this->result('模試で実力を確認中', 'まだ受けていない模試を120分であと1回受けましょう', $count, $average, $unitAccuracies);
             }
 
             $coreCoverage = $coreTotal === 0 ? 0 : $coreSeen / $coreTotal;
-            $label = $coreCoverage < 0.6 ? '基礎構築中' : '初見模試で確認';
+            $label = $coreCoverage < 0.6 ? '重要問題を学習中' : '模試で実力を確認中';
             $detail = $coreCoverage < 0.6
-                ? 'まず合格コアを広く一周する'
-                : '初見120分模試を2回受験して実力を測る';
+                ? 'まず重要問題をひととおり解きましょう'
+                : 'まだ受けていない模試を120分で2回受けましょう';
 
             return $this->result($label, $detail, $count, $average, $unitAccuracies);
         }
 
         if ($freshAttempts->contains(fn (MockExamAttempt $attempt): bool => ($attempt->score ?? 0) < self::MINIMUM_SCORE)) {
-            return $this->result('弱点補強中', '初見模試は各70点以上を目指す', $count, $average, $unitAccuracies);
+            return $this->result('苦手分野を復習中', '初回の模試はどちらも70点以上を目指しましょう', $count, $average, $unitAccuracies);
         }
 
         if (($average ?? 0) < self::MINIMUM_AVERAGE) {
-            return $this->result('弱点補強中', '初見模試2回の平均80点以上を目指す', $count, $average, $unitAccuracies);
+            return $this->result('苦手分野を復習中', '初回の模試2回の平均80点以上を目指しましょう', $count, $average, $unitAccuracies);
         }
 
         if ($freshAttempts->contains(fn (MockExamAttempt $attempt): bool => ($attempt->calculation_score ?? 0) < self::MINIMUM_CALCULATION_SCORE)) {
-            return $this->result('弱点補強中', '各模試の計算問題で18点以上を目指す', $count, $average, $unitAccuracies);
+            return $this->result('苦手分野を復習中', '各模試の計算問題で18点以上を目指しましょう', $count, $average, $unitAccuracies);
         }
 
         $weakUnits = collect($unitAccuracies)
             ->filter(fn (int $accuracy): bool => $accuracy < self::MINIMUM_UNIT_ACCURACY)
             ->keys();
         if ($weakUnits->isNotEmpty()) {
-            return $this->result('弱点補強中', '全単元で得点率60%以上を目指す', $count, $average, $unitAccuracies);
+            return $this->result('苦手分野を復習中', 'すべての分野で得点率60%以上を目指しましょう', $count, $average, $unitAccuracies);
         }
 
         return $this->result(
-            '合格圏',
-            "初見模試2回平均{$average}点。弱点復習で再現性を保つ",
+            '合格の目安に到達',
+            "初回の模試2回の平均は{$average}点です。苦手な問題を復習して力を保ちましょう",
             $count,
             $average,
             $unitAccuracies,

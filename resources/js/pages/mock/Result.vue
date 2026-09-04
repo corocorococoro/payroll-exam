@@ -70,7 +70,11 @@ function toggle(position: number) {
                 result.passed ? 'text-emerald-500' : 'text-[#285ac8]',
             ]"
         >
-            {{ result.passed ? 'この模試で70点到達！' : 'もうひと伸び！' }}
+            {{
+                result.passed
+                    ? '合格基準の70点に到達しました'
+                    : '結果を確認して復習しましょう'
+            }}
         </p>
         <h1
             class="mt-1 text-5xl font-semibold text-gray-700 dark:text-gray-100"
@@ -85,7 +89,7 @@ function toggle(position: number) {
         class="mt-5 rounded-lg border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900"
     >
         <h2 class="mb-3 flex items-center gap-2 font-semibold">
-            <Trophy class="size-5 text-amber-500" />単元別診断
+            <Trophy class="size-5 text-amber-500" />分野別の結果
         </h2>
         <p class="mb-3 text-xs text-gray-500">
             知識 {{ result.knowledge_score }}/70点・計算
@@ -125,7 +129,8 @@ function toggle(position: number) {
             v-if="result.weakest_sections.length"
             class="mt-4 rounded-md bg-blue-50 p-3 text-xs text-blue-700 dark:bg-blue-950 dark:text-blue-300"
         >
-            優先復習: <strong>{{ result.weakest_sections.join('・') }}</strong>
+            優先して復習する分野：
+            <strong>{{ result.weakest_sections.join('・') }}</strong>
         </div>
         <div v-if="remediation.length" class="mt-3 grid gap-2 sm:grid-cols-2">
             <Link
@@ -138,10 +143,10 @@ function toggle(position: number) {
                     {{ item.unit_name }}・失点{{ item.missed_points }}点
                 </p>
                 <p class="mt-1 text-sm font-semibold text-[#285ac8]">
-                    {{ item.lesson_name }}を補強 →
+                    {{ item.lesson_name }}を復習 →
                 </p>
                 <p class="mt-1 text-[10px] text-gray-400">
-                    誤答・無回答 {{ item.missed_count }}問
+                    間違い・未回答 {{ item.missed_count }}問
                 </p>
             </Link>
         </div>
@@ -154,12 +159,12 @@ function toggle(position: number) {
         ><Link
             href="/review"
             class="rounded-md bg-[#2864f0] py-3 text-center text-sm font-semibold text-white"
-            >模試の誤答を復習</Link
+            >模試で間違えた問題を復習</Link
         >
     </div>
     <section class="mt-6">
         <h2 class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-100">
-            問題別レビュー
+            問題ごとの見直し
         </h2>
         <div class="space-y-2">
             <article
@@ -203,9 +208,9 @@ function toggle(position: number) {
                     class="border-t p-4 text-xs leading-relaxed dark:border-gray-800"
                 >
                     <p>
-                        あなたの解答:
+                        あなたの解答：
                         <strong>{{ item.given_answer ?? '未回答' }}</strong
-                        >　正解:
+                        >　正解：
                         <strong class="text-emerald-600">{{
                             item.correct_answer
                         }}</strong>

@@ -202,7 +202,7 @@ onBeforeUnmount(() => {
                 <span class="flex items-center gap-1 text-xs text-gray-400"
                     ><Save class="size-3" />{{
                         saveError
-                            ? '保存エラー'
+                            ? '保存できませんでした'
                             : saving
                               ? '保存中'
                               : savedAt

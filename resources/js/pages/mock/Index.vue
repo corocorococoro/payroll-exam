@@ -57,7 +57,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                     <h1
                         class="text-xl font-semibold text-gray-700 dark:text-gray-100"
                     >
-                        2級 診断模試
+                        2級 模擬試験
                     </h1>
                     <p class="text-xs text-gray-500">
                         40問・100点満点・合格基準70点
@@ -67,7 +67,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
             <KyuchanMoment
                 mood="confident"
                 effect="focus"
-                message="120分、本番のつもりでいこう"
+                message="本番と同じ120分で実力を確認できます"
                 :size="84"
                 compact
                 class="mt-3 sm:mt-0"
@@ -92,7 +92,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                         <span
                             class="rounded-full bg-sky-100 px-2 py-0.5 text-[10px] font-bold text-sky-700 dark:bg-sky-950 dark:text-sky-300"
                             >{{
-                                exam.attempt_count === 0 ? '初見判定' : '再受験'
+                                exam.attempt_count === 0 ? '初回' : '再受験'
                             }}</span
                         >
                     </div>
@@ -109,8 +109,8 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                             : 'bg-blue-100 text-[#285ac8]',
                     ]"
                 >
-                    <p class="text-[10px] font-bold">BEST</p>
-                    <p class="text-xl font-semibold">{{ exam.best_score }}</p>
+                    <p class="text-[10px] font-bold">最高点</p>
+                    <p class="text-xl font-semibold">{{ exam.best_score }}点</p>
                 </div>
             </div>
             <div class="my-4 grid grid-cols-3 gap-2 text-center text-xs">
@@ -160,7 +160,7 @@ function start(exam: Exam, mode: 'standard' | 'compressed') {
                     class="flex items-center justify-center gap-1 rounded-md bg-sky-400 py-3 text-sm font-semibold text-white shadow-sm shadow-sky-500 active:shadow-none"
                     @click="start(exam, 'compressed')"
                 >
-                    <Gauge class="size-4" />90分圧縮
+                    <Gauge class="size-4" />短縮版（90分）
                 </button>
             </div>
         </section>

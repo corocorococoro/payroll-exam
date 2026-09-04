@@ -87,7 +87,7 @@ class DashboardController extends Controller
             ? $firstSeenToday->whereIn('question_id', $coreQuestionIds)->count()
             : $firstSeenToday->count();
         $newCompletedToday = min($dailyNewTarget, $newCompletedToday);
-        $dailyNewLabel = $coreUnseenQuestions > 0 ? '今日のコア' : '今日の新規';
+        $dailyNewLabel = $dailyNewTarget === 0 ? '新しい問題は完了' : '今日の新しい問題';
         $reviewDue = $user->reviewItems()
             ->whereDate('due_date', '<=', today())
             ->whereHas('question', function (Builder $query): void {
@@ -189,11 +189,11 @@ class DashboardController extends Controller
                     ? '/review'
                     : ($recommendedLesson === null ? '/learn' : "/lessons/{$recommendedLesson->id}"),
                 'next_action_label' => $reviewDue > 0
-                    ? "期限到来の復習{$reviewDue}問をはじめる"
+                    ? "今日の復習{$reviewDue}問を始める"
                     : match ($recommendationKind) {
-                        'recovery' => "「{$recommendedLesson->name}」の弱点を補強する",
-                        'core' => "「{$recommendedLesson->name}」の合格コアを進める",
-                        'reinforcement' => "「{$recommendedLesson->name}」を補強する",
+                        'recovery' => "「{$recommendedLesson->name}」の苦手な問題を復習する",
+                        'core' => "「{$recommendedLesson->name}」の重要問題を進める",
+                        'reinforcement' => "「{$recommendedLesson->name}」の追加問題を進める",
                         default => '学習一覧を見る',
                     },
                 'xp_progress' => app(XpLevelService::class)->progress($user),
