@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-09-06",
+  "source_url": "https://jitsumu-up.jp/about/",
+  "locator": "実際の出題例／2級",
+  "source_limitation": "主催者は制度・料率変更による結果差を理由に正答を掲載していない。公開例5件から全範囲、出題頻度、セット間難易度の等価性は推定しない。",
+  "examples": [
+    {
+      "heading": "割増賃金",
+      "required_operations": "法定休日・深夜・時間外の組合せを4肢で比較",
+      "question_ids": [
+        "q-0179",
+        "q-0181"
+      ],
+      "fingerprints": {
+        "q-0179": "5db9f69cdd38181333908f9a530dbd4fef50e753cc3cf99245db3b5031d621e8",
+        "q-0181": "9ff870d511b6a40aee3bdb71e4b65a0cfebc2bdb1f68d4c9ec1a148889d0a451"
+      },
+      "assessment": "率の組合せを問う通常演習・模試がある。公開例の文面を新規問題として転載していない。"
+    },
+    {
+      "heading": "所得税",
+      "required_operations": "表への復興税算入、申告書、異動、配偶者と子の人数を比較",
+      "question_ids": [
+        "q-0348",
+        "q-0351",
+        "q-0377"
+      ],
+      "fingerprints": {
+        "q-0348": "1710a519d4195c2a09af6fe9a29b86b4e6f36c2db78354bce07a4822a703e6d4",
+        "q-0351": "2dd29ed6a0a73610d2ca59d03dcad969af91363e372e396c910d1608e7fd27bf",
+        "q-0377": "1c257e5198dd8857197f4b33bbe3b867a6f194fa941f055e91a7c7c07c5e0c01"
+      },
+      "assessment": "関連する基本判断を分けて練習。公開例は旧年条件のため2026年の制度根拠は国税庁資料を別途使用。"
+    },
+    {
+      "heading": "社会保険手続",
+      "required_operations": "定時・随時で日数不足月の扱いと任意性を比較",
+      "question_ids": [
+        "q-0544",
+        "q-0517"
+      ],
+      "fingerprints": {
+        "q-0544": "584967e172612fcc4c81a7ccd1c23587bccacacc33d975aed7bcd236aaaadac3",
+        "q-0517": "33794b6afecb9e37f07a440b1b0d985bf832eaf1818e08de94acccc95ec5f0e1"
+      },
+      "assessment": "提出対象・制度の目的に加え日数要件の通常演習がある。複数制度の肢比較の負荷は単独暗記より大きく、正答率の実測はない。"
+    },
+    {
+      "heading": "労働法令の基礎",
+      "required_operations": "人数・必要記載事項・意見聴取を比較",
+      "question_ids": [
+        "q-0005",
+        "q-0006",
+        "q-0008"
+      ],
+      "fingerprints": {
+        "q-0005": "0a996adb8a79dcf07d1d0a032475c658bf4ea7ab80a00aa9c93d605dee1421d8",
+        "q-0006": "5540529e926d283507e717fda1c32bcd7230ef354f66d21d2b38edb31661a1d0",
+        "q-0008": "86f08ca02dbfd500faa491b4fde9c2c4a510fad67fc8d96fa0e887f0dbae86dd"
+      },
+      "assessment": "同じ基礎を通常コアで学べる。1問で複数規定を比較する公開例に対し、分解練習だけで初見転移を保証しない。"
+    },
+    {
+      "heading": "給与計算",
+      "required_operations": "通勤非課税、社会保険料、税額表、差引支給を連続計算",
+      "question_ids": [
+        "q-0830",
+        "q-0829"
+      ],
+      "fingerprints": {
+        "q-0830": "0b6c56675d0550d126499c5a11d9b7fd525d511983f61e8c93d7a868df0aa47f",
+        "q-0829": "b7f8f48b69534c66bc38400584398a897b76310840ffd471216217337f8d66a9"
+      },
+      "assessment": "通常830と模試829を資料から中間額も求める形に改訂。830は介護・通勤非課税・住民税、829は介護なし・扶養1人を扱う。公開例は2018年2月支給の条件であり、その選択肢を2026年税額で採点しない。"
+    }
+  ]
+}

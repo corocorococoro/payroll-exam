@@ -52,6 +52,8 @@ class SyncQuestionContent extends Command
         $files = collect(File::allFiles(database_path('seeders/data')))
             ->map(fn (\SplFileInfo $file): string => $file->getPathname())
             ->push(database_path('seeders/ContentSeeder.php'))
+            ->push(app_path('Services/QuestionReviewLedger.php'))
+            ->push(app_path('Services/QuestionChoiceOrder.php'))
             ->sort();
         $hash = hash_init('sha256');
 

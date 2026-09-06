@@ -1,0 +1,205 @@
+{
+  "review_date": "2026-09-06",
+  "revisions": [
+    {
+      "id": "q-0493",
+      "before": {
+        "id": "q-0493",
+        "topic_key": "social.short-worker",
+        "role": "application",
+        "study_tier": "core",
+        "source_keys": [
+          "social_workplaces"
+        ],
+        "exam_role": "knowledge",
+        "unit": "shaho",
+        "lesson": "hyojun-hoshu",
+        "type": "choice",
+        "category": "標準報酬月額と保険料のしくみ",
+        "difficulty": "medium",
+        "question_text": "健康保険・厚生年金の適用事業所で働く人について、同じ事業所の同様の業務に従事する通常の労働者と比べる「4分の3基準」はどれか。年齢等による適用除外はない。",
+        "choices": [
+          {
+            "key": "A",
+            "text": "月所定労働日数だけが通常の労働者の4分の3以上であること"
+          },
+          {
+            "key": "B",
+            "text": "週所定労働時間と月所定労働日数がともに4分の3以上であること"
+          },
+          {
+            "key": "C",
+            "text": "年間賃金と勤続期間がともに通常の労働者の4分の3以上であること"
+          },
+          {
+            "key": "D",
+            "text": "週所定労働時間だけが通常の労働者の4分の3以上であること"
+          }
+        ],
+        "answer": {
+          "choice": "B"
+        },
+        "explanation": "週の所定労働時間と月の所定労働日数の両方を比べます。時間だけ、日数だけではこの基準を満たしません。賃金や勤続年数の割合を比べるものでもありません。基準を満たせば、適用事業所の企業規模にかかわらず加入対象です。満たさなくても、短時間労働者の別の加入条件に該当する場合があります。",
+        "common_mistake": null,
+        "distractor_feedback": {
+          "A": "日数に加えて週の所定労働時間も比較します。",
+          "C": "比べるのは時間と日数で、賃金や勤続期間ではありません。",
+          "D": "時間に加えて月の所定労働日数も比較します。"
+        },
+        "calc_params": null,
+        "reference_sheet_slugs": []
+      },
+      "reason": "通常演習と同じ暗記判断から、同じ学習目標を条件へ適用する模試へ改訂。別技能へのID再利用ではない。"
+    },
+    {
+      "id": "q-0501",
+      "before": {
+        "id": "q-0501",
+        "topic_key": "social.workplaces",
+        "role": "recall",
+        "study_tier": "core",
+        "source_keys": [
+          "social_workplaces"
+        ],
+        "exam_role": "knowledge",
+        "unit": "shaho",
+        "lesson": "hyojun-hoshu",
+        "type": "choice",
+        "category": "標準報酬月額と保険料のしくみ",
+        "difficulty": "medium",
+        "question_text": "被保険者となるべき人を常時使用し、その労働の対償として報酬を支払う法人事業所について、健康保険・厚生年金の強制適用の原則はどれか。",
+        "choices": [
+          {
+            "key": "A",
+            "text": "法人事業所は常時5人以上で法定17業種の場合だけ対象となる"
+          },
+          {
+            "key": "B",
+            "text": "法人事業所は常時20人以上の従業員を使用する場合だけ対象となる"
+          },
+          {
+            "key": "C",
+            "text": "法人事業所は常時51人以上の従業員を使用する場合だけ対象となる"
+          },
+          {
+            "key": "D",
+            "text": "法人事業所は従業員数にかかわらず原則として対象となる"
+          }
+        ],
+        "answer": {
+          "choice": "D"
+        },
+        "explanation": "法人の事業所は、被保険者となるべき人を常時使用していれば原則として強制適用です。報酬を受ける事業主1人の会社も含みます。個人事業所の業種・5人基準や、短時間労働者の企業規模要件と混同しません。法人登記だけあって報酬を受ける人がいないケースを本問は想定していません。",
+        "common_mistake": null,
+        "distractor_feedback": {
+          "A": "法定業種・5人の基準は、法人の加入人数の下限ではありません。",
+          "B": "法人について20人という下限はありません。",
+          "C": "51人は短時間労働者の適用拡大に関する基準です。"
+        },
+        "calc_params": null,
+        "reference_sheet_slugs": []
+      },
+      "reason": "通常演習と同じ暗記判断から、同じ学習目標を条件へ適用する模試へ改訂。別技能へのID再利用ではない。"
+    },
+    {
+      "id": "q-0544",
+      "before": {
+        "id": "q-0544",
+        "topic_key": "social.regular-determination",
+        "role": "recall",
+        "study_tier": "core",
+        "source_keys": [
+          "regular_determination"
+        ],
+        "exam_role": "knowledge",
+        "unit": "shaho",
+        "lesson": "zuiji-kaitei",
+        "type": "choice",
+        "category": "社会保険の事務手続②（定時決定・随時改定）",
+        "difficulty": "medium",
+        "question_text": "通常の定時決定で、使用している被保険者等を確認する基準日はいつか。資格取得時期や随時改定等による提出不要の対象者は別途判定する。",
+        "choices": [
+          {
+            "key": "A",
+            "text": "毎年9月1日現在"
+          },
+          {
+            "key": "B",
+            "text": "毎年7月1日現在"
+          },
+          {
+            "key": "C",
+            "text": "毎年4月1日現在"
+          },
+          {
+            "key": "D",
+            "text": "毎年1月1日現在"
+          }
+        ],
+        "answer": {
+          "choice": "B"
+        },
+        "explanation": "基準日は7月1日です。4〜6月は報酬を見る期間、9月は決め直した標準報酬月額を使い始める月で、基準日とは違います。7月1日に使用している人でも、6月1日以降の資格取得者などは通常の提出対象から外れるので、基準日だけで全員提出と決めません。",
+        "common_mistake": null,
+        "distractor_feedback": {
+          "A": "9月は通常の適用開始月です。",
+          "C": "4月は報酬を確認する3か月の始まりです。",
+          "D": "1月1日を定時決定の基準日にはしません。"
+        },
+        "calc_params": null,
+        "reference_sheet_slugs": []
+      },
+      "reason": "通常演習と同じ暗記判断から、同じ学習目標を条件へ適用する模試へ改訂。別技能へのID再利用ではない。"
+    },
+    {
+      "id": "q-0577",
+      "before": {
+        "id": "q-0577",
+        "topic_key": "social.care-insurance-age",
+        "role": "boundary",
+        "study_tier": "core",
+        "source_keys": [
+          "care_insurance"
+        ],
+        "misconception_key": "age-40-month",
+        "unit": "shaho",
+        "lesson": "ryoritsu",
+        "type": "choice",
+        "category": "社会保険",
+        "difficulty": "medium",
+        "question_text": "国内に住所を有し、適用除外のない協会けんぽ加入者について、介護保険第2号被保険者の年齢範囲の正しい組合せはどれか。",
+        "choices": [
+          {
+            "key": "A",
+            "text": "39歳は該当、40歳は非該当"
+          },
+          {
+            "key": "B",
+            "text": "40歳は該当、64歳も該当"
+          },
+          {
+            "key": "C",
+            "text": "64歳は非該当、65歳は該当"
+          },
+          {
+            "key": "D",
+            "text": "全年齢が該当"
+          }
+        ],
+        "answer": {
+          "choice": "B"
+        },
+        "explanation": "40歳以上65歳未満なので、40歳と64歳はともに第2号です。39歳はこの年齢範囲の前、65歳は第1号へ切り替わる境界です。医療保険に加入していれば全年齢が介護保険第2号になるわけではありません。",
+        "common_mistake": "65歳を第2号に含めないこと。",
+        "distractor_feedback": {
+          "A": "39歳は年齢範囲外で、40歳は範囲内です。",
+          "C": "64歳は範囲内、65歳は第1号です。",
+          "D": "第2号には40歳以上65歳未満という年齢条件があります。"
+        },
+        "calc_params": null,
+        "reference_sheet_slugs": []
+      },
+      "reason": "通常演習と同じ暗記判断から、同じ学習目標を条件へ適用する模試へ改訂。別技能へのID再利用ではない。"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "checked_at": "2026-09-06",
+  "database": "phpunit.xmlのSQLite :memory:。既存DBを再構築・再シードしない。",
+  "bank_sha256": "e2c09390da6523149bc52dc79d4811b194c59d8f6e37308a518432f719f62cd5",
+  "software_tests": {
+    "command": "php artisan test",
+    "passed": 166,
+    "skipped": 3,
+    "assertions": 6347,
+    "skip_reason": "Fortifyの二要素認証機能が無効のため、その機能に依存する既存3テストをスキップ。",
+    "editorial_approval": "テスト専用の架空承認を注入。実教材を承認した結果ではない。",
+    "scope": "現行567問、270退役、総合計算829/830、全行表照合、退役根拠の厳格検査を含む最終全体回帰。SQLiteメモリDB。",
+    "duration_seconds": 111.45,
+    "log": "/tmp/payroll-audit-final-cross.log"
+  },
+  "phpstan": {
+    "command": "vendor/bin/phpstan analyse --memory-limit=1G --no-progress",
+    "status": "passed",
+    "note": "最終PHP変更後、1GBで実行しエラーなし。既定128MBでは以前メモリ不足。",
+    "log": "/tmp/payroll-audit-final-phpstan.log"
+  },
+  "types": "npm run types:check：成功。最終の固定見出し・表の高さ制限・モバイル横スクロール対応後。",
+  "eslint": "npm run lint:check：成功。最終の固定見出し・表の高さ制限・モバイル横スクロール対応後。",
+  "build": "SKIP_WAYFINDER_GENERATION=1 npm run build：成功。最終の固定見出し・表の高さ制限・モバイル横スクロール対応後。",
+  "pint": "変更PHPファイルの整形・検査：成功",
+  "prettier": "変更Vueを整形。教材JSONは正本と同じ2スペースで保存しJSON解析を確認。",
+  "review_ledger": {
+    "command": "php artisan content:review-audit --json",
+    "exit_code": 1,
+    "questions": 567,
+    "pending_errors": 1,
+    "completed_individual_reviews": 567,
+    "status": "現行567件と退役270件の個別不一致0件。公式本文と必要技能の未検証によりリリースの承認を保留し、全体ゲート1件で同期拒否。"
+  },
+  "visual_qa": {
+    "previous": "PC 1280×900・モバイル390×844、隔離HTMLでレッスン・模試ナビゲーション・税額表・結果を確認。",
+    "latest": "2026年9月6日、PC 1280×900・モバイル390×844で年休表を再確認。横スクロール時の行見出し消失を固定列で修正。右端・注記・閉じた後の選択を確認。最新ビルドのクラスが読み込まれたことも確認。 勤怠控除を追記したレッスン説明も両幅で再表示し、全文と開始ボタンまで確認。 給与処理の6段落の説明を両幅で全文確認。モバイルから演習へ進むボタンも操作した。 源泉所得税の5段落の説明も両幅で全文確認し、モバイルから演習開始まで操作した。 賞与表の千円単位、甲0〜7人以上・乙、50行等級表の開閉と縦横スクロールを確認。長表の見出しと閉じるボタンを固定し、表を画面高の半分以内に制限。PC・モバイルで社会保険6段落、混在平均賃金の式を確認。モバイルq-0830で3資料を参照して閉じ、解答を選択できることを確認。",
+    "static_preview": "保存通信は静的サーバーでは未対応。保存と採点はHTTP回帰テストで確認。"
+  },
+  "learning_flow": {
+    "updated_four_day_trace": "recovery-runs.json。HTTP取得・全問誤答・完了・翌日。新規10→2→2→2問、既出は古い8問。",
+    "legacy_four_day_trace": "recovery-runs-legacy.json。同一条件で新規10→0→0→0問、同じ10問に滞留。",
+    "legacy_source": {
+      "commit": "0b1c451744d3844981563793f0256752168206cd",
+      "path": "app/Services/LessonRunService.php",
+      "fixture": "tests/Support/LegacyLessonRunService.php",
+      "isolation": "旧クラスをテスト用namespaceと名前に置換して注入。その他のアプリ・教材・SRSは現行を共通使用し、配信変更の影響を比較。"
+    },
+    "same_day_repetition": "same_day_testsのHTTPシナリオで確認。"
+  },
+  "production": "未反映。実学習者の効果測定は未実施。",
+  "related_tests": {
+    "command": "php artisan test --filter='CalcVerificationTest|ContentQualityTest|MockExamFlowTest|QuestionReviewLedgerTest'",
+    "scope": "q-0836までの改訂。SQLiteメモリDB。",
+    "status": "passed",
+    "passed": 45,
+    "assertions": 2774
+  },
+  "legacy_comparison_tests": {
+    "command": "EXPORT_CONTENT_PREVIEW=1 php artisan test --filter='旧配信の復習滞留'",
+    "passed": 2,
+    "assertions": 120,
+    "scope": "現行と旧配信の選択ロジックを、同じ現行教材・HTTP取得・全問誤答・完了・日付経過で比較。旧リリースの全アプリを再現するものではない。"
+  },
+  "same_day_tests": {
+    "command": "php artisan test --filter='同日6回'",
+    "passed": 1,
+    "assertions": 131,
+    "result": "HTTP取得・正解・完了を同日6回でもbox2。期限前は422。3日・7日・14日を空けた復習でbox3・4・5、次の期限は30日後。実学習者の効果測定ではない。"
+  },
+  "intermediate_failures": [
+    "q-0265の説明追加が要点3項目制約に違反し検出。3項目に戻し説明は例題へ移した。",
+    "再実行で資料ラベルの不整合1件を検出。同一URL別名登録2組を統合し、再発時の承認拒否を追加。修正後の全体162テストが成功。",
+    "q-0360時点の関連実行は説明の固定文言チェック1件で失敗。q-0348の意味を一次資料で再確認して表現を揃え、品質17件の再実行とq-0380の全体163件で通過。",
+    "q-0420の関連実行で退役済みq-0414をContentQualityTestが参照。統合先q-0399に更新し、品質17件・q-0440関連97件・q-0460全体163件で通過。",
+    "q-0580で詳細な一次資料への切替後も古い表示ラベルを期待していた。q-0580とq-0559の期待ラベルを実際に該当する資料へ更新。品質17件1189アサーションとq-0610関連45件で成功。",
+    "q-0700の年度更新の技能・レッスン訂正後も、ゼロ問題検出テストが旧q-0674を使用。正しい通常コアq-0684へ更新し、品質17件1219アサーションで成功。",
+    "q-0733で退役したq-0709の固定金額検算が現行DBを探して失敗。期待値を捨てず退役ステータスと統合先を記録し、旧問の正答と新規DBに存在しないことを同時に検証するよう修正。",
+    "q-0799関連で旧育休資料ラベルの固定期待1件が失敗。実際に根拠とする詳細資料名へ更新しq-0836関連45件で通過。",
+    "拡張表の回帰テストで存在しないMockExam::questionsをテスト側が呼び失敗。実装のexamQuestionsへ修正し8件117アサーション成功。",
+    "賞与表の拡張時に32セルの読み取り誤りを全行独立照合で検出。原本抽出と画像で修正し、21行全セルの固定期待値との回帰が成功。訂正前後はbonus-table-cell-corrections.json。",
+    "レッスン追加根拠にMHLWのURLとe-Gov用キーを混在させ、72件の根拠不一致を検出。レッスン専用の根拠を別記録へ移し、問題台帳の既存根拠は保持。最終個別エラー0件。",
+    "等級表全行の期待値が配列、Inertia応答がCollectionであるため1件失敗。値を変更せずテストで配列化して比較し、関連8件129アサーションと最終全体166件で通過。"
+  ],
+  "full_rerun": {
+    "scope": "現行567問、270退役、総合計算829/830、全行表照合、退役根拠の厳格検査を含む最終全体回帰。SQLiteメモリDB。",
+    "status": "passed",
+    "passed": 166,
+    "skipped": 3,
+    "assertions": 6347,
+    "log": "/tmp/payroll-audit-final-cross.log"
+  },
+  "reference_table_tests": {
+    "status": "passed",
+    "scope": "最終全体回帰に含む。賞与甲21行×9列（率を含む）・健康等級50行×5列を原本から独立抽出した固定ファイルと照合。",
+    "fixtures": [
+      "tests/Fixtures/bonus-rate-table-2026.json",
+      "tests/Fixtures/insurance-grades-2026.json"
+    ],
+    "monthly_source_check": "原表印刷2頁、251000〜260000の3区分×甲0〜2人を画像で確認。全月額表の収録ではない。"
+  },
+  "report_integrity": {
+    "status": "passed",
+    "checked_at": "2026-09-06",
+    "checks": [
+      "監査・教材JSONの解析",
+      "現行567件の指紋一致",
+      "現行類似8組の判断指紋一致",
+      "範囲対応表と検証記録の正本SHA256一致",
+      "公開例対応の問題指紋一致",
+      "15レッスンの内容SHA256一致",
+      "git diff --check"
+    ]
+  }
+}

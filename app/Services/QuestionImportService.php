@@ -87,7 +87,19 @@ class QuestionImportService
                 ];
                 $contentHash = Question::contentHash($content);
                 $existing = Question::where('source_id', $validated['source_id'])->first();
-                $contentChanged = $existing !== null && $existing->content_hash !== $contentHash;
+                $dependencies = [
+                    'unit_id' => $unit->id,
+                    'lesson_id' => $lessonId,
+                    'fiscal_year' => $validated['fiscal_year'],
+                    'concept_key' => $validated['concept_key'],
+                    'learning_objective' => $validated['learning_objective'],
+                    'variant_role' => $validated['variant_role'],
+                    'misconception_key' => $validated['misconception_key'] ?? null,
+                    'source_urls' => $validated['source_urls'],
+                    'reference_sheet_slugs' => $data['reference_sheet_slugs'] ?? [],
+                ];
+                $contentChanged = $existing !== null && ($existing->content_hash !== $contentHash
+                    || Question::reviewDependenciesHash($existing->toArray()) !== Question::reviewDependenciesHash(array_replace($existing->toArray(), $dependencies)));
 
                 Question::updateOrCreate(['source_id' => $validated['source_id']], [
                     'unit_id' => $unit->id,
@@ -107,6 +119,7 @@ class QuestionImportService
                         : $existing->content_revision + ($contentChanged ? 1 : 0),
                     'content_hash' => $contentHash,
                     'reviewed_content_hash' => $existing?->reviewed_content_hash,
+                    'review_fingerprint' => $contentChanged ? null : $existing?->review_fingerprint,
                     'fiscal_year' => $validated['fiscal_year'],
                     'question_text' => $content['question_text'],
                     'choices' => $content['choices'],

@@ -37,7 +37,9 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
             <div
                 class="relative max-h-[85dvh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-white p-5 shadow-xl sm:rounded-lg dark:bg-gray-900"
             >
-                <div class="mb-3 flex items-center justify-between gap-3">
+                <div
+                    class="sticky -top-5 z-20 -mx-5 -mt-5 mb-3 flex items-center justify-between gap-3 bg-white px-5 py-3 dark:bg-gray-900"
+                >
                     <h2
                         class="text-base font-semibold text-gray-700 dark:text-gray-200"
                     >
@@ -60,8 +62,8 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                     </button>
                 </div>
 
-                <p class="mb-4 text-xs text-gray-400">
-                    本番でも資料集が配布されます。表から必要な数値を確認する練習に使ってください。
+                <p class="mb-4 text-xs text-gray-500 dark:text-gray-400">
+                    アプリ用に編集した学習資料です。出題条件と表の年度・区分を確認して使ってください。
                 </p>
 
                 <div class="flex flex-col gap-5">
@@ -76,17 +78,18 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                             {{ sheet.name }}
                         </h3>
 
+                        <p
+                            v-if="sheet.content.note"
+                            class="mb-2 text-xs text-gray-500"
+                        >
+                            {{ sheet.content.note }}
+                        </p>
+
                         <!-- 税額表タイプ -->
                         <template v-if="sheet.content.type === 'tax_table'">
-                            <p
-                                v-if="sheet.content.note"
-                                class="mb-2 text-xs text-gray-400"
-                            >
-                                {{ sheet.content.note }}
-                            </p>
-                            <div class="overflow-x-auto">
+                            <div class="max-h-[50dvh] overflow-auto">
                                 <table class="w-full text-xs">
-                                    <thead>
+                                    <thead class="sticky top-0 z-10">
                                         <tr
                                             class="bg-blue-50 text-gray-500 dark:bg-gray-800"
                                         >
@@ -153,17 +156,39 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
 
                         <!-- 汎用テーブルタイプ -->
                         <template v-else>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-xs">
-                                    <thead v-if="sheet.content.columns">
+                            <p
+                                v-if="(sheet.content.columns?.length ?? 0) > 4"
+                                class="mb-2 text-xs text-gray-500"
+                            >
+                                横にスクロールすると、右側の列まで確認できます。
+                            </p>
+                            <div class="max-h-[50dvh] overflow-auto">
+                                <table
+                                    class="w-full text-xs"
+                                    :class="{
+                                        'min-w-max whitespace-nowrap':
+                                            (sheet.content.columns?.length ??
+                                                0) > 4,
+                                    }"
+                                >
+                                    <thead
+                                        v-if="sheet.content.columns"
+                                        class="sticky top-0 z-10"
+                                    >
                                         <tr
                                             class="bg-blue-50 text-gray-500 dark:bg-gray-800"
                                         >
                                             <th
-                                                v-for="col in sheet.content
+                                                v-for="(col, j) in sheet.content
                                                     .columns"
                                                 :key="col"
                                                 class="p-2 text-left font-bold"
+                                                :class="{
+                                                    'sticky left-0 z-10 bg-blue-50 dark:bg-gray-800':
+                                                        j === 0 &&
+                                                        sheet.content.columns
+                                                            .length > 4,
+                                                }"
                                             >
                                                 {{ col }}
                                             </th>
@@ -179,6 +204,12 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                                                 v-for="(cell, j) in row"
                                                 :key="j"
                                                 class="p-2"
+                                                :class="{
+                                                    'sticky left-0 bg-white dark:bg-gray-900':
+                                                        j === 0 &&
+                                                        (sheet.content.columns
+                                                            ?.length ?? 0) > 4,
+                                                }"
                                             >
                                                 {{ cell }}
                                             </td>
@@ -187,24 +218,47 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                                 </table>
                             </div>
 
-                            <div
+                            <details
                                 v-for="ex in sheet.content.example_rows ?? []"
                                 :key="ex.title"
+                                :open="ex.rows.length <= 12"
                                 class="mt-3"
                             >
-                                <p class="mb-1 text-xs font-bold text-gray-500">
+                                <summary
+                                    class="mb-2 cursor-pointer text-xs font-bold text-gray-600 dark:text-gray-300"
+                                >
                                     {{ ex.title }}
+                                </summary>
+                                <p
+                                    v-if="ex.columns.length > 4"
+                                    class="mb-2 text-xs text-gray-500"
+                                >
+                                    横にスクロールすると、右側の列まで確認できます。
                                 </p>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-xs">
-                                        <thead>
+                                <div class="max-h-[50dvh] overflow-auto">
+                                    <table
+                                        class="w-full text-xs"
+                                        :class="{
+                                            'min-w-max whitespace-nowrap':
+                                                ex.columns.length > 4,
+                                        }"
+                                    >
+                                        <thead class="sticky top-0 z-10">
                                             <tr
                                                 class="bg-blue-50 text-gray-500 dark:bg-gray-800"
                                             >
                                                 <th
-                                                    v-for="col in ex.columns"
+                                                    v-for="(
+                                                        col, j
+                                                    ) in ex.columns"
                                                     :key="col"
                                                     class="p-2 text-left font-bold"
+                                                    :class="{
+                                                        'sticky left-0 z-10 bg-blue-50 dark:bg-gray-800':
+                                                            j === 0 &&
+                                                            ex.columns.length >
+                                                                4,
+                                                    }"
                                                 >
                                                     {{ col }}
                                                 </th>
@@ -220,6 +274,12 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                                                     v-for="(cell, j) in row"
                                                     :key="j"
                                                     class="p-2"
+                                                    :class="{
+                                                        'sticky left-0 bg-white dark:bg-gray-900':
+                                                            j === 0 &&
+                                                            ex.columns.length >
+                                                                4,
+                                                    }"
                                                 >
                                                     {{ cell }}
                                                 </td>
@@ -227,12 +287,12 @@ const tableRows = (sheet: ReferenceSheetData): string[][] =>
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </details>
                         </template>
 
                         <ul
                             v-if="sheet.content.notes"
-                            class="mt-2 list-inside list-disc text-xs text-gray-400"
+                            class="mt-2 list-inside list-disc text-xs text-gray-500 dark:text-gray-400"
                         >
                             <li v-for="note in sheet.content.notes" :key="note">
                                 {{ note }}

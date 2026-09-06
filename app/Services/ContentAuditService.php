@@ -7,6 +7,7 @@ use App\Enums\QuestionType;
 use App\Models\Lesson;
 use App\Models\MockExam;
 use App\Models\Question;
+use App\Models\ReferenceSheet;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -28,8 +29,28 @@ class ContentAuditService
      */
     public function audit(): array
     {
-        $errors = [];
+        $errors = app(QuestionReviewLedger::class)->errors();
+        $reviews = app(QuestionReviewLedger::class)->records();
+        $subjects = app(QuestionReviewLedger::class)->subjects();
+        $choiceOrder = app(QuestionChoiceOrder::class);
+        $targets = $choiceOrder->choiceTargets(array_column($subjects, 'question'));
+        $checkedSheets = [];
+        foreach ($subjects as $subject) {
+            foreach ($subject['reference_sheets'] as $slug => $sheet) {
+                if ($sheet === null || isset($checkedSheets[$slug])) {
+                    continue;
+                }
+                $checkedSheets[$slug] = true;
+                $stored = ReferenceSheet::where('slug', $slug)->where('fiscal_year', $sheet['fiscal_year'])->first();
+                if ($stored === null || $stored->name !== $sheet['name']
+                    || QuestionReviewLedger::fingerprint($stored->content) !== QuestionReviewLedger::fingerprint($sheet['content'])) {
+                    $errors[] = "参照表{$slug}: DBの資料が監査対象の正本と一致しません。";
+                }
+            }
+        }
+        $checkedLessons = [];
         $reviewCandidates = Question::query()
+            ->with('unit', 'lesson')
             ->where('is_active', true)
             ->where('review_status', QuestionReviewStatus::Approved->value)
             ->get();
@@ -46,6 +67,37 @@ class ContentAuditService
 
         foreach ($reviewCandidates as $question) {
             $id = $question->source_id ?? (string) $question->id;
+            $subject = $subjects[$id] ?? null;
+            if ($subject === null) {
+                $errors[] = "{$id}: 正本にない問題が公開されています。";
+            } else {
+                $canonical = $choiceOrder->normalizeChoiceOrder($subject['question'], $targets[$id] ?? null);
+                if (Question::contentHash($canonical) !== Question::contentHash($question->toArray())) {
+                    $errors[] = "{$id}: DBの本文・選択肢・正答・解説が正本と一致しません。";
+                }
+                $expectedDependencies = array_replace($question->toArray(), [
+                    'concept_key' => $canonical['topic_key'], 'learning_objective' => $subject['learning_objective'],
+                    'variant_role' => $canonical['role'], 'misconception_key' => $canonical['misconception_key'] ?? null,
+                    'fiscal_year' => (int) substr($subject['legal_as_of'], 0, 4), 'study_tier' => $canonical['study_tier'],
+                    'reference_sheet_slugs' => $canonical['reference_sheet_slugs'],
+                    'source_urls' => array_column($subject['sources'], 'url'),
+                    'exam_role' => $canonical['exam_role'] ?? ($canonical['calc_params'] === null ? 'knowledge' : 'calculation'),
+                ]);
+                if (Question::reviewDependenciesHash($expectedDependencies) !== Question::reviewDependenciesHash($question->toArray())
+                    || $question->unit->slug !== $canonical['unit'] || $question->lesson?->slug !== $canonical['lesson']) {
+                    $errors[] = "{$id}: DBの年度・学習目標・所属・参照先が正本と一致しません。";
+                }
+                if ($question->lesson !== null && ! isset($checkedLessons[$question->lesson_id])) {
+                    $checkedLessons[$question->lesson_id] = true;
+                    if (QuestionReviewLedger::fingerprint($question->lesson->study_guide) !== QuestionReviewLedger::fingerprint($subject['lesson']['study_guide'] ?? null)
+                        || $question->lesson->description !== ($subject['lesson']['description'] ?? null)) {
+                        $errors[] = "{$id}: レッスン説明が監査対象の正本と一致しません。";
+                    }
+                }
+            }
+            if (($reviews[$id]['fingerprint'] ?? null) !== $question->review_fingerprint) {
+                $errors[] = "{$id}: DBの承認指紋と正本の監査記録が一致しません。";
+            }
             $actualHash = Question::contentHash($question->only([
                 'type',
                 'question_text',
@@ -124,6 +176,10 @@ class ContentAuditService
         }
 
         $this->auditLearningObjectives($questions, $errors);
+        $practiceCoreTopics = Question::query()->practiceBank()->where('study_tier', 'core')->pluck('concept_key');
+        foreach ($questions->pluck('concept_key')->unique()->diff($practiceCoreTopics) as $concept) {
+            $errors[] = "{$concept}: 模試解放前の通常学習に合格コアがありません。";
+        }
         $this->auditAnswerPositionBalance($questions, $errors);
         $this->auditMockExams($errors);
         $this->auditPracticeBankCoverage($errors);
@@ -223,6 +279,18 @@ class ContentAuditService
                 if ($isKnowledge === $question->isCalculation()) {
                     $section = $isKnowledge ? '知識問題' : '計算問題';
                     $errors[] = "{$exam->slug}: {$position}問目が{$section}の構成条件と一致しません。";
+                }
+
+                if (! $isKnowledge && ($question->calc_params === null || ! is_numeric($question->answer['value'] ?? null))) {
+                    $errors[] = "{$exam->slug}: {$position}問目の計算を数値で検証できません。";
+                }
+
+                if (! $isKnowledge && $question->type === QuestionType::Choice) {
+                    $correctText = collect($question->choices)->firstWhere('key', $question->answer['choice'])['text'] ?? '';
+                    $number = str_replace([',', '円', ' '], '', $correctText);
+                    if (! is_numeric($number) || (int) $number !== ($question->answer['value'] ?? null)) {
+                        $errors[] = "{$exam->slug}: {$position}問目の正答選択肢が計算結果と一致しません。";
+                    }
                 }
 
                 if (! $question->is_active || $question->review_status !== QuestionReviewStatus::Approved) {

@@ -1,0 +1,98 @@
+[
+  {
+    "left": "q-0267",
+    "right": "q-0268",
+    "left_fingerprint": "1d56eafb1386264ba5d7508558de65012b0eda2c8e86c68c609dea693521b7d0",
+    "right_fingerprint": "04bdb2ccb498abf2356181f53be77a396d4ad4b6a95676c8f7fb74dfc4544234",
+    "decision": "維持：勤怠区分の時間・日数と支給区分の金額の分類を区別する。基礎想起の模試項目で、ここから高い初見応用力を推定しない。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0353",
+    "right": "q-0355",
+    "left_fingerprint": "95aa4107d291d66247e2a72acfb0fe6257bcb8addecafff082a290d50511d318",
+    "right_fingerprint": "b1290e9a6a5535ccf7b0abdb239efe0a8b1f4a67b82b292855fbb600e61b8130",
+    "decision": "維持：一般障害者と同居特別障害者は加算1人／2人で異なる法定条件。14歳の基本人数0は共通に固定し、障害区分の違いへ焦点を当てる。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0375",
+    "right": "q-0376",
+    "left_fingerprint": "f0d932111ea83816651fbd36274a3d218a59e52cb923922f004a6eac6bfe8596",
+    "right_fingerprint": "5ee1bb11b699c3e754c429a6aa4bfce729d4ae2012a3293752f8eb293e6a4378",
+    "decision": "維持：月ごとの通常給与と各日支給で参照する税額表が異なる。日給という名称だけで表を選ぶ誤りを防ぐ対比。月額と日額の数値演習の不足は別記。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0551",
+    "right": "q-0552",
+    "left_fingerprint": "329808ce49410971a28fa0cd9eea8a3072609369c9af61bb45b4610ecc139336",
+    "right_fingerprint": "d1affb824a392e899141b2b7fb4ccadd11fd9b4236ca7008d84946b8f342c47b",
+    "decision": "維持：4分の3のパートで17日以上なしの後、15日以上の月あり／なしで平均と従前の結論が分かれる。異なる境界条件。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0572",
+    "right": "q-0573",
+    "left_fingerprint": "d3b9b2d4bf56fd1a5915211c7bcf157157fddae8471f232188e48633fed9bac0",
+    "right_fingerprint": "df11dfb03dbc9a4668b56cf46eafbe6c16e5f6bec573ee7753e1bbca40efbf12",
+    "decision": "維持：第1号は国内住所65歳以上、第2号は国内住所40〜64歳かつ医療保険加入。年齢だけでなく医療保険条件が異なる。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0578",
+    "right": "q-0579",
+    "left_fingerprint": "7a430539d2ad12cf454120eab61ef29d80882c02465b85530e0365d571da7a85",
+    "right_fingerprint": "dac77da5b776cffb604d032c9c208925372fb33f8a536be34d640e74e468c5e6",
+    "decision": "維持：取得と喪失では雇用保険の期限・起算点が異なる。健厚の5日と雇用の翌月10日／事実翌日から10日を区別する。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0639",
+    "right": "q-0640",
+    "left_fingerprint": "fd3ca0df04c6c58011cb920ebf349068d23f94aa043ebca0d6258b731d9d8250",
+    "right_fingerprint": "6acab69d0af6e9b4780978b1eca60a996b56fabd0748a8286bc77fa2c0c9d653",
+    "decision": "維持：月途中と月末退職の違いが資格喪失月を変え、最終の保険料対象月を変える。日数だけ変えた同一結論の類題ではない。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0493",
+    "right": "q-0612",
+    "left_fingerprint": "ca4bf4e19ce74fa761320d849c03412b582bd6ceeed069ef755c455bd6049f8b",
+    "right_fingerprint": "81a388e3b990ad7fd326437af4835537dabe2309247c6bb605d9e77b9c830de5",
+    "decision": "修正済み：模試493を時間・日数の2人のケース判定へ変更。通常612は両方4分の3の基礎規則を学ぶ。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0501",
+    "right": "q-0621",
+    "left_fingerprint": "d78de9597492ea6514cfd9193188ecf21f83d19210fc5615d18939a7aed34d60",
+    "right_fingerprint": "e7dce07d217821ea1c6237fa23dd4e39a46803d718dfdefc63590f90ff539382",
+    "decision": "修正済み：模試501を法人1人と個人飲食3人の適用比較へ変更。通常621は法人の基本要件を学ぶ。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0544",
+    "right": "q-0666",
+    "left_fingerprint": "584967e172612fcc4c81a7ccd1c23587bccacacc33d975aed7bcd236aaaadac3",
+    "right_fingerprint": "40d52dde131b5b915dd123761b47b5e99af5cda23d305e1ac44d125caacaa660",
+    "decision": "修正済み：模試544を7月1日在籍と5月31日／6月1日の取得境界の適用へ変更。通常666は基準日を学ぶ。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0576",
+    "right": "q-0577",
+    "left_fingerprint": "6e98e8df3a6241168383a5fc098890ef305c4df0531297d780c54fe1bfe6bd68",
+    "right_fingerprint": "ee8b7abd94277130fd2504861337f97cec9a4b4b52291fc8a2f084fd41a9777a",
+    "decision": "修正済み：模試577を65歳到達日と翌月控除の接続へ変更。通常576は40〜64歳の年齢範囲と対象月を学ぶ。",
+    "review_date": "2026-09-06"
+  },
+  {
+    "left": "q-0829",
+    "right": "q-0830",
+    "left_fingerprint": "b7f8f48b69534c66bc38400584398a897b76310840ffd471216217337f8d66a9",
+    "right_fingerprint": "0b6c56675d0550d126499c5a11d9b7fd525d511983f61e8c93d7a868df0aa47f",
+    "decision": "維持：通常830で介護あり・非課税通勤あり・扶養0人・住民税あり、模試829で介護なし・全額課税・扶養1人・住民税なしを適用する。金額だけの差ではなく、加算すべき保険料と税額表の列、非課税支給、最終控除が変わる。解説の同じ手順を学んだ効果はあり、実測の難易度等価性は未検証。",
+    "review_date": "2026-09-06"
+  }
+]

@@ -11,6 +11,8 @@ use App\Models\MockExam;
 use App\Models\Question;
 use App\Models\ReferenceSheet;
 use App\Models\Unit;
+use App\Services\QuestionChoiceOrder;
+use App\Services\QuestionReviewLedger;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
@@ -21,12 +23,19 @@ use RuntimeException;
  */
 class ContentSeeder extends Seeder
 {
+    /** @var array<string, array<string, mixed>> */
+    private array $reviews = [];
+
     private const int FISCAL_YEAR = 2026;
 
     public function run(): void
     {
-        $this->seedCourse();
-        $this->seedReferenceSheets();
+        // Fail before course, reference sheets or questions are mutated.
+        $this->reviews = app(QuestionReviewLedger::class)->approvedRecords();
+        // Approved canonical synchronization handles revisions once per subject
+        // below; interactive dependency edits use model events instead.
+        Lesson::withoutEvents(fn () => $this->seedCourse());
+        ReferenceSheet::withoutEvents(fn () => $this->seedReferenceSheets());
         $this->seedQuestions();
         $this->seedMockExams();
     }
@@ -90,7 +99,7 @@ class ContentSeeder extends Seeder
 
     /**
      * @param  array<string, mixed>  $lessonData
-     * @return array{why: string, goal: string, key_points: list<string>, common_traps: list<string>}
+     * @return array{why: string, goal: string, key_points: list<string>, common_traps: list<string>, worked_example: string|null}
      */
     private function validateStudyGuide(array $lessonData): array
     {
@@ -105,6 +114,10 @@ class ContentSeeder extends Seeder
         $goal = $guide['goal'] ?? null;
         $keyPoints = $guide['key_points'] ?? null;
         $commonTraps = $guide['common_traps'] ?? null;
+        $example = $guide['worked_example'] ?? null;
+        if ($example !== null && (! is_string($example) || trim($example) === '')) {
+            throw new RuntimeException("Lesson {$slug}: worked_example must be non-empty text");
+        }
 
         if (! is_string($why) || trim($why) === '' || ! is_string($goal) || trim($goal) === '') {
             throw new RuntimeException("Lesson {$slug}: why and goal are required");
@@ -131,6 +144,7 @@ class ContentSeeder extends Seeder
             'goal' => $goal,
             'key_points' => $keyPoints,
             'common_traps' => $commonTraps,
+            'worked_example' => $example,
         ];
     }
 
@@ -154,7 +168,7 @@ class ContentSeeder extends Seeder
         $release = $bank['release'] ?? [];
         /** @var list<array<string, mixed>> $questions */
         $questions = $bank['questions'] ?? [];
-        $choiceTargets = $this->choiceTargets($questions);
+        $choiceTargets = app(QuestionChoiceOrder::class)->choiceTargets($questions);
         $seededSourceIds = [];
 
         if (($release['question_count'] ?? null) !== count($questions)) {
@@ -168,7 +182,7 @@ class ContentSeeder extends Seeder
 
         foreach ($questions as $q) {
             $this->validateQuestion($q, $topics, $sourceCatalog);
-            $q = $this->normalizeChoiceOrder($q, $choiceTargets[$q['id']] ?? null);
+            $q = app(QuestionChoiceOrder::class)->normalizeChoiceOrder($q, $choiceTargets[$q['id']] ?? null);
             $seededSourceIds[] = $q['id'];
             $sourceUrls = array_values(array_map(
                 fn (string $key): string => $sourceCatalog[$key]['url'],
@@ -189,7 +203,11 @@ class ContentSeeder extends Seeder
             $contentHash = Question::contentHash($content);
             $existing = Question::where('source_id', $q['id'])->first();
             $configuredRevision = (int) ($q['content_revision'] ?? 1);
-            $contentChanged = $existing !== null && $existing->content_hash !== $contentHash;
+            $reviewFingerprint = $this->reviews[$q['id']]['fingerprint'];
+            // Legacy rows have no proof that their dependencies match this
+            // review. Reconfirm mastery once when adopting the ledger.
+            $contentChanged = $existing !== null && ($existing->content_hash !== $contentHash
+                || $existing->review_fingerprint !== $reviewFingerprint);
             $contentRevision = $existing === null
                 ? $configuredRevision
                 : max(
@@ -219,6 +237,7 @@ class ContentSeeder extends Seeder
                     'content_revision' => $contentRevision,
                     'content_hash' => $contentHash,
                     'reviewed_content_hash' => $contentHash,
+                    'review_fingerprint' => $reviewFingerprint,
                     'fiscal_year' => self::FISCAL_YEAR,
                     'question_text' => $content['question_text'],
                     'choices' => $content['choices'],
@@ -229,9 +248,9 @@ class ContentSeeder extends Seeder
                     'calc_params' => $content['calc_params'],
                     'reference_sheet_slugs' => $q['reference_sheet_slugs'],
                     'source_urls' => $sourceUrls,
-                    'review_notes' => $q['review_notes'] ?? '2026年9月1日の試験基準に対し、公式試験案内・法令一次資料・計算結果を確認。',
-                    'reviewed_at' => $q['reviewed_at'] ?? $release['reviewed_at'].' 00:00:00',
-                    'review_due_at' => $q['review_due_at'] ?? $release['review_due_at'].' 00:00:00',
+                    'review_notes' => $this->reviews[$q['id']]['notes'],
+                    'reviewed_at' => $this->reviews[$q['id']]['reviewed_at'].' 00:00:00',
+                    'review_due_at' => $this->reviews[$q['id']]['review_due_at'].' 23:59:59',
                     'is_active' => true,
                 ],
             );
@@ -302,121 +321,6 @@ class ContentSeeder extends Seeder
         if ($q['type'] === QuestionType::Numeric->value && ! is_numeric($q['answer']['value'] ?? null)) {
             throw new RuntimeException("Question {$id}: numeric question needs answer.value");
         }
-    }
-
-    /**
-     * 正解位置の偏りから答えを推測できないよう、選択肢を決定的に再配置する。
-     *
-     * @param  array<string, mixed>  $question
-     * @return array<string, mixed>
-     */
-    private function normalizeChoiceOrder(array $question, ?string $targetCorrectKey): array
-    {
-        if ($question['type'] !== QuestionType::Choice->value) {
-            return $question;
-        }
-
-        $keys = ['A', 'B', 'C', 'D'];
-        if (! in_array($targetCorrectKey, $keys, true)) {
-            throw new RuntimeException("Question {$question['id']}: correct-choice target is missing");
-        }
-        $originalCorrectKey = $question['answer']['choice'];
-        /** @var list<array{key: string, text: string}> $choices */
-        $choices = $question['choices'];
-        $correctChoice = null;
-        $distractors = [];
-
-        foreach ($choices as $choice) {
-            if ($choice['key'] === $originalCorrectKey) {
-                $correctChoice = $choice;
-            } else {
-                $distractors[] = $choice;
-            }
-        }
-
-        if ($correctChoice === null) {
-            throw new RuntimeException("Question {$question['id']}: correct choice not found");
-        }
-        $oldToNewKeys = [];
-        $reordered = [];
-        $distractorIndex = 0;
-
-        foreach ($keys as $newKey) {
-            $choice = $newKey === $targetCorrectKey
-                ? $correctChoice
-                : $distractors[$distractorIndex++];
-            $oldToNewKeys[$choice['key']] = $newKey;
-            $choice['key'] = $newKey;
-            $reordered[] = $choice;
-        }
-
-        $feedback = [];
-        /** @var array<string, string> $sourceFeedback */
-        $sourceFeedback = $question['distractor_feedback'] ?? [];
-        foreach ($sourceFeedback as $oldKey => $message) {
-            $feedback[$oldToNewKeys[$oldKey]] = $message;
-        }
-        ksort($feedback);
-
-        $question['choices'] = $reordered;
-        $question['answer']['choice'] = $targetCorrectKey;
-        $question['distractor_feedback'] = $feedback;
-
-        return $question;
-    }
-
-    /**
-     * 公開模試は各正解位置を10問ずつにし、残りを現在の最少位置へ配って
-     * 問題バンク全体も均等にする。正本IDと固定シードから再現可能に決定する。
-     *
-     * @param  list<array<string, mixed>>  $questions
-     * @return array<string, string>
-     */
-    private function choiceTargets(array $questions): array
-    {
-        $keys = ['A', 'B', 'C', 'D'];
-        $targets = [];
-        $counts = array_fill_keys($keys, 0);
-
-        foreach (File::json($this->dataPath('mock-exams.json')) as $exam) {
-            foreach ($exam['questions'] as $item) {
-                $questionId = (string) $item['question_id'];
-                $target = match (((int) $item['position'] - 1) % count($keys)) {
-                    0 => 'A',
-                    1 => 'B',
-                    2 => 'C',
-                    3 => 'D',
-                    default => throw new RuntimeException("Mock exam position must be positive: {$item['position']}"),
-                };
-
-                if (isset($targets[$questionId]) && $targets[$questionId] !== $target) {
-                    throw new RuntimeException("Question {$questionId}: 模試間で正解位置が競合しています。");
-                }
-
-                if (! isset($targets[$questionId])) {
-                    $targets[$questionId] = $target;
-                    $counts[$target]++;
-                }
-            }
-        }
-
-        foreach ($questions as $question) {
-            $questionId = (string) $question['id'];
-            if ($question['type'] !== QuestionType::Choice->value || isset($targets[$questionId])) {
-                continue;
-            }
-
-            $minimum = min($counts);
-            $leastUsed = array_values(array_filter(
-                $keys,
-                fn (string $key): bool => $counts[$key] === $minimum,
-            ));
-            $target = $leastUsed[0] ?? throw new RuntimeException('正解位置の割当てに失敗しました。');
-            $targets[$questionId] = $target;
-            $counts[$target]++;
-        }
-
-        return $targets;
     }
 
     private function seedMockExams(): void

@@ -1,0 +1,199 @@
+{
+  "review_date": "2026-09-06",
+  "source_url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+  "source_sha256": "99daf0384733d4d3417ab7591325e6602b54195e7bb9e9c01f57910bb51331e0",
+  "changes": [
+    {
+      "rate": "8.168",
+      "dependents": 2,
+      "before": "377以上 401未満",
+      "after": "377以上 400未満"
+    },
+    {
+      "rate": "10.210",
+      "dependents": 2,
+      "before": "401以上 430未満",
+      "after": "400以上 426未満"
+    },
+    {
+      "rate": "12.252",
+      "dependents": 2,
+      "before": "430以上 457未満",
+      "after": "426以上 457未満"
+    },
+    {
+      "rate": "12.252",
+      "dependents": 3,
+      "before": "452以上 479未満",
+      "after": "452以上 484未満"
+    },
+    {
+      "rate": "14.294",
+      "dependents": 2,
+      "before": "457以上 491未満",
+      "after": "457以上 492未満"
+    },
+    {
+      "rate": "14.294",
+      "dependents": 3,
+      "before": "479以上 517未満",
+      "after": "484以上 517未満"
+    },
+    {
+      "rate": "16.336",
+      "dependents": 2,
+      "before": "491以上 526未満",
+      "after": "492以上 525未満"
+    },
+    {
+      "rate": "18.378",
+      "dependents": 2,
+      "before": "526以上 636未満",
+      "after": "525以上 636未満"
+    },
+    {
+      "rate": "18.378",
+      "dependents": 3,
+      "before": "550以上 661未満",
+      "after": "550以上 651未満"
+    },
+    {
+      "rate": "20.420",
+      "dependents": 3,
+      "before": "661以上 751未満",
+      "after": "651以上 751未満"
+    },
+    {
+      "rate": "22.462",
+      "dependents": 2,
+      "before": "728以上 768未満",
+      "after": "728以上 764未満"
+    },
+    {
+      "rate": "24.504",
+      "dependents": 0,
+      "before": "715以上 739未満",
+      "after": "715以上 752未満"
+    },
+    {
+      "rate": "24.504",
+      "dependents": 2,
+      "before": "768以上 807未満",
+      "after": "764以上 804未満"
+    },
+    {
+      "rate": "26.546",
+      "dependents": 0,
+      "before": "739以上 854未満",
+      "after": "752以上 795未満"
+    },
+    {
+      "rate": "26.546",
+      "dependents": 2,
+      "before": "807以上 854未満",
+      "after": "804以上 848未満"
+    },
+    {
+      "rate": "28.588",
+      "dependents": 0,
+      "before": "854以上 922未満",
+      "after": "795以上 854未満"
+    },
+    {
+      "rate": "28.588",
+      "dependents": 1,
+      "before": "821以上 952未満",
+      "after": "821以上 882未満"
+    },
+    {
+      "rate": "28.588",
+      "dependents": 2,
+      "before": "854以上 910未満",
+      "after": "848以上 910未満"
+    },
+    {
+      "rate": "28.588",
+      "dependents": 3,
+      "before": "876以上 948未満",
+      "after": "876以上 938未満"
+    },
+    {
+      "rate": "30.630",
+      "dependents": 0,
+      "before": "922以上 1,052未満",
+      "after": "854以上 922未満"
+    },
+    {
+      "rate": "30.630",
+      "dependents": 1,
+      "before": "952以上 1,052未満",
+      "after": "882以上 952未満"
+    },
+    {
+      "rate": "30.630",
+      "dependents": 3,
+      "before": "948以上 1,013未満",
+      "after": "938以上 1,013未満"
+    },
+    {
+      "rate": "30.630",
+      "dependents": 6,
+      "before": "1,022以上 1,118未満",
+      "after": "1,022以上 1,104未満"
+    },
+    {
+      "rate": "32.672",
+      "dependents": 0,
+      "before": "1,052以上 1,318未満",
+      "after": "922以上 1,318未満"
+    },
+    {
+      "rate": "32.672",
+      "dependents": 1,
+      "before": "1,052以上 1,342未満",
+      "after": "952以上 1,342未満"
+    },
+    {
+      "rate": "32.672",
+      "dependents": 6,
+      "before": "1,118以上 1,464未満",
+      "after": "1,104以上 1,464未満"
+    },
+    {
+      "rate": "35.735",
+      "dependents": 2,
+      "before": "1,367以上 1,536未満",
+      "after": "1,367以上 1,526未満"
+    },
+    {
+      "rate": "35.735",
+      "dependents": 3,
+      "before": "1,391以上 1,551未満",
+      "after": "1,391以上 1,538未満"
+    },
+    {
+      "rate": "35.735",
+      "dependents": 6,
+      "before": "1,464以上 1,563未満",
+      "after": "1,464以上 1,555未満"
+    },
+    {
+      "rate": "38.798",
+      "dependents": 2,
+      "before": "1,536以上 2,669未満",
+      "after": "1,526以上 2,669未満"
+    },
+    {
+      "rate": "38.798",
+      "dependents": 3,
+      "before": "1,551以上 2,693未満",
+      "after": "1,538以上 2,693未満"
+    },
+    {
+      "rate": "38.798",
+      "dependents": 6,
+      "before": "1,563以上 2,764未満",
+      "after": "1,555以上 2,764未満"
+    }
+  ]
+}

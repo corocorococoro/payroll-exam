@@ -1,0 +1,4631 @@
+{
+  "review_date": "2026-09-06",
+  "hash_method": "退役時の問題JSONをキー順ソート・UTF-8・空白なしでSHA256。承認用の依存資料込みfingerprintとは別。",
+  "records": [
+    {
+      "id": "q-0028",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "事業場で常時10人以上という同じ下限判断。q-0005は事業場単位も併せて問うため残し通常コアへ変更する。旧IDの解答・習熟履歴を保持し、統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0005",
+      "retired_question_hash": "6a0024cd5bc73eefb386da33534107794ee9111ec99dd9cea207f49562ad218d",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第89条（作成及び届出の義務）"
+        }
+      ]
+    },
+    {
+      "id": "q-0040",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "6時間ちょうどの最低休憩という同じ境界判断はq-0034の全肢比較で扱う。 異なる応用条件がないため統合。旧履歴を保持して配信停止し、統合先への習熟自動移行は行わない。",
+      "merged_into": "q-0034",
+      "retired_question_hash": "bceeb28626fbabafa895e97120d8619a414cbe140edb030b4e7510f7d3d1c7d9",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第34条第1項"
+        }
+      ]
+    },
+    {
+      "id": "q-0044",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "電話当番の待機は休憩でなく労働時間という同じ判断。条件を明確にした通常コアq-0035に統合する。旧IDの解答・習熟履歴を保持し、統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0035",
+      "retired_question_hash": "89d84c2e90a5ab1d78fdeb74ba8e2492be772c6baad0b1f5f258f2bd444e91ae",
+      "evidence": [
+        {
+          "source_key": "break_phone_duty",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_11.html",
+          "locator": "統合判断の参照根拠：電話・来客当番は手待時間で休憩ではない旨の回答"
+        }
+      ]
+    },
+    {
+      "id": "q-0045",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "6時間超8時間以下の最低休憩45分という同じ判断。複数の境界を比較する通常コアq-0034に統合する。旧IDの解答・習熟履歴を保持し、統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0034",
+      "retired_question_hash": "4a8f549e832a2fb85a71ed85453927bed0e5df59d9c0a2c7acf8c3ce1ad026fe",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第34条第1項"
+        }
+      ]
+    },
+    {
+      "id": "q-0058",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "事業場外かつ労働時間算定困難という同じ適用要件はq-0055で扱う。 異なる応用条件がないため統合。旧履歴を保持して配信停止し、統合先への習熟自動移行は行わない。",
+      "merged_into": "q-0055",
+      "retired_question_hash": "d72d34a4d39b7472c15231e91e093c6255c3c8924de023db94e69bc486e99460",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第38条の2第1項"
+        },
+        {
+          "source_key": "deemed_hours_notice",
+          "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/jigyoubagai_roudou.html",
+          "locator": "統合判断の参照根拠：第1～2段落：算定困難・具体的な指揮監督"
+        }
+      ]
+    },
+    {
+      "id": "q-0065",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "q-0063と清算期間の法定上限3か月という同じ境界判断を問う。異なる条件・応用技能がないため統合。q-0065の学習履歴は保持し配信を停止する。q-0063への習熟の自動移行は行わない。",
+      "merged_into": "q-0063",
+      "retired_question_hash": "d59fb89a5283f09ec6158d85841f94407a53005fe4cac0b5d7652b62e923ebe8",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条の3第1項第2号・第2項・第4項"
+        },
+        {
+          "source_key": "flex_guide",
+          "url": "https://www.mhlw.go.jp/content/001140964.pdf",
+          "locator": "統合判断の参照根拠：7～8頁：清算期間延長と届出"
+        }
+      ]
+    },
+    {
+      "id": "q-0074",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "振替休日の事前交換という同一定義。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0070",
+      "retired_question_hash": "fe2b12af9c363976414f4dbc84f32e17e26c74e3206dbc41e390eec6256acaa0",
+      "evidence": [
+        {
+          "source_key": "holiday_substitution",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/roudoujikan/q11.html",
+          "locator": "統合判断の参照根拠：振替休日と代休の相違・振替後に週の法定時間を超える場合"
+        }
+      ]
+    },
+    {
+      "id": "q-0081",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "44時間特例の4業種・10人未満と1日8時間はq-0077の解説を含めて扱う。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0077",
+      "retired_question_hash": "565f32fc1e45abb8212d959bf50b32391acce26be771f2e1a19031c3b35ad225",
+      "evidence": [
+        {
+          "source_key": "flex_guide",
+          "url": "https://www.mhlw.go.jp/content/001140964.pdf",
+          "locator": "統合判断の参照根拠：5頁注2：特例措置対象事業場"
+        },
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第40条"
+        }
+      ]
+    },
+    {
+      "id": "q-0082",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "所定時間の定義は通常コアq-0080の解説へ統合。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0080",
+      "retired_question_hash": "b6a0cefaabfdbd93c53cffd06635ee25c0e61fdb560a58b31444d97c4fb5950e",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第89条第1号"
+        }
+      ]
+    },
+    {
+      "id": "q-0083",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "7時間所定から8時間働く法定内残業の同じ境界。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0079",
+      "retired_question_hash": "b8406c59efbb202a518d6bd28a0e60dde804c5b2b18efe4ad9dbdee753605b41",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第36条・第37条"
+        }
+      ]
+    },
+    {
+      "id": "q-0087",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "初回6か月・8割・10日の同じ付与要件。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0084",
+      "retired_question_hash": "0dc9fef2127f69d4df161bfbcb5581696539742e6abda6dd7adf98357818c802",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第39条第1項"
+        },
+        {
+          "source_key": "annual_leave_guide",
+          "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+          "locator": "統合判断の参照根拠：3頁：発生要件と通常の付与日数"
+        }
+      ]
+    },
+    {
+      "id": "q-0090",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "週4日以下・30時間未満の同じ比例付与要件。年間216日の説明も統合。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0085",
+      "retired_question_hash": "aa4c08d3ceeea10603e2e7651acd79b2ad5fd74e8deee997852088de902e0d94",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第39条第3項"
+        },
+        {
+          "source_key": "annual_leave_guide",
+          "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+          "locator": "統合判断の参照根拠：3頁：比例付与の対象条件"
+        }
+      ]
+    },
+    {
+      "id": "q-0100",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "本人取得・計画年休を5日から控除する同じ判断。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0094",
+      "retired_question_hash": "6c4a63deb082c5938227b47d16794db953f4ae3269ebf1cfcb7a266162954643",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第39条第7～8項"
+        },
+        {
+          "source_key": "annual_leave_guide",
+          "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+          "locator": "統合判断の参照根拠：5～6頁・20頁Q3～4：半日・時間単位と対象者"
+        }
+      ]
+    },
+    {
+      "id": "q-0102",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "旧Dの本人同意も許される取扱いで正答一意でない。同じ意見聴取義務をq-0095へ統合。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0095",
+      "retired_question_hash": "a7e446e065485804c84cd47132e1dbbcf278fc57451046daf15da4ab52c602ae",
+      "evidence": [
+        {
+          "source_key": "annual_leave_guide",
+          "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+          "locator": "統合判断の参照根拠：5頁Point3：時季指定の方法"
+        },
+        {
+          "source_key": "annual_leave_basics",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q1.html",
+          "locator": "統合判断の参照根拠：労働義務のない日には取得できない"
+        }
+      ]
+    },
+    {
+      "id": "q-0106",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "労使協定・年5日の同じ時間単位年休の導入要件。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0098",
+      "retired_question_hash": "f7050f481299175cde4e9a5f4fb26cbf83410eb3bfac677699a4e1a43b5809e9",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第39条第4項"
+        },
+        {
+          "source_key": "annual_leave_hours",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_16.html",
+          "locator": "統合判断の参照根拠：協定事項と年5日以内"
+        },
+        {
+          "source_key": "annual_leave_hours_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q3.html",
+          "locator": "統合判断の参照根拠：労使協定の項目・監督署へ届け出る必要はない"
+        }
+      ]
+    },
+    {
+      "id": "q-0108",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "平均・通常・標準報酬という3方式の同じ列挙。 異なる技能を追加しない類題として統合。旧履歴を保持し配信停止。統合先の習熟へ自動移行しない。",
+      "merged_into": "q-0099",
+      "retired_question_hash": "f1f4e2cde183f5fc3ebdfb93daa556e97c1288f79c4c962627974afcf9ba221a",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第39条第9項、特にただし書の端数処理"
+        }
+      ]
+    },
+    {
+      "id": "q-0123",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "36協定の効果を手続の説明に統合。旧Aの法定内労働自体も可能なので協定の効果との違いを明記。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0114",
+      "retired_question_hash": "10e77c65c60f696b9554be62d842c7e8821362162dda7438472b5606c03a11c3",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第1項・第37条"
+        }
+      ]
+    },
+    {
+      "id": "q-0124",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "通常月45・年360の同一判断。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0116",
+      "retired_question_hash": "d7ad2bf81512e57ce1652f6a0cadf3ea3d9801aece25ed6010126344a45734bd",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第3～4項"
+        }
+      ]
+    },
+    {
+      "id": "q-0125",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "年720の集計対象の同一判断。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0118",
+      "retired_question_hash": "37283abcf646a536300fd9bf567fa788050cb26a348a028cf605e89c42cd002a",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第5～6項"
+        }
+      ]
+    },
+    {
+      "id": "q-0126",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "単月合計100未満の同一判断。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0119",
+      "retired_question_hash": "6940b7b994679969d96e8a50aad07d44f44ce067b92f781928c857e7360c8784",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第5項・第6項第2号"
+        }
+      ]
+    },
+    {
+      "id": "q-0128",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "45時間超の月数最大6の同一判断。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0121",
+      "retired_question_hash": "b29ae3b89d3179c9592dfcfc72f808a1b64502dd4444e2e44d1de60bbc8a00ed",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第5項後段"
+        }
+      ]
+    },
+    {
+      "id": "q-0136",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "月単位の対象期間と週平均の同一定義。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0132",
+      "retired_question_hash": "491884b11528379dc71ed5d428d42530faa31600dea74e4fe07671f657b7f535",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条の2"
+        },
+        {
+          "source_key": "variable_month_guide",
+          "url": "https://www.mhlw.go.jp/content/140811-2.pdf",
+          "locator": "統合判断の参照根拠：1頁：定義と対象期間・労働日特定"
+        }
+      ]
+    },
+    {
+      "id": "q-0137",
+      "retired_at": "2026-09-05",
+      "kind": "merged",
+      "reason": "月単位の事前勤務特定と事後変更不可の同一判断。 別技能の演習を増やさないため統合。旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0135",
+      "retired_question_hash": "feac30158361241161ad31fde60d9d63225828622edbd03bc60072aae2bcbfe4",
+      "evidence": [
+        {
+          "source_key": "variable_month_guide",
+          "url": "https://www.mhlw.go.jp/content/140811-2.pdf",
+          "locator": "統合判断の参照根拠：1頁2③：あらかじめ具体的に定め任意変更不可"
+        }
+      ]
+    },
+    {
+      "id": "q-0146",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "別居を含む7種類と資格・皆勤・役職の除外不可を統合先で説明。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0147",
+      "retired_question_hash": "e8c8628a19b183354b6ef964bde9c590774f5b8487dc9acf375c25f06cc3a7c7",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：7種類の列挙"
+        },
+        {
+          "source_key": "remote_allowance_notice",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+          "locator": "統合判断の参照根拠：1：法37条5項・則21条による限定"
+        }
+      ]
+    },
+    {
+      "id": "q-0156",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "本文で臨時の賃金と正答を示していたため、結婚の事由から判断する例へ統合。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0173",
+      "retired_question_hash": "5fae24472f075d2524609509aff6919cc70fb8d84d52371c9da0ed561da9b4a2",
+      "evidence": [
+        {
+          "source_key": "premium_temporary_qa",
+          "url": "https://jsite.mhlw.go.jp/osaka-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/hourei_seido/jikan2/warimasi.html",
+          "locator": "統合判断の参照根拠：除外賃金6：臨時に支払われた賃金（結婚手当など）"
+        }
+      ]
+    },
+    {
+      "id": "q-0157",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "毎月の資格手当が7種類外という同じ判断を統合先で説明。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0147",
+      "retired_question_hash": "0359420a358b6d643719ef3e875b471a38aab9df30604f08fefd7db5a9b4f519",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：7種類の列挙"
+        },
+        {
+          "source_key": "remote_allowance_notice",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+          "locator": "統合判断の参照根拠：1：法37条5項・則21条による限定"
+        }
+      ]
+    },
+    {
+      "id": "q-0163",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "除外される7種類の列挙の重複。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0147",
+      "retired_question_hash": "0b7a44f933c19d4ef10f98f997a1a9c7365830b80a16e4319bb6f2dda843ddb5",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：7種類の列挙"
+        },
+        {
+          "source_key": "remote_allowance_notice",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+          "locator": "統合判断の参照根拠：1：法37条5項・則21条による限定"
+        }
+      ]
+    },
+    {
+      "id": "q-0164",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "扶養人数連動の家族手当の同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0150",
+      "retired_question_hash": "bff7f1cb0d74e0aff4db214cc9432e66b342b11c371c65916528534e34212a7a",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁①：扶養人数に応じた支給例"
+        }
+      ]
+    },
+    {
+      "id": "q-0165",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全員一律の家族手当の同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0149",
+      "retired_question_hash": "c662833d92041ce6fc8df23204d98c538ea07cc209c3e4c22d4baecc75d64706",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁①：家族の有無・人数に関係なく一律の例"
+        }
+      ]
+    },
+    {
+      "id": "q-0166",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通勤距離・費用連動の同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0153",
+      "retired_question_hash": "01ba6e76c6c160a27e549b467becd0e7ecfe9138d65ff9274b2908d24953e10d",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁②：通勤距離・実費に応じた算定"
+        }
+      ]
+    },
+    {
+      "id": "q-0167",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "費用に関係ない一律通勤手当の同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0154",
+      "retired_question_hash": "47e02ec7437a4a6cdf07d37917d1dac5f8d13551b9cf25f4c0ce314186748d00",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁②：距離・費用に関係なく一律の例"
+        }
+      ]
+    },
+    {
+      "id": "q-0168",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "住宅費に連動する同じ判断。賃貸という形態だけでは除外不可との説明も統合。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0152",
+      "retired_question_hash": "f11b2ab8e60d2c1b2db6072d683709d4fe73c09673ba6f6b0c1690584ff48bff",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁③：費用定率と住宅形態別定額の比較"
+        }
+      ]
+    },
+    {
+      "id": "q-0169",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "名称でなく支給実態で判断する同じ原則。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0148",
+      "retired_question_hash": "162d7dd265ea4b3be80369f9c8ce1035470d3d7465e758cbbd6ca44e12d9ec53",
+      "evidence": [
+        {
+          "source_key": "premium_allowance_guide",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+          "locator": "統合判断の参照根拠：2頁冒頭：名称だけでは除外できない"
+        }
+      ]
+    },
+    {
+      "id": "q-0170",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "毎月の役職手当は7種類外という同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0147",
+      "retired_question_hash": "cc9d5690a8a3d150b219d3d3c0475ca64ad73a49b493030913c3ae88c89d555e",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：7種類の列挙"
+        },
+        {
+          "source_key": "remote_allowance_notice",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+          "locator": "統合判断の参照根拠：1：法37条5項・則21条による限定"
+        }
+      ]
+    },
+    {
+      "id": "q-0171",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "精皆勤手当は7種類外という同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0147",
+      "retired_question_hash": "b0b4148473ed5e2378b79c6e56c574b4ce53878bec1db92dc9893a4a150e441f",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：7種類の列挙"
+        },
+        {
+          "source_key": "remote_allowance_notice",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+          "locator": "統合判断の参照根拠：1：法37条5項・則21条による限定"
+        }
+      ]
+    },
+    {
+      "id": "q-0174",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "毎月変動する業績手当は臨時でないという同じ判断。 旧履歴保持・配信停止。統合先の習熟には自動移行しない。",
+      "merged_into": "q-0155",
+      "retired_question_hash": "a2b8d9f48c7526cbd3fe40fcbd3c740d84f9ac0071a184a547c904041cff20d3",
+      "evidence": [
+        {
+          "source_key": "premium_base_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+          "locator": "統合判断の参照根拠：回答：通常の労働の賃金と除外7種類"
+        },
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：3(1)：出来高給は算定期間中の総労働時間で除す"
+        }
+      ]
+    },
+    {
+      "id": "q-0187",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "時間外25＋深夜25の同一判断。旧設問は最低率の指定も不足。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0182",
+      "retired_question_hash": "6789bfe453418abd86e9432012e10297546345aa1a4404f426d59d036c9bf308",
+      "evidence": [
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：冒頭と計算方法：時間外・深夜の割増"
+        },
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(1)：深夜は時間内外を問わず別途加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0188",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "休日35＋深夜25の同一判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0178",
+      "retired_question_hash": "6ca47a8881feeab0962a3caec5bd7d4f2ae85486c695e15980e3f45851f689e2",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(2)：法定休日の時間外加算なし・深夜は加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0189",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "8時間超も休日時間外を加算しない説明に統合。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0178",
+      "retired_question_hash": "3f094edbc27d10097570b6dfb153d74b867ef06ba4bbad666e7a837b0d271744",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(2)：法定休日の時間外加算なし・深夜は加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0194",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定休日に時間外を加算しない同じ理由。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0178",
+      "retired_question_hash": "1bb2e2c8b60f73bb4bd2e66aa888f0fee5c1a408c26c0edc20cc8747e44c4138",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(2)：法定休日の時間外加算なし・深夜は加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0195",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "休日付与の法定最低日数を労働時間の通常問題へ統合。旧Aの週2日も適法だった。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0068",
+      "retired_question_hash": "84c96e62175c40d84526075eb04e7caf776d8d2b4a8a3af5ca1ae2726aafa9de",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第35条第1～2項"
+        },
+        {
+          "source_key": "holiday_four_week",
+          "url": "https://jsite.mhlw.go.jp/tochigi-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/roukijou/soudan_jirei/q_and_a5/q_and_a5_r.html",
+          "locator": "統合判断の参照根拠：4週間の起算日"
+        }
+      ]
+    },
+    {
+      "id": "q-0198",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "36協定は割増義務を免除しない同じ判断。締結だけでなく届出が必要な説明も統合先にある。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0114",
+      "retired_question_hash": "3cd057d0c2cb67f23d2710ee6b746c68f3163bcb6bce8360c3396905075389e6",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第1項・第37条"
+        }
+      ]
+    },
+    {
+      "id": "q-0199",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通常時間外25％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0184",
+      "retired_question_hash": "7929fc1ee0e4836f0e1c3249d0da4aa2b0f7fca6a9d82fa738918630a7896359",
+      "evidence": [
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：冒頭：25％と月60超50％"
+        }
+      ]
+    },
+    {
+      "id": "q-0200",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "月60超の超過部分だけ50％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0192",
+      "retired_question_hash": "184e7f7a6438dd73b0ed0586653e762d156ebfe7b5796e1a1b86ff086d23d1b2",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第37条第1項ただし書"
+        },
+        {
+          "source_key": "premium_over60_guide",
+          "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+          "locator": "統合判断の参照根拠：2頁規則例・3頁60時間を超えた時点からの適用"
+        }
+      ]
+    },
+    {
+      "id": "q-0201",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "昼間の法定休日35％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0186",
+      "retired_question_hash": "0b1d96633539db65aeaac07df59792fa74b4fdc22523fb6a77265873402c6289",
+      "evidence": [
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：冒頭：法定休日3割5分以上"
+        }
+      ]
+    },
+    {
+      "id": "q-0202",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "深夜22～5時・25％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0185",
+      "retired_question_hash": "8c074cabed84c208cdc2357693f80fc19a6f70c474646b8a8b1508726239acc0",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第37条第4項"
+        }
+      ]
+    },
+    {
+      "id": "q-0203",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通常時間外深夜50％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0182",
+      "retired_question_hash": "570f460e9d8ec7a24c41989066b1a42cdc539d2364f72c627a022854b3b2903e",
+      "evidence": [
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：冒頭と計算方法：時間外・深夜の割増"
+        },
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(1)：深夜は時間内外を問わず別途加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0204",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "60時間超の深夜75％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0180",
+      "retired_question_hash": "b5a03c1ad21943b6b456d4845866e93013d54d1a11d5be5a175a8e6caa747e22",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第37条第1・3・4項"
+        },
+        {
+          "source_key": "premium_over60_guide",
+          "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+          "locator": "統合判断の参照根拠：1頁2023年4月以降・2頁深夜労働との関係"
+        }
+      ]
+    },
+    {
+      "id": "q-0205",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定休日深夜60％の同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0178",
+      "retired_question_hash": "14d8ccbe75f51d2cd72bec98c7dee7f69ac43943ccd665047b3a14e67f875699",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(2)：法定休日の時間外加算なし・深夜は加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0206",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "8時間超も法定休日に時間外を加算しない同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0178",
+      "retired_question_hash": "94480542101da2037d46747b04cf148d1cfb26075677939a68052fcc218a14fd",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：2(2)：法定休日の時間外加算なし・深夜は加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0207",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定休日は60時間に算入しない同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0190",
+      "retired_question_hash": "76c3dbba05fc67b89eb6ba9c972d968860332275acd27454ab4a11bd962671cd",
+      "evidence": [
+        {
+          "source_key": "premium_over60_guide",
+          "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+          "locator": "統合判断の参照根拠：2頁：休日労働との関係"
+        },
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第6項・第37条第1項"
+        }
+      ]
+    },
+    {
+      "id": "q-0208",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定外休日の週40超を時間外とする同じ判断。 旧履歴を保持し配信停止。統合先への習熟の自動移行はしない。",
+      "merged_into": "q-0193",
+      "retired_question_hash": "206f7d4bad626a402fbd41cce846524eaa103b6ecb933d3ab546072030f4cbbc",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第37条"
+        },
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：時間外と法定休日の区分"
+        }
+      ]
+    },
+    {
+      "id": "q-0212",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "36協定で割増義務は免除されない同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0114",
+      "retired_question_hash": "ddbabca8a94a1b5001278c30f4440fca40071c1c05d14e01c038130c6690b940",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第36条第1項・第37条"
+        }
+      ]
+    },
+    {
+      "id": "q-0213",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "管理監督者の深夜割増の同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0130",
+      "retired_question_hash": "86790196c3189f55fdda20cc3390c2c2de3a5823c615945245b211270c65ac6a",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第41条第2号・第37条第4項・第39条"
+        },
+        {
+          "source_key": "supervisor_night",
+          "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_parttime.html",
+          "locator": "統合判断の参照根拠：管理監督者の適用除外：深夜割増は必要"
+        },
+        {
+          "source_key": "annual_leave_basics",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q1.html",
+          "locator": "統合判断の参照根拠：年5日の確実な取得：管理監督者も含む"
+        }
+      ]
+    },
+    {
+      "id": "q-0214",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "60時間までは25％、超過部分だけ50％の同じ境界。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0192",
+      "retired_question_hash": "15a9295989e04742d75661e789ce0e1bd893f5d08592bd0aef57ab781013271f",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第37条第1項ただし書"
+        },
+        {
+          "source_key": "premium_over60_guide",
+          "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+          "locator": "統合判断の参照根拠：2頁規則例・3頁60時間を超えた時点からの適用"
+        }
+      ]
+    },
+    {
+      "id": "q-0215",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "中小企業を含む適用の同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0191",
+      "retired_question_hash": "52712890a6f7d6c0f94b47f6b6a429fafe207e5965ef4702d08edeb7663041b1",
+      "evidence": [
+        {
+          "source_key": "premium_over60_guide",
+          "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+          "locator": "統合判断の参照根拠：1頁：2023年4月1日以降は大企業・中小とも50％"
+        }
+      ]
+    },
+    {
+      "id": "q-0216",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "所定7時間と法定8時間の区別を統合。旧版は週の超過条件が不足。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0039",
+      "retired_question_hash": "05bf7bfe8d40f24a5d3fe3a1598205ece741d9347ae3bf9da6ec72166f5e4647",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第37条"
+        }
+      ]
+    },
+    {
+      "id": "q-0219",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定休日の最低日数の同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0068",
+      "retired_question_hash": "a565ce36f337b267f0beaa60e43584a79c760b2bfc40a61dade1add9273dc976",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第35条第1～2項"
+        },
+        {
+          "source_key": "holiday_four_week",
+          "url": "https://jsite.mhlw.go.jp/tochigi-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/roukijou/soudan_jirei/q_and_a5/q_and_a5_r.html",
+          "locator": "統合判断の参照根拠：4週間の起算日"
+        }
+      ]
+    },
+    {
+      "id": "q-0220",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "法定外休日の時間外判定を条件明示したケースへ統合。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0193",
+      "retired_question_hash": "cd772e343d979aa6999a04a8e9d4851235fe7f92f2418784d57ff4e032c44584",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第32条・第37条"
+        },
+        {
+          "source_key": "premium_rates_qa",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+          "locator": "統合判断の参照根拠：時間外と法定休日の区分"
+        }
+      ]
+    },
+    {
+      "id": "q-0221",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "事前の休日振替という同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0070",
+      "retired_question_hash": "9a9a5223077951a59e6c1555a3d60df6497dbdf6852b14cef6e4d48cb0cc346a",
+      "evidence": [
+        {
+          "source_key": "holiday_substitution",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/roudoujikan/q11.html",
+          "locator": "統合判断の参照根拠：振替休日と代休の相違・振替後に週の法定時間を超える場合"
+        }
+      ]
+    },
+    {
+      "id": "q-0222",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "事後の代休は法定休日割増を消さない同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0075",
+      "retired_question_hash": "b32625107e6da2a5ab1777485fe1b17e1b1ae8b0fdad34b2261f70e63b93a9f5",
+      "evidence": [
+        {
+          "source_key": "holiday_substitution",
+          "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/roudoujikan/q11.html",
+          "locator": "統合判断の参照根拠：代休を与えても休日労働の割増賃金が必要"
+        }
+      ]
+    },
+    {
+      "id": "q-0225",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "30分ちょうどを切り上げる同じ境界を基本説明へ統合。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0223",
+      "retired_question_hash": "658c5e09ab9040a65fb06f1b256e4d11ba744c659a2b2758bf3633f3d143c11b",
+      "evidence": [
+        {
+          "source_key": "rounding",
+          "url": "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html",
+          "locator": "統合判断の参照根拠：Q10回答(1)：各種類の月間時間合計"
+        }
+      ]
+    },
+    {
+      "id": "q-0226",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "日ごとの15分未満切捨て不可を13分のケースへ統合。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0232",
+      "retired_question_hash": "dc902dd49b33f753926cb7952730acd87fe8435bde90c4d5db8f6b05bcef9d23",
+      "evidence": [
+        {
+          "source_key": "supervisor_cases",
+          "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_jikangai.html",
+          "locator": "統合判断の参照根拠：割増賃金1の端数処理：日々の切捨て不可"
+        },
+        {
+          "source_key": "rounding",
+          "url": "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html",
+          "locator": "統合判断の参照根拠：Q10回答(1)：例外は月合計"
+        }
+      ]
+    },
+    {
+      "id": "q-0231",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "区分別の月合計という同じ判断。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0224",
+      "retired_question_hash": "58b70ad23bfe60e7bdec260dba4131286f44b784d7d5c94ab7408d969d402587",
+      "evidence": [
+        {
+          "source_key": "rounding",
+          "url": "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html",
+          "locator": "統合判断の参照根拠：Q10回答(1)：おのおのの時間数の合計"
+        }
+      ]
+    },
+    {
+      "id": "q-0234",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "月給の時間換算の同一式を条件補足済みの基礎へ統合。q-0233・0227は模試専用なので通常コアとは数えない。通常コアq-0161で月給の時間換算を学び、q-0236を通常コアとして複合計算へ進む。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0161",
+      "retired_question_hash": "ba91f16888c37f0a3a03a2386c1f098d992e6f4c689966f6c4797e3b7152d2fe",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：3(1)・4(1)：月給の1時間額への換算"
+        }
+      ]
+    },
+    {
+      "id": "q-0235",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "年間時間÷12の式を1920時間の適用ケースへ統合。 旧履歴を残し配信停止。習熟を自動移行しない。",
+      "merged_into": "q-0162",
+      "retired_question_hash": "89aae89eb627022f868810747e8a0911435eb64e2d70f023afb4af260a46e415",
+      "evidence": [
+        {
+          "source_key": "premium_calculation_qa",
+          "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+          "locator": "統合判断の参照根拠：3(1)：1年間における1か月平均所定労働時間"
+        }
+      ]
+    },
+    {
+      "id": "q-0244",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "ノーワーク・ノーペイの同じ判断を、適用条件と例外を明示したq-0237へ統合。旧履歴を保持し習熟は自動移行しない。",
+      "merged_into": "q-0237",
+      "retired_question_hash": "11ddade5a54fba3670e5624dd46369f56d379a52097532ba4c44cc9fcc720bfe",
+      "evidence": [
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：64～65頁：第43～46条と解説、休暇・休業・欠勤を区別"
+        }
+      ]
+    },
+    {
+      "id": "q-0247",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "途中入退社の日割りは規程によるという同じ判断をq-0241へ統合。旧履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0241",
+      "retired_question_hash": "54c87bfb7227800082711526ad1d07a63a39e770527ae4d54134f42196d743cc",
+      "evidence": [
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：4頁モデル活用と65頁第46条第2項の規程例"
+        }
+      ]
+    },
+    {
+      "id": "q-0273",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ区分・原則の判断をq-0266へ統合。旧履歴を保持し習熟を移行しない。q-0273の論点workflowはq-0270の通常コアで基本順序を学ぶ。",
+      "merged_into": "q-0266",
+      "retired_question_hash": "5577111662a9f4382895ac53d11bfeab1388d6858da40423b9073285547a864b",
+      "evidence": [
+        {
+          "source_key": "payslip_model",
+          "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+          "locator": "統合判断の参照根拠：PDF8頁・印刷66頁：給与明細書モデル例の勤怠／支給／控除"
+        }
+      ]
+    },
+    {
+      "id": "q-0277",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ区分・原則の判断をq-0276へ統合。旧履歴を保持し習熟を移行しない。q-0273の論点workflowはq-0270の通常コアで基本順序を学ぶ。",
+      "merged_into": "q-0276",
+      "retired_question_hash": "222c1c197fb7921937d762c4a59230c9581de69d7f1db2311fbd19e18dad8d03",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第12条1〜4項"
+        },
+        {
+          "source_key": "average_kanagawa",
+          "url": "https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/saiteichingin_chinginseido/heikinchi.html",
+          "locator": "統合判断の参照根拠：平均賃金の計算・以前3か月間とは"
+        }
+      ]
+    },
+    {
+      "id": "q-0286",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ基本式・定義・義務の判断をq-0276へ統合。履歴は保持し習熟は移行しない。休業手当の通常コアはq-0284、賃金定義の通常コアはq-0295で維持。",
+      "merged_into": "q-0276",
+      "retired_question_hash": "769147104d19bf950209fb0cf4a020a34f7f04e655323ad06200bd20c12ddcdf",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第12条1〜4項"
+        },
+        {
+          "source_key": "average_kanagawa",
+          "url": "https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/saiteichingin_chinginseido/heikinchi.html",
+          "locator": "統合判断の参照根拠：平均賃金の計算・以前3か月間とは"
+        }
+      ]
+    },
+    {
+      "id": "q-0287",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ基本式・定義・義務の判断をq-0282へ統合。履歴は保持し習熟は移行しない。休業手当の通常コアはq-0284、賃金定義の通常コアはq-0295で維持。",
+      "merged_into": "q-0282",
+      "retired_question_hash": "aa1caed2fc7bc42b590f4f8ad5b264a850ea7db700be26a38b52bf2e23fafa9a",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第12条1項1・2号"
+        }
+      ]
+    },
+    {
+      "id": "q-0290",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ基本式・定義・義務の判断をq-0295へ統合。履歴は保持し習熟は移行しない。休業手当の通常コアはq-0284、賃金定義の通常コアはq-0295で維持。",
+      "merged_into": "q-0295",
+      "retired_question_hash": "31b275965c5bc93f60a4e468d5051482db83920c412259a371b510f199332204",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第11条"
+        },
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：賃金の定義と客のチップ等"
+        }
+      ]
+    },
+    {
+      "id": "q-0293",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ基本式・定義・義務の判断をq-0298へ統合。履歴は保持し習熟は移行しない。休業手当の通常コアはq-0284、賃金定義の通常コアはq-0295で維持。",
+      "merged_into": "q-0298",
+      "retired_question_hash": "23b3197bc30126812516d98811b661e8e34d72d55c3f47fd80f970f24a8ad48f",
+      "evidence": [
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：結婚祝金と支給要件がある場合の注記"
+        }
+      ]
+    },
+    {
+      "id": "q-0296",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ基本式・定義・義務の判断をq-0295へ統合。履歴は保持し習熟は移行しない。休業手当の通常コアはq-0284、賃金定義の通常コアはq-0295で維持。",
+      "merged_into": "q-0295",
+      "retired_question_hash": "23e8a33fa0bdfa4ba376ffed587d266ff7acc0f6e68c13a269c4bdebd2ae2217",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第11条"
+        },
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：賃金の定義と客のチップ等"
+        }
+      ]
+    },
+    {
+      "id": "q-0301",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0295へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0295",
+      "retired_question_hash": "cff69a8233c763914b7fc0788585ed01a223aa39acddf42a896f569ff2186068",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第11条"
+        },
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：賃金の定義と客のチップ等"
+        }
+      ]
+    },
+    {
+      "id": "q-0306",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0307へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0307",
+      "retired_question_hash": "8d25781c4a4a2693e5e8e8c405090741b0397fb821e58f0e81f177ad6507c54d",
+      "evidence": [
+        {
+          "source_key": "minimum_wage",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/index.html",
+          "locator": "統合判断の参照根拠：最低賃金制度の概要"
+        },
+        {
+          "source_key": "minimum_scope",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei24.html",
+          "locator": "統合判断の参照根拠：地域別と特定の適用地域・産業"
+        }
+      ]
+    },
+    {
+      "id": "q-0313",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0310へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0310",
+      "retired_question_hash": "42a9499a21f78fafab809a7227d55b823d5154a5936fde462cccf6dd8f564096",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条"
+        }
+      ]
+    },
+    {
+      "id": "q-0314",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0312へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0312",
+      "retired_question_hash": "47e12517dcef5774b5884df8616e9dd8bf15a026e3388cb3245eb8f68c9fefe6",
+      "evidence": [
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：第47条2項・解説2"
+        },
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：銀行振込の労使協定・本人同意"
+        }
+      ]
+    },
+    {
+      "id": "q-0318",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0269へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0269",
+      "retired_question_hash": "b18dcb1fe694facaf5739decc21560f665ddd6664aaf5a4602ca270bd343b3a1",
+      "evidence": [
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：第47条3項及び解説：法定控除・組合費等の協定控除"
+        },
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条1項ただし書"
+        }
+      ]
+    },
+    {
+      "id": "q-0320",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0324へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0324",
+      "retired_question_hash": "31316b8d04f931c57c0da3d823e37735041da036e110231d964792044362e18b",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条1項ただし書"
+        },
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：第47条3項・解説1"
+        }
+      ]
+    },
+    {
+      "id": "q-0321",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "同じ定義・区分・手続の判断をq-0310へ統合。通常コア307・310・324等で基礎を維持。履歴を保持し習熟を自動移行しない。",
+      "merged_into": "q-0310",
+      "retired_question_hash": "1ef333e3f62a67d9370f8193150e8eb9c26a6e46699966ebcfdcbb7de3105b3b",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条"
+        }
+      ]
+    },
+    {
+      "id": "q-0327",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0312へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0312",
+      "retired_question_hash": "251fba8b3bd19fd2650ec409df651125ec732076ccf8bfee12b644666b3f8f7d",
+      "evidence": [
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：第47条2項・解説2"
+        },
+        {
+          "source_key": "wage_definition_guide",
+          "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+          "locator": "統合判断の参照根拠：PDF12頁：銀行振込の労使協定・本人同意"
+        }
+      ]
+    },
+    {
+      "id": "q-0328",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0302へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0302",
+      "retired_question_hash": "cb70b4068defe29a517b0020929acf4a34f6df4e80bc9fad77ceff0d0ada1eb4",
+      "evidence": [
+        {
+          "source_key": "digital_wage",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03_00028.html",
+          "locator": "統合判断の参照根拠：概要・2023年3月掲載リーフレットの今後の流れ"
+        },
+        {
+          "source_key": "digital_start",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000198659_00015.html",
+          "locator": "統合判断の参照根拠：賃金のデジタル払い制度の開始：令和5年4月"
+        }
+      ]
+    },
+    {
+      "id": "q-0329",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0304へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0304",
+      "retired_question_hash": "524d37a5189fcd55a0a1e51990b8b38a33a7c6350a08b7a19a3373af03d78e19",
+      "evidence": [
+        {
+          "source_key": "digital_employee",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/newpage_55414.html",
+          "locator": "統合判断の参照根拠：必要な手続き・Q3"
+        }
+      ]
+    },
+    {
+      "id": "q-0331",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0330へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0330",
+      "retired_question_hash": "e2fe690d4560e2199ae5cda7fe5c81d44aa04b158c5ea3eab790fb246e046042",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：24条1項"
+        },
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：47条3項と解説"
+        }
+      ]
+    },
+    {
+      "id": "q-0342",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0325へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0325",
+      "retired_question_hash": "482ed4321e48259126bb4cf992ea87b52c4f5cbfddd0c709f881fcd35f2fd9ec",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条2項"
+        },
+        {
+          "source_key": "wage_payment_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+          "locator": "統合判断の参照根拠：毎月一回以上・一定期日の趣旨"
+        }
+      ]
+    },
+    {
+      "id": "q-0343",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0326へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0326",
+      "retired_question_hash": "6af4efc2c28ff6e48d2455049d5bf883a1a8d7caaeb7da1111eeca772df926d9",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：24条2項"
+        },
+        {
+          "source_key": "wage_payment_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+          "locator": "統合判断の参照根拠：毎月1回以上・一定期日"
+        }
+      ]
+    },
+    {
+      "id": "q-0345",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0325へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0325",
+      "retired_question_hash": "7632e3cf4b3432d4bb44cb591f3f6541d50c207bd53781c34b467a6f251635d8",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：第24条2項"
+        },
+        {
+          "source_key": "wage_payment_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+          "locator": "統合判断の参照根拠：毎月一回以上・一定期日の趣旨"
+        }
+      ]
+    },
+    {
+      "id": "q-0346",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全選択肢を比較し同じ定義・例外・手続の判断をq-0347へ統合。模試解放に依存せず通常問題と説明で基礎を維持。旧履歴は保持し習熟は自動移行しない。",
+      "merged_into": "q-0347",
+      "retired_question_hash": "881c78c9128d82ce8218f95b828336006b338172b6635fdbbe2f3221c9953722",
+      "evidence": [
+        {
+          "source_key": "labor_standards",
+          "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+          "locator": "統合判断の参照根拠：25条"
+        },
+        {
+          "source_key": "model_wage_rules",
+          "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+          "locator": "統合判断の参照根拠：66頁48条・解説：本人または生計維持者"
+        }
+      ]
+    },
+    {
+      "id": "q-0362",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢・説明を比べ同じ限度額・税目・期間・適用欄を問うq-0252へ統合。旧履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0252",
+      "retired_question_hash": "d8d1fbfd9dc429f6999a8692e7ed251a38479ba149eb68d18f88636d1635de9a",
+      "evidence": [
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：交通機関だけを利用：合理的経路、特急・グリーン、15万円"
+        }
+      ]
+    },
+    {
+      "id": "q-0365",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢・説明を比べ同じ限度額・税目・期間・適用欄を問うq-0364へ統合。旧履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0364",
+      "retired_question_hash": "f588284c96351f69bf8f7d391ba35d15167f39af1f060501705ee5813fab09c3",
+      "evidence": [
+        {
+          "source_key": "forest_tax",
+          "url": "https://www.rinya.maff.go.jp/j/keikaku/kankyouzei/kankyouzei_jouyozei.html",
+          "locator": "統合判断の参照根拠：2：2024年度から国税として市町村が賦課徴収"
+        },
+        {
+          "source_key": "resident_division_2026",
+          "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf",
+          "locator": "統合判断の参照根拠：4頁①特別徴収のしくみ"
+        }
+      ]
+    },
+    {
+      "id": "q-0367",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢・説明を比べ同じ限度額・税目・期間・適用欄を問うq-0272へ統合。旧履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0272",
+      "retired_question_hash": "cf24602e73b7fb7a36db2c6fc19047e14af1cc0952efdcc29b70c611790f3aea",
+      "evidence": [
+        {
+          "source_key": "resident_tax",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about",
+          "locator": "統合判断の参照根拠：給与所得の特別徴収手続：6月〜翌年5月"
+        }
+      ]
+    },
+    {
+      "id": "q-0379",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢・説明を比べ同じ限度額・税目・期間・適用欄を問うq-0358へ統合。旧履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0358",
+      "retired_question_hash": "5f6337bd66c2c42cd61e8f42e2472cd28632dca0753c7a9dd287bed86adec674",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1：月額表の甲・乙"
+        }
+      ]
+    },
+    {
+      "id": "q-0382",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢と説明を照合し、同じ控除順・欄区分・復興税二重加算防止を扱うq-0373へ統合。履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0373",
+      "retired_question_hash": "a71574fc198e6b45a531d3aabc3da15a2aa40cdba8e57795af74d7918e33a0ad",
+      "evidence": [
+        {
+          "source_key": "salary_benefits",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+          "locator": "統合判断の参照根拠：非課税の手当"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(1)"
+        }
+      ]
+    },
+    {
+      "id": "q-0385",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢と説明を照合し、同じ控除順・欄区分・復興税二重加算防止を扱うq-0380へ統合。履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0380",
+      "retired_question_hash": "098dee784c35b0a49b0781e8f0b8540483f77afcb824c249672c1967177e6ff2",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1・日雇賃金の注"
+        }
+      ]
+    },
+    {
+      "id": "q-0386",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "全肢と説明を照合し、同じ控除順・欄区分・復興税二重加算防止を扱うq-0377へ統合。履歴保持、習熟の自動移行なし。",
+      "merged_into": "q-0377",
+      "retired_question_hash": "a3c4f1d0c8056c463c4a4e4621cd66f6d136d4108af34809cc0d563f1e289f2c",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：表紙：税額には復興特別所得税を含む"
+        },
+        {
+          "source_key": "withholding_system_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/shikata_r08/pdf/02.pdf",
+          "locator": "統合判断の参照根拠：1頁I：所得税と併せて徴収"
+        }
+      ]
+    },
+    {
+      "id": "q-0395",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "本文・全肢・正答・解説を確認。B特例は法令上妥当、A0%固定/C無徴収/D住民税率は誤り。ただし主催者は1級の特例として掲げ、公式2026年2級本文も未入手のため2級模試に置く根拠不足。元問を退役して別ID837の通常賞与の適用欄判断へ差替え。技能は異なるため統合先とせず、習熟は移行しない。開始済み模試は従前の問題と資料のスナップショットで採点する。",
+      "merged_into": null,
+      "retired_question_hash": "664a224f66f054ce36735ca6374e437c7b55091080f365eca65c6a6cfb12f9c2",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "1級賞与計算：前月給与なし・10倍超。2級は通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "前月給与なしの場合の月額表による特例"
+        }
+      ]
+    },
+    {
+      "id": "q-0401",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "基本人数は源泉配偶者＋源泉親族。A年齢不問・B同一生計を別加算・C16歳未満を基本人数へは不可。 本文・全肢・説明を照合しq-0349へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0349",
+      "retired_question_hash": "4551335a43b17918a9b046d1bce76d95a6d8f730ca0947e2f6a4d23f51fb2e2b",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(2)・注2・3"
+        },
+        {
+          "source_key": "tax_reform_2026",
+          "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm",
+          "locator": "統合判断の参照根拠：施行は原則12/1・11月まで月次変更なし"
+        }
+      ]
+    },
+    {
+      "id": "q-0402",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "本人障害者1加算。A乙へ・B配偶者のみ・D無反映は不可。一般と特別でも本人加算は1と統合先で学べる。 本文・全肢・説明を照合しq-0354へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0354",
+      "retired_question_hash": "1f688328e86b4c2229fbf56b9d362e163463ca972daaaaa0404faac98527c09a",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(2)本人の障害者（特別を含む）"
+        }
+      ]
+    },
+    {
+      "id": "q-0403",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "16歳未満は基本0、一般障害者1加算。A全0・B基本のみ・D基本含む追加2は不一致。 本文・全肢・説明を照合しq-0353へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0353",
+      "retired_question_hash": "44e5d1dbc935ae74c872148a5f12fc72998abc1594606b65d7b1bdacf8d9aca7",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(2)・20頁注7"
+        }
+      ]
+    },
+    {
+      "id": "q-0405",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "Cの給与範囲、A現物除外・B給料除外・D賞与除外は不適切。360と361の説明で金銭・現物と非課税例外を学ぶ。 本文・全肢・説明を照合しq-0361へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0361",
+      "retired_question_hash": "2fe3ca85a29094187645f39186ee4acb716e76e289a669300067e17258b810de",
+      "evidence": [
+        {
+          "source_key": "salary_benefits",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+          "locator": "統合判断の参照根拠：現物給与の定義と特別取扱い"
+        }
+      ]
+    },
+    {
+      "id": "q-0407",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B合理的運賃15万円上限。A10万・C5万・D給与10%は違う。 本文・全肢・説明を照合しq-0252へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0252",
+      "retired_question_hash": "4908c44ee532e4a7b0ab6ef5bfa6d9c14953e771627195a101c0a187ba48019b",
+      "evidence": [
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：交通機関だけを利用：合理的経路、特急・グリーン、15万円"
+        }
+      ]
+    },
+    {
+      "id": "q-0410",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通常C全課税。A4200・B15000・D7300は距離不一致。元問の障害特例条件不足を補った統合先へ。 本文・全肢・説明を照合しq-0250へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0250",
+      "retired_question_hash": "3975afdf18a14c364c0316e5bdff0f24acaca540e720e3c2abac7d2cae6808f9",
+      "evidence": [
+        {
+          "source_key": "commuting",
+          "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm",
+          "locator": "統合判断の参照根拠：改正後表の片道2km未満"
+        },
+        {
+          "source_key": "commuting_disability_qa",
+          "url": "https://www.nta.go.jp/law/shitsugi/gensen/03/18.htm",
+          "locator": "統合判断の参照根拠：照会要旨・回答要旨：足が不自由で交通機関を利用できない事例"
+        }
+      ]
+    },
+    {
+      "id": "q-0414",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C会社が給与から控除して自治体納入。A税務署・B本人直接・D預金引落一般は給与特別徴収の定義でない。 本文・全肢・説明を照合しq-0399へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0399",
+      "retired_question_hash": "14520d4805a47d90f790e10cef240f2d272683194646b512a1eb5e58fecd8cc4",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本STEP①〜⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0415",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B6〜翌5月。A4〜3・C1〜12・D7〜6は不一致。 本文・全肢・説明を照合しq-0272へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0272",
+      "retired_question_hash": "5d431161236f2e5d632bf34f4e62f6e8b52d4dc4651e1de6828c6553a886eb56",
+      "evidence": [
+        {
+          "source_key": "resident_tax",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about",
+          "locator": "統合判断の参照根拠：給与所得の特別徴収手続：6月〜翌年5月"
+        }
+      ]
+    },
+    {
+      "id": "q-0416",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B自治体→会社5/31。A逆方向・C年金6/30・D税務署4/30は違う。 本文・全肢・説明を照合しq-0366へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0366",
+      "retired_question_hash": "c397620cb4759863f9ec989418fdfd9f4337c3e0c1cd0ba1f1598d7a0909c632",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本的な手続STEP②③"
+        }
+      ]
+    },
+    {
+      "id": "q-0417",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通常D翌10日。A当月末・B翌15・C翌5は違う。納期特例を除いた統合先へ。 本文・全肢・説明を照合しq-0368へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0368",
+      "retired_question_hash": "bd605183bb206120d90e00b083e8239d4918fe363daa0374b54ab02c76c43ee4",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：STEP④⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0418",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "通常D初回6月。A1月・B最終5月・C12月は違う。途中開始等を除いた統合先へ。 本文・全肢・説明を照合しq-0369へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0369",
+      "retired_question_hash": "47bb8e662888e1b22c5fca3e47603e8118d2cc41f5da706771d75315e7d63463",
+      "evidence": [
+        {
+          "source_key": "resident_division_2026",
+          "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf",
+          "locator": "統合判断の参照根拠：4頁②：月割額100円未満は初回加算"
+        }
+      ]
+    },
+    {
+      "id": "q-0420",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B自治体が資料から決定。A年金・C会社年調・D本人税務署の自己申告決定は住民税の通常の賦課方式でない。 本文・全肢・説明を照合しq-0399へ統合。旧履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0399",
+      "retired_question_hash": "6c1c006c04128589802d25e011b3040c240f431990493859624dd0cbee8bf10d",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本STEP①〜⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0421",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A所得割均等割森林税。B所得消費・C事業復興・D法人を混ぜない。 全肢・解説の同じ判断をq-0364へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0364",
+      "retired_question_hash": "9f41e65c3fa0ab5abcae4cf3cdceb6c606db986d022fbe830a67949a21c0f6b6",
+      "evidence": [
+        {
+          "source_key": "forest_tax",
+          "url": "https://www.rinya.maff.go.jp/j/keikaku/kankyouzei/kankyouzei_jouyozei.html",
+          "locator": "統合判断の参照根拠：2：2024年度から国税として市町村が賦課徴収"
+        },
+        {
+          "source_key": "resident_division_2026",
+          "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf",
+          "locator": "統合判断の参照根拠：4頁①特別徴収のしくみ"
+        }
+      ]
+    },
+    {
+      "id": "q-0423",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A国税1000円市町村徴収。B地方1万円税務署・C地方10%・D給与1%はいずれも違う。 全肢・解説の同じ判断をq-0364へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0364",
+      "retired_question_hash": "c24057d4a4ad01ab4d38465d4116777f4028e426210c572ce0f422d98708b52d",
+      "evidence": [
+        {
+          "source_key": "forest_tax",
+          "url": "https://www.rinya.maff.go.jp/j/keikaku/kankyouzei/kankyouzei_jouyozei.html",
+          "locator": "統合判断の参照根拠：2：2024年度から国税として市町村が賦課徴収"
+        },
+        {
+          "source_key": "resident_division_2026",
+          "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf",
+          "locator": "統合判断の参照根拠：4頁①特別徴収のしくみ"
+        }
+      ]
+    },
+    {
+      "id": "q-0427",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D普通または申出一括。A年調・B翌年度加算・C必ず強制はいずれも違う。死亡等を限定した統合先で学ぶ。 全肢・解説の同じ判断をq-0370へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0370",
+      "retired_question_hash": "382e91344fc3f5d136bdf67a774a4e00db63d8cc437fb9b71643fcfde85b61da",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：従業員異動・6/1～12/31"
+        }
+      ]
+    },
+    {
+      "id": "q-0428",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B給与退職手当を原資。A新会社賞与のみ・C自治体給付・D任意口座引出は不可。 全肢・解説の同じ判断をq-0429へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0429",
+      "retired_question_hash": "60147cdb46817e7ec34f99fc973a345e761c754ef3caa39c661324a5de6b7f6f",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：従業員異動：1/1〜4/30"
+        },
+        {
+          "source_key": "resident_change_forms",
+          "url": "https://www.city.nerima.tokyo.jp/dl/zei/jigyo/todokede.html",
+          "locator": "統合判断の参照根拠：届出が必要な主なケース3・4"
+        }
+      ]
+    },
+    {
+      "id": "q-0431",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B最終5月を通常控除。A所得税へ・C翌年度新会社へ・D控除可能でも普通は違う。 全肢・解説の同じ判断をq-0371へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0371",
+      "retired_question_hash": "492b0a1a012b314794a7deab2c72c732617ad6674701ca574b8fc84ca1ba4d67",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：従業員異動・5月退職注記"
+        }
+      ]
+    },
+    {
+      "id": "q-0434",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D常時10人未満。A20・B100・C50ではない。 全肢・解説の同じ判断をq-0372へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0372",
+      "retired_question_hash": "fb77ced5b17fbcc2d2d9856e964a4240a8b40e03ac720580a6e23ff9a1b9f4a9",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：納期の特例"
+        }
+      ]
+    },
+    {
+      "id": "q-0435",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B市町村申請承認。A都道府県毎年・C税務署同意・D年金届出ではない。 全肢・解説の同じ判断をq-0372へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0372",
+      "retired_question_hash": "7ef7bfac81d80fd8ba9a409f2aac2ab5e5784071673dc5b24e1271d0d728e3ca",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：納期の特例"
+        }
+      ]
+    },
+    {
+      "id": "q-0438",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C所得税当年と住民税前年。A双方当年・B逆・D双方前年は違う。 全肢・解説の同じ判断をq-0419へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0419",
+      "retired_question_hash": "2f8cc11093b6add3f00de5866f24f3ffeb410a9f2f0d4d4a04e92f83335993c5",
+      "evidence": [
+        {
+          "source_key": "resident_prior_year",
+          "url": "https://www.city.nerima.tokyo.jp/kurashi/zei/jyuminzei/jumin_shotoku.html",
+          "locator": "統合判断の参照根拠：課税される所得：前年所得課税の2026年度例"
+        }
+      ]
+    },
+    {
+      "id": "q-0439",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A非課税除外後本人社保控除。B非課税加算・C非課税加算社保未控除・D住民税加算は違う。 全肢・解説の同じ判断をq-0373へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0373",
+      "retired_question_hash": "eb1bcbc833991d9dbf0c628f2654c0f87cc222714b2899a89ccf7cb1e298bcf2",
+      "evidence": [
+        {
+          "source_key": "salary_benefits",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+          "locator": "統合判断の参照根拠：非課税の手当"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(1)"
+        }
+      ]
+    },
+    {
+      "id": "q-0440",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B所得税課税額に含めない。A住民税振替・C会社社保・D賞与表へではない。 全肢・解説の同じ判断をq-0373へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0373",
+      "retired_question_hash": "763b6f7c0bd95e4f5cad845086b9204ddb654d73c8cf8a2fdf821ae2f9c6361e",
+      "evidence": [
+        {
+          "source_key": "salary_benefits",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+          "locator": "統合判断の参照根拠：非課税の手当"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(1)"
+        }
+      ]
+    },
+    {
+      "id": "q-0441",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C課税から本人社保。A手取会社分・B会社分加算・D非課税から住民税ではない。 全肢と解説の判断をq-0373へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0373",
+      "retired_question_hash": "bbac14458044b71fbff4721595a4a67f24c48f4d94db9d00c0d8992af8993b5a",
+      "evidence": [
+        {
+          "source_key": "salary_benefits",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+          "locator": "統合判断の参照根拠：非課税の手当"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(1)"
+        }
+      ]
+    },
+    {
+      "id": "q-0442",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B支給期間方法。A通勤・C年所得・D雇用名称ではない。 全肢と解説の判断をq-0387へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0387",
+      "retired_question_hash": "5145b1661c6ca2e46b346fd590a039ced18791119b48356fe95a12758a194503",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1"
+        }
+      ]
+    },
+    {
+      "id": "q-0443",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C2026年所得税復興込み。A住民税加算・B復興だけ・D住民税込みではない。 全肢と解説の判断をq-0377へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0377",
+      "retired_question_hash": "3f921491889d3b173ea7ca524a9b102b9ff103c4918f192800ba5ad5899f2e09",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：表紙：税額には復興特別所得税を含む"
+        },
+        {
+          "source_key": "withholding_system_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/shikata_r08/pdf/02.pdf",
+          "locator": "統合判断の参照根拠：1頁I：所得税と併せて徴収"
+        }
+      ]
+    },
+    {
+      "id": "q-0444",
+      "retired_at": "2026-09-06",
+      "kind": "outdated_undated_rule",
+      "reason": "全肢・旧正答A・解説を確認。適用時期の限定なく2037年までと断定し、2026年度成立改正の2047年までの延長を反映しない。B2020〜2044、C2015〜2039、D2011〜2035も誤り。古い期間の暗記問題は退役し、2026年の税額表の使い方は377で学ぶ。異なる技能へのID再利用・習熟移行なし。期間を問う同一技能の統合先は設定しない。",
+      "merged_into": null,
+      "retired_question_hash": "1cff114c2ed18143618d065871e61e9e9383ea722c7c36a440cf88d2b6d3ca49",
+      "evidence": [
+        {
+          "source_key": "withholding_reform_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/2026kaisei.pdf",
+          "locator": "8頁：2027年分以後の復興特別所得税1.1%、課税期間2047年まで、防衛特別所得税1%"
+        }
+      ]
+    },
+    {
+      "id": "q-0445",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D基準所得税へ2.1%加算。A住民税・B給与総額・C社保ではない。適用年を限定した統合先で学ぶ。 全肢と解説の判断をq-0377へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0377",
+      "retired_question_hash": "94005ffe3cede4f74235ee940ce4fb36514dfde5deff6319e20e25b035a37392",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：表紙：税額には復興特別所得税を含む"
+        },
+        {
+          "source_key": "withholding_system_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/shikata_r08/pdf/02.pdf",
+          "locator": "統合判断の参照根拠：1頁I：所得税と併せて徴収"
+        }
+      ]
+    },
+    {
+      "id": "q-0446",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A通常甲は申告書提出。B退職申告・C未提出ではない。D日雇の条件不足も解消した統合先を用いる。 全肢と解説の判断をq-0392へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0392",
+      "retired_question_hash": "e9d64c5cb35acf0fde6b32170332f896d3dd733fe29905c31f4bda1d4618efcc",
+      "evidence": [
+        {
+          "source_key": "dependent_declaration",
+          "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/annai/1648_01.htm",
+          "locator": "統合判断の参照根拠：扶養0でも提出"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1"
+        }
+      ]
+    },
+    {
+      "id": "q-0447",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C主1か所。A従のみ・B市町村のみ・D全勤務先ではない。 全肢と解説の判断をq-0378へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0378",
+      "retired_question_hash": "fe578ab54bc1073e4123eb5c2fdbe52bcfbca5f195798716e792d4479ee87463",
+      "evidence": [
+        {
+          "source_key": "dependent_declaration",
+          "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/annai/1648_01.htm",
+          "locator": "統合判断の参照根拠：備考：いずれか一の給与支払者にのみ"
+        },
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1"
+        }
+      ]
+    },
+    {
+      "id": "q-0448",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C未提出は原則乙。A退職手当・D主給与提出済は違う。B日雇は詳細条件が必要で、統合先で対象を限定。 全肢と解説の判断をq-0358へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0358",
+      "retired_question_hash": "450c53538de5bf137091dfd64461667f717501b0420217ddd1d3015822ad371f",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1：月額表の甲・乙"
+        }
+      ]
+    },
+    {
+      "id": "q-0449",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A一定日雇丙。B賞与・C無期週給・D月給申告済ではない。日額時間額・日払の不足条件を統合先で補足。 全肢と解説の判断をq-0381へ統合。履歴保持・習熟の自動移行なし。",
+      "merged_into": "q-0381",
+      "retired_question_hash": "8f14c0152a89c70deaf85b0880f469912f9c0732fe8a9a810d894748dff4f1fd",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1と日雇賃金注"
+        }
+      ]
+    },
+    {
+      "id": "q-0468",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A現金定期券とも算入。B非課税除外・C現物除外・D月額賞与算入は違う。 全肢・解説の同じ判断をq-0254へ統合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0254",
+      "retired_question_hash": "9eb99ccf0173f4908e98eaea040d401a278b56f9efdee41654d2f6d130b7b881",
+      "evidence": [
+        {
+          "source_key": "remuneration_scope",
+          "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+          "locator": "統合判断の参照根拠：回答：基本給・残業・通勤を含む税引前給与"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：3頁：報酬となる通勤手当・通勤定期券"
+        }
+      ]
+    },
+    {
+      "id": "q-0473",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C4〜6月9月。A7〜9月10月・B10〜12月1月・D1〜3月4月は違う。 全肢・解説の同じ判断をq-0462へ統合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "65c96231167eb84e33f2600682671b78ffa903495348a52d5824bfc2e1d61a0c",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0475",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C2017年9月以来18.3固定。A企業規模・B組合・D都道府県厚年は違う。 全肢・解説の同じ判断をq-0480へ統合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0480",
+      "retired_question_hash": "b9843dbfe3c7557046f0874ff530e8c712bbe246e991d1855ed223126f2ae50c",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：都道府県単位健康率・介護全国1.62%"
+        },
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．18.3%固定"
+        }
+      ]
+    },
+    {
+      "id": "q-0477",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B加入支部。A企業人数・C居住市町村・D産業分類ではない。 全肢・解説の同じ判断をq-0480へ統合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0480",
+      "retired_question_hash": "15cb7cdd443df5791c4e1cc16d8dc1ecf4da126f0e2d8cfc238e830ac68a9f17",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：都道府県単位健康率・介護全国1.62%"
+        },
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．18.3%固定"
+        }
+      ]
+    },
+    {
+      "id": "q-0479",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C全国一律、年度見直し。A組合別固定・B市町村毎月・D都道府県5年は違う。毎年必ず数値変更と読める説明を統合先で修正。 全肢・解説の同じ判断をq-0480へ統合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0480",
+      "retired_question_hash": "e86d8b038adb27be0a4ae27e40e5761421076c9cf7fc1c8d8b9d634c52af33d6",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：都道府県単位健康率・介護全国1.62%"
+        },
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．18.3%固定"
+        }
+      ]
+    },
+    {
+      "id": "q-0514",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "養育・申出・日数を前提にし、最低等級差を問う。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "b9662bb9ff68f8baccb1e37f4eb69d5fc82ceacae3de0133653ac161be084cc9",
+      "evidence": [
+        {
+          "source_key": "childcare_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html",
+          "locator": "1．終了日3歳未満・1等級・対象月日数"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0515",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "終了翌日の月を月末境界例で説明。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "49e81951645bfb8e704eb8769a2ca0d59b555b0831ef655965147cbd3e1c1447",
+      "evidence": [
+        {
+          "source_key": "childcare_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html",
+          "locator": "1．終了翌日の属する月以後3か月・4か月目"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0516",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "次の日育休開始不可と下限の一意性を補足。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "b67333497165bb07fad3513eb162c683dc53c1df45e8771b1e02c2ecdc55808d",
+      "evidence": [
+        {
+          "source_key": "maternity_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140327-01.html",
+          "locator": "1．終了日養育・1等級差・翌日育休なら申出不可"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0521",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C時給単価変更は固定。A非固定/B賞与/D臨時は違う。同じ単価と実績の判断を統合。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0518",
+      "retired_question_hash": "304c4dbd7c5c7ef481d8dd7c4beb256dc6df0fa214828f57d0c04eef05ca0e7c",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：固定的賃金の例：昇給・単価・歩合率"
+        }
+      ]
+    },
+    {
+      "id": "q-0524",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C各月17。A1月のみ/B平均/D合計は違う。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0504",
+      "retired_question_hash": "2a0c2cf24765ed2d872ad78485cc09bde049fe26542b5cabe856aac3a11ea6ef",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(3)：継続3か月各月17/11日"
+        }
+      ]
+    },
+    {
+      "id": "q-0527",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D残業だけ固定なしは対象外。A即時/B残業固定翌月/C2等級のみでは要件不足。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "f502f80eaf214e6073b3a272007e40fb087cb406fbcb06bfc969c870cc8ff498",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0529",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "遡及差額を除く理由。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "cb0b4643b7bbe3287ed1ee5e0f11164ff92846b199cb72e4996613ab42782bfc",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "1．要件(2)遡及昇給差額の調整"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0535",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C取得月1か月。A翌月/B半月/D日割は違う。統合先の免除なし前提を使う。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0487",
+      "retired_question_hash": "7c9adf9150dab5d48b3ae146673f0b7cc4909434594ecb42fa62013d39f5fa63",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：資格取得月から資格喪失月の前月まで"
+        }
+      ]
+    },
+    {
+      "id": "q-0537",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B前月まで。A日割/C当月/D半額は違う。勤務先分と後続制度を区別する統合先へ。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0488",
+      "retired_question_hash": "cc6a1692959ca63506cb944b94c35f1d85a9c5ba0d0bb27e141751722b451991",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月途中退職の控除"
+        },
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(2)：退職翌日資格喪失"
+        }
+      ]
+    },
+    {
+      "id": "q-0538",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C退職月分必要。A半額/B日割/D不要は違う。未徴収・免除なしの統合先へ。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0489",
+      "retired_question_hash": "79055cf0866c701ef29cd96a1d14d79996a95d9107763522a7e168b98746ec77",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月末退職：前月と退職月2か月"
+        }
+      ]
+    },
+    {
+      "id": "q-0539",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A前月と当月。B当月だけ限定/C半月/D翌月先取は違う。統合先で未徴収・引き切れる条件を明示済み。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0489",
+      "retired_question_hash": "345657c7399f2a5ec9b6d9eb1e4ba162743832f3757d9b5903fc14b92c1f704b",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月末退職：前月と退職月2か月"
+        }
+      ]
+    },
+    {
+      "id": "q-0543",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A年1見直し。B資格毎月/C扶養料率/D賞与毎月は違う。制度目的の説明を統合先へ追記。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "ba6244de330afa8d5f3f7a9989f5747b84df4d6d1e3d7f152880310d09fbb818",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0545",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A4〜6月。B6〜8/C1〜3/D3〜5は違う。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "bf7ed822ab26b846ae1274055277257d86171d5422e0bc85660b461bc2dbd20c",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0546",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C9〜翌8月。A7〜翌6/B8〜翌7/D10〜翌9は違う。 全文照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "bcab8b6bef1af10fe5bfad21c954842aef06564e3b3e054a7968473a0afb6a12",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0562",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "一定要件の事業に限定。詳細算式の暗記は求めない。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "cd9a6398df563a250261db894c2c62e360e04ddf2419ed463875d3406cfbc9b7",
+      "evidence": [
+        {
+          "source_key": "workers_comp_merit_2026",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-08.pdf",
+          "locator": "冊子15頁（PDF1枚目画像）：継続事業のメリット制・非業務災害率"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0574",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "Bの65歳第2号→第1号が正答。A継続/C後期/D逆方向は誤り。全文確認しq-0450の同じ境界判断へ統合。既存履歴保持・習熟移行なし。",
+      "merged_into": "q-0450",
+      "retired_question_hash": "94a379307da4d32b562de25655a561c88d058b82d24cacb67e8da15d8010a89d",
+      "evidence": [
+        {
+          "source_key": "care_age",
+          "url": "https://www.kyoukaikenpo.or.jp/shibu/ibaraki/public_relations/009/index.html",
+          "locator": "統合判断の参照根拠：65歳から第1号、市区町村徴収"
+        }
+      ]
+    },
+    {
+      "id": "q-0581",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B月額上限。A保険料年超過/C出産全費/D休業給与は違う。統合先は保険診療の対象外費用と2026年8月年間上限も説明。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0452",
+      "retired_question_hash": "5a8fefb229b9affa99940f664da4b5f59216207e2819278937c58efc808ed16e",
+      "evidence": [
+        {
+          "source_key": "high_cost_medical",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/high_cost_medical_expenses/002/",
+          "locator": "統合判断の参照根拠：高額療養費とは・令和8年8月見直し・自己負担限度額"
+        }
+      ]
+    },
+    {
+      "id": "q-0582",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D業務外本人休業。A労災/B出産/C家族介護は違う。通算1年6か月の固有説明は統合先へ追記。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0453",
+      "retired_question_hash": "157160b12a0175954101c3f6a4ddaf3cf72fb4fc15194286f45be3108f706dc3",
+      "evidence": [
+        {
+          "source_key": "sickness_allowance",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/",
+          "locator": "統合判断の参照根拠：給付対象(1)〜(4)"
+        }
+      ]
+    },
+    {
+      "id": "q-0583",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C本人出産休業。A費用/B配偶者医療/D扶養者育児は違う。期間の多胎・予定日遅延を補って統合。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0454",
+      "retired_question_hash": "dab6bd6ea5d0c1df7396156626e6c775522b4d4269faf97d81e7db75b75ee3e4",
+      "evidence": [
+        {
+          "source_key": "childbirth_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/index.html",
+          "locator": "統合判断の参照根拠：出産する・したとき／両給付の目的"
+        },
+        {
+          "source_key": "health_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html",
+          "locator": "統合判断の参照根拠：Q1：出産手当金は本人、出産育児一時金は本人または被扶養者の出産"
+        },
+        {
+          "source_key": "maternity_allowance",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/001/",
+          "locator": "統合判断の参照根拠：給付範囲：42日・多胎98日、産後56日、出産予定日超過、出産日は産前"
+        }
+      ]
+    },
+    {
+      "id": "q-0584",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C出産費用。A所得/B高額医療/D介護は違う。被扶養者は家族出産育児一時金の説明を統合先に保持。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0454",
+      "retired_question_hash": "213131abd8886360a96221fe5bcdc1fb70f23d538498cc3c565b266e2159424b",
+      "evidence": [
+        {
+          "source_key": "childbirth_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/index.html",
+          "locator": "統合判断の参照根拠：出産する・したとき／両給付の目的"
+        },
+        {
+          "source_key": "health_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html",
+          "locator": "統合判断の参照根拠：Q1：出産手当金は本人、出産育児一時金は本人または被扶養者の出産"
+        },
+        {
+          "source_key": "maternity_allowance",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/001/",
+          "locator": "統合判断の参照根拠：給付範囲：42日・多胎98日、産後56日、出産予定日超過、出産日は産前"
+        }
+      ]
+    },
+    {
+      "id": "q-0585",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D健保出産休業。A雇用全給与/B労災全費/C厚年育休は違う。予定日前42日一律ではなく実出産日と遅延の条件を統合先で補正。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0454",
+      "retired_question_hash": "b21bae5a850ad3106140109d6d384a890c9ee18bb8613d5f15dca8c05d866bb1",
+      "evidence": [
+        {
+          "source_key": "childbirth_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/index.html",
+          "locator": "統合判断の参照根拠：出産する・したとき／両給付の目的"
+        },
+        {
+          "source_key": "health_benefits",
+          "url": "https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html",
+          "locator": "統合判断の参照根拠：Q1：出産手当金は本人、出産育児一時金は本人または被扶養者の出産"
+        },
+        {
+          "source_key": "maternity_allowance",
+          "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/001/",
+          "locator": "統合判断の参照根拠：給付範囲：42日・多胎98日、産後56日、出産予定日超過、出産日は産前"
+        }
+      ]
+    },
+    {
+      "id": "q-0590",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B第1。A第2/C非加入/D第3は国内30歳非厚年第3不該当の条件と違う。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0461",
+      "retired_question_hash": "3ad67669cfbb04b1c06c6f3cd86ff5a845d16895934eaac387b43ad4778e949f",
+      "evidence": [
+        {
+          "source_key": "pension_membership",
+          "url": "https://www.nenkin.go.jp/service/mokutekibetsu/kojin/kanyu/index.html",
+          "locator": "統合判断の参照根拠：第1号・第2号・第3号の各加入案内"
+        }
+      ]
+    },
+    {
+      "id": "q-0591",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D第2。A第1/B任意/C第3は35歳厚年加入に不適合。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0461",
+      "retired_question_hash": "0b4f72a931a1a5036f5d0637cd10eb64e99fc2ae46714084364ba1bd8995277c",
+      "evidence": [
+        {
+          "source_key": "pension_membership",
+          "url": "https://www.nenkin.go.jp/service/mokutekibetsu/kojin/kanyu/index.html",
+          "locator": "統合判断の参照根拠：第1号・第2号・第3号の各加入案内"
+        }
+      ]
+    },
+    {
+      "id": "q-0597",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D労使折半。A国/B会社全/C本人全は違う。組合規約例外や年齢を明示済みの統合先へ。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0482",
+      "retired_question_hash": "ed75e16fb9b5110b5a1f7305d19bcf21dcd7417eee72fda3d3406951c542bc4c",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：2．折半額と端数"
+        },
+        {
+          "source_key": "care_age",
+          "url": "https://www.kyoukaikenpo.or.jp/shibu/ibaraki/public_relations/009/index.html",
+          "locator": "統合判断の参照根拠：介護保険制度：第2号労使折半"
+        }
+      ]
+    },
+    {
+      "id": "q-0598",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C18.3固定。A毎年改定/B9.15固定/D9.15毎年は違う。2017年9月からという説明を統合先へ追記。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0566",
+      "retired_question_hash": "ec78b3bafd9c3043743d5c2f9729ae346302bce77979a22b72f58aa196fec33c",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：保険料率18.3％・事業主と被保険者が半分ずつ"
+        }
+      ]
+    },
+    {
+      "id": "q-0599",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D9.15。A8.15/B10.15/C合計18.3は違う。18.3/2=9.15の率の独立照合。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0476",
+      "retired_question_hash": "62f691f432154fb0601e21f9258b157732c7c8cf017fabc3b60020d1969c9152",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．保険料率18.3%と半分ずつの負担"
+        }
+      ]
+    },
+    {
+      "id": "q-0600",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D支部ごと年度見直し。A市区町村3年/B永久全国/C会社任意は違う。毎年数値が必ず変わるという読みは統合先で明確化済み。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0480",
+      "retired_question_hash": "2084359357e6fb1fbb94bd6499170192a965096e77cc22a2f6ba4af045f4bf2d",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：都道府県単位健康率・介護全国1.62%"
+        },
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．18.3%固定"
+        }
+      ]
+    },
+    {
+      "id": "q-0601",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A3月。B1/C4/D9は一般被保険者の2026適用月と違う。固定した年度・任意継続除外の統合先へ。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0478",
+      "retired_question_hash": "72a7b95a037b7ea08499c4df303553d331db4954e74396a496682a253f8938d0",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：冒頭：3月分4月納付・任意継続日雇特例は4月分"
+        }
+      ]
+    },
+    {
+      "id": "q-0602",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B全国年度見直し。A永久固定/C市区町村/D県別は違う。毎年率が必ず変わる意味でないことは統合先に説明。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0480",
+      "retired_question_hash": "07f27a9c6cd0613bf144b250b215fde53ead97c6bb5bfae00624bddbc8888900",
+      "evidence": [
+        {
+          "source_key": "social_rates",
+          "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+          "locator": "統合判断の参照根拠：都道府県単位健康率・介護全国1.62%"
+        },
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：1．18.3%固定"
+        }
+      ]
+    },
+    {
+      "id": "q-0603",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C3月。A4/B2/D5は翌月控除で4月支給給与に不適合。同じ前月控除技能。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0486",
+      "retired_question_hash": "32be364cf9a68d63dece67dcbdcaacdd806184de7b795a54c0a8e9fcc2c86b16",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：第1段落：毎月給与から前月分"
+        }
+      ]
+    },
+    {
+      "id": "q-0604",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A翌月末。B翌10/C当月末/D翌々月末は違う。休日の場合も統合先で説明済み。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0490",
+      "retired_question_hash": "67df26d35e17d3fd5f587ba932f8fbd1f8e888328aecfb3d7101d57b193d4b63",
+      "evidence": [
+        {
+          "source_key": "social_premium_deadline",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121121.html",
+          "locator": "統合判断の参照根拠：納付対象月の翌月末・休日なら翌営業日"
+        }
+      ]
+    },
+    {
+      "id": "q-0606",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A現金定期とも含む。B現金除外/C非課税除外/D両除外は違う。現物定期の説明を統合先へ追記。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0254",
+      "retired_question_hash": "a3efb0ea88e3ed15f27172ffd48e00ee5c6eef4ab06ca307988d82f56bd5ecba",
+      "evidence": [
+        {
+          "source_key": "remuneration_scope",
+          "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+          "locator": "統合判断の参照根拠：回答：基本給・残業・通勤を含む税引前給与"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：3頁：報酬となる通勤手当・通勤定期券"
+        }
+      ]
+    },
+    {
+      "id": "q-0607",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B所定現物換算。A希望だけ/C全賞与/D現金以外除外は違う。本人負担なし前提が明確な統合先へ。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0469",
+      "retired_question_hash": "694a514ac70acf98d8765347762626cf65b206e1ed9c7619efaac22a84d6089f",
+      "evidence": [
+        {
+          "source_key": "social_in_kind",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150511.html",
+          "locator": "統合判断の参照根拠：現物給与について：食事住宅の告示価額、支店所在地"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：冊子3頁：食事本人負担2/3以上の除外との区別"
+        }
+      ]
+    },
+    {
+      "id": "q-0608",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D臨時恩恵結婚祝金。A家族/B通勤/C住宅各継続手当は報酬。同じ労働対償と慶弔金判断を統合。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0467",
+      "retired_question_hash": "2ab2af2832997b1311b71e406a6c280af53cf5bd41c276a8ccce24f6a864cfae",
+      "evidence": [
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：冊子3頁：報酬になる・ならない表"
+        }
+      ]
+    },
+    {
+      "id": "q-0609",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "登録C年4回だがA年5回も包含し複数正解になり得る。B2回/D1回一律は違う。同じ性質・臨時増回除外と月換算の条件が明確な統合先へ退役。 本文全肢解説を照合。旧履歴保持・別技能への習熟移行なし。",
+      "merged_into": "q-0472",
+      "retired_question_hash": "67ffcdeccdef19a38577a1bf8577e0046c341858177a2eb3465a3db19ae6dc92",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：2．報酬：年4回以上、3．賞与との区別"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：冊子16頁（PDF19枚目）：年4回以上の賞与、前年7月〜当年6月の月額換算"
+        }
+      ]
+    },
+    {
+      "id": "q-0613",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D51下限だがA101も条件を満たす読みになる。B21/C31は当年不足。年度・下限が明確な統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0498",
+      "retired_question_hash": "3972ae47fca6eea079e52251a3d207be258e5bed34f438b86f9682ce5c391029",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：1．特定適用事業所：被保険者総数の数え方"
+        },
+        {
+          "source_key": "short_worker_coverage",
+          "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+          "locator": "統合判断の参照根拠：企業規模51人と2027年10月36人"
+        }
+      ]
+    },
+    {
+      "id": "q-0614",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D同法人合算。A個事業所/B市/C県は法人単位違い。統合先に合算法あり。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0498",
+      "retired_question_hash": "d9a7d6e71d7a7270b435eed91085c0fb11e88e804d2bd16228fbc633839abeae",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：1．特定適用事業所：被保険者総数の数え方"
+        },
+        {
+          "source_key": "short_worker_coverage",
+          "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+          "locator": "統合判断の参照根拠：企業規模51人と2027年10月36人"
+        }
+      ]
+    },
+    {
+      "id": "q-0615",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B短時間除外・共済含。A雇用全/C役員除外全日だけ/D70健康だけは違う。同じ対象人数の説明を統合先に保持。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0498",
+      "retired_question_hash": "7fd9783873f601d20526c62740041f80244a9fbd9cbe59eefeb1ea40bbb6a5e5",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：1．特定適用事業所：被保険者総数の数え方"
+        },
+        {
+          "source_key": "short_worker_coverage",
+          "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+          "locator": "統合判断の参照根拠：企業規模51人と2027年10月36人"
+        }
+      ]
+    },
+    {
+      "id": "q-0616",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D20下限だがB25/C30も条件を満たす。A15不足。下限明示済みの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0494",
+      "retired_question_hash": "1345a0f081aff2415d8b9c0cc3066e2660d05b65ba9bee1b5db5de8ed7edf075",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：2．週の所定労働時間20時間以上"
+        }
+      ]
+    },
+    {
+      "id": "q-0618",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D学生例外。A必ず加入/B無関係/C夜間等も一律除外は違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0497",
+      "retired_question_hash": "8cc3f44efe3a8037e9f9db088312243a5f7fa0a573a74280faf0480a546baa21",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：2．学生でないことと例外"
+        },
+        {
+          "source_key": "social_workplaces",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+          "locator": "統合判断の参照根拠：2(2)ア：4分の3基準"
+        }
+      ]
+    },
+    {
+      "id": "q-0619",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A当初から。B一律非加入/C実際3月超/D更新翌月は違う。通常業務の更新見込み条件を統合先に保持。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0496",
+      "retired_question_hash": "491df66e97abdf2452ea68e3ab26e2c33397ed064603f8c103cce9caef6ce960",
+      "evidence": [
+        {
+          "source_key": "social_workplaces",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+          "locator": "統合判断の参照根拠：2(3)表：2か月以内契約でも当初から加入"
+        },
+        {
+          "source_key": "short_worker",
+          "url": "https://www.mhlw.go.jp/tekiyoukakudai/qa/",
+          "locator": "統合判断の参照根拠：適用対象Q5：更新予定・実績、季節的業務等"
+        }
+      ]
+    },
+    {
+      "id": "q-0620",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D6月下限だがB12月全部も満たす。A3月/C1日だけは不足。説明に1年6月を明示済みの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0498",
+      "retired_question_hash": "32069c7cae04e01f0d8a729fac3af35495cd1f62e16a6befe2c6a060aa5e8eec",
+      "evidence": [
+        {
+          "source_key": "short_worker_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+          "locator": "統合判断の参照根拠：1．特定適用事業所：被保険者総数の数え方"
+        },
+        {
+          "source_key": "short_worker_coverage",
+          "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+          "locator": "統合判断の参照根拠：企業規模51人と2027年10月36人"
+        }
+      ]
+    },
+    {
+      "id": "q-0622",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A5人法定業種。B51は下限でなく/C1/D3業種不問は違う。9月基準日と2029経過措置の説明がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0502",
+      "retired_question_hash": "4b476e8ae6a0c18ea973c7cb29272977ce5e3f1702d778ccee53a0df83005c1a",
+      "evidence": [
+        {
+          "source_key": "social_industry_scope",
+          "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_009.html",
+          "locator": "統合判断の参照根拠：2．個人事業所：法定17業種と2029年経過措置、注7"
+        }
+      ]
+    },
+    {
+      "id": "q-0623",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A要件満たす全員。B同意者/C正社員だけ/D事業主選択だけは違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0503",
+      "retired_question_hash": "b29a3bc883e1b8cece0c329cd10a2b8133b77fccc73c6097752df368e8a38ca9",
+      "evidence": [
+        {
+          "source_key": "social_voluntary_application",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150310.html",
+          "locator": "統合判断の参照根拠：1．事業主申請・大臣認可"
+        },
+        {
+          "source_key": "social_voluntary_form",
+          "url": "https://www.nenkin.go.jp/shinsei/kounen/tekiyo/jigyosho/20140430.files/0000002397.pdf",
+          "locator": "統合判断の参照根拠：2枚目：半数の母集団・反対者も加入"
+        }
+      ]
+    },
+    {
+      "id": "q-0627",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A130基準だがB103未満も130未満という読みになる。C150/D180は特例。基準額と障害除外が明確な統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0506",
+      "retired_question_hash": "a87d7cc198231cd1a118be510327c12240b0d1e636119a8cfdd240ebb6d6dd79",
+      "evidence": [
+        {
+          "source_key": "dependents",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html",
+          "locator": "統合判断の参照根拠：1．年間収入：130/180と生計維持等"
+        },
+        {
+          "source_key": "dependent_young",
+          "url": "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html",
+          "locator": "統合判断の参照根拠：150万円対象から配偶者を除外"
+        }
+      ]
+    },
+    {
+      "id": "q-0631",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B認定5日事業主経由。A10日本人/C資格取得/D月変は違う。認定と削除の期限の違いを踏まえ、統合先へ新規認定5日だけ追記。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0510",
+      "retired_question_hash": "af1a7923d152979a8ab902b97b292f3ff0ba381808e177774b38763b818ea93c",
+      "evidence": [
+        {
+          "source_key": "dependents",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html",
+          "locator": "統合判断の参照根拠：2．提出者・3．被扶養者異動届"
+        }
+      ]
+    },
+    {
+      "id": "q-0633",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D月末。A賞与日/B月初/C給与日は月例免除の月末基準ではない。開始月14日特例との違いを統合先に保持。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0513",
+      "retired_question_hash": "e81359a45657a70ab83e2011eafb72e2548478ee93ce9a67951aec0a9978c003",
+      "evidence": [
+        {
+          "source_key": "childcare_exemption",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html",
+          "locator": "統合判断の参照根拠：概要：月額免除の同月14日と賞与の連続1か月超"
+        }
+      ]
+    },
+    {
+      "id": "q-0634",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C14が下限だがA30も満たす読み。B7/D10不足。開始日と終了翌日の同月条件・14日を明示済みの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0513",
+      "retired_question_hash": "d8dbb8472e76134ecf563ca140cc4f07857295c26f56db2dd147ff8a6d1593bb",
+      "evidence": [
+        {
+          "source_key": "childcare_exemption",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html",
+          "locator": "統合判断の参照根拠：概要：月額免除の同月14日と賞与の連続1か月超"
+        }
+      ]
+    },
+    {
+      "id": "q-0635",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D月額のみ。A双方/B双方不適用/C賞与だけは違う。賞与には末日含む連続1か月超が別途必要と統合先に説明済み。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0513",
+      "retired_question_hash": "8c5c3f4a22d546f419d4398bb9c89cdcd8c4c15cca6bfe5046f507538e020507",
+      "evidence": [
+        {
+          "source_key": "childcare_exemption",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html",
+          "locator": "統合判断の参照根拠：概要：月額免除の同月14日と賞与の連続1か月超"
+        }
+      ]
+    },
+    {
+      "id": "q-0636",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "A1等級下限。B3/C4/D2は下限でない。養育年齢・申出・日数・固定変動不要の条件がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。 横断範囲監査で統合先q-0514も2級必須演習への採用根拠不足により退役。旧統合判断はformer_merged_intoへ残し、現行問題への統合・習熟移行は行わない。",
+      "merged_into": null,
+      "retired_question_hash": "9f1e557e4f9e1065b0bef5d5974dff7e173224cdf04ec83861d2900e3358883f",
+      "evidence": [
+        {
+          "source_key": "childcare_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html",
+          "locator": "1．終了日3歳未満・1等級・対象月日数"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0637",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "D1等級下限。A3/B2/C4は下限でない。翌日育休除外・養育・申出・日数条件がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。 横断範囲監査で統合先q-0516も2級必須演習への採用根拠不足により退役。旧統合判断はformer_merged_intoへ残し、現行問題への統合・習熟移行は行わない。",
+      "merged_into": null,
+      "retired_question_hash": "c66e3bfc2226dd9874adc1d5bd251be06a566447f5317a5b22dc21e808a0e353",
+      "evidence": [
+        {
+          "source_key": "maternity_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140327-01.html",
+          "locator": "1．終了日養育・1等級差・翌日育休なら申出不可"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0638",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "産休翌日育休不可と申出条件を付記。 全体の網羅性・全模試初見性は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。",
+      "merged_into": null,
+      "retired_question_hash": "da9199d85f0c0633a5a91f6d96aff3fd55c69e7f20a78859e476d1757b59ef5f",
+      "evidence": [
+        {
+          "source_key": "childcare_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html",
+          "locator": "3か月平均・4か月目適用"
+        },
+        {
+          "source_key": "maternity_end_revision",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140327-01.html",
+          "locator": "終了翌日育休不可・3か月確認4か月目"
+        },
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級社会保険手続の具体例、2級社会保険の基本的手続"
+        }
+      ]
+    },
+    {
+      "id": "q-0641",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A固定。B賞与/C非固定だけ/D扶養人数だけは違う。固定変動から3月日数等の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "e5211dab207a5ebfe11c0c3350590b7eea4aa07287edea8257d4015ff7dd0176",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0643",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B3月。A1/C2/D6は通常随時の期間でない。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "9aec32609a235f0a98211d5b56812f0ec80b61084c6a95f978289e92e7be7bce",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0644",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A17が下限だがC30/D20も満たす。B11は短時間区分。下限と一般短時間区別の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0504",
+      "retired_question_hash": "4c4ba3924630947b6db7fd8b6f9c6ad68e4f05d552d79a948847e22d16e743ff",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(3)：継続3か月各月17/11日"
+        }
+      ]
+    },
+    {
+      "id": "q-0645",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B2等級が下限だがC4/D3も満たす。A1は通常不足。特例を除いた統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "48b473d105d41c367552e55d2f0e59978b53c2f4532944302b6b5d974e764c02",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0646",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D同方向。A賞与/B日数/C所得税は比較方向違い。単純暗記から逆方向の適用例へ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0528",
+      "retired_question_hash": "4abaf0365ebd74174dbe948ad5c16bd10f1be4e3c11d29129850cd9e0d81422b",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：留意事項：固定的賃金と非固定的賃金の増減が逆"
+        }
+      ]
+    },
+    {
+      "id": "q-0648",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A時給単価。B残業量/C臨時賞与/D実費は固定でない。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0518",
+      "retired_question_hash": "3785d109ce3c2819bbfdf484dc57e14383b1c2d21589de035ccdd9c10ffc1e28",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：固定的賃金の例：昇給・単価・歩合率"
+        }
+      ]
+    },
+    {
+      "id": "q-0655",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B取得時報酬。A所得税/C年賞与/D日数だけは違う。契約報酬から決める通常演習へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0533",
+      "retired_question_hash": "40fe87feeca39688a9ac1bf57ace7a3f9d6055a01dca2d49b2563598d61441de",
+      "evidence": [
+        {
+          "source_key": "acquisition_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20120330.html",
+          "locator": "統合判断の参照根拠：1．実績なし・2．報酬形態別算定"
+        }
+      ]
+    },
+    {
+      "id": "q-0657",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C取得月1月。A翌月/B日割/D全免除は違う。継続加入・免除なし前提を持つ統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0487",
+      "retired_question_hash": "8557fe396cafbf35c9ed19ab3ed8e59ffadedde263b95abc533601040d263eb8",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：資格取得月から資格喪失月の前月まで"
+        }
+      ]
+    },
+    {
+      "id": "q-0658",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C取得月。A翌々/B翌月は違う。D翌日属月も月末以外は重なる曖昧さを退役し統合先の明確な条件へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0487",
+      "retired_question_hash": "0f0be9c394d41dc9ba2293e69652aee0370ac1ba341027afbcf4559bb855ec67",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：資格取得月から資格喪失月の前月まで"
+        }
+      ]
+    },
+    {
+      "id": "q-0660",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A通常前月まで。B取得同月なら起こり得るため原問に条件不足。C翌月/D日割は違う。前月以前加入・免除なしの具体例へ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0639",
+      "retired_question_hash": "b361eacb37fade0d263816cc244d1e318b52ff65f483fd00c3c9913f1dbc3d87",
+      "evidence": [
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(1)喪失月前月まで、4(2)退職翌日"
+        }
+      ]
+    },
+    {
+      "id": "q-0661",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C通常退職月まで。A日割/B前月/D半額は違う。継続加入・免除なしの明確な例へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0640",
+      "retired_question_hash": "86843ae7408528e703bd3cfb9c662a10212ca063988d627b9313146cbaf3ef95",
+      "evidence": [
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(1)喪失月前月まで、4(2)3月31日退職例"
+        }
+      ]
+    },
+    {
+      "id": "q-0662",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B2月分だが未徴収等の条件不足。A/Dはすでに控除済ならあり得る。C翌月先取りは違う。未徴収・引き切れる条件がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0489",
+      "retired_question_hash": "f8674a9a10bc4cdf14ea0e9fb479eef88dfa938b4fe6117d24766f744dba3730",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月末退職：前月と退職月2か月"
+        }
+      ]
+    },
+    {
+      "id": "q-0664",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D1月。A2月/B日割/C不要は本条件で違う。保険料免除なし・後続年金なしを明記済みの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0541",
+      "retired_question_hash": "59cf6a9788fa7a25ef953712bdb7dabb3fe36bba06459929b5dc9c022dc81732",
+      "evidence": [
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(1)同月得喪の納付と例外"
+        }
+      ]
+    },
+    {
+      "id": "q-0665",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A区別。B常同/C支給日だけ/D締切だけは違う。翌月控除で前月分を引く具体説明へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0486",
+      "retired_question_hash": "3fbbb2f66d304aedaf52d25dd737f185718857d86480d6ad6b24bfdcfd631dce",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：第1段落：毎月給与から前月分"
+        }
+      ]
+    },
+    {
+      "id": "q-0667",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D4〜6。A3〜5/B5〜7/C6〜8は違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "9bedb2f4e46e9b4c42dca67a0af32b2e11d313d6c1a29f710c72d06b010e0e2e",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0668",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B5・6月。A不足4だけ/C全月/D不足4含は違う。17日以上2か月・不足1か月の同じ月選択技能を通常演習へ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0549",
+      "retired_question_hash": "e8cdc5aed92d486cddf334aa7de08a22f5bc5212070cb03627b304ec6e00dfcf",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：4．対象月を選び総額を対象月数で除す"
+        }
+      ]
+    },
+    {
+      "id": "q-0669",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A11下限。B15/D17も満たし複数解釈、C10不足。適用拡大区分と下限が明確な統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0550",
+      "retired_question_hash": "aa20af4ef756d7d4971d6c82109224a72f86f5af55151ff26d42c8f7e7743db6",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：4．注1と6．短時間11日"
+        }
+      ]
+    },
+    {
+      "id": "q-0670",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D9〜翌8。A8〜7/B10〜9/C7〜6は違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "9171e325d69b70ae2e192fc8d0a1aa942e0726aaa63cd7d5551e1f538308b54d",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0672",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A報酬実態調整。B扶養給付率/C賞与だけ/D所定日数は目的でない。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "c76bf956bd04fe43fae42e28cade98ba602e2078c35ee3da7f739c0662a536a3",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0683",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C会社全額。A本人/B国本人折半/D労使折半は誤り。同じ負担技能へ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0674",
+      "retired_question_hash": "8a1f813ce1482709ffc4aa0653d434e263b4f1b31282c2279f52cde49f94853f",
+      "evidence": [
+        {
+          "source_key": "labor_premium_burden",
+          "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito/about.html",
+          "locator": "統合判断の参照根拠：労災は事業主全額、雇用は労使双方"
+        }
+      ]
+    },
+    {
+      "id": "q-0689",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D標準報酬×本人率。A課税/B差引会社率/C総支給会社率は誤り。統合先の標準報酬と本人割合の説明に重複。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0481",
+      "retired_question_hash": "129fd2f3efa929be5a7fce959fbf048e13ac46e6017cc77929b8635045839eb2",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：1．事業所合計、2．本人負担"
+        }
+      ]
+    },
+    {
+      "id": "q-0690",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C標準報酬×本人率。A差引会社率/B非課税額/D課税会社率は誤り。統合先は健康と厚年・本人割合を説明。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0481",
+      "retired_question_hash": "8676c243841cbf31ae8274aad39b3fac93fffc751a2d7ccad5d0bccbce751d52",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：1．事業所合計、2．本人負担"
+        }
+      ]
+    },
+    {
+      "id": "q-0691",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B通勤全額。A非課税除外/C標準報酬だけ/D超過だけは誤り。統合先に非課税通勤の算入を明記。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0680",
+      "retired_question_hash": "75d64a0c29d69a5d5702393534fa6ea6141f3ec9498cf27e852aa172ccda3c2d",
+      "evidence": [
+        {
+          "source_key": "labor_wage_scope",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/dl/1-3-2.pdf",
+          "locator": "統合判断の参照根拠：1枚目左列：基本賃金・賞与・通勤手当（課税非課税問わず）・超過勤務深夜手当"
+        }
+      ]
+    },
+    {
+      "id": "q-0695",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A自治体月割額。B所得税率/C標準報酬/D月総支給率は誤り。通知月額の通常コアへ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0399",
+      "retired_question_hash": "7fb81dc66ef0738c4781e5ef00a8082f6a4416743ef5fd807a920b7c157f75b3",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本STEP①〜⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0696",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C税額表の基礎から住民税を引かない。A非課税扱い/B報酬控除/D社会保険扱いは誤り。統合先に住民税除外不可を明記。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0693",
+      "retired_question_hash": "473156146740f09af0d0347ae6ff0fd8353cebb8546cee4d2275a955190148ea",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：月額表・その月の社会保険料等控除後の給与等の金額"
+        }
+      ]
+    },
+    {
+      "id": "q-0704",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A異なる場合。B総支給/C課税/D手取と常同は違う。等級の幅に当てはめる統合先の説明へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0605",
+      "retired_question_hash": "e7041479fbbd4e4570ace0bf5f4261815b175babf31a6d7f93c30fdd562decc6",
+      "evidence": [
+        {
+          "source_key": "remuneration_scope",
+          "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+          "locator": "統合判断の参照根拠：標準報酬月額：保険料と保険給付の計算"
+        }
+      ]
+    },
+    {
+      "id": "q-0707",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A個別指定。B/C/D一方の方法へ統一は指定違い。適法な指定を明記する統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0706",
+      "retired_question_hash": "d13742c6f9101ab1780a1efb8970ba87ded9ebdff93417e30ce72e0780716365",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：本人負担計算と端数、労使間の特約"
+        }
+      ]
+    },
+    {
+      "id": "q-0709",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B190000。230000−10000−30000と正答前に計算。A社会保険漏れ/C非課税漏れ/D両方漏れ。同じ控除後給与技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0374",
+      "retired_question_hash": "9fba2c98cfc0009ffeedd190b1e7a9c3b430baed6723714508548a8af6d7096a",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁2(1)"
+        },
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：限度内の合理的通勤手当"
+        }
+      ]
+    },
+    {
+      "id": "q-0710",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D所得税控除。A非課税加算/B住民税変更/C標準報酬変更は違う。金額が明示され計算ではない法定控除の重複。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0697",
+      "retired_question_hash": "2876c14d48870ba6731244b483813de666f19311d9916b871baebe736a5250ab",
+      "evidence": [
+        {
+          "source_key": "wage_payment_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+          "locator": "統合判断の参照根拠：全額払いの原則と法令上の控除"
+        },
+        {
+          "source_key": "labor_premium_burden",
+          "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito/about.html",
+          "locator": "統合判断の参照根拠：労災事業主全額"
+        }
+      ]
+    },
+    {
+      "id": "q-0711",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C甲。A賞与/B退職/D乙は提出済み通常月給と違う。居住者条件付きの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0357",
+      "retired_question_hash": "b258149f4be141ad142a2a7199247cc3cabc8cd9e18dd1f3f858a382a6c3b3ac",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：19頁1の月額表・2(2)甲欄人数"
+        },
+        {
+          "source_key": "dependent_declaration",
+          "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/annai/1648_01.htm",
+          "locator": "統合判断の参照根拠：備考：扶養の有無にかかわらない原則"
+        }
+      ]
+    },
+    {
+      "id": "q-0714",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A要件。B会社手当/C同居/D住民票だけは不足。所得年齢と申告要件の同じ技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0713",
+      "retired_question_hash": "8efc4c538833862a6f7d6d64b4e3c86b097f4808c1504b3ae5592d32e44b594f",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：扶養親族等の数の求め方"
+        },
+        {
+          "source_key": "tax_reform_2026",
+          "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm",
+          "locator": "統合判断の参照根拠：2026年9月の月次処理と12月施行を区別"
+        }
+      ]
+    },
+    {
+      "id": "q-0715",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B控除後税額確定。A標準報酬前除外/C支給加算/D非課税判定前では誤り。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0699",
+      "retired_question_hash": "3aef0ce0c0c862ed9596efed0abe7ca90e721a14b5562d115c2d6d2b53d02914",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：月額表の控除後給与から税額を読む手順"
+        },
+        {
+          "source_key": "payslip_model",
+          "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+          "locator": "統合判断の参照根拠：支給・控除・差引欄"
+        }
+      ]
+    },
+    {
+      "id": "q-0716",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D別控除。A標準報酬加算/B非課税扱い/C社会保険扱いは誤り。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0693",
+      "retired_question_hash": "1fd8b60e7f0d07bd000c3f5a7ac8eb4c0fe850171bcd7eb69b78c213c40ea956",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "統合判断の参照根拠：月額表・その月の社会保険料等控除後の給与等の金額"
+        }
+      ]
+    },
+    {
+      "id": "q-0718",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B支給に含む。A不支給/C控除移行/D標準報酬だけは違う。現金通勤の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0687",
+      "retired_question_hash": "3ee6fd79ec88265a1af38c5881b4d6e593a381e211098792417926fc56677158",
+      "evidence": [
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：非課税通勤の範囲"
+        },
+        {
+          "source_key": "payslip_model",
+          "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+          "locator": "統合判断の参照根拠：支給欄の通勤手当"
+        }
+      ]
+    },
+    {
+      "id": "q-0719",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A15万円超課税には合理的運賃等の条件不足。B全非課税/C逆/D全課税は原則と違う。条件補充済み統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0688",
+      "retired_question_hash": "220b5ed8613630cb291d579ad25c406103059e1e6b1116d3788c3cd9ed892a9d",
+      "evidence": [
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：合理的運賃の最高限度15万円・超過額課税"
+        }
+      ]
+    },
+    {
+      "id": "q-0720",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A合理的。B最遠/C最高希望/D定額15万円は違う。統合先は最高限度と合理的額を区別済み。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0252",
+      "retired_question_hash": "ea2549d650c07a259fa46147ecd6c9dc3573ba6ff47abe35be017dbe66715370",
+      "evidence": [
+        {
+          "source_key": "commuting_transport_qa",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+          "locator": "統合判断の参照根拠：交通機関だけを利用：合理的経路、特急・グリーン、15万円"
+        }
+      ]
+    },
+    {
+      "id": "q-0721",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B非課税含む。A除外/C賞与/D課税だけは違う。通常通勤と現物月割も含む統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0254",
+      "retired_question_hash": "2757ed47f213135bd2bd6a2e6070dcabdef9af9d89b06c69f30a905b4659eeb1",
+      "evidence": [
+        {
+          "source_key": "remuneration_scope",
+          "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+          "locator": "統合判断の参照根拠：回答：基本給・残業・通勤を含む税引前給与"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：3頁：報酬となる通勤手当・通勤定期券"
+        }
+      ]
+    },
+    {
+      "id": "q-0723",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D標準賞与だが年4回以上等の条件不足。A非課税振替/B直接加算/C基本給組込は誤り。年3回・3か月超の条件済みへ統合。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0471",
+      "retired_question_hash": "f953cd2c8cafd7f3a33e60d0bc23041c016e5c08b7c4f06f3e2ea90c673b0565",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：3．標準賞与額と年3回以下賞与"
+        }
+      ]
+    },
+    {
+      "id": "q-0727",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B標準報酬だが本人率の明示が不足。A総支給/C課税/D手取は違う。統合先は労使合計率と本人割合を分ける。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0481",
+      "retired_question_hash": "6d8821088226327fd583de172eb395fa232c720c453f810e471d811a7f6dbb02",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：1．事業所合計、2．本人負担"
+        }
+      ]
+    },
+    {
+      "id": "q-0728",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C該当月額。A税基礎加算/B年額全部/D独自均等は誤り。通常徴収の通知額技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0399",
+      "retired_question_hash": "7c9550d543dd9683d952a69a4ee0b9837a1ed1c0cfd674948bbb2d3d588cd140",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本STEP①〜⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0729",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A支給−控除。B基本給−通勤/C課税と標準/D社会保険−税は違う。同じ算式へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0717",
+      "retired_question_hash": "dbe4bf52491bbf858b2afeea7d615a2cc069f5a48e0521980e30e18e596f45eb",
+      "evidence": [
+        {
+          "source_key": "payslip_model",
+          "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+          "locator": "統合判断の参照根拠：総支給−控除合計＝差引支給"
+        }
+      ]
+    },
+    {
+      "id": "q-0730",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A法定控除。B単位混在/C支給/D時間は控除金額でない。同じ4項目の区分へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0697",
+      "retired_question_hash": "992f9f5ac482d5ff2a57adae30d8313b1abb06dc599e7bb51372242990263c09",
+      "evidence": [
+        {
+          "source_key": "wage_payment_qa",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+          "locator": "統合判断の参照根拠：全額払いの原則と法令上の控除"
+        },
+        {
+          "source_key": "labor_premium_burden",
+          "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito/about.html",
+          "locator": "統合判断の参照根拠：労災事業主全額"
+        }
+      ]
+    },
+    {
+      "id": "q-0733",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D差額。A控除合算を支給/B加算と標準/C課税非課税相殺は違う。同じ差引算式へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0717",
+      "retired_question_hash": "33c013f3bc3d84ecd7f11343082f8a92929e94213b78f108bbb0385bf8c4b704",
+      "evidence": [
+        {
+          "source_key": "payslip_model",
+          "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+          "locator": "統合判断の参照根拠：総支給−控除合計＝差引支給"
+        }
+      ]
+    },
+    {
+      "id": "q-0736",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B基本通勤残業すべて。A残業除外/C通勤除外/D基本のみは誤り。統合先は3項目の算入を説明。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0470",
+      "retired_question_hash": "4248a3188dce4be12f4e16a6b938e71bbbd07448268481a0a7a59759b93e4fa8",
+      "evidence": [
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：冊子3頁：臨時見舞金と継続見舞金"
+        }
+      ]
+    },
+    {
+      "id": "q-0737",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D実費旅費。A住宅/B残業/C通勤は報酬。対価と実費弁償の同じ技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0467",
+      "retired_question_hash": "c9e7edeee3d5f8f2affe6e3143f7dca36b64567731f95d3c3c42edd264955e54",
+      "evidence": [
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "統合判断の参照根拠：冊子3頁：報酬になる・ならない表"
+        }
+      ]
+    },
+    {
+      "id": "q-0739",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D40以上65未満医療。A高齢/B65以下雇用/C不正な範囲は誤り。国内住所・適用除外なしを明示済みの通常コアへ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0573",
+      "retired_question_hash": "bf8a84b12003735a8f56193879f4c3ed9e42a006215df7a4fbdd3e8b92fb1a10",
+      "evidence": [
+        {
+          "source_key": "care_insurance",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo4.html",
+          "locator": "統合判断の参照根拠：第2号40〜64歳の医療保険加入者"
+        }
+      ]
+    },
+    {
+      "id": "q-0744",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "Cは給与天引きだが本文に方法がなくB現金払いも成立。天引き明示・50銭境界の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0483",
+      "retired_question_hash": "71045a56108d2f9037651014606353702eb0a609cd77a13cba650db86fedba01",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：2(1)給与控除と特約注記"
+        }
+      ]
+    },
+    {
+      "id": "q-0745",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A51銭切上げ、B切捨/C小数/D50銭置換は違う。給与天引きの50.50/50.51円具体例の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0483",
+      "retired_question_hash": "15494cf08fb6e2cc3fa2ade1e7d8d22eb4fe5413c7e321b49ac3732a7d87c54f",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：2(1)給与控除と特約注記"
+        }
+      ]
+    },
+    {
+      "id": "q-0746",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B標準×本人率後円処理。A全額控除/C総支給100円/D基本給10円は誤り。基礎・負担割合・端数を説明済みの通常演習へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0481",
+      "retired_question_hash": "e279703ea1ab53cc0c7018196c95b8a7d4dd21662222b3745cf72dae626e47b7",
+      "evidence": [
+        {
+          "source_key": "social_premium_rounding",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+          "locator": "統合判断の参照根拠：1．事業所合計、2．本人負担"
+        }
+      ]
+    },
+    {
+      "id": "q-0752",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C標準月額/賞与。A/B/D総支給は違う。年4回以上等を明示しない不足を、年3回と対象期間明確な統合先で解消。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0471",
+      "retired_question_hash": "11b179e41ea47aba02a283d6f30ae0a0b8045ae210e38d735a81b31aa047ebbb",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "統合判断の参照根拠：3．標準賞与額と年3回以下賞与"
+        }
+      ]
+    },
+    {
+      "id": "q-0754",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C月額、A/B日割/D翌月開始は誤り。ただし免除・同月喪失条件不足を統合先で解消。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0487",
+      "retired_question_hash": "88fe2306394650c5f3b9e53c231ffcbaaa59454f178b8b4f130554100bc88b34",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：資格取得月から資格喪失月の前月まで"
+        }
+      ]
+    },
+    {
+      "id": "q-0755",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C月単位、A時間割/B/D日割は誤り。元解説は同月得喪を除かず、条件明確な通常期間の統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0663",
+      "retired_question_hash": "7ebfbfa2e5cf00afd3aa91e807ec69c65bf5180dd5537e9d30bfc70ac50292a4",
+      "evidence": [
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(1)取得月から喪失月前月・同月例外"
+        }
+      ]
+    },
+    {
+      "id": "q-0756",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D前月だが加入継続・免除・未徴収条件不足。A/Cは同月取得なら違い得る。B先取りは違う。条件明確な統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0488",
+      "retired_question_hash": "22ed852836b7fe3073af3f6308a78f77fa2184e34fcfb133020d7ce135e17f55",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月途中退職の控除"
+        },
+        {
+          "source_key": "qualification_loss",
+          "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+          "locator": "統合判断の参照根拠：4(2)：退職翌日資格喪失"
+        }
+      ]
+    },
+    {
+      "id": "q-0757",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B通常2月だが継続・未徴収・引き切れる条件不足。A/Dは既徴収等で違い得る。C先取りは違う。条件済みの統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0489",
+      "retired_question_hash": "570dff8f9d3908bbbfba6060b54d142c02a57749fb447aefd3f9dfa57a1b7836",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月末退職：前月と退職月2か月"
+        }
+      ]
+    },
+    {
+      "id": "q-0758",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B前月未徴収と退職月。A取得喪失/C前払い/D喪失月も発生は誤り。具体条件と同じ理由を持つ通常コアへ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0489",
+      "retired_question_hash": "707c233c45b60c5a732a076127ee467be338d14656bf467b944eae9a38741621",
+      "evidence": [
+        {
+          "source_key": "social_premium_collection",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+          "locator": "統合判断の参照根拠：月末退職：前月と退職月2か月"
+        }
+      ]
+    },
+    {
+      "id": "q-0762",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D以上含む未満含まず。A両含/B逆/C両除は誤り。27万円境界を実際に当てはめる通常演習へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0761",
+      "retired_question_hash": "9374e5c003503b4b0f27cb13c224a88544cc4211f6a44d8d40066fcfd6f0d3bf",
+      "evidence": [
+        {
+          "source_key": "health_rates_tokyo_2026",
+          "url": "https://www.kyoukaikenpo.or.jp/shibu/tokyo/assets/R0802.pdf",
+          "locator": "統合判断の参照根拠：報酬250000〜270000未満と270000〜290000未満の境界"
+        }
+      ]
+    },
+    {
+      "id": "q-0764",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A取得時報酬。B実績12月待ち/C基本給だけ/D他社前年は違う。契約報酬を取得時に見込む同じ技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0533",
+      "retired_question_hash": "82e9c8ad61d67119992886df0d8791540981b515c74697ab46d8f034705905a1",
+      "evidence": [
+        {
+          "source_key": "acquisition_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20120330.html",
+          "locator": "統合判断の参照根拠：1．実績なし・2．報酬形態別算定"
+        }
+      ]
+    },
+    {
+      "id": "q-0765",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C4〜6/9適用。A1〜3/4、B7〜9/10、D10〜12/1は違う。目的・月・期間を含む通常コアへ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "c3d1bc42742eabe10707a776c14267c079bd9d0dda31c9cedaf9d0348789bbe0",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0766",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A固定3月2等級。B非固定1月/C非固定2月/D6月は違う。原問の増減方向の不足を統合先で解消。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "ed0b34b88a6815690ad434f8b25c60e385163879e5f84d3cedb1c92ea25c5ca1",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0767",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B4月目。A3/C変動月/D翌月は違う。変動支給月から3月判定・4月目適用を説明する通常演習へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0474",
+      "retired_question_hash": "08e57b41565aabba611c930bd8639a83d45b32039bed0b91ec1d1a97e07a3782",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：1．要件(1)〜(3)と留意事項"
+        }
+      ]
+    },
+    {
+      "id": "q-0771",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D逆方向。A平均だけ/B方向無視/C固定だけで下げるは誤り。同じ方向不一致の判断へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0528",
+      "retired_question_hash": "a02381888c6bd1740a27ab8e02df38260c80903088b974368b80c4563b60a617",
+      "evidence": [
+        {
+          "source_key": "monthly_revision_detail",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+          "locator": "統合判断の参照根拠：留意事項：固定的賃金と非固定的賃金の増減が逆"
+        }
+      ]
+    },
+    {
+      "id": "q-0772",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C4〜6。A7〜9/B1〜3/D10〜12は違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "b103c16accc9adb1f1d0ced32a6ca810f92a35fbb9c53a4e29f54994e0716b2a",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0774",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C4/6。A片方だけ/B不足5含む/D全ては違う。20>=17、16<17、19>=17を独立照合、充足2月の同じ技能へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0549",
+      "retired_question_hash": "e5cff25b820a568252b4f6d28913ec0eb8c46e0ee90c003a17509fb10fe264cf",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：4．対象月を選び総額を対象月数で除す"
+        }
+      ]
+    },
+    {
+      "id": "q-0776",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C9〜翌8。A7〜6/B暦年/D10〜9は違う。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0462",
+      "retired_question_hash": "27827f418770a683d66d7e63e35936e05174df7ecea0fcbb2e9c5a9be14a08b3",
+      "evidence": [
+        {
+          "source_key": "regular_determination",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+          "locator": "統合判断の参照根拠：1．概要、4．決定方法"
+        }
+      ]
+    },
+    {
+      "id": "q-0783",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "C雇用総額。A千切/B健康率/D厚年率は違う。統合先は千切と保険料円処理を明示。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0782",
+      "retired_question_hash": "faccf2a465ffec129d793dbe456515246389823b2434206158c4318316d8b1fb",
+      "evidence": [
+        {
+          "source_key": "labor_wage_scope",
+          "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/dl/1-3-2.pdf",
+          "locator": "統合判断の参照根拠：賞与を賃金に含める"
+        },
+        {
+          "source_key": "employment_premium_collection",
+          "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-21.pdf",
+          "locator": "統合判断の参照根拠：本人率と円未満処理"
+        }
+      ]
+    },
+    {
+      "id": "q-0796",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A期間と月末。B支給日だけ/C月末無視/D支給前開始だけは不足。同じ判定の具体期間例へ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0794",
+      "retired_question_hash": "de29bcaeccf001b64e117728167b9b712281928318a5c674ed5f6863cd10a68c",
+      "evidence": [
+        {
+          "source_key": "childcare_exemption",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html",
+          "locator": "統合判断の参照根拠：1(4)同月14日と1(5)賞与の別要件"
+        }
+      ]
+    },
+    {
+      "id": "q-0798",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A月割通知。B前年賞与12割/C標準と健保率/D賞与別率は違う。通知月額を読む通常コアへ。 全文全肢を照合。履歴保持・習熟移行なし。",
+      "merged_into": "q-0399",
+      "retired_question_hash": "7e7b174b7af12507fd6a6c4c8cadec01e6499ea10f676cdce3ca78126718e838",
+      "evidence": [
+        {
+          "source_key": "resident_procedures",
+          "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+          "locator": "統合判断の参照根拠：基本STEP①〜⑤"
+        }
+      ]
+    },
+    {
+      "id": "q-0804",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A通常報酬。B対象外/C年度末/D各回賞与は違う。元の同一性と回数条件不足を統合先で限定。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0472",
+      "retired_question_hash": "b6ab584a44aeddd5efd56f7972271073d48a40aad0cf7dfba2a2e4cbddf4541c",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "2．報酬：年4回以上、3．賞与との区別"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "冊子16頁（PDF19枚目）：年4回以上の賞与、前年7月〜当年6月の月額換算"
+        }
+      ]
+    },
+    {
+      "id": "q-0805",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A上限3回。B1/D2は上限でなくC4は月例報酬との境界違い。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0471",
+      "retired_question_hash": "6dd89a47072b15dd10b7642442a79e7e59630510e5516269c0e3aede86dd8cac",
+      "evidence": [
+        {
+          "source_key": "pension_premiums",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+          "locator": "3．標準賞与額と年3回以下賞与"
+        }
+      ]
+    },
+    {
+      "id": "q-0806",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D実態と回数。A名称/C見出し/B本人希望だけでは決まらない。同じ対償性の具体例へ。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0803",
+      "retired_question_hash": "46eac4e7443dbce3c91e057d50c9fc6cc40a46e9ad4da5dd3ffac8c12ca65556",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．賞与とは"
+        },
+        {
+          "source_key": "remuneration_guide_2026",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+          "locator": "3頁 報酬とならない金銭・年3回以下の賞与"
+        }
+      ]
+    },
+    {
+      "id": "q-0807",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B税前千切。A百円四捨五入/C税後/D税後百円切上は違う。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0801",
+      "retired_question_hash": "6b1b84f11b56e44fd4c1ab79754d88226344b29d8799bcb18cd38d46119b4ec8",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．税引前賞与の千円未満切捨て・同月合算"
+        }
+      ]
+    },
+    {
+      "id": "q-0808",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B千切。A百切/C万四捨五入/D千切上は違う。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0801",
+      "retired_question_hash": "877ee20b7e3707cf29b704c6fad6734d4473f88b18733080ae83a08fe476b25b",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．税引前賞与の千円未満切捨て・同月合算"
+        }
+      ]
+    },
+    {
+      "id": "q-0810",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D4/1〜翌3/31。A6〜5/B暦年/C7〜6は違う。年度の始終を統合先解説で確認。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0809",
+      "retired_question_hash": "27764d7ed0b0ce26e8175fc3c93d5bc279fa46192f6b4de61d9778aa72ba23e7",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．年度573万円、4(10)同一保険者"
+        }
+      ]
+    },
+    {
+      "id": "q-0813",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D同月合算150。A各回年度150/B年度573/C各回573は違う。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0812",
+      "retired_question_hash": "1bd7e61e7fd1825c2a51bf72188e26c3dbb0fe14d52cc5c59f80a58583ca2d99",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．厚年月150万円・同月合算"
+        }
+      ]
+    },
+    {
+      "id": "q-0814",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B支給月ごと。A半年/C年度/D四半期は違う。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0812",
+      "retired_question_hash": "7743aded98aad6855782285edf94856cae63211698c28665db7608d24c5aa067",
+      "evidence": [
+        {
+          "source_key": "bonus_insurance",
+          "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+          "locator": "1．厚年月150万円・同月合算"
+        }
+      ]
+    },
+    {
+      "id": "q-0816",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "D前月社会等後。A総額/B当月/C手取りは違う。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0815",
+      "retired_question_hash": "f546cd5a50843d9d1d0244e7c0bf29e0df54e92ddac052b059b158da9bf1f5f0",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "15頁備考1(1)〜(3)、注2社会保険料等"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "通常の計算方法1〜3"
+        }
+      ]
+    },
+    {
+      "id": "q-0817",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "A扶養申告書。B健康被扶養/C雇用届/D住民通知は所得税の人数判定根拠でない。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0713",
+      "retired_question_hash": "278efea186a534ab18a42f39cafc8c39a7e5b54ab0f66d1036c25e0a8857a848",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "扶養親族等の数の求め方"
+        },
+        {
+          "source_key": "tax_reform_2026",
+          "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm",
+          "locator": "2026年9月の月次処理と12月施行を区別"
+        }
+      ]
+    },
+    {
+      "id": "q-0819",
+      "retired_at": "2026-09-06",
+      "kind": "merged",
+      "reason": "B復興加算。A健保上限/C会社分/D住民均等割は違う。年指定がない元の本税加算を2026年の計算例へ。 全文全肢確認済み。同じ判断を問う通常演習へ統合し履歴保持・習熟移行なし。",
+      "merged_into": "q-0802",
+      "retired_question_hash": "ada559664ee403c80abef43b2d49a40d650ab660afbdcb629f297dc81f515098",
+      "evidence": [
+        {
+          "source_key": "withholding_table_2026",
+          "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+          "locator": "15頁算出率2.042％および表の注記"
+        }
+      ]
+    },
+    {
+      "id": "q-0820",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "C月額換算。A通常0扱い/B住民年額/D日額は違う。解説は控除後の限定不足。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "516061e16726a298ab1a2212daf2e346d561978c32f71c6f3ffa1db2f77b48f9",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    },
+    {
+      "id": "q-0821",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "A月額特例。B住民/C最大/D最小は違う。前月給与も社会保険料等控除後で比較する条件が本文に不足。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "146d4014a5e0580f988fcbd94a9ee2205f92b168b1bdf299a0c74adf6d3cd17c",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    },
+    {
+      "id": "q-0822",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "D双方社会保険料等後が意図。A両前/B片方/C片方は違うが、全肢の「控除後」が何を引くか本文で未指定。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "02c9119959695fff7153f57dd25713bf2a46bc2988c96aa2b5c78cd6db755b09",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    },
+    {
+      "id": "q-0823",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "B6・月額・差額6倍が意図。A算出率/C日額/D住民は違う。給与合算も控除後の金額と限定が必要。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "55bec53d44fd8b49dba1c799fb42cab744a615155a872343d9491865f17a6857",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    },
+    {
+      "id": "q-0824",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "C12・12が意図。A6・6/B12・6/D6・12は違う。ただし10倍超の場合は前月給与合算とその税額差引が要り、単に表の税額を12倍では足りない。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "86c193aa730b07b8a8049b4dad7df0f5c1e39f275afb31f0bed6535c14516fb8",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    },
+    {
+      "id": "q-0825",
+      "retired_at": "2026-09-06",
+      "kind": "scope_unverified_2kyu",
+      "reason": "A6/12月額倍戻し。B算出率/C住民/D日額は違う。除算対象は社会保険料等控除後賞与と明示が必要。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。",
+      "merged_into": null,
+      "retired_question_hash": "0d5d2eb8af8e67d3bd99f42b81b540015d0ae8de6285633be2118c47bae244fd",
+      "evidence": [
+        {
+          "source_key": "exam_about",
+          "url": "https://jitsumu-up.jp/about/",
+          "locator": "各級の出題範囲：1級賞与計算＝前月給与なし・前月給与10倍超。2級の位置づけは通常賞与。"
+        },
+        {
+          "source_key": "bonus_withholding",
+          "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+          "locator": "計算方法：10倍超と前月給与なし。具体例は2025年分なので2026年の数値根拠には使わない。"
+        }
+      ]
+    }
+  ]
+}

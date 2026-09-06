@@ -154,5 +154,517 @@
   "retirement_health": {
     "label": "協会けんぽ：退職後の健康保険",
     "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/002/"
+  },
+  "deemed_hours_notice": {
+    "label": "兵庫労働局：事業場外労働の算定と事業場内時間の合算",
+    "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/jigyoubagai_roudou.html"
+  },
+  "remuneration_guide_2026": {
+    "label": "日本年金機構：令和8年度算定基礎届ガイドブック（報酬の範囲）",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf"
+  },
+  "monthly_revision_detail": {
+    "label": "日本年金機構：随時改定の要件と留意事項",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html"
+  },
+  "rules_electronic_notice": {
+    "label": "厚生労働省：就業規則等の電子機器による周知（基発680号）",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb1918&dataType=1&pageNo=1"
+  },
+  "childcare_summary": {
+    "label": "厚生労働省：育児休業の対象・回数・期間",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/childcare/"
+  },
+  "break_phone_duty": {
+    "label": "厚生労働省：休憩中の電話・来客当番の取扱い",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_11.html"
+  },
+  "holiday_four_week": {
+    "label": "栃木労働局：4週4休と起算日の定め",
+    "url": "https://jsite.mhlw.go.jp/tochigi-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/roukijou/soudan_jirei/q_and_a5/q_and_a5_r.html"
+  },
+  "holiday_substitution": {
+    "label": "厚生労働省：振替休日・代休と週の時間外割増",
+    "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/roudoujikan/q11.html"
+  },
+  "childcare_law": {
+    "label": "厚生労働省：育児・介護休業法の条文",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=73084100&dataType=0&pageNo=1"
+  },
+  "paternity_leave": {
+    "label": "厚生労働省：産後パパ育休の期間・回数・申出",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/paternity/"
+  },
+  "care_leave_detail": {
+    "label": "厚生労働省：介護休業の対象家族・日数・回数",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/leave/"
+  },
+  "childcare_amendment_2025": {
+    "label": "厚生労働省：2025年4月施行の育児・介護休業法改正",
+    "url": "https://www.mhlw.go.jp/stf/newpage_51380.html"
+  },
+  "childcare_short_hours": {
+    "label": "厚生労働省：育児の短時間勤務と代替措置",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/shortworking/"
+  },
+  "childcare_flexible_work": {
+    "label": "厚生労働省：2025年10月施行の柔軟な働き方の措置",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/flexiblework/"
+  },
+  "care_amendment_2025": {
+    "label": "厚生労働省：2025年4月施行の介護とテレワーク",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/"
+  },
+  "discretionary_specialist": {
+    "label": "厚生労働省：専門業務型裁量労働制の手続・同意・割増",
+    "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_tayou_senmon.html"
+  },
+  "discretionary_2024": {
+    "label": "厚生労働省：2024年4月以降の裁量労働制",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/sairyo.html"
+  },
+  "flex_guide": {
+    "label": "厚生労働省：フレックスタイム制のわかりやすい解説",
+    "url": "https://www.mhlw.go.jp/content/001140964.pdf"
+  },
+  "flex_overtime_qa": {
+    "label": "厚生労働省：改正労働基準法Q&A・フレックスの月別時間外",
+    "url": "https://www.mhlw.go.jp/content/000487097.pdf"
+  },
+  "break_exceptions": {
+    "label": "厚生労働省：休憩の3原則と一斉付与の例外",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/roudoujikan/q1.html"
+  },
+  "annual_leave_guide": {
+    "label": "厚生労働省：年5日の年次有給休暇の確実な取得（2023年2月版）",
+    "url": "https://www.mhlw.go.jp/content/001140963.pdf"
+  },
+  "annual_leave_basics": {
+    "label": "厚生労働省：年休の発生要件・利用目的・時季指定",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q1.html"
+  },
+  "annual_leave_planned": {
+    "label": "厚生労働省：計画年休の導入手続",
+    "url": "https://work-holiday.mhlw.go.jp/planned-granting/procedure.html"
+  },
+  "annual_leave_hours": {
+    "label": "厚生労働省：時間単位年休の労使協定と1日の時間数",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_16.html"
+  },
+  "annual_leave_planned_qa": {
+    "label": "厚生労働省：計画年休と時間単位年休の関係",
+    "url": "https://www.mhlw.go.jp/shinsai_jouhou/faq_04.html"
+  },
+  "annual_leave_halfday": {
+    "label": "厚生労働省：時間単位・半日単位年休の留意点",
+    "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/yukyu/q3.html"
+  },
+  "annual_leave_attendance": {
+    "label": "厚生労働省：年休の出勤率算定の基礎となる全労働日",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb9536&dataType=1"
+  },
+  "annual_leave_attendance_qa": {
+    "label": "厚生労働省：年休の出勤日数に算入する日",
+    "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/yukyu/q1.html"
+  },
+  "annual_leave_change_cases": {
+    "label": "中央労働委員会：年休の時季変更権と代替要員への配慮",
+    "url": "https://www.mhlw.go.jp/churoi/assen/dl/jirei28.pdf"
+  },
+  "annual_leave_hours_qa": {
+    "label": "厚生労働省：時間単位年休の協定と届出不要",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q3.html"
+  },
+  "annual_leave_carryover_plan": {
+    "label": "厚生労働省：計画年休に含める前年繰越分",
+    "url": "https://www.mhlw.go.jp/stf/web_magazine/closeup/51.html"
+  },
+  "variable_month_guide": {
+    "label": "厚生労働省：1か月単位の変形労働時間制",
+    "url": "https://www.mhlw.go.jp/content/140811-2.pdf"
+  },
+  "variable_year_guide": {
+    "label": "厚生労働省：1年単位の変形労働時間制（2021年1月版）",
+    "url": "https://www.mhlw.go.jp/content/001021908.pdf"
+  },
+  "variable_week_guide": {
+    "label": "兵庫労働局：1週間単位の非定型的変形労働時間制",
+    "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/1syukan.html"
+  },
+  "variable_week_notice": {
+    "label": "厚生労働省：変形労働時間制の通達（1週間制の事前通知）",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb1899&dataType=1&pageNo=1"
+  },
+  "supervisor_cases": {
+    "label": "厚生労働省：時間外・休日労働と割増賃金／管理監督者",
+    "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_jikangai.html"
+  },
+  "supervisor_night": {
+    "label": "厚生労働省：管理監督者の深夜割増と実態判断",
+    "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_parttime.html"
+  },
+  "premium_base_qa": {
+    "label": "厚生労働省：割増賃金の基礎となる賃金",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html"
+  },
+  "premium_allowance_guide": {
+    "label": "厚生労働省：割増賃金の基礎から除外できる手当（2015年3月版）",
+    "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf"
+  },
+  "premium_calculation_qa": {
+    "label": "厚生労働省：割増賃金の算定基礎・時間単価・端数処理",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html"
+  },
+  "premium_temporary_qa": {
+    "label": "大阪労働局：除外賃金と臨時の結婚手当",
+    "url": "https://jsite.mhlw.go.jp/osaka-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/hourei_seido/jikan2/warimasi.html"
+  },
+  "remote_allowance_notice": {
+    "label": "厚生労働省：在宅勤務手当の割増賃金算定（2024年4月5日通達）",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1"
+  },
+  "annual_salary_base": {
+    "label": "厚生労働省：年俸制の賞与部分と割増賃金算定基礎",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q4.html"
+  },
+  "premium_rates_qa": {
+    "label": "厚生労働省：時間外・休日・深夜の割増賃金",
+    "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html"
+  },
+  "premium_over60_guide": {
+    "label": "厚生労働省：2023年4月からの月60時間超割増と深夜・休日",
+    "url": "https://www.mhlw.go.jp/content/001317968.pdf"
+  },
+  "fixed_overtime_qa": {
+    "label": "厚生労働省：固定残業代の区分と不足額の支払",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q11.html"
+  },
+  "model_wage_rules": {
+    "label": "厚生労働省：モデル就業規則の欠勤控除・日割計算（規程例）",
+    "url": "https://www.mhlw.go.jp/content/001620507.pdf"
+  },
+  "deduction_discipline": {
+    "label": "厚生労働省：欠勤控除と減給の制裁の区別",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/model/dl/11.pdf"
+  },
+  "commuting_car_qa": {
+    "label": "国税庁：マイカー・自転車通勤の非課税限度額",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2585.htm"
+  },
+  "commuting_transport_qa": {
+    "label": "国税庁：公共交通の合理的運賃と非課税限度額",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm"
+  },
+  "commuting_disability_qa": {
+    "label": "国税庁：障害による2km未満の自動車通勤の質疑事例",
+    "url": "https://www.nta.go.jp/law/shitsugi/gensen/03/18.htm"
+  },
+  "payslip_model": {
+    "label": "埼玉労働局：給与明細書モデル例（2018年・様式の参考）",
+    "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf"
+  },
+  "average_kanagawa": {
+    "label": "神奈川労働局：平均賃金の計算・期間・具体例",
+    "url": "https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/saiteichingin_chinginseido/heikinchi.html"
+  },
+  "average_chiba": {
+    "label": "千葉労働局：平均賃金・雇入れ後3か月未満の算定",
+    "url": "https://jsite.mhlw.go.jp/chiba-roudoukyoku/content/contents/heikinchingin.pdf"
+  },
+  "wage_definition_guide": {
+    "label": "長野労働局：労基法上の賃金・実費弁償・恩恵的給付",
+    "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf"
+  },
+  "shutdown_allowance_qa": {
+    "label": "厚生労働省：会社都合の休業と一部休業の手当",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q6.html"
+  },
+  "digital_employee": {
+    "label": "厚生労働省：賃金デジタル払いの本人手続と選択",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/newpage_55414.html"
+  },
+  "digital_start": {
+    "label": "厚生労働省：2023年4月の制度変更",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000198659_00015.html"
+  },
+  "minimum_scope": {
+    "label": "厚生労働省：最低賃金の種類と適用",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei24.html"
+  },
+  "minimum_wage_base": {
+    "label": "厚生労働省：最低賃金の比較対象賃金",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/newpage_43898.html"
+  },
+  "wage_payment_qa": {
+    "label": "厚生労働省：賃金支払5原則と例外",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html"
+  },
+  "care_age": {
+    "label": "協会けんぽ：介護保険料の40歳・65歳の取扱い",
+    "url": "https://www.kyoukaikenpo.or.jp/shibu/ibaraki/public_relations/009/index.html"
+  },
+  "records_rules": {
+    "label": "厚生労働省：労働基準法施行規則（賃金台帳・保存）",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=73023000&dataType=0&pageNo=2"
+  },
+  "records_retention": {
+    "label": "厚生労働省：労働関係書類の保存期間",
+    "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/syuugyoukisoku/q6.html"
+  },
+  "working_time_records": {
+    "label": "厚生労働省：労働時間の適正把握ガイドライン",
+    "url": "https://www.mhlw.go.jp/file/06-Seisakujouhou-11200000-Roudoukijunkyoku/0000149439.pdf"
+  },
+  "labor_premium_burden": {
+    "label": "厚生労働省：労働保険の保険料負担",
+    "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito/about.html"
+  },
+  "child_support_rate": {
+    "label": "協会けんぽ：子ども・子育て支援金の開始と適用月",
+    "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/003/index.html"
+  },
+  "exam_about": {
+    "label": "実務能力開発支援協会：級ごとの位置づけと公開例",
+    "url": "https://jitsumu-up.jp/about/"
+  },
+  "tax_reform_2026": {
+    "label": "国税庁：2026年度改正の施行と源泉徴収への適用",
+    "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm"
+  },
+  "dependent_declaration": {
+    "label": "国税庁：扶養控除等申告書の提出時期・提出先",
+    "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/annai/1648_01.htm"
+  },
+  "withholding_system_2026": {
+    "label": "国税庁：源泉徴収制度の意義（2026年版）",
+    "url": "https://www.nta.go.jp/publication/pamph/gensen/shikata_r08/pdf/02.pdf"
+  },
+  "salary_income": {
+    "label": "国税庁：給与所得の範囲と金額",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1400.htm"
+  },
+  "salary_benefits": {
+    "label": "国税庁：給与となる手当・現物給付",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm"
+  },
+  "travel_nontaxable": {
+    "label": "国税庁：所得税基本通達9-3・9-4（旅費）",
+    "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/02/02.htm"
+  },
+  "resident_procedures": {
+    "label": "東京都主税局：特別徴収の通知・異動・納期特例",
+    "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki"
+  },
+  "resident_division_2026": {
+    "label": "広島市：2026年度特別徴収の手引き",
+    "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf"
+  },
+  "forest_tax": {
+    "label": "林野庁：森林環境税の課税・徴収の仕組み",
+    "url": "https://www.rinya.maff.go.jp/j/keikaku/kankyouzei/kankyouzei_jouyozei.html"
+  },
+  "bonus_withholding": {
+    "label": "国税庁：賞与に対する源泉徴収",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm"
+  },
+  "salary_gifts": {
+    "label": "国税庁：所得税基本通達28-3・28-5（旅費・祝金品）",
+    "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/04/03.htm"
+  },
+  "disaster_gifts": {
+    "label": "国税庁：災害見舞金と源泉所得税",
+    "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/higashinihon/hojin_shohi_gensenFAQ/answer13.htm"
+  },
+  "resident_prior_year": {
+    "label": "練馬区：住民税と所得税の課税対象年の違い",
+    "url": "https://www.city.nerima.tokyo.jp/kurashi/zei/jyuminzei/jumin_shotoku.html"
+  },
+  "resident_transfer": {
+    "label": "練馬区：退職時の住民税と新勤務先への引継ぎ",
+    "url": "https://www.city.nerima.tokyo.jp/kurashi/zei/jyuminzei/kyuyozeikin/02974801.html"
+  },
+  "resident_change_forms": {
+    "label": "練馬区：特別徴収の異動届と各種手続",
+    "url": "https://www.city.nerima.tokyo.jp/dl/zei/jigyo/todokede.html"
+  },
+  "medical_treatment": {
+    "label": "協会けんぽ：療養の給付",
+    "url": "https://www.kyoukaikenpo.or.jp/benefit/mynumber_insurance_card/"
+  },
+  "high_cost_medical": {
+    "label": "協会けんぽ：高額療養費と2026年8月改正",
+    "url": "https://www.kyoukaikenpo.or.jp/benefit/high_cost_medical_expenses/002/"
+  },
+  "sickness_allowance": {
+    "label": "協会けんぽ：傷病手当金の支給条件",
+    "url": "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/"
+  },
+  "childbirth_benefits": {
+    "label": "協会けんぽ：出産育児一時金と出産手当金",
+    "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/index.html"
+  },
+  "pension_benefits": {
+    "label": "日本年金機構：老齢・障害・遺族年金の案内",
+    "url": "https://www.nenkin.go.jp/service/pamphlet/kyufu.html"
+  },
+  "health_system": {
+    "label": "協会けんぽ：医療保険制度の体系",
+    "url": "https://www.kyoukaikenpo.or.jp/about/business/overview/"
+  },
+  "pension_premiums": {
+    "label": "日本年金機構：厚生年金保険の保険料と標準報酬",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html"
+  },
+  "pension_membership": {
+    "label": "日本年金機構：年金に加入する",
+    "url": "https://www.nenkin.go.jp/service/mokutekibetsu/kojin/kanyu/index.html"
+  },
+  "withholding_reform_2026": {
+    "label": "国税庁：令和8年度税制改正の源泉所得税関係",
+    "url": "https://www.nta.go.jp/publication/pamph/gensen/2026kaisei.pdf"
+  },
+  "social_premium_rounding": {
+    "label": "日本年金機構：保険料計算と天引き・現金払の端数処理",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html"
+  },
+  "social_premium_collection": {
+    "label": "日本年金機構：資格取得・退職月の保険料徴収",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html"
+  },
+  "social_premium_deadline": {
+    "label": "日本年金機構：保険料の納付期限",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121121.html"
+  },
+  "social_in_kind": {
+    "label": "日本年金機構：現物給与の通貨換算",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150511.html"
+  },
+  "short_worker_detail": {
+    "label": "日本年金機構：短時間労働者の人数・時間・賃金の判定",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html"
+  },
+  "social_workplaces": {
+    "label": "日本年金機構：適用事業所と被保険者",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html"
+  },
+  "social_industry_scope": {
+    "label": "厚生労働省：被用者保険の適用拡大と個人事業所",
+    "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_009.html"
+  },
+  "social_voluntary_application": {
+    "label": "日本年金機構：任意適用の申請と認可",
+    "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150310.html"
+  },
+  "social_voluntary_form": {
+    "label": "日本年金機構：任意適用申請書・同意対象者の説明",
+    "url": "https://www.nenkin.go.jp/shinsei/kounen/tekiyo/jigyosho/20140430.files/0000002397.pdf"
+  },
+  "dependent_young": {
+    "label": "日本年金機構：19歳以上23歳未満の被扶養者の収入要件",
+    "url": "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html"
+  },
+  "maternity_exemption": {
+    "label": "日本年金機構：産前産後休業の保険料免除",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140509-02.html"
+  },
+  "maternity_end_revision": {
+    "label": "日本年金機構：産前産後休業終了時の報酬月額変更",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140327-01.html"
+  },
+  "childcare_exemption": {
+    "label": "日本年金機構：育児休業等の月額・賞与保険料免除",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html"
+  },
+  "childcare_end_revision": {
+    "label": "日本年金機構：育児休業等終了時の報酬月額変更",
+    "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html"
+  },
+  "basic_benefits": {
+    "label": "厚生労働省：基本手当について",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000135026.html"
+  },
+  "high_age_benefits": {
+    "label": "厚生労働省：高年齢雇用継続給付Q&A",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158464.html"
+  },
+  "high_age_reform": {
+    "label": "厚生労働省：2025年4月からの高年齢雇用継続給付率",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000160564_00043.html"
+  },
+  "childcare_benefits": {
+    "label": "厚生労働省：育児休業等給付Q&A",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158500.html"
+  },
+  "care_leave_benefits": {
+    "label": "厚生労働省：介護休業給付Q&A",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158665.html"
+  },
+  "workers_comp_benefits": {
+    "label": "厚生労働省：労災保険給付の概要",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000166858.html"
+  },
+  "commuting_accident": {
+    "label": "厚生労働省：通勤災害の範囲・逸脱中断Q10",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/sonota/q10.html"
+  },
+  "workers_comp_merit_2026": {
+    "label": "厚生労働省：2026年度年度更新申告書の書き方・メリット制",
+    "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-08.pdf"
+  },
+  "employment_procedures_current": {
+    "label": "厚生労働省：雇用保険手続き一覧・被保険者の取得喪失",
+    "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/koyouhoken/tetsuduki_ichiran01.html"
+  },
+  "health_insurance_law": {
+    "label": "厚生労働省法令：健康保険法・健康保険組合の設立",
+    "url": "https://www.mhlw.go.jp/web/t_doc?dataId=84024000&dataType=0&pageNo=1"
+  },
+  "pension_structure": {
+    "label": "日本年金機構：公的年金制度の種類と加入制度",
+    "url": "https://www.nenkin.go.jp/service/seidozenpan/20140710.html"
+  },
+  "pension_dependent_conditions": {
+    "label": "日本年金機構：国民年金第1号・第3号の加入要件",
+    "url": "https://www.nenkin.go.jp/service/kokunen/kanyu/20140710-04.html"
+  },
+  "pension_dependent_premium": {
+    "label": "日本年金機構：第3号被保険者の保険料",
+    "url": "https://www.nenkin.go.jp/service/kokunen/hokenryo/sango.html"
+  },
+  "retirement_health_period": {
+    "label": "協会けんぽ：任意継続の加入期間",
+    "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/004/"
+  },
+  "maternity_allowance": {
+    "label": "協会けんぽ：出産手当金の対象期間・給与調整",
+    "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/001/"
+  },
+  "retirement_health_options": {
+    "label": "協会けんぽ：退職後の医療保険の選択肢",
+    "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/001/"
+  },
+  "acquisition_delayed_allowance": {
+    "label": "日本年金機構：社会保険事務のポイントVol.7・支給が遅れた取得時手当",
+    "url": "https://www.nenkin.go.jp/service/kounen/info/jimupoint.files/Vol.7.pdf"
+  },
+  "employment_premium_collection": {
+    "label": "厚生労働省：2026年度更新・雇用保険の控除と端数（44頁）",
+    "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-21.pdf"
+  },
+  "labor_wage_scope": {
+    "label": "厚生労働省：労働保険対象賃金の範囲",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/dl/1-3-2.pdf"
+  },
+  "employment_payment_timing": {
+    "label": "兵庫労働局：雇用保険の賃金支払時の控除",
+    "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudou_hoken/hourei_seido/roudouhoken_about/keisan_houhou.html"
+  },
+  "annual_renewal_explanation": {
+    "label": "厚生労働省：年度更新の確定・概算申告",
+    "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/kousin.html"
+  },
+  "payroll_saving": {
+    "label": "厚生労働省：社内預金の任意性・協定・保全措置",
+    "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/sonota/q1.html"
   }
 }

@@ -24,6 +24,8 @@ class CalcVerifier
 
         return match ($p['calc_type']) {
             'overtime_pay' => $this->overtimePay($p),
+            'absence_deduction_floor' => intdiv($p['monthly_wage'] * $p['absence_minutes'], $p['monthly_minutes']),
+            'monthly_rounded_overtime' => self::roundHalfUp($p['hourly_wage'] * $p['premium_rate'] * intdiv($p['total_minutes'] + 30, 60)),
             'social_insurance_employee' => $this->socialInsuranceEmployee($p),
             'employment_insurance' => $this->employmentInsurance($p),
             'withholding_tax_monthly' => $this->withholdingTaxMonthly($p, $question),

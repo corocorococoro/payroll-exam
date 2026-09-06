@@ -3,6 +3,8 @@ import { Head, Link } from '@inertiajs/vue3';
 import { ChevronDown, ChevronUp, RotateCcw, Trophy } from '@lucide/vue';
 import { ref } from 'vue';
 import Kyuchan from '@/components/Kyuchan.vue';
+import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
+import type { Choice, ReferenceSheetData } from '@/types';
 
 type Section = {
     name: string;
@@ -13,6 +15,7 @@ type Section = {
     accuracy: number;
 };
 type Review = {
+    choices?: Choice[] | null;
     position: number;
     question_text: string;
     unit_name: string;
@@ -47,8 +50,10 @@ defineProps<{
     };
     remediation: Remediation[];
     review: Review[];
+    reference_sheets: ReferenceSheetData[];
 }>();
 const open = ref<number[]>([]);
+const sheetsOpen = ref(false);
 function toggle(position: number) {
     open.value = open.value.includes(position)
         ? open.value.filter((p) => p !== position)
@@ -163,6 +168,13 @@ function toggle(position: number) {
         >
     </div>
     <section class="mt-6">
+        <button
+            v-if="reference_sheets.length"
+            class="mb-4 rounded-md border border-blue-200 px-4 py-2 text-sm font-semibold text-[#285ac8]"
+            @click="sheetsOpen = true"
+        >
+            受験時の資料集で計算を確認
+        </button>
         <h2 class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-100">
             問題ごとの見直し
         </h2>
@@ -207,6 +219,31 @@ function toggle(position: number) {
                     v-if="open.includes(item.position)"
                     class="border-t p-4 text-xs leading-relaxed dark:border-gray-800"
                 >
+                    <p class="mb-3 text-sm font-semibold whitespace-pre-wrap">
+                        {{ item.question_text }}
+                    </p>
+                    <ul v-if="item.choices?.length" class="mb-3 space-y-2">
+                        <li
+                            v-for="choice in item.choices"
+                            :key="choice.key"
+                            class="rounded-md border p-2"
+                            :class="{
+                                'border-emerald-300 bg-emerald-50 text-emerald-900':
+                                    choice.key === item.correct_answer,
+                                'border-rose-300':
+                                    choice.key === item.given_answer &&
+                                    !item.correct,
+                            }"
+                        >
+                            {{ choice.key }}. {{ choice.text }}
+                            <strong v-if="choice.key === item.correct_answer"
+                                >（正解）</strong
+                            >
+                            <span v-if="choice.key === item.given_answer"
+                                >（あなたの解答）</span
+                            >
+                        </li>
+                    </ul>
                     <p>
                         あなたの解答：
                         <strong>{{ item.given_answer ?? '未回答' }}</strong
@@ -240,4 +277,9 @@ function toggle(position: number) {
             </article>
         </div>
     </section>
+    <ReferenceSheetsModal
+        :open="sheetsOpen"
+        :sheets="reference_sheets"
+        @close="sheetsOpen = false"
+    />
 </template>

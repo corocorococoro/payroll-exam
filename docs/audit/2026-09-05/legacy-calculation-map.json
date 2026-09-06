@@ -1,0 +1,352 @@
+[
+  {
+    "original_number": 85,
+    "original_page": 21,
+    "old_expected_result": "10,000円",
+    "candidates": [
+      {
+        "id": "q-0283",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0567",
+        "similarity": 0.3617
+      },
+      {
+        "id": "q-0748",
+        "similarity": 0.36
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0283",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": true,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 218,
+    "original_page": 51,
+    "old_expected_result": "3,000円",
+    "candidates": [
+      {
+        "id": "q-0233",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0227",
+        "similarity": 0.6857
+      },
+      {
+        "id": "q-0183",
+        "similarity": 0.6015
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0233",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 243,
+    "original_page": 56,
+    "old_expected_result": "1,600円",
+    "candidates": [
+      {
+        "id": "q-0227",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0233",
+        "similarity": 0.6857
+      },
+      {
+        "id": "q-0183",
+        "similarity": 0.6074
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0227",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 266,
+    "original_page": 62,
+    "old_expected_result": "3,500円を支払う",
+    "candidates": [
+      {
+        "id": "q-0236",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0233",
+        "similarity": 0.4222
+      },
+      {
+        "id": "q-0227",
+        "similarity": 0.4066
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0236",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 296,
+    "original_page": 68,
+    "old_expected_result": "控除額は2,400円となる",
+    "candidates": [
+      {
+        "id": "q-0243",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0245",
+        "similarity": 0.3667
+      },
+      {
+        "id": "q-0246",
+        "similarity": 0.3617
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0243",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 332,
+    "original_page": 77,
+    "old_expected_result": "被保険者の負担率は9.15%である。",
+    "candidates": [
+      {
+        "id": "q-0599",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0476",
+        "similarity": 0.7059
+      },
+      {
+        "id": "q-0567",
+        "similarity": 0.6905
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": false,
+    "current_id": "q-0599",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "割合の知識問題。旧検算を現行の承認として使わない。"
+  },
+  {
+    "original_number": 364,
+    "original_page": 85,
+    "old_expected_result": "事業主9.15%、被保険者9.15%",
+    "candidates": [
+      {
+        "id": "q-0476",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0599",
+        "similarity": 0.7059
+      },
+      {
+        "id": "q-0566",
+        "similarity": 0.5652
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": false,
+    "current_id": "q-0476",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "割合の知識問題。旧検算を現行の承認として使わない。"
+  },
+  {
+    "original_number": 515,
+    "original_page": 120,
+    "old_expected_result": "9,900円",
+    "candidates": [
+      {
+        "id": "q-0748",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0749",
+        "similarity": 0.8829
+      },
+      {
+        "id": "q-0734",
+        "similarity": 0.7324
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0748",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": true,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 516,
+    "original_page": 121,
+    "old_expected_result": "1,620円",
+    "candidates": [
+      {
+        "id": "q-0749",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0748",
+        "similarity": 0.8829
+      },
+      {
+        "id": "q-0567",
+        "similarity": 0.7238
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0749",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 560,
+    "original_page": 131,
+    "old_expected_result": "25万円",
+    "candidates": [
+      {
+        "id": "q-0374",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0709",
+        "similarity": 0.6667
+      },
+      {
+        "id": "q-0694",
+        "similarity": 0.5517
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0374",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 675,
+    "original_page": 156,
+    "old_expected_result": "230,000円",
+    "candidates": [
+      {
+        "id": "q-0708",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0177",
+        "similarity": 0.4737
+      },
+      {
+        "id": "q-0709",
+        "similarity": 0.4538
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0708",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 676,
+    "original_page": 157,
+    "old_expected_result": "190,000円",
+    "candidates": [
+      {
+        "id": "q-0709",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0374",
+        "similarity": 0.6667
+      },
+      {
+        "id": "q-0694",
+        "similarity": 0.6026
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0709",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 749,
+    "original_page": 172,
+    "old_expected_result": "250,000円",
+    "candidates": [
+      {
+        "id": "q-0801",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0737",
+        "similarity": 0.5679
+      },
+      {
+        "id": "q-0764",
+        "similarity": 0.5
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0801",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  },
+  {
+    "original_number": 750,
+    "original_page": 172,
+    "old_expected_result": "2,042円",
+    "candidates": [
+      {
+        "id": "q-0802",
+        "similarity": 1.0
+      },
+      {
+        "id": "q-0821",
+        "similarity": 0.4587
+      },
+      {
+        "id": "q-0255",
+        "similarity": 0.3729
+      }
+    ],
+    "mapping_status": "exact_stem",
+    "current_calculation_verified": true,
+    "current_id": "q-0802",
+    "mapping_basis": "監査開始時の本文と受領PDFの本文の一致。内容監査の代替ではない。",
+    "statement_revised_in_this_audit": false,
+    "remaining": "金額の固定期待値と一致。全選択肢・法令条件の最終監査は別。"
+  }
+]

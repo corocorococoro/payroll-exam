@@ -1,8 +1,20 @@
 <?php
 
+use App\Models\Course;
 use App\Models\Question;
+use App\Models\ReferenceSheet;
+use App\Services\QuestionReviewLedger;
+use Database\Seeders\ContentSeeder;
 
 use function Pest\Laravel\artisan;
+
+test('監査未完了のシードはコースや問題を変更する前に停止する', function () {
+    app()->instance(QuestionReviewLedger::class, new QuestionReviewLedger([]));
+    expect(fn () => $this->seed(ContentSeeder::class))->toThrow(RuntimeException::class);
+    expect(Course::count())->toBe(0)
+        ->and(Question::count())->toBe(0)
+        ->and(ReferenceSheet::count())->toBe(0);
+});
 
 test('同じ正本リリースではDB上のレビュー結果を上書きしない', function () {
     artisan('content:sync')->assertSuccessful();
