@@ -290,11 +290,12 @@ def extract_answers(reader: PdfReader) -> dict[int, dict[str, str]]:
     return records
 
 
-def is_calculation(number: int, text: str) -> bool:
-    calculation_chapters = {5, 6, 11, 14, 15}
-    chapter = chapter_for(number)
-    return chapter.number in calculation_chapters and bool(
-        re.search(r"いくら|求め|計算|算出|金額|支払額|差引支給額", text)
+def is_calculation(number: int, text: str, choices: list[dict[str, str]]) -> bool:
+    # A chapter title or the word 計算 does not establish numerical calculation.
+    # Conservative import classification; editorial review still verifies it.
+    return bool(re.search(r"[0-9０-９]", text)) and bool(choices) and all(
+        re.fullmatch(r"[0-9０-９,，.．]+(?:円|万円)", choice["text"])
+        for choice in choices
     )
 
 
@@ -316,7 +317,7 @@ def build_records(reader: PdfReader) -> list[dict[str, object]]:
             answers[number]["explanation"] = correction["explanation"]
         if number in QUESTION_TEXT_REWRITES:
             questions[number]["question_text"] = QUESTION_TEXT_REWRITES[number]
-        calculation = is_calculation(number, str(questions[number]["question_text"]))
+        calculation = is_calculation(number, str(questions[number]["question_text"]), questions[number]["choices"])
         correct_choice = answers[number]["choice"]
         correct_text = next(
             choice["text"]
@@ -340,7 +341,7 @@ def build_records(reader: PdfReader) -> list[dict[str, object]]:
                 "source_chapter": chapter.number,
                 "source_chapter_title": chapter.title,
                 "source_page": questions[number]["source_page"],
-                "verification_status": "official_sources_reviewed",
+                "verification_status": "unreviewed",
                 "scope_status": "exam_2026-09-01",
                 "exam_role": "calculation" if calculation else "knowledge",
                 "unit": unit,

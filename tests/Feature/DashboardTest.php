@@ -159,6 +159,7 @@ class DashboardTest extends TestCase
         $exam = MockExam::query()->firstOrFail();
         $user->mockExamAttempts()->create([
             'mock_exam_id' => $exam->id,
+            'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
             'time_limit_minutes' => 120,
             'started_at' => now()->subHours(2),
             'finished_at' => now(),
@@ -191,6 +192,7 @@ class DashboardTest extends TestCase
             $score = 80 + ($index * 2);
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -222,6 +224,7 @@ class DashboardTest extends TestCase
         foreach ([80, 100] as $index => $score) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -258,6 +261,7 @@ class DashboardTest extends TestCase
 
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -289,6 +293,7 @@ class DashboardTest extends TestCase
         foreach ($exams as $index => $exam) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => 90,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -320,6 +325,7 @@ class DashboardTest extends TestCase
         foreach ([90, 120] as $index => $minutes) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exams->first()->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exams->first()),
                 'time_limit_minutes' => $minutes,
                 'started_at' => now()->subHours(8 - $index),
                 'finished_at' => now()->subHours(7 - $index),
@@ -334,6 +340,7 @@ class DashboardTest extends TestCase
 
         $user->mockExamAttempts()->create([
             'mock_exam_id' => $exams->last()->id,
+            'review_snapshot' => app(MockExamSnapshotService::class)->build($exams->last()),
             'time_limit_minutes' => 120,
             'started_at' => now()->subHours(4),
             'finished_at' => now()->subHours(2),
@@ -376,6 +383,7 @@ class DashboardTest extends TestCase
         foreach ($exams as $index => $exam) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => 120,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -406,6 +414,7 @@ class DashboardTest extends TestCase
         foreach ($exams as $index => $exam) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -472,6 +481,7 @@ class DashboardTest extends TestCase
         foreach ($exams as $index => $exam) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -510,6 +520,7 @@ class DashboardTest extends TestCase
 
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exam->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
                 'time_limit_minutes' => $exam->time_limit_minutes,
                 'started_at' => now()->subHours(5 - $index),
                 'finished_at' => now()->subHours(3 - $index),
@@ -540,6 +551,7 @@ class DashboardTest extends TestCase
         foreach ([60, 100] as $index => $score) {
             $user->mockExamAttempts()->create([
                 'mock_exam_id' => $exams->first()->id,
+                'review_snapshot' => app(MockExamSnapshotService::class)->build($exams->first()),
                 'time_limit_minutes' => $exams->first()->time_limit_minutes,
                 'started_at' => now()->subHours(8 - $index),
                 'finished_at' => now()->subHours(7 - $index),
@@ -554,6 +566,7 @@ class DashboardTest extends TestCase
 
         $user->mockExamAttempts()->create([
             'mock_exam_id' => $exams->last()->id,
+            'review_snapshot' => app(MockExamSnapshotService::class)->build($exams->last()),
             'time_limit_minutes' => $exams->last()->time_limit_minutes,
             'started_at' => now()->subHours(4),
             'finished_at' => now()->subHours(2),
@@ -582,6 +595,7 @@ class DashboardTest extends TestCase
         $exam = MockExam::query()->firstOrFail();
         $user->mockExamAttempts()->create([
             'mock_exam_id' => $exam->id,
+            'review_snapshot' => app(MockExamSnapshotService::class)->build($exam),
             'time_limit_minutes' => 120,
             'started_at' => now()->subHours(2),
             'finished_at' => now(),

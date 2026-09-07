@@ -1,0 +1,2949 @@
+{
+  "checked_at": "2026-09-06",
+  "legal_as_of": "2026-09-01",
+  "received_pdf": {
+    "path": "docs/exam_202608.pdf",
+    "sha256": "e3e9960988a7a5e473b659de02c61aed7aa720e299ad1c1c5c7d031af63ad859",
+    "classification": "表紙に非公式の予想問題集と記載。2026年版と表示。公式教材として使用しない。"
+  },
+  "official_textbook": {
+    "status": "本文未入手、ユーザーは所有していない",
+    "contents_url": "https://jitsumu-up.jp/textbooks/"
+  },
+  "official_errata_2026": {
+    "status": "未入手・存在未確認。2025年の正誤表を2026年版として使用しない。"
+  },
+  "official_examples": {
+    "url": "https://jitsumu-up.jp/about/",
+    "checked_at": "2026-09-06",
+    "locator": "２級／知識問題4例、２級／計算問題1例",
+    "status": "公開例の要求操作を現行問題に対応付けた。official-example-comparison.json参照。古い条件・正答非掲載であり、2026年本試験の難易度や出題頻度を実証するものではない。"
+  },
+  "downloaded_primary_pdfs": [
+    {
+      "url": "https://www.kyoukaikenpo.or.jp/shibu/tokyo/assets/R0802.pdf",
+      "sha256": "50e36f0d8aa46131e54527ed5edfa0aab24da0b7839a4a88c199f23ee96ef77b",
+      "locator": "1枚目、左の等級・保険料表と右の適用時点",
+      "verification": "当該箇所を画像でも確認。PDF全文を逐条確認した意味ではない。 50行×5列を原本の数値字体から独立に復号・照合し250セル一致。"
+    },
+    {
+      "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+      "sha256": "457df197942b0b705d39d1b77d61f3e068ea5ee07c0113f9035ff7ee94592e6d",
+      "locator": "冊子2〜4頁（報酬範囲・現物評価）、冊子16頁（PDF19枚目、年4回以上賞与の月換算）",
+      "verification": "これらの箇所を原本画像で照合。冊子16頁とPDF19枚目の対応も再確認。4頁は本人負担控除と2026年10月住宅評価変更の注記を確認。全国現物価額表の全境界値や冊子全文の監査ではない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/11909000/001567627.pdf",
+      "sha256": "ca802d3d7bb17d519104ec790081a166784c8f992cb3f43ffd7af751420ad3b6",
+      "locator": "冊子9・10・32頁：均衡待遇、均等待遇、説明義務",
+      "verification": "9・32頁は本文抽出、10頁は抽出文字が欠落したため原本画像で照合。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+      "sha256": "55605f1753a5b86988f885cd07422079625787ec097da7d1e209a3796896f28b",
+      "locator": "3頁の通常・比例付与表、5頁の対象・意見聴取、20～21頁の半日・時間単位・繰越のQ&A",
+      "verification": "上記ページを原本画像で照合。4頁の時効・繰越は抽出本文と現行法115条を照合。全文監査済みとはしない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001021908.pdf",
+      "sha256": "9555b80259ef8a36be2bb4bc7431c1ff876ea5e56121bdcc441996102cfef5a7",
+      "locator": "1～2頁：期間・協定・所定時間の上限・48時間超の追加制限",
+      "verification": "原本画像を確認。2021年1月版。現行労基法32条の4と照合。全文の監査ではない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+      "sha256": "e991e205aeb0037f43d79eb5bc748fc7e64dd46166e675933cfd3cacafbf1613",
+      "locator": "2頁①～③：家族・通勤・住宅手当の除外条件",
+      "verification": "当該ページの原本画像を確認。2015年3月版。名称ではなく実態で判断する表を現行の厚生労働省Q&Aと照合。全文の監査ではない。"
+    },
+    {
+      "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+      "sha256": "3b7fbaa94a16e734cb5048b9eb776f7161c638152fffa9db13a1202e89a26890",
+      "locator": "PDF8頁・印刷66頁：給与明細の様式例。2018年税制の正確性の根拠として使用しない。",
+      "verification": "当該ページの原本画像を確認。全文を逐条確認した意味ではない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/11200000/001065931.pdf",
+      "sha256": "4d6a5710c25787ecf5b597a947330b0f441caf6758fb67488e539f31532b55ca",
+      "locator": "1頁：2023年3月資料の制度施行→指定→会社手続の流れ。現在の指定業者一覧とは扱わない。",
+      "verification": "当該ページの原本画像を確認。全文を逐条確認した意味ではない。"
+    },
+    {
+      "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+      "sha256": "99daf0384733d4d3417ab7591325e6602b54195e7bb9e9c01f57910bb51331e0",
+      "locator": "印刷2頁（月額表251000〜260000・甲0〜2人）、15〜16頁（賞与算出率）、19・20頁（使用区分・人数加算）。印刷頁とPDF索引を区別。",
+      "verification": "両頁の原本画像を確認。表紙は2025年7月1日法令基準。2026年度改正の原則12月1日施行・11月まで月次不変更を別の国税庁改正案内で照合。全31頁の全文監査ではない。 賞与甲21行を独立抽出・全セル比較し32セルを訂正。月額表の上記3行は原本画像で再照合。"
+    },
+    {
+      "url": "https://www.nta.go.jp/publication/pamph/gensen/2026kaisei.pdf",
+      "sha256": "8db585cd5feef2eb29109a16a2e7b16054a0fa4d6423ac622d9ea12c54b39945",
+      "locator": "8頁（0始まり7）：復興・防衛特別所得税の課税期間と税率",
+      "verification": "当該原本画像を確認。2027年分以後に適用。2026年の給与税額表と分離してq-0444退役の根拠に使用。全8頁の全規定の監査ではない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001692566.pdf",
+      "sha256": "69ca914736d051ffa067464756500c2a8cf597186e9cf091b54512a68d3b1be9",
+      "locator": "1枚目：2026年度3事業区分・二事業と注記",
+      "verification": "原本画像で労働者5/6/6、事業主8.5/9.5/10.5、計13.5/15.5/16.5の千分率と除外業種を確認。古い年度の参考欄を混用しない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-08.pdf",
+      "sha256": "1ed54ab8b0912a53d7e90bb3880dcc5c0a2878854e917f94fdcaa512c5741b83",
+      "locator": "冊子15頁（PDF1枚目）：メリット制",
+      "verification": "原本画像で一定規模事業の災害収支と非業務災害の除外を確認。全事業の詳細適用計算を承認した意味ではない。"
+    },
+    {
+      "url": "https://www.nenkin.go.jp/service/kounen/info/jimupoint.files/Vol.7.pdf",
+      "sha256": "2385db88cde70f4dbf927da7f2d6f8a4d79ea65ccc273af2897efeb21d4f5331",
+      "locator": "PDF2枚目：事例②",
+      "verification": "取得時支給対象の手当が初回給与に遅れた場合を原本画像で確認。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/dl/1-3-2.pdf",
+      "sha256": "f3066d3a7c8c81a658caffe82d572f8525bb35e1bfc103cdde35756851273b35",
+      "locator": "1枚目全体の区分表",
+      "verification": "原本画像で基本賃金・賞与・課税非課税を問わない通勤・超過勤務深夜手当の算入と実費旅費の除外を確認。刊行年度記載なし。年度更新ページの現行リンクより入手、税改正の根拠には使わない。"
+    }
+  ],
+  "downloaded_laws": [
+    {
+      "url": "https://laws.e-gov.go.jp/api/1/lawdata/322AC0000000049",
+      "sha256": "7ff8d8701deac403bccf47636e6f220d226d69568e0c6ba458dd46efd6e197d0",
+      "locator": "第15・20・21・23・24・32・34・35・75・76・84・89・90・91・106条・32条の3・38条の2～4・39・115条・32条の2・32条の4～5・36・41・65条・13・37条",
+      "verification": "XML内のMainProvision該当条文を読んで照合。公式テキスト全範囲の確認とは異なる。"
+    },
+    {
+      "url": "https://laws.e-gov.go.jp/api/1/lawdata/419AC0000000128",
+      "sha256": "2f1d4f91d03b207cbd3f7a4dc4eafd9852c878443b8986ce6449a6408247e103",
+      "locator": "第3・9・10・16・17条・7・12条・15条",
+      "verification": "XML内のMainProvision該当条文を読んで照合。公式テキスト全範囲の確認とは異なる。"
+    }
+  ],
+  "source_corrections": [
+    {
+      "source_key": "deemed_hours_notice",
+      "old_url": "https://www.mhlw.go.jp/content/11201250/000902876.pdf",
+      "finding": "実際は旧版の裁量労働制説明であり、事業場外のみなし労働時間の根拠として誤引用。",
+      "new_url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/jigyoubagai_roudou.html",
+      "checked_question_ids": [
+        "q-0055",
+        "q-0056",
+        "q-0057"
+      ]
+    }
+  ],
+  "read_primary_documents": [
+    {
+      "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+      "version": "令和7年12月版（表紙確認）",
+      "locator": "4頁のモデル活用、64～65頁の休暇・休業・欠勤・日割計算",
+      "verification": "公開PDFの該当本文を確認。全国一律の法定算式でなく規程例と区別。全94頁の監査ではない。"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/bunya/roudoukijun/model/dl/11.pdf",
+      "version": "公開旧版抜粋・発行時点未特定",
+      "locator": "2頁第60条解説1・2：減給の上限と欠勤相当分の区別",
+      "verification": "該当本文を現行法91条・労契法15条と照合。最新版と称さず、他の規定に依拠しない。"
+    }
+  ],
+  "review_evidence_index": {
+    "note": "個別確認済み台帳の根拠箇所をURL別に集約した索引。各資料の全文監査を意味せず、出典の発行時点・適用条件は個別台帳を参照。",
+    "sources": [
+      {
+        "url": "https://elaws.e-gov.go.jp/document?lawid=322AC0000000049",
+        "locators": [
+          "108条",
+          "109条・附則143条",
+          "24条1項",
+          "24条2項",
+          "25条",
+          "27条",
+          "第115条：賃金以外の請求権",
+          "第11条",
+          "第11条・第12条4項",
+          "第12条1〜4項",
+          "第12条1項",
+          "第12条1項1・2号",
+          "第12条2項",
+          "第12条2項・6項",
+          "第12条3項1〜5号",
+          "第12条4項",
+          "第13条・第37条",
+          "第13条・第37条・第92条",
+          "第15条第1項",
+          "第15条第2項",
+          "第20条第1項、第21条",
+          "第20条第1項ただし書・第3項による第19条第2項準用",
+          "第20条第2項",
+          "第23条第1・2項",
+          "第23条第2項",
+          "第24条",
+          "第24条1項ただし書",
+          "第24条2項",
+          "第24条2項：一定期日",
+          "第24条・第59条",
+          "第24条・第91条：全額払と減給制裁",
+          "第24条第1・2項",
+          "第24条第1項ただし書",
+          "第24条第2項",
+          "第24条：賃金全額・一定期日",
+          "第26条",
+          "第32条",
+          "第32条の2",
+          "第32条の2・第89条",
+          "第32条の3第1項",
+          "第32条の3第1項第2号・第2項・第4項",
+          "第32条の4第1項本文・第2号",
+          "第32条の4第1～2項・第4項",
+          "第32条の5",
+          "第32条・第35条・第37条",
+          "第32条・第36条・第37条",
+          "第32条・第37条",
+          "第32条・第40条",
+          "第32条・第89条第1号",
+          "第34条第1項",
+          "第34条第1～3項",
+          "第34条第2項",
+          "第35条・第37条",
+          "第35条・第37条・第38条の3～4",
+          "第35条第1項（曜日の指定はない）",
+          "第35条第1～2項",
+          "第35条第2項",
+          "第36条第1項・第37条",
+          "第36条第3～4項",
+          "第36条第4項括弧書",
+          "第36条第5項",
+          "第36条第5項・第6項第2号",
+          "第36条第5項後段",
+          "第36条第5～6項",
+          "第36条第6項・第37条第1項",
+          "第36条第6項第2～3号",
+          "第36条第6項第3号",
+          "第37条第1・3・4項",
+          "第37条第1・4項",
+          "第37条第1項",
+          "第37条第1項ただし書",
+          "第37条第1項ただし書・第4項",
+          "第37条第4項",
+          "第38条の2第1項",
+          "第38条の2第1項本文",
+          "第38条の3・第38条の4",
+          "第38条の4第1項・同項第6号",
+          "第39条第10項",
+          "第39条第1項",
+          "第39条第1～2項",
+          "第39条第1～3項",
+          "第39条第2項・第115条",
+          "第39条第3項",
+          "第39条第4項",
+          "第39条第5項",
+          "第39条第6項",
+          "第39条第7項括弧書",
+          "第39条第7～8項",
+          "第39条第9項、特にただし書の端数処理",
+          "第39条第9項・第89条第2号",
+          "第41条第2号・第37条第4項・第39条",
+          "第65条第1～2項",
+          "第65条第2項ただし書",
+          "第75条・第84条第1項",
+          "第76条第1項・第84条第1項",
+          "第89条・第90条",
+          "第89条第1〜10号",
+          "第89条第1〜3号・第8号",
+          "第89条第2号：賃金の計算方法",
+          "第89条（作成及び届出の義務）",
+          "第90条第1項",
+          "第91条",
+          "第9条・第37条・第41条"
+        ],
+        "question_ids": [
+          "q-0002",
+          "q-0004",
+          "q-0005",
+          "q-0006",
+          "q-0007",
+          "q-0008",
+          "q-0017",
+          "q-0018",
+          "q-0019",
+          "q-0020",
+          "q-0021",
+          "q-0022",
+          "q-0023",
+          "q-0024",
+          "q-0025",
+          "q-0026",
+          "q-0029",
+          "q-0030",
+          "q-0031",
+          "q-0032",
+          "q-0033",
+          "q-0034",
+          "q-0036",
+          "q-0037",
+          "q-0038",
+          "q-0039",
+          "q-0041",
+          "q-0042",
+          "q-0043",
+          "q-0046",
+          "q-0055",
+          "q-0056",
+          "q-0060",
+          "q-0061",
+          "q-0062",
+          "q-0063",
+          "q-0064",
+          "q-0068",
+          "q-0069",
+          "q-0072",
+          "q-0073",
+          "q-0076",
+          "q-0077",
+          "q-0078",
+          "q-0079",
+          "q-0080",
+          "q-0084",
+          "q-0085",
+          "q-0088",
+          "q-0089",
+          "q-0092",
+          "q-0093",
+          "q-0094",
+          "q-0096",
+          "q-0097",
+          "q-0098",
+          "q-0099",
+          "q-0103",
+          "q-0105",
+          "q-0109",
+          "q-0111",
+          "q-0112",
+          "q-0113",
+          "q-0114",
+          "q-0115",
+          "q-0116",
+          "q-0117",
+          "q-0118",
+          "q-0119",
+          "q-0120",
+          "q-0121",
+          "q-0122",
+          "q-0127",
+          "q-0129",
+          "q-0130",
+          "q-0132",
+          "q-0133",
+          "q-0138",
+          "q-0139",
+          "q-0141",
+          "q-0142",
+          "q-0143",
+          "q-0144",
+          "q-0145",
+          "q-0180",
+          "q-0181",
+          "q-0185",
+          "q-0190",
+          "q-0192",
+          "q-0193",
+          "q-0196",
+          "q-0197",
+          "q-0209",
+          "q-0210",
+          "q-0211",
+          "q-0218",
+          "q-0239",
+          "q-0245",
+          "q-0246",
+          "q-0257",
+          "q-0258",
+          "q-0269",
+          "q-0270",
+          "q-0275",
+          "q-0276",
+          "q-0278",
+          "q-0279",
+          "q-0280",
+          "q-0281",
+          "q-0282",
+          "q-0283",
+          "q-0284",
+          "q-0289",
+          "q-0292",
+          "q-0295",
+          "q-0297",
+          "q-0299",
+          "q-0310",
+          "q-0311",
+          "q-0315",
+          "q-0316",
+          "q-0317",
+          "q-0322",
+          "q-0323",
+          "q-0324",
+          "q-0325",
+          "q-0326",
+          "q-0330",
+          "q-0334",
+          "q-0336",
+          "q-0339",
+          "q-0344",
+          "q-0347"
+        ]
+      },
+      {
+        "url": "https://elaws.e-gov.go.jp/document?lawid=419AC0000000128",
+        "locators": [
+          "第15条：懲戒の客観的合理性・社会的相当性",
+          "第15条：懲戒の濫用",
+          "第16条",
+          "第17条第1項",
+          "第3条第1・3・4項",
+          "第7条・第12条：周知した就業規則と規則を下回る契約",
+          "第9条・第10条",
+          "第9条・第10条本文及びただし書"
+        ],
+        "question_ids": [
+          "q-0010",
+          "q-0011",
+          "q-0012",
+          "q-0013",
+          "q-0027",
+          "q-0211",
+          "q-0245",
+          "q-0257"
+        ]
+      },
+      {
+        "url": "https://jitsumu-up.jp/about/",
+        "locators": [
+          "2級：出題科目の法令基準日と公式テキスト条件",
+          "級による試験区分：2級・1級"
+        ],
+        "question_ids": [
+          "q-0348",
+          "q-0396"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/chiba-roudoukyoku/content/contents/heikinchingin.pdf",
+        "locators": [
+          "2頁4：3か月未満でも原則直前締切、1締切期間未満の例外"
+        ],
+        "question_ids": [
+          "q-0279"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudou_hoken/hourei_seido/roudouhoken_about/keisan_houhou.html",
+        "locators": [
+          "労働者被保険者負担額：賃金を支払う都度"
+        ],
+        "question_ids": [
+          "q-0681"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/1syukan.html",
+        "locators": [
+          "対象事業場・労使協定・労働時間の上限",
+          "採用するには1：40時間（特例措置事業も同じ）"
+        ],
+        "question_ids": [
+          "q-0134",
+          "q-0141"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/hyogo-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/_79872/jigyoubagai_roudou.html",
+        "locators": [
+          "第1段落：事業場内外を通算して通常所定内の場合",
+          "第1～2段落：算定困難・具体的な指揮監督",
+          "第3～4段落：通常所定時間超過の場合の事業場内実時間の加算"
+        ],
+        "question_ids": [
+          "q-0055",
+          "q-0056",
+          "q-0057"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/kagoshima-roudoukyoku/yokuaru_goshitsumon/kyushokuchu/0310.html",
+        "locators": [
+          "1時間賃金の50銭以上切上げ",
+          "Q10の2：1時間当たり賃金の50銭境界",
+          "Q10の第1項・昭63.3.14基発150号",
+          "Q10回答(1)：30分未満切捨て",
+          "Q10回答(1)：おのおのの時間数の合計",
+          "Q10回答(1)：例外は月合計",
+          "Q10回答(1)：各種類の月間時間合計",
+          "Q10回答(2)：1時間当たり賃金の50銭以上切上げ",
+          "Q10回答(3)：各割増賃金総額、(2)の50銭境界",
+          "割増賃金額の端数処理",
+          "時間外労働等Q10・月合計の方式"
+        ],
+        "question_ids": [
+          "q-0160",
+          "q-0223",
+          "q-0224",
+          "q-0228",
+          "q-0229",
+          "q-0230",
+          "q-0232",
+          "q-0340",
+          "q-0341",
+          "q-0677",
+          "q-0678"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/kanagawa-roudoukyoku/hourei_seido_tetsuzuki/saiteichingin_chinginseido/heikinchi.html",
+        "locators": [
+          "以前3か月間とは：締切日当日の事由は前締切へ遡及",
+          "実際の計算：月給制は暦日数で除す",
+          "平均賃金の計算・以前3か月間とは",
+          "賃金の総額とは：通勤・各種手当、3か月ごとの賞与",
+          "賃金総額：通勤手当を含む"
+        ],
+        "question_ids": [
+          "q-0276",
+          "q-0278",
+          "q-0281",
+          "q-0283",
+          "q-0297"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/nagano-roudoukyoku/content/contents/roudoujyouken_handbook202502-honbun1.pdf",
+        "locators": [
+          "PDF12頁・印刷8頁：実費弁償的なもの・出張旅費",
+          "PDF12頁：任意・恩恵的給付と就業規則等による支給要件の注記",
+          "PDF12頁：企業設備の一環・制服",
+          "PDF12頁：労働対償性と実費弁償の区別",
+          "PDF12頁：実費弁償は賃金でない",
+          "PDF12頁：恩恵給付・実費弁償",
+          "PDF12頁：結婚祝金と支給要件がある場合の注記",
+          "PDF12頁：賃金の定義と客のチップ等",
+          "PDF12頁：銀行振込の労使協定・本人同意"
+        ],
+        "question_ids": [
+          "q-0291",
+          "q-0292",
+          "q-0294",
+          "q-0295",
+          "q-0297",
+          "q-0298",
+          "q-0299",
+          "q-0300",
+          "q-0312"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/osaka-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/hourei_seido/jikan2/warimasi.html",
+        "locators": [
+          "除外賃金6：臨時に支払われた賃金（結婚手当など）"
+        ],
+        "question_ids": [
+          "q-0173"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/saitama-roudoukyoku/library/saitama-roudoukyoku/seido/kijun/handbook2018/59-70.pdf",
+        "locators": [
+          "PDF8頁・印刷66頁：給与明細書モデル例の勤怠／支給／控除",
+          "PDF8頁：勤怠・時間外勤務欄",
+          "PDF8頁：基本給・役職手当・残業手当の支給欄",
+          "PDF8頁：給与支給額・控除総額・支給額の関係",
+          "支給・控除・差引欄",
+          "支給合計の集計",
+          "支給控除の内訳・合計・差引",
+          "支給欄の通勤手当",
+          "給与明細書の支給欄・控除欄（2018の税率を使用しない）",
+          "給与明細書モデルの控除欄・健康厚年（様式のみ）",
+          "給与明細書モデル・支給控除合計と差引（様式のみ参照）",
+          "総支給−控除合計＝差引支給",
+          "総支給・控除・差引支給の区分"
+        ],
+        "question_ids": [
+          "q-0266",
+          "q-0267",
+          "q-0268",
+          "q-0274",
+          "q-0685",
+          "q-0686",
+          "q-0687",
+          "q-0699",
+          "q-0705",
+          "q-0708",
+          "q-0717",
+          "q-0731",
+          "q-0829",
+          "q-0830"
+        ]
+      },
+      {
+        "url": "https://jsite.mhlw.go.jp/tochigi-roudoukyoku/hourei_seido_tetsuzuki/roudoukijun_keiyaku/roukijou/soudan_jirei/q_and_a5/q_and_a5_r.html",
+        "locators": [
+          "4週間の起算日",
+          "休日に関する回答：4週間の起算日を就業規則等で明らかにする（規則第12条の2）"
+        ],
+        "question_ids": [
+          "q-0036",
+          "q-0068"
+        ]
+      },
+      {
+        "url": "https://work-holiday.mhlw.go.jp/planned-granting/procedure.html",
+        "locators": [
+          "対象日数：保有日数から少なくとも5日を残す",
+          "就業規則への規定・労使協定の締結・対象日数"
+        ],
+        "question_ids": [
+          "q-0097",
+          "q-0105"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q11.html",
+        "locators": [
+          "回答第2～4段落：明確区分・法定計算不足額支払"
+        ],
+        "question_ids": [
+          "q-0217"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q3.html",
+        "locators": [
+          "2(1)：時間内外を問わず深夜加算",
+          "2(1)：深夜の別途加算",
+          "2(1)：深夜は時間内外を問わず別途加算",
+          "2(2)：法定休日に時間外は重ねず深夜は加算",
+          "2(2)：法定休日の時間外加算なし・深夜は加算",
+          "3(1)・4(1)：月給の1時間額への換算",
+          "3(1)：1年間における1か月平均所定労働時間",
+          "3(1)：出来高給は算定期間中の総労働時間で除す",
+          "3：月給を時間額に換算",
+          "3～4：月給の時間額換算"
+        ],
+        "question_ids": [
+          "q-0155",
+          "q-0160",
+          "q-0161",
+          "q-0162",
+          "q-0178",
+          "q-0179",
+          "q-0182",
+          "q-0183",
+          "q-0210",
+          "q-0227",
+          "q-0229"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q4.html",
+        "locators": [
+          "2：賞与時支給分を含め年俸額が確定する場合の算定基礎"
+        ],
+        "question_ids": [
+          "q-0172"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/chingin/q6.html",
+        "locators": [
+          "1労働日の一部休業：その日全体で6割と既払賃金との差額",
+          "会社の経営上事情・不可抗力の区別",
+          "平均賃金60％の保障、上乗せ契約との違い"
+        ],
+        "question_ids": [
+          "q-0284",
+          "q-0285",
+          "q-0288"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/roudoujikan/q1.html",
+        "locators": [
+          "休憩時間の一斉付与の適用除外（労基法40・労基則31・労基法34第2項）"
+        ],
+        "question_ids": [
+          "q-0043"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/sonota/q1.html",
+        "locators": [
+          "労基18・任意の貯蓄管理と協定・保全"
+        ],
+        "question_ids": [
+          "q-0698"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/sonota/q10.html",
+        "locators": [
+          "Q10：通勤の定義・逸脱中断・例外"
+        ],
+        "question_ids": [
+          "q-0560"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q1.html",
+        "locators": [
+          "パートタイム労働者の付与",
+          "使用目的の自由と時季変更権",
+          "労働義務のない日には取得できない",
+          "基本的な考え方4：年休の使用目的は労働者の自由",
+          "年5日の確実な取得：管理監督者も含む"
+        ],
+        "question_ids": [
+          "q-0092",
+          "q-0095",
+          "q-0103",
+          "q-0104",
+          "q-0130"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/qa/roudousya/yukyu/q3.html",
+        "locators": [
+          "労使協定の項目・監督署へ届け出る必要はない"
+        ],
+        "question_ids": [
+          "q-0098"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_jikangai.html",
+        "locators": [
+          "4．管理監督者：実態判断の3基準",
+          "割増賃金1の端数処理：日々の切捨て不可",
+          "割増賃金5：定額残業制、差額を当該支払期に支払う判例"
+        ],
+        "question_ids": [
+          "q-0131",
+          "q-0217",
+          "q-0232"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_parttime.html",
+        "locators": [
+          "管理監督者の適用除外：深夜割増は必要"
+        ],
+        "question_ids": [
+          "q-0130"
+        ]
+      },
+      {
+        "url": "https://www.check-roudou.mhlw.go.jp/study/roudousya_tayou_senmon.html",
+        "locators": [
+          "制度を実施する（2）休日労働・深夜労働",
+          "協定の届出・労働者本人の同意"
+        ],
+        "question_ids": [
+          "q-0059",
+          "q-0061"
+        ]
+      },
+      {
+        "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/019/093/260009.pdf",
+        "locators": [
+          "4頁①特別徴収のしくみ",
+          "4頁②：月割額100円未満は初回加算"
+        ],
+        "question_ids": [
+          "q-0364",
+          "q-0369"
+        ]
+      },
+      {
+        "url": "https://www.city.nerima.tokyo.jp/dl/zei/jigyo/todokede.html",
+        "locators": [
+          "届出が必要な主なケース3・4"
+        ],
+        "question_ids": [
+          "q-0429"
+        ]
+      },
+      {
+        "url": "https://www.city.nerima.tokyo.jp/kurashi/zei/jyuminzei/jumin_shotoku.html",
+        "locators": [
+          "住民税の税率（所得割）6%＋4%と基本的違い",
+          "前年所得で翌年度課税",
+          "前年所得課税",
+          "納付方法：普通徴収と給与・年金特別徴収",
+          "課税される所得：前年所得課税の2026年度例"
+        ],
+        "question_ids": [
+          "q-0419",
+          "q-0422",
+          "q-0424",
+          "q-0426",
+          "q-0799"
+        ]
+      },
+      {
+        "url": "https://www.city.nerima.tokyo.jp/kurashi/zei/jyuminzei/kyuyozeikin/02974801.html",
+        "locators": [
+          "住民税・注釈2",
+          "住民税・注釈3",
+          "未徴収税額を給与・退職手当等から一括徴収",
+          "退職時の一括徴収"
+        ],
+        "question_ids": [
+          "q-0426",
+          "q-0432",
+          "q-0797",
+          "q-0800"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/003/index.html",
+        "locators": [
+          "2026年4月以降の賞与",
+          "2026年4月分0.23％",
+          "2026年4月分から支援金",
+          "2026年4月分・5月納付分開始",
+          "2026年4月分開始",
+          "2026年4月分開始0.23％",
+          "4月分開始",
+          "一般被保険者・2026年4月分開始",
+          "賞与への支援金開始"
+        ],
+        "question_ids": [
+          "q-0332",
+          "q-0564",
+          "q-0570",
+          "q-0679",
+          "q-0734",
+          "q-0750",
+          "q-0751",
+          "q-0781",
+          "q-0800",
+          "q-0826",
+          "q-0827",
+          "q-0831"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/about/business/insurance_rate/rate_prefectures/r08/index.html",
+        "locators": [
+          "冒頭：3月分4月納付・任意継続日雇特例は4月分",
+          "都道府県単位健康率・介護全国1.62%"
+        ],
+        "question_ids": [
+          "q-0478",
+          "q-0480"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/about/business/overview/",
+        "locators": [
+          "医療保険制度の体系：一般健康保険の保険者・被保険者、共済・国保・高齢者医療",
+          "医療保険制度の体系：協会と組合",
+          "高齢者医療：75歳以上"
+        ],
+        "question_ids": [
+          "q-0456",
+          "q-0460",
+          "q-0586"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/001/",
+        "locators": [
+          "給付範囲：42日・多胎98日、産後56日、出産予定日超過、出産日は産前"
+        ],
+        "question_ids": [
+          "q-0454"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/childbirth/index.html",
+        "locators": [
+          "出産する・したとき／両給付の目的"
+        ],
+        "question_ids": [
+          "q-0454"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/high_cost_medical_expenses/002/",
+        "locators": [
+          "高額療養費とは・令和8年8月見直し・自己負担限度額"
+        ],
+        "question_ids": [
+          "q-0452"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/",
+        "locators": [
+          "給付対象(1)〜(4)"
+        ],
+        "question_ids": [
+          "q-0453"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/benefit/mynumber_insurance_card/",
+        "locators": [
+          "療養の給付とは・給付の範囲・業務通勤災害",
+          "療養の給付：業務外の疾病負傷・診察薬剤処置入院"
+        ],
+        "question_ids": [
+          "q-0451",
+          "q-0580"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/faq/benefit/001/index.html",
+        "locators": [
+          "Q1：出産手当金は本人、出産育児一時金は本人または被扶養者の出産"
+        ],
+        "question_ids": [
+          "q-0454"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/001/",
+        "locators": [
+          "Q1：任意継続・国保・家族扶養"
+        ],
+        "question_ids": [
+          "q-0611"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/002/",
+        "locators": [
+          "Q1・Q2：20日、休日、必着、継続2か月"
+        ],
+        "question_ids": [
+          "q-0610"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/faq/voluntary_continuation/004/",
+        "locators": [
+          "Q1：退職翌日取得・2年・途中喪失"
+        ],
+        "question_ids": [
+          "q-0610"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/shibu/ibaraki/public_relations/009/index.html",
+        "locators": [
+          "1日生まれの65歳到達月から第2号徴収なし",
+          "40歳・65歳到達月の介護保険料",
+          "5月1日生まれは4月分から",
+          "65歳から第1号、市区町村徴収",
+          "介護保険制度：第2号労使折半",
+          "介護保険料はいつから徴収されなくなるか：65歳誕生日前日の属する月、1日生まれの例。2020年公表の制度原則を参照し2026年度料率には使用しない。",
+          "制度・40歳開始・65歳終了・誕生日前日",
+          "年齢到達日と対象月",
+          "満40歳・誕生日前日と対象月",
+          "満65歳前日・第1号市町村"
+        ],
+        "question_ids": [
+          "q-0319",
+          "q-0450",
+          "q-0482",
+          "q-0576",
+          "q-0577",
+          "q-0740",
+          "q-0741",
+          "q-0742",
+          "q-0743",
+          "q-0780"
+        ]
+      },
+      {
+        "url": "https://www.kyoukaikenpo.or.jp/shibu/tokyo/assets/R0802.pdf",
+        "locators": [
+          "11.47・0.23・18.3、賞与標準千切",
+          "195000以上210000未満→標準20万円",
+          "195000以上210000未満→標準20万円・東京9.85％",
+          "1枚目の健康保険と厚生年金の上限",
+          "1枚目：健康保険の1等級58,000〜50等級1,390,000",
+          "2026年3月一般被保険者：9.85・11.47％",
+          "2026年3月分健康9.85・介護1.62、4月分支援金0.23、厚年18.3と本人折半",
+          "2026年度介護1.62％・本人折半",
+          "300000行の本人分と支援金開始月",
+          "健康介護・厚年・支援金の各本人分",
+          "健康介護非該当・厚年",
+          "報酬250000〜270000未満と270000〜290000未満の境界",
+          "東京2026年度表・厚生年金の労使合計と折半列",
+          "東京2026年度表：健康・介護、支援金0.23％と折半",
+          "東京9.85・支援0.23・厚年18.3、賞与千切",
+          "東京9.85％・介護の40〜64歳・標準30万円",
+          "標準報酬30万円・健康9.85％折半欄14775",
+          "標準報酬表1〜50等級、厚年括弧1〜32・上下端注記"
+        ],
+        "question_ids": [
+          "q-0465",
+          "q-0466",
+          "q-0564",
+          "q-0567",
+          "q-0570",
+          "q-0571",
+          "q-0679",
+          "q-0734",
+          "q-0749",
+          "q-0750",
+          "q-0751",
+          "q-0760",
+          "q-0761",
+          "q-0827",
+          "q-0828",
+          "q-0829",
+          "q-0830",
+          "q-0831",
+          "q-0834"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei05.html",
+        "locators": [
+          "一定期日の支払原則",
+          "全額払いの協定例外",
+          "全額払いの原則と法令上の控除",
+          "全額払の原則",
+          "毎月1回以上・一定期日",
+          "毎月一回以上・一定期日の趣旨",
+          "通貨払の原則の趣旨"
+        ],
+        "question_ids": [
+          "q-0311",
+          "q-0315",
+          "q-0325",
+          "q-0326",
+          "q-0344",
+          "q-0697",
+          "q-0698"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyungyosei24.html",
+        "locators": [
+          "両方同時適用なら高い方",
+          "地域別と特定の適用地域・産業"
+        ],
+        "question_ids": [
+          "q-0307",
+          "q-0308"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_11.html",
+        "locators": [
+          "休憩中の電話・来客対応",
+          "電話・来客当番は手待時間で休憩ではない旨の回答"
+        ],
+        "question_ids": [
+          "q-0035",
+          "q-0046"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_16.html",
+        "locators": [
+          "協定事項と年5日以内"
+        ],
+        "question_ids": [
+          "q-0098"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/faq_kijyunhou_24.html",
+        "locators": [
+          "回答：1か月を超える期間ごとに支払われる賃金",
+          "回答：7種類の列挙",
+          "回答：子女教育手当",
+          "回答：通常の労働の賃金と除外7種類",
+          "回答：通常賃金と除外7種類",
+          "家族手当の割増基礎の除外要件",
+          "除外手当の要件"
+        ],
+        "question_ids": [
+          "q-0147",
+          "q-0155",
+          "q-0158",
+          "q-0172",
+          "q-0176",
+          "q-0677",
+          "q-0703"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/model/dl/11.pdf",
+        "locators": [
+          "2頁第60条解説1・2、91条と不就労部分の区別",
+          "2頁第60条解説1・2：額と欠勤控除の区別",
+          "2頁：第60条解説2、遅刻・早退の額を超える減給",
+          "第60条解説1：不就労相当額を超える減給"
+        ],
+        "question_ids": [
+          "q-0238",
+          "q-0245",
+          "q-0256",
+          "q-0832"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/dl/1-3-2.pdf",
+        "locators": [
+          "1枚目左列：基本賃金・賞与・通勤手当（課税非課税問わず）・超過勤務深夜手当",
+          "冒頭：税・社会保険料等控除前の支払総額",
+          "出張旅費宿泊費・実費弁償は右列、通勤は左列",
+          "賞与を賃金に含める",
+          "非課税通勤も賃金"
+        ],
+        "question_ids": [
+          "q-0680",
+          "q-0692",
+          "q-0722",
+          "q-0725",
+          "q-0782"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/bunya/roudoukijun/roudouhoken01/kousin.html",
+        "locators": [
+          "1．保険年度、概算と確定、年度更新",
+          "1．年度更新の確定と概算"
+        ],
+        "question_ids": [
+          "q-0673",
+          "q-0684"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/churoi/assen/dl/jirei28.pdf",
+        "locators": [
+          "1頁Point（2）・3頁解説（1）：事業の規模・繁閑・代替要員確保・通常の配慮"
+        ],
+        "question_ids": [
+          "q-0103"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/000487097.pdf",
+        "locators": [
+          "問1－1：週平均50時間超の36協定と各期間の支払日"
+        ],
+        "question_ids": [
+          "q-0067"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001021908.pdf",
+        "locators": [
+          "2頁2(2)：1日・1週間の限度と対象期間3か月超の追加制限"
+        ],
+        "question_ids": [
+          "q-0140"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001140963.pdf",
+        "locators": [
+          "20頁Q3：半日0.5日算入・時間単位は不算入",
+          "3頁通常付与の最終列・4頁年休の繰越し",
+          "3頁：比例付与の対象条件",
+          "3頁：比例付与表、週3日・6か月",
+          "3頁：比例付与表、週4日・6か月",
+          "3頁：発生要件と通常の付与日数",
+          "3頁：要件と通常付与日数",
+          "3頁：通常付与表",
+          "4頁：年次有給休暇の繰越し",
+          "4頁：時季変更権",
+          "5頁Point3：時季指定の方法",
+          "5頁：10日以上付与される労働者が対象",
+          "5頁：年5日対象と時季指定義務",
+          "5～6頁・20頁Q3～4：半日・時間単位と対象者"
+        ],
+        "question_ids": [
+          "q-0084",
+          "q-0085",
+          "q-0086",
+          "q-0088",
+          "q-0089",
+          "q-0091",
+          "q-0094",
+          "q-0095",
+          "q-0096",
+          "q-0101",
+          "q-0111",
+          "q-0142",
+          "q-0143",
+          "q-0144"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001140964.pdf",
+        "locators": [
+          "10頁：コアタイム（任意）",
+          "5頁注2：特例措置対象事業場",
+          "7～8頁：清算期間延長と届出",
+          "8・11頁：届出と協定有効期間、13・15頁：月別時間外",
+          "制度の概要・導入の要件"
+        ],
+        "question_ids": [
+          "q-0063",
+          "q-0064",
+          "q-0066",
+          "q-0067",
+          "q-0077"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001317968.pdf",
+        "locators": [
+          "1頁2023年4月以降・2頁深夜労働との関係",
+          "1頁：2023年4月1日以降は大企業・中小とも50％",
+          "2頁規則例①60時間以下・②60時間超",
+          "2頁規則例・3頁60時間を超えた時点からの適用",
+          "2頁：60時間超の時間外と深夜は75％以上",
+          "2頁：休日労働との関係",
+          "2頁：深夜労働との関係"
+        ],
+        "question_ids": [
+          "q-0180",
+          "q-0181",
+          "q-0190",
+          "q-0191",
+          "q-0192",
+          "q-0218",
+          "q-0236"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001620507.pdf",
+        "locators": [
+          "47条3項1～3",
+          "47条3項と解説",
+          "4頁モデル活用と65頁第46条第2項の規程例",
+          "4頁モデル活用・65頁第45条の規程例",
+          "64～65頁：第43～46条と解説、休暇・休業・欠勤を区別",
+          "65頁・第45条と解説：月給の基本給÷月平均所定時間、不就労分",
+          "65頁第45条：日数又は時間分の控除例",
+          "65頁第45条：時間分の控除例",
+          "65頁第46条第2項：当該期間の所定日を基準とする日割例",
+          "66頁48条・解説：本人または生計維持者",
+          "第45〜46条：勤怠控除・計算期間・支払日を規程で定める例",
+          "第45〜47条：勤怠控除・期間・支給控除",
+          "第45条：不就労分控除の規程例",
+          "第46条1項：支払日が休日の場合の繰上げ規程例",
+          "第46条：締切・支払",
+          "第46条：締切日・支払日を定める規程例",
+          "第46条：賃金計算期間及び支払日",
+          "第47条2項・解説2",
+          "第47条3項1〜3",
+          "第47条3項・解説1",
+          "第47条3項及び解説：法定控除・組合費等の協定控除",
+          "第47条解説1：住宅寮等、事理明白なもの",
+          "第47条解説2",
+          "第47条：支払と控除"
+        ],
+        "question_ids": [
+          "q-0237",
+          "q-0239",
+          "q-0240",
+          "q-0241",
+          "q-0242",
+          "q-0243",
+          "q-0246",
+          "q-0256",
+          "q-0258",
+          "q-0263",
+          "q-0264",
+          "q-0265",
+          "q-0269",
+          "q-0270",
+          "q-0274",
+          "q-0275",
+          "q-0312",
+          "q-0316",
+          "q-0317",
+          "q-0322",
+          "q-0324",
+          "q-0330",
+          "q-0332",
+          "q-0347"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/001692566.pdf",
+        "locators": [
+          "2026年度表1枚目画像：一般5・8.5・13.5、二事業3.5",
+          "2026年度表：事業主負担の失業等・育休と二事業",
+          "一般事業本人5/1000"
+        ],
+        "question_ids": [
+          "q-0568",
+          "q-0569",
+          "q-0675"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/content/140811-2.pdf",
+        "locators": [
+          "1頁1：採用方法と注2",
+          "1頁2③：あらかじめ具体的に定め任意変更不可",
+          "1頁：定義と対象期間・労働日特定"
+        ],
+        "question_ids": [
+          "q-0132",
+          "q-0135",
+          "q-0138"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/file/06-Seisakujouhou-11200000-Roudoukijunkyoku/0000149439.pdf",
+        "locators": [
+          "1頁2適用範囲・2頁4(1)(2)",
+          "4(1)・(2)・(4)"
+        ],
+        "question_ids": [
+          "q-0338",
+          "q-0340"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/hoken/kakikata/dl/keizoku-21.pdf",
+        "locators": [
+          "44頁第20：賃金総額×被保険者負担率",
+          "一般の事業の2026年度本人5/1000・賃金総額に乗じる",
+          "印刷44頁第20：源泉控除①と現金払い②・特約",
+          "対象賃金と本人率",
+          "本人料率と円未満処理",
+          "本人率と円未満処理",
+          "本人率計算",
+          "賃金総額×本人率",
+          "雇用保険対象賃金"
+        ],
+        "question_ids": [
+          "q-0682",
+          "q-0692",
+          "q-0725",
+          "q-0781",
+          "q-0782",
+          "q-0784",
+          "q-0827",
+          "q-0828",
+          "q-0829",
+          "q-0830"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/new-info/kobetu/roudou/gyousei/kantoku/dl/040324-5a.pdf",
+        "locators": [
+          "2頁①・③：家族・住宅の除外条件",
+          "2頁①：人数に応じた家族手当",
+          "2頁①：家族の有無・人数に関係なく一律の例",
+          "2頁①：扶養人数に応じた支給例",
+          "2頁②：距離・費用に関係なく一律の例",
+          "2頁②：通勤距離・実費に応じた算定",
+          "2頁③：住宅費用に応じた算定が必要",
+          "2頁③：費用定率と住宅形態別定額の比較",
+          "2頁冒頭：①～⑤の手当は名称だけで判断しない",
+          "2頁冒頭：名称だけでは除外できない",
+          "2頁：家族・通勤の実態判断"
+        ],
+        "question_ids": [
+          "q-0148",
+          "q-0149",
+          "q-0150",
+          "q-0151",
+          "q-0152",
+          "q-0153",
+          "q-0154",
+          "q-0158",
+          "q-0160",
+          "q-0176",
+          "q-0177"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/childcare/",
+        "locators": [
+          "対象となる子・利用回数・利用期間"
+        ],
+        "question_ids": [
+          "q-0001"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/flexiblework/",
+        "locators": [
+          "5つの措置から2つ以上を選択・対象労働者が1つ選択"
+        ],
+        "question_ids": [
+          "q-0052"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/paternity/",
+        "locators": [
+          "取得期間・利用回数",
+          "申出・2回に分割する場合"
+        ],
+        "question_ids": [
+          "q-0047",
+          "q-0048"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/ikuji/shortworking/",
+        "locators": [
+          "措置の内容・対象労働者・適用除外・代替措置"
+        ],
+        "question_ids": [
+          "q-0051"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/law-amendment/",
+        "locators": [
+          "介護のためのテレワーク導入（努力義務）"
+        ],
+        "question_ids": [
+          "q-0053"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/koyoukintou/ryouritsu/kaigo/leave/",
+        "locators": [
+          "介護休業給付：原則67％・賃金調整",
+          "利用期間・利用回数・対象となる家族"
+        ],
+        "question_ids": [
+          "q-0049",
+          "q-0558"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/tokusetusaito/about.html",
+        "locators": [
+          "保険料負担者",
+          "労働保険料の労災・雇用の負担区分",
+          "労災は事業主全額、雇用は労使双方",
+          "労災事業主全額",
+          "労災会社全額",
+          "労災会社負担",
+          "労災保険の対象者と役員等"
+        ],
+        "question_ids": [
+          "q-0332",
+          "q-0333",
+          "q-0559",
+          "q-0674",
+          "q-0697",
+          "q-0738",
+          "q-0750"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/shinsai_jouhou/faq_04.html",
+        "locators": [
+          "問4－1：時間単位年休を計画的付与として与えることは認められない"
+        ],
+        "question_ids": [
+          "q-0107"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_009.html",
+        "locators": [
+          "2．個人事業所：法定17業種と2029年経過措置、注7"
+        ],
+        "question_ids": [
+          "q-0502"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/newpage_32105.html",
+        "locators": [
+          "掲載リーフレット001298245.pdf、2頁「1 就業場所・業務の変更の範囲の明示」"
+        ],
+        "question_ids": [
+          "q-0003"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/newpage_51380.html",
+        "locators": [
+          "所定外労働の制限（残業免除）の対象拡大"
+        ],
+        "question_ids": [
+          "q-0050"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000061842.html",
+        "locators": [
+          "掲載あらまし令和7年8月版、10頁「第9条のポイント」（原本画像で確認）",
+          "掲載あらまし令和7年8月版、32頁「第14条のポイント」2・3",
+          "掲載あらまし令和7年8月版、9頁「第8条のポイント」"
+        ],
+        "question_ids": [
+          "q-0014",
+          "q-0015",
+          "q-0016"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000135026.html",
+        "locators": [
+          "基本手当の対象となる失業状態"
+        ],
+        "question_ids": [
+          "q-0555"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158464.html",
+        "locators": [
+          "Q1：原則60〜64歳・5年・75％未満"
+        ],
+        "question_ids": [
+          "q-0556"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158500.html",
+        "locators": [
+          "2026年8月版Q34：賃金80％以上と減額"
+        ],
+        "question_ids": [
+          "q-0557"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000158665.html",
+        "locators": [
+          "Q1：対象家族ごと93日・3回"
+        ],
+        "question_ids": [
+          "q-0558"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000160564_00043.html",
+        "locators": [
+          "支給率・60歳到達日（5年未満時の読替）・2025年4月境界"
+        ],
+        "question_ids": [
+          "q-0556"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000166858.html",
+        "locators": [
+          "業務災害・通勤災害の給付",
+          "療養・休業（補償）等・障害・遺族の各支給事由"
+        ],
+        "question_ids": [
+          "q-0560",
+          "q-0561"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000198659_00015.html",
+        "locators": [
+          "賃金のデジタル払い制度の開始：令和5年4月"
+        ],
+        "question_ids": [
+          "q-0302"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/nintei/gaiyo4.html",
+        "locators": [
+          "国内住所・医療保険加入",
+          "第1号の住所要件",
+          "第1号・第2号の比較表",
+          "第1号・第2号被保険者の区分",
+          "第2号40〜64歳",
+          "第2号40〜64歳の医療保険加入者",
+          "第2号40以上65未満",
+          "第2号の年齢",
+          "第2号の年齢・住所",
+          "第2号の特定疾病・認定による給付",
+          "被保険者区分"
+        ],
+        "question_ids": [
+          "q-0319",
+          "q-0572",
+          "q-0573",
+          "q-0575",
+          "q-0576",
+          "q-0740",
+          "q-0742",
+          "q-0749",
+          "q-0751",
+          "q-0780",
+          "q-0781"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/koyouhoken/tetsuduki_ichiran01.html",
+        "locators": [
+          "(1)被保険者に関する手続：資格取得届翌月10日",
+          "(1)資格喪失届：事実翌日から10日"
+        ],
+        "question_ids": [
+          "q-0578",
+          "q-0579"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/index.html",
+        "locators": [
+          "最低賃金制度の概要"
+        ],
+        "question_ids": [
+          "q-0307"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/chingin/newpage_43898.html",
+        "locators": [
+          "除外賃金1〜6"
+        ],
+        "question_ids": [
+          "q-0309"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/hoken/roudouhoken21/index.html",
+        "locators": [
+          "2026年6月1日〜7月10日",
+          "令和8年度の6月1日〜7月10日",
+          "令和8年度：6月1日〜7月10日"
+        ],
+        "question_ids": [
+          "q-0259",
+          "q-0673",
+          "q-0684"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/roudouzikan/sairyo.html",
+        "locators": [
+          "2024年4月1日からの制度改正"
+        ],
+        "question_ids": [
+          "q-0059"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/03_00028.html",
+        "locators": [
+          "指定資金移動業者への支払の要件",
+          "概要・2023年3月掲載リーフレットの今後の流れ",
+          "概要・注意点：指定業者、現金化不可ポイント・暗号資産",
+          "注意点：希望しない者への強制不可・銀行口座への変更"
+        ],
+        "question_ids": [
+          "q-0302",
+          "q-0303",
+          "q-0305",
+          "q-0323"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/roudoukijun/zigyonushi/shienjigyou/newpage_55414.html",
+        "locators": [
+          "Q3・Q4：協定と本人手続・指定業者選定",
+          "必要な手続き・Q3"
+        ],
+        "question_ids": [
+          "q-0303",
+          "q-0304"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/stf/web_magazine/closeup/51.html",
+        "locators": [
+          "計画的付与：前年繰越を含めた付与日数から5日を引く"
+        ],
+        "question_ids": [
+          "q-0097",
+          "q-0105"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/tekiyoukakudai/jugyouin/taisho/",
+        "locators": [
+          "2か月超の雇用見込み",
+          "企業規模51人と2027年10月36人"
+        ],
+        "question_ids": [
+          "q-0498",
+          "q-0650"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/tekiyoukakudai/qa/",
+        "locators": [
+          "4分の3基準：所定時間と所定日数の両方",
+          "適用対象Q4：月額88,000円と年収約106万円",
+          "適用対象Q5：更新予定・実績、季節的業務等"
+        ],
+        "question_ids": [
+          "q-0496",
+          "q-0499",
+          "q-0612"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb1899&dataType=1&pageNo=1",
+        "locators": [
+          "2(4)ロ・ホ・ヘ・ト（フレックス等の旧記述は使用しない）"
+        ],
+        "question_ids": [
+          "q-0141"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb1918&dataType=1&pageNo=1",
+        "locators": [
+          "基発680号「記」要件一・二"
+        ],
+        "question_ids": [
+          "q-0009"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tb9536&dataType=1",
+        "locators": [
+          "出勤率の基礎となる全労働日の取扱い"
+        ],
+        "question_ids": [
+          "q-0093"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00tc8495&dataType=1&pageNo=1",
+        "locators": [
+          "1：法37条5項・則21条による限定",
+          "1～2：賃金該当性・返還不要の渡切り",
+          "1～3：実費精算と計算法、4：不利益変更の留意"
+        ],
+        "question_ids": [
+          "q-0147",
+          "q-0159",
+          "q-0175"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=73023000&dataType=0&pageNo=2",
+        "locators": [
+          "54条1～5項",
+          "54条本文",
+          "56条1項5号・2項"
+        ],
+        "question_ids": [
+          "q-0335",
+          "q-0336",
+          "q-0337"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=73084100&dataType=0&pageNo=1",
+        "locators": [
+          "第10条・第16条",
+          "第9条の2第1項・第2項第2号",
+          "第9条の2第2項・第9条の3第1項"
+        ],
+        "question_ids": [
+          "q-0047",
+          "q-0048",
+          "q-0054"
+        ]
+      },
+      {
+        "url": "https://www.mhlw.go.jp/web/t_doc?dataId=84024000&dataType=0&pageNo=1",
+        "locators": [
+          "第8・11・12条：組織・共同設立・同意規約と認可"
+        ],
+        "question_ids": [
+          "q-0587"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/oshirase/taisetu/2025/202508/0819.html",
+        "locators": [
+          "150万円対象から配偶者を除外",
+          "2025年10月以後の認定、19〜22歳、12月31日年齢",
+          "対象者・配偶者除外、留意事項1の年末年齢と障害者"
+        ],
+        "question_ids": [
+          "q-0506",
+          "q-0507",
+          "q-0628"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/section/faq/kounen/hyoujunhoushu/20120903.html",
+        "locators": [
+          "回答：基本給・残業・通勤を含む税引前給与",
+          "標準報酬月額の定義と計算用途",
+          "標準報酬月額：保険料と保険給付の計算"
+        ],
+        "question_ids": [
+          "q-0254",
+          "q-0464",
+          "q-0605"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kokunen/hokenryo/sango.html",
+        "locators": [
+          "第3号本人納付不要・第2号全体負担"
+        ],
+        "question_ids": [
+          "q-0593"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kokunen/kanyu/20140710-04.html",
+        "locators": [
+          "第3号要件1〜3、65〜69歳で老齢退職年金受給権ある配偶者除外"
+        ],
+        "question_ids": [
+          "q-0592"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20120330.html",
+        "locators": [
+          "1・2．取得時の報酬見込",
+          "1．実績なし・2．報酬形態別算定",
+          "3．6〜12月の取得は翌年8月",
+          "3．6〜12月取得の適用期間",
+          "3．適用期間1〜5月と6〜12月",
+          "取得時の報酬見込",
+          "取得時決定"
+        ],
+        "question_ids": [
+          "q-0533",
+          "q-0534",
+          "q-0553",
+          "q-0651",
+          "q-0652",
+          "q-0656",
+          "q-0760"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.files/santei.guide.book.pdf",
+        "locators": [
+          "3か月とも17日未満の場合の保険者算定",
+          "3頁 報酬とならない金銭・年3回以下の賞与",
+          "3頁(3)①：通勤定期券、3か月・6か月単位は月額換算",
+          "3頁報酬とならないもの出張旅費、報酬となるもの通勤手当",
+          "3頁：報酬となる通勤手当・通勤定期券",
+          "冊子16頁（PDF19枚目）：年4回以上の賞与、前年7月〜当年6月の月額換算",
+          "冊子3頁：報酬となる金銭と現物",
+          "冊子3頁：報酬になる・ならない表",
+          "冊子3頁：臨時見舞金と継続見舞金",
+          "冊子3頁：食事本人負担2/3以上の除外との区別",
+          "冊子4頁（PDF7枚目）：住宅の評価・本人負担控除・10月変更",
+          "冊子4頁（PDF7枚目）：支払基礎日数",
+          "支払基礎日数：月給・日給・有給・欠勤控除"
+        ],
+        "question_ids": [
+          "q-0254",
+          "q-0255",
+          "q-0467",
+          "q-0469",
+          "q-0470",
+          "q-0472",
+          "q-0491",
+          "q-0492",
+          "q-0554",
+          "q-0671",
+          "q-0775",
+          "q-0803",
+          "q-0835"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20121017.html",
+        "locators": [
+          "17日未満を除く・パート短時間例外",
+          "1概要、2提出時期、4定時決定の対象",
+          "1概要・2提出時期",
+          "1概要・2提出時期：7月提出、9月から翌8月適用",
+          "1．7月1日・4．対象者除外",
+          "1．概要、4．決定方法",
+          "3．算定基礎届",
+          "4.標準報酬月額の決定方法・提出対象者：7月1日使用、6月1日以降の資格取得者を除く。",
+          "4．17日、5．短時間就労者、6．短時間労働者",
+          "4．6月1日以後取得者除外",
+          "4．定時決定の報酬月額",
+          "4．対象月を選び総額を対象月数で除す",
+          "4．決定方法、6．短時間労働者",
+          "4．注1と6．短時間11日",
+          "5．全月15日未満",
+          "5．短時間就労者：全月17日未満・一部15日以上",
+          "改定の適用期間",
+          "通常の定時決定"
+        ],
+        "question_ids": [
+          "q-0259",
+          "q-0260",
+          "q-0271",
+          "q-0462",
+          "q-0463",
+          "q-0520",
+          "q-0544",
+          "q-0547",
+          "q-0548",
+          "q-0549",
+          "q-0550",
+          "q-0551",
+          "q-0552",
+          "q-0553",
+          "q-0652",
+          "q-0666",
+          "q-0735",
+          "q-0763",
+          "q-0773"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20141203.html",
+        "locators": [
+          "1．保険料の納入・翌月の通知と月末納付",
+          "1．保険料の納入・賞与支払時控除",
+          "1．厚年月150万円・同月合算",
+          "1．対象賞与と賞与支払届",
+          "1．年度573万円、4(10)同一保険者",
+          "1．手続きの方法と3．併記様式",
+          "1．税引前の賞与額の千円未満切捨て",
+          "1．税引前総支給と千円未満処理、4(12)同月合算",
+          "1．税引前賞与の千円未満切捨て・同月合算",
+          "1．賞与とは",
+          "1．賞与にかかる保険料・制度別上限",
+          "1．賞与にかかる保険料・標準賞与額と年度月上限",
+          "1．賞与保険料の本人分",
+          "2．支払日から5日以内、4(12)複数回合算",
+          "4(10)(11)同一保険者、継続加入者の累計上限管理",
+          "健保573・厚年150は標準賞与額の上限",
+          "標準賞与額×率と労使折半",
+          "標準賞与額×率・労使折半",
+          "賞与保険料"
+        ],
+        "question_ids": [
+          "q-0625",
+          "q-0626",
+          "q-0777",
+          "q-0778",
+          "q-0779",
+          "q-0781",
+          "q-0784",
+          "q-0785",
+          "q-0786",
+          "q-0787",
+          "q-0788",
+          "q-0789",
+          "q-0790",
+          "q-0800",
+          "q-0801",
+          "q-0803",
+          "q-0809",
+          "q-0811",
+          "q-0812"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150511.html",
+        "locators": [
+          "現物給与について：食事住宅の告示価額、支店所在地",
+          "現物給与の価額・所在地"
+        ],
+        "question_ids": [
+          "q-0469",
+          "q-0492"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-01.html",
+        "locators": [
+          "1．18.3%固定",
+          "1．保険料率18.3%と半分ずつの負担",
+          "1．月例保険料の式／2．標準報酬の上限",
+          "2．厚生年金32等級",
+          "2．厚生年金上限65万円",
+          "2．報酬：年4回以上、3．賞与との区別",
+          "2．標準報酬月額：1〜32等級",
+          "3．標準賞与額と年3回以下賞与",
+          "保険料率18.3％・事業主と被保険者が半分ずつ",
+          "厚生年金18.3％折半",
+          "標準報酬月額×18.3％、労使折半",
+          "標準報酬月額方式"
+        ],
+        "question_ids": [
+          "q-0457",
+          "q-0458",
+          "q-0465",
+          "q-0466",
+          "q-0471",
+          "q-0472",
+          "q-0476",
+          "q-0480",
+          "q-0566",
+          "q-0567",
+          "q-0679",
+          "q-0735"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/hoshu/20150515-02.html",
+        "locators": [
+          "1．原則2等級と上下限特例",
+          "1．固定的賃金による変動と随時改定の目的",
+          "1．固定的賃金変動要件",
+          "1．固定的賃金：固定手当新設と非固定の区別",
+          "1．概要：4月変動7月改定の例",
+          "1．要件(1)〜(3)と留意事項",
+          "1．要件(2)変動月の定義",
+          "1．要件(2)従前と3か月平均の標準報酬",
+          "1．要件(3)3か月とも必要日数",
+          "1．要件(3)：継続3か月各月17/11日",
+          "2等級要件・上限下限特例",
+          "2．提出時期速やかに・3．月額変更届",
+          "3．月額変更届",
+          "固定的賃金と非固定的賃金",
+          "固定的賃金の例：住宅手当等の新設廃止",
+          "固定的賃金の例：昇給・単価・歩合率",
+          "固定的賃金・3月・等級差等",
+          "固定給減少・3月・4か月目改定",
+          "留意事項：固定的賃金と非固定的賃金の増減が逆",
+          "留意事項：固定給上昇・非固定減少で2等級低下は対象外"
+        ],
+        "question_ids": [
+          "q-0474",
+          "q-0504",
+          "q-0505",
+          "q-0517",
+          "q-0518",
+          "q-0519",
+          "q-0520",
+          "q-0522",
+          "q-0523",
+          "q-0525",
+          "q-0526",
+          "q-0528",
+          "q-0530",
+          "q-0531",
+          "q-0547",
+          "q-0642",
+          "q-0647",
+          "q-0763",
+          "q-0768",
+          "q-0769",
+          "q-0770"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20140327-05.html",
+        "locators": [
+          "1(2)(5)申出・両負担・賞与月末と1月超",
+          "1(2)両方の負担免除",
+          "1(4)同月14日と1(5)賞与の別要件",
+          "1(5)1か月を超える要件",
+          "1(5)2022年10月1日以後開始",
+          "概要：月額免除の同月14日と賞与の連続1か月超",
+          "育休中の両負担免除・月例の対象月"
+        ],
+        "question_ids": [
+          "q-0513",
+          "q-0588",
+          "q-0791",
+          "q-0792",
+          "q-0793",
+          "q-0794",
+          "q-0795"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/ikuji-menjo/20150407.html",
+        "locators": [
+          "1．1等級以上"
+        ],
+        "question_ids": [
+          "q-0526"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140327-01.html",
+        "locators": [
+          "1．1等級以上"
+        ],
+        "question_ids": [
+          "q-0526"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/menjo/sankyu-menjo/20140509-02.html",
+        "locators": [
+          "1．免除範囲・労使両方・有給無給不問",
+          "1．開始月〜終了翌日月の前月",
+          "保険料免除の概要・免除期間",
+          "産休中の両負担免除"
+        ],
+        "question_ids": [
+          "q-0511",
+          "q-0512",
+          "q-0588",
+          "q-0632"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20120330-01.html",
+        "locators": [
+          "取得月から発生・前月分の控除",
+          "月末退職：前月と退職月2か月",
+          "月途中退職の控除",
+          "第1段落：毎月給与から前月分",
+          "給与から前月分の保険料を控除",
+          "資格取得月から資格喪失月の前月まで"
+        ],
+        "question_ids": [
+          "q-0486",
+          "q-0487",
+          "q-0488",
+          "q-0489",
+          "q-0576",
+          "q-0759"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121026.html",
+        "locators": [
+          "1．事業所合計、2．本人負担",
+          "1．合計端数処理、3．事業主負担分",
+          "2(1)給与控除と特約注記",
+          "2(2)現金支払と特約注記",
+          "2．折半額と端数",
+          "事業主と被保険者間に特約がある場合",
+          "制度ごとの標準報酬月額から本人分を計算",
+          "労使折半と端数",
+          "本人負担分を給与天引き",
+          "本人負担計算と端数、労使間の特約",
+          "標準報酬×料率・折半"
+        ],
+        "question_ids": [
+          "q-0481",
+          "q-0482",
+          "q-0483",
+          "q-0484",
+          "q-0485",
+          "q-0705",
+          "q-0706",
+          "q-0738",
+          "q-0747",
+          "q-0748",
+          "q-0753"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/nofu/20121121.html",
+        "locators": [
+          "納付対象月の翌月末・休日なら翌営業日"
+        ],
+        "question_ids": [
+          "q-0490"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08kikinryougaku.pdf",
+        "locators": [
+          "PDF4枚目：2026年度0.36％・事業主全額",
+          "PDF4枚目：子ども子育て拠出金0.36％・事業主全額"
+        ],
+        "question_ids": [
+          "q-0564",
+          "q-0565"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/info/jimupoint.files/Vol.7.pdf",
+        "locators": [
+          "PDF2枚目原本画像：事例②の正しい取扱い・取得時報酬の訂正"
+        ],
+        "question_ids": [
+          "q-0656"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20141202.html",
+        "locators": [
+          "1(1)同居半分未満・別居仕送り未満・注2例外",
+          "1(2)同一世帯の条件ア・イ",
+          "1．対象親族：同居不要と三親等内同居",
+          "1．年間収入：130/180と生計維持等",
+          "1．障害等180と生計維持",
+          "2．提出者・3．被扶養者異動届",
+          "年間収入：過去ではなく認定日以後の見込み・各給付",
+          "被扶養者異動届"
+        ],
+        "question_ids": [
+          "q-0506",
+          "q-0507",
+          "q-0508",
+          "q-0509",
+          "q-0510",
+          "q-0547",
+          "q-0629",
+          "q-0630"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150407-02.html",
+        "locators": [
+          "2．事実発生5日以内・4(2)退職翌日",
+          "2．提出期限5日以内",
+          "2．提出期限と提出者、4(2)退職翌日",
+          "4(1)取得月から喪失月前月・同月例外",
+          "4(1)同月後続資格と還付の経路",
+          "4(1)同月得喪の納付と例外",
+          "4(1)喪失月前月まで、4(2)3月31日退職例",
+          "4(1)喪失月前月まで、4(2)退職翌日",
+          "4(2)退職翌日・3月31日例",
+          "4(2)：75歳到達による喪失日は誕生日当日",
+          "4(2)：退職翌日資格喪失"
+        ],
+        "question_ids": [
+          "q-0460",
+          "q-0488",
+          "q-0536",
+          "q-0540",
+          "q-0541",
+          "q-0542",
+          "q-0579",
+          "q-0639",
+          "q-0640",
+          "q-0659",
+          "q-0663"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/hihokensha1/20150422.html",
+        "locators": [
+          "1．事実上の使用関係",
+          "1．事実上の使用関係・試用期間から資格取得",
+          "1．使用関係、2．提出期限5日",
+          "2．取得届の5日以内",
+          "2．提出期限5日以内",
+          "2．提出者・期限・提出先",
+          "協会の資格取得届提出先",
+          "資格取得届"
+        ],
+        "question_ids": [
+          "q-0532",
+          "q-0547",
+          "q-0578",
+          "q-0586",
+          "q-0596",
+          "q-0651",
+          "q-0653",
+          "q-0654"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150310.html",
+        "locators": [
+          "1．いずれか又は両方へ任意加入",
+          "1．事業主申請・大臣認可"
+        ],
+        "question_ids": [
+          "q-0503",
+          "q-0624"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/20150518.html",
+        "locators": [
+          "1(1)強制適用：法人（事業主のみを含む）と個人事業所の人数・業種。",
+          "1．法人事業所・事業主のみを含む",
+          "2(2)ア：4分の3基準",
+          "2(2)短時間就労者：週所定時間と月所定日数の両方が4分の3以上。独立計算40×3/4=30、20×3/4=15。",
+          "2(3)表：2か月以内契約でも当初から加入"
+        ],
+        "question_ids": [
+          "q-0493",
+          "q-0496",
+          "q-0497",
+          "q-0501",
+          "q-0621"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/kounen/tekiyo/jigyosho/tanjikan.html",
+        "locators": [
+          "1・3．事業所と各要件",
+          "1．2027年10月36人、3．短時間要件",
+          "1．特定適用事業所：被保険者総数の数え方",
+          "2．学生でないことと例外",
+          "2．週の所定労働時間20時間以上",
+          "3(3)所定内賃金・除外対象・2026年10月撤廃予定",
+          "所定内賃金88,000円の算入範囲",
+          "留意事項：88,000円と2026年10月撤廃予定",
+          "留意事項：除外賃金(4)と資格取得届の報酬"
+        ],
+        "question_ids": [
+          "q-0494",
+          "q-0495",
+          "q-0497",
+          "q-0498",
+          "q-0499",
+          "q-0500",
+          "q-0617",
+          "q-0649",
+          "q-0650"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/mokutekibetsu/kojin/kanyu/index.html",
+        "locators": [
+          "会社員・公務員など：70歳未満、国籍性別受給の有無によらない",
+          "第1号・第2号・第3号の各加入案内"
+        ],
+        "question_ids": [
+          "q-0459",
+          "q-0461"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/pamphlet/kyufu.html",
+        "locators": [
+          "2026年4月版の老齢・障害・遺族年金ガイドの区分"
+        ],
+        "question_ids": [
+          "q-0455"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/service/seidozenpan/20140710.html",
+        "locators": [
+          "冒頭2階建て・第2号加入制度",
+          "厚生年金保険：常時使用70歳未満・受給有無不問",
+          "厚生年金保険：年金受給有無にかかわらず加入"
+        ],
+        "question_ids": [
+          "q-0589",
+          "q-0594",
+          "q-0595"
+        ]
+      },
+      {
+        "url": "https://www.nenkin.go.jp/shinsei/kounen/tekiyo/jigyosho/20140430.files/0000002397.pdf",
+        "locators": [
+          "2枚目：半数の母集団・反対者も加入"
+        ],
+        "question_ids": [
+          "q-0503"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/law/shitsugi/gensen/03/18.htm",
+        "locators": [
+          "照会要旨・回答要旨：足が不自由で交通機関を利用できない事例"
+        ],
+        "question_ids": [
+          "q-0250"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/02/02.htm",
+        "locators": [
+          "9-3・9-4",
+          "所得税基本通達9-3・9-4(1)"
+        ],
+        "question_ids": [
+          "q-0363",
+          "q-0412"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/04/03.htm",
+        "locators": [
+          "28-3",
+          "28-5"
+        ],
+        "question_ids": [
+          "q-0406",
+          "q-0412",
+          "q-0413"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/publication/pamph/gensen/shikata_r08/pdf/02.pdf",
+        "locators": [
+          "1頁I：制度の意義",
+          "1頁I：所得税と併せて徴収",
+          "1頁I：源泉徴収制度の意義"
+        ],
+        "question_ids": [
+          "q-0359",
+          "q-0377",
+          "q-0404"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf",
+        "locators": [
+          "15頁備考1(1)〜(3)、注2社会保険料等",
+          "15頁注2 社会保険料等",
+          "15頁甲欄1人・107〜250千円・注2・備考1",
+          "15頁算出率2.042％および表の注記",
+          "15頁賞与の社会保険料等控除後額へ乗算",
+          "16頁備考3：申告書の提出がない人・従たる給与の申告書を含む",
+          "19頁1",
+          "19頁1と日雇賃金注",
+          "19頁1の月額表・2(2)甲欄人数",
+          "19頁1・日雇賃金の注",
+          "19頁1：半月ごと",
+          "19頁1：日額表と賞与",
+          "19頁1：月額表の甲・乙",
+          "19頁1：税額表の使用区分",
+          "19頁2(1)",
+          "19頁2(1)・21頁3",
+          "19頁2(2)・20頁注7",
+          "19頁2(2)・20頁算定図・注7",
+          "19頁2(2)・注2・3",
+          "19頁2(2)本人の障害者（特別を含む）",
+          "19頁注2・20頁注4と6",
+          "19頁注3※・20頁非居住者区分",
+          "19～20頁：16歳と障害者加算",
+          "22頁4",
+          "印刷2頁・月額表254000円以上257000円未満の甲欄、0人6320円・1人4710円",
+          "扶養親族等の数の求め方",
+          "控除後給与と金額帯・0円の行",
+          "控除後給与を用いる・税額帯",
+          "月額表254000以上257000未満の行・甲0人6320、1人4710、2人3090",
+          "月額表254000以上257000未満の行・甲欄1人4710",
+          "月額表の0円となる区間",
+          "月額表の控除後給与から税額を読む手順",
+          "月額表を当てはめる社会保険料等控除後給与",
+          "月額表・その月の社会保険料等控除後の給与等の金額",
+          "月額表・乙欄と申告書提出の有無",
+          "税額決定の基礎・欄・人数",
+          "表紙：所得税の納期特例との比較",
+          "表紙：税額には復興特別所得税を含む"
+        ],
+        "question_ids": [
+          "q-0349",
+          "q-0350",
+          "q-0351",
+          "q-0352",
+          "q-0353",
+          "q-0354",
+          "q-0355",
+          "q-0357",
+          "q-0358",
+          "q-0373",
+          "q-0374",
+          "q-0375",
+          "q-0376",
+          "q-0377",
+          "q-0378",
+          "q-0380",
+          "q-0381",
+          "q-0383",
+          "q-0384",
+          "q-0387",
+          "q-0390",
+          "q-0391",
+          "q-0392",
+          "q-0393",
+          "q-0394",
+          "q-0436",
+          "q-0675",
+          "q-0676",
+          "q-0693",
+          "q-0694",
+          "q-0699",
+          "q-0712",
+          "q-0713",
+          "q-0724",
+          "q-0726",
+          "q-0731",
+          "q-0732",
+          "q-0802",
+          "q-0815",
+          "q-0826",
+          "q-0827",
+          "q-0828",
+          "q-0829",
+          "q-0830",
+          "q-0837"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/saigai/higashinihon/hojin_shohi_gensenFAQ/answer13.htm",
+        "locators": [
+          "Q33・34"
+        ],
+        "question_ids": [
+          "q-0406",
+          "q-0413"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2508.htm",
+        "locators": [
+          "住宅手当と現物給与の区別",
+          "家族扶養手当も給与所得",
+          "手当",
+          "手当：残業は給与・通常必要な旅費は非課税",
+          "残業手当などの手当も給与所得",
+          "現物給与の定義と特別取扱い",
+          "非課税の手当",
+          "非課税手当(2)"
+        ],
+        "question_ids": [
+          "q-0361",
+          "q-0363",
+          "q-0373",
+          "q-0406",
+          "q-0700",
+          "q-0701",
+          "q-0702",
+          "q-0703"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2523.htm",
+        "locators": [
+          "概要：申告書提出は甲欄、未提出は乙欄",
+          "通常の場合(1)〜(3)、10倍超・前月支払なしの区別",
+          "通常の計算",
+          "通常の計算方法",
+          "通常の計算方法(3)",
+          "通常の計算方法1〜3"
+        ],
+        "question_ids": [
+          "q-0394",
+          "q-0800",
+          "q-0815",
+          "q-0818",
+          "q-0826",
+          "q-0837"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2582.htm",
+        "locators": [
+          "15万円を超える場合・超過部分の課税",
+          "交通機関だけを利用：合理的経路、特急・グリーン、15万円",
+          "合理的運賃の最高限度15万円・超過額課税",
+          "限度内の合理的通勤手当",
+          "電車・バス等：合理的な運賃等の限度内",
+          "非課税となる限度額と超過部分",
+          "非課税の扱い",
+          "非課税通勤",
+          "非課税通勤の範囲"
+        ],
+        "question_ids": [
+          "q-0252",
+          "q-0253",
+          "q-0374",
+          "q-0383",
+          "q-0408",
+          "q-0687",
+          "q-0688",
+          "q-0701",
+          "q-0724"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2585.htm",
+        "locators": [
+          "限度額1の表・超える部分の課税",
+          "非課税となる限度額・概要と1〜4",
+          "非課税限度額1～4、有料道路・駐車場との組合せ",
+          "非課税限度額超過分を給与として課税する段落"
+        ],
+        "question_ids": [
+          "q-0248",
+          "q-0249",
+          "q-0251",
+          "q-0409"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1400.htm",
+        "locators": [
+          "概要・所得の計算方法",
+          "給与収入には賞与も含む"
+        ],
+        "question_ids": [
+          "q-0360",
+          "q-0799"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/taxes/tetsuzuki/shinsei/annai/gensen/annai/1648_01.htm",
+        "locators": [
+          "備考：いずれか一の給与支払者にのみ",
+          "備考：一の給与支払者",
+          "備考：扶養の有無にかかわらない原則",
+          "扶養0でも提出",
+          "提出時期・手続対象者",
+          "提出時期・提出先と方法",
+          "異動が生じた場合の提出時期"
+        ],
+        "question_ids": [
+          "q-0356",
+          "q-0357",
+          "q-0378",
+          "q-0388",
+          "q-0389",
+          "q-0392",
+          "q-0393"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/users/gensen/2026kiso/index.htm",
+        "locators": [
+          "11月まで変更なし",
+          "2026年9月の月次処理と12月施行を区別",
+          "施行と月次処理",
+          "施行は原則12/1・11月まで月次変更なし"
+        ],
+        "question_ids": [
+          "q-0349",
+          "q-0351",
+          "q-0352",
+          "q-0713"
+        ]
+      },
+      {
+        "url": "https://www.nta.go.jp/users/gensen/2026tsukin/index.htm",
+        "locators": [
+          "2026年4月適用表の10km以上15km未満・交通併用",
+          "冒頭：適用日・差額除外、区分3と駐車場の定義",
+          "改正後表の2km未満／2km以上10km未満",
+          "改正後表の片道2km未満",
+          "適用対象時期・改正後表65km以上75km未満45700円・駐車5000円上限"
+        ],
+        "question_ids": [
+          "q-0248",
+          "q-0250",
+          "q-0251",
+          "q-0411",
+          "q-0836"
+        ]
+      },
+      {
+        "url": "https://www.ppc.go.jp/legal/policy/my_number_guideline_jigyosha/",
+        "locators": [
+          "別添1 E d：削除廃棄・記録・委託先確認・中小規模事業者の対応方法",
+          "第4-1(1)A・B：個人番号を利用できる事務と利用目的の制限、第4-1(2)：特定個人情報ファイルの作成制限",
+          "第4-6 A・B：利用目的、第4-3(4)：本人確認、同(3)：保管制限",
+          "第4−1(1)1 利用目的特定、第4−5 B b書面取得時の明示"
+        ],
+        "question_ids": [
+          "q-0261",
+          "q-0262",
+          "q-0563",
+          "q-0833"
+        ]
+      },
+      {
+        "url": "https://www.rinya.maff.go.jp/j/keikaku/kankyouzei/kankyouzei_jouyozei.html",
+        "locators": [
+          "2：2024年度から国税として市町村が賦課徴収"
+        ],
+        "question_ids": [
+          "q-0364"
+        ]
+      },
+      {
+        "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/chingin/q2.html",
+        "locators": [
+          "冒頭と計算方法：時間外・深夜の割増",
+          "冒頭：25％と月60超50％",
+          "冒頭：時間外・深夜25％以上",
+          "冒頭：法定休日3割5分以上",
+          "冒頭：法定最低割増率",
+          "時間外25％・深夜25％を加算",
+          "時間外25％以上",
+          "時間外25％以上と計算方法",
+          "時間外と法定休日の区分",
+          "時間外と深夜の重複"
+        ],
+        "question_ids": [
+          "q-0182",
+          "q-0183",
+          "q-0184",
+          "q-0186",
+          "q-0193",
+          "q-0196",
+          "q-0228",
+          "q-0233",
+          "q-0677",
+          "q-0678"
+        ]
+      },
+      {
+        "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/roudoujikan/q11.html",
+        "locators": [
+          "代休を与えても休日労働の割増賃金が必要",
+          "休日の振替により週の法定労働時間を超えた場合",
+          "振替休日と代休の相違・振替後に週の法定時間を超える場合",
+          "法定休日以外の休日労働と時間外割増"
+        ],
+        "question_ids": [
+          "q-0037",
+          "q-0070",
+          "q-0071",
+          "q-0075"
+        ]
+      },
+      {
+        "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/syuugyoukisoku/q6.html",
+        "locators": [
+          "5年へ延長・当分3年",
+          "改正と経過措置"
+        ],
+        "question_ids": [
+          "q-0335",
+          "q-0339"
+        ]
+      },
+      {
+        "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/yukyu/q1.html",
+        "locators": [
+          "出勤したものとみなす期間・年次有給休暇を取得した日（基発17）"
+        ],
+        "question_ids": [
+          "q-0093"
+        ]
+      },
+      {
+        "url": "https://www.startup-roudou.mhlw.go.jp/qa/zigyonushi/yukyu/q3.html",
+        "locators": [
+          "半日単位年休の希望・同意・日単位取得を阻害しない範囲"
+        ],
+        "question_ids": [
+          "q-0110"
+        ]
+      },
+      {
+        "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/about",
+        "locators": [
+          "給与所得に係る特別徴収の手続・6月から翌年5月",
+          "給与所得の特別徴収手続：6月〜翌年5月"
+        ],
+        "question_ids": [
+          "q-0259",
+          "q-0272"
+        ]
+      },
+      {
+        "url": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju/tokubetsu/tetsuzuki",
+        "locators": [
+          "STEP④⑤",
+          "住民税は通知の月割額",
+          "基本STEP①〜⑤",
+          "基本STEP②③",
+          "基本的な手続STEP②③",
+          "従業員が異動する時は",
+          "従業員異動・5月退職注記",
+          "従業員異動・6/1～12/31",
+          "従業員異動：1/1〜4/30",
+          "従業員異動：1/1〜4/30の例外",
+          "特別徴収税額が変更になった場合",
+          "税額に変更が生じたら",
+          "納期の特例",
+          "給与支払報告書・基本STEP①〜③",
+          "通常の通知月割額と退職時一括",
+          "通知月割額"
+        ],
+        "question_ids": [
+          "q-0366",
+          "q-0368",
+          "q-0370",
+          "q-0371",
+          "q-0372",
+          "q-0397",
+          "q-0398",
+          "q-0399",
+          "q-0400",
+          "q-0424",
+          "q-0425",
+          "q-0429",
+          "q-0430",
+          "q-0433",
+          "q-0436",
+          "q-0437",
+          "q-0731",
+          "q-0732",
+          "q-0797"
+        ]
+      }
+    ],
+    "completed_records": 567,
+    "checked_question_count": 567
+  },
+  "scope_findings": [
+    {
+      "question_id": "q-0395",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "本文・全肢・正答・解説を確認。B特例は法令上妥当、A0%固定/C無徴収/D住民税率は誤り。ただし主催者は1級の特例として掲げ、公式2026年2級本文も未入手のため2級模試に置く根拠不足。元問を退役して別ID837の通常賞与の適用欄判断へ差替え。技能は異なるため統合先とせず、習熟は移行しない。開始済み模試は従前の問題と資料のスナップショットで採点する。"
+    },
+    {
+      "question_id": "q-0514",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "養育・申出・日数を前提にし、最低等級差を問う。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0515",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "終了翌日の月を月末境界例で説明。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0516",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "次の日育休開始不可と下限の一意性を補足。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0529",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "遡及差額を除く理由。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0562",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "一定要件の事業に限定。詳細算式の暗記は求めない。 公式教材全文・全模試初見性・教材全体の完成は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0636",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "A1等級下限。B3/C4/D2は下限でない。養育年齢・申出・日数・固定変動不要の条件がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。 横断範囲監査で統合先q-0514も2級必須演習への採用根拠不足により退役。旧統合判断はformer_merged_intoへ残し、現行問題への統合・習熟移行は行わない。"
+    },
+    {
+      "question_id": "q-0637",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "D1等級下限。A3/B2/C4は下限でない。翌日育休除外・養育・申出・日数条件がある統合先へ。 全文全肢を照合。履歴保持・習熟移行なし。 横断範囲監査で統合先q-0516も2級必須演習への採用根拠不足により退役。旧統合判断はformer_merged_intoへ残し、現行問題への統合・習熟移行は行わない。"
+    },
+    {
+      "question_id": "q-0638",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "産休翌日育休不可と申出条件を付記。 全体の網羅性・全模試初見性は未承認。 横断範囲監査：主催者の1級の具体的範囲に、産育休終了時改定・遡り昇給・メリット制として明記される。一方2級は基本的手続で、公式2026年2級本文未入手のため、この詳細を必須演習にする根拠はない。法令照合の結果は保存し、2級学習の時間を通常処理へ振り向けるため配信から除く。別技能の統合先なし。"
+    },
+    {
+      "question_id": "q-0820",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "C月額換算。A通常0扱い/B住民年額/D日額は違う。解説は控除後の限定不足。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0821",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "A月額特例。B住民/C最大/D最小は違う。前月給与も社会保険料等控除後で比較する条件が本文に不足。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0822",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "D双方社会保険料等後が意図。A両前/B片方/C片方は違うが、全肢の「控除後」が何を引くか本文で未指定。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0823",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "B6・月額・差額6倍が意図。A算出率/C日額/D住民は違う。給与合算も控除後の金額と限定が必要。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0824",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "C12・12が意図。A6・6/B12・6/D6・12は違う。ただし10倍超の場合は前月給与合算とその税額差引が要り、単に表の税額を12倍では足りない。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0825",
+      "status": "retired_scope_unverified",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "1級の具体的範囲と2級の通常・基本的な実務",
+      "finding": "A6/12月額倍戻し。B算出率/C住民/D日額は違う。除算対象は社会保険料等控除後賞与と明示が必要。 本文・全肢・正答・解説を照合。主催者が1級の特例として掲げる内容で、2026年公式2級テキスト未入手のため2級必須技能として承認できず配信から除外。法令の誤りだけを退役理由とはしない。統合先なし、履歴保持・ID再利用・習熟移行なし。"
+    },
+    {
+      "question_id": "q-0472",
+      "status": "retained_basic_boundary_not_required_advanced_calculation",
+      "source": "https://jitsumu-up.jp/about/",
+      "locator": "2級の標準報酬と通常賞与／1級の年4回賞与の場合の定時決定",
+      "finding": "月例報酬か賞与かの基礎的分類として補強に残す。1級の詳細計算を2級必須とは認定しない。公式本文未入手。"
+    }
+  ],
+  "table_expansion_review": {
+    "date": "2026-09-06",
+    "bonus": "原表印刷15〜16頁。拡張時の32セル誤読を修正後、甲21行×8人数区分と率を独立抽出ファイルで全セル比較。乙5区分も画像照合。",
+    "insurance": "原表1枚目、独立に数字字体を復号して健康50行×5列を比較し250セル一致。厚年32等級、上下端の適用は原表注記で確認。",
+    "affected_question_ids": [
+      "q-0394",
+      "q-0564",
+      "q-0565",
+      "q-0566",
+      "q-0567",
+      "q-0570",
+      "q-0571",
+      "q-0576",
+      "q-0625",
+      "q-0626",
+      "q-0679",
+      "q-0734",
+      "q-0815",
+      "q-0827",
+      "q-0828",
+      "q-0829",
+      "q-0830",
+      "q-0831",
+      "q-0837"
+    ],
+    "visual_status": "PC1280×900・モバイル390×844で表示、縦横スクロール、閉じる操作を確認。静的プレビューの保存はHTTPテストで補完。",
+    "monthly": "原表印刷2頁の3金額区分×甲0〜2人を原本画像で再照合。月額表全体・乙欄・日額表の金額演習は未充足。",
+    "corrections": "bonus-table-cell-corrections.json",
+    "independent_fixtures": [
+      "tests/Fixtures/bonus-rate-table-2026.json",
+      "tests/Fixtures/insurance-grades-2026.json"
+    ]
+  }
+}

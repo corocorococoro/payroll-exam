@@ -33,6 +33,7 @@ const props = defineProps<{
         description: string;
         focus_label: string;
         study_guide: {
+            worked_example?: string | null;
             why: string;
             goal: string;
             key_points: string[];
@@ -385,6 +386,15 @@ const accuracy = computed(() =>
                     </ul>
                 </div>
 
+                <div
+                    v-if="lesson.study_guide.worked_example"
+                    class="mt-4 rounded-lg bg-blue-50 p-4 text-sm leading-7 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                >
+                    <p class="font-bold">例で確かめる</p>
+                    <p class="whitespace-pre-line">
+                        {{ lesson.study_guide.worked_example }}
+                    </p>
+                </div>
                 <button
                     class="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm hover:bg-[#285ac8]"
                     @click="started = true"

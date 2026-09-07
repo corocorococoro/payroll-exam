@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $content_revision
  * @property string|null $content_hash
  * @property string|null $reviewed_content_hash
+ * @property string|null $review_fingerprint
  * @property int $fiscal_year
  * @property string $question_text
  * @property array<int, array{key: string, text: string}>|null $choices
@@ -55,7 +56,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'review_status', 'verification_status', 'scope_status', 'exam_role', 'study_tier', 'content_revision', 'content_hash', 'reviewed_content_hash', 'fiscal_year',
     'question_text', 'choices', 'answer', 'explanation', 'common_mistake', 'distractor_feedback',
     'calc_params', 'reference_sheet_slugs', 'source_urls', 'review_notes', 'reviewed_at',
-    'review_due_at', 'is_active',
+    'review_due_at', 'is_active', 'review_fingerprint',
 ])]
 class Question extends Model
 {
@@ -187,6 +188,21 @@ class Question extends Model
             self::canonicalizeForHash($content),
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE,
         ));
+    }
+
+    /** @param array<string, mixed> $attributes */
+    public static function reviewDependenciesHash(array $attributes): string
+    {
+        $dependencies = [];
+        foreach (['source_id', 'unit_id', 'lesson_id', 'fiscal_year', 'concept_key', 'learning_objective', 'variant_role', 'misconception_key', 'study_tier', 'exam_role', 'source_urls', 'reference_sheet_slugs'] as $key) {
+            $value = $attributes[$key] ?? null;
+            if (in_array($key, ['unit_id', 'lesson_id', 'fiscal_year'], true) && $value !== null) {
+                $value = (int) $value;
+            }
+            $dependencies[$key] = $value;
+        }
+
+        return hash('sha256', json_encode(self::canonicalizeForHash($dependencies), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
     }
 
     private static function canonicalizeForHash(mixed $value): mixed

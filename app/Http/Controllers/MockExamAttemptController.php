@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
-use App\Models\ReferenceSheet;
 use App\Models\User;
 use App\Services\MockExamService;
 use App\Services\MockExamSnapshotService;
@@ -74,7 +73,6 @@ class MockExamAttemptController extends Controller
 
         $snapshot = $attempt->review_snapshot ?? $snapshots->build($attempt->mockExam);
         $questions = $snapshots->playerItems($snapshot);
-        $sheetSlugs = collect($snapshot)->pluck('reference_sheet_slugs')->flatten()->filter()->unique();
 
         return Inertia::render('mock/Player', [
             'attempt' => [
@@ -85,8 +83,10 @@ class MockExamAttemptController extends Controller
                 'answers' => $attempt->answers ?? [],
             ],
             'questions' => $questions,
-            'reference_sheets' => ReferenceSheet::whereIn('slug', $sheetSlugs)
-                ->where('fiscal_year', 2026)->orderBy('sort_order')->get(['slug', 'name', 'content']),
+            'reference_sheets' => $snapshots->referenceSheets($attempt->review_snapshot ?? []),
+            'reference_sheets_unavailable' => $attempt->review_snapshot === null || collect($snapshot)->contains(
+                fn (array $item): bool => array_diff($item['reference_sheet_slugs'] ?? [], array_column($item['reference_sheets'] ?? [], 'slug')) !== [],
+            ),
         ]);
     }
 
@@ -202,6 +202,7 @@ class MockExamAttemptController extends Controller
             ],
             'remediation' => $remediation,
             'review' => $review,
+            'reference_sheets' => $snapshots->referenceSheets($snapshot),
         ]);
     }
 

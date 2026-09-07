@@ -171,6 +171,44 @@ test('最終復習の正解で定着状態になり30日後も再確認する', 
         ->and($progress->box)->toBe(5);
 });
 
+test('同日6回の再学習では定着せず期限を隔てた復習で段階が進む', function () {
+    $user = User::factory()->create(['onboarded' => true])->refresh();
+    $question = Question::practiceBank()->orderBy('id')->firstOrFail();
+    // Isolate one available question so every completed run can revisit it.
+    Question::where('lesson_id', $question->lesson_id)->whereKeyNot($question->id)
+        ->update(['review_status' => 'draft']);
+
+    for ($run = 0; $run < 6; $run++) {
+        actingAs($user)->get("/lessons/{$question->lesson_id}")->assertOk()
+            ->assertInertia(fn ($page) => $page->has('questions', 1)->where('questions.0.id', $question->id));
+        actingAs($user)->postJson('/answers', [
+            'question_id' => $question->id,
+            'answer' => correctChoice($question),
+            'context' => 'lesson',
+            'lesson_id' => $question->lesson_id,
+        ])->assertOk()->assertJson(['correct' => true, 'mastery_state' => 'review']);
+        actingAs($user)->postJson("/lessons/{$question->lesson_id}/complete")->assertOk();
+        $this->travel(2)->seconds();
+    }
+    $progress = $user->questionProgresses()->where('question_id', $question->id)->firstOrFail();
+    expect($progress->box)->toBe(2)->and($progress->correct_count)->toBe(6);
+
+    $reviewAnswer = ['question_id' => $question->id, 'answer' => correctChoice($question), 'context' => 'review'];
+    actingAs($user)->postJson('/answers', $reviewAnswer)->assertStatus(422);
+    expect($progress->refresh()->box)->toBe(2);
+
+    foreach ([3 => 3, 7 => 4, 14 => 5] as $days => $expectedBox) {
+        $this->travel($days)->days();
+        actingAs($user)->get('/review')->assertOk()
+            ->assertInertia(fn ($page) => $page->has('questions', 1)->where('questions.0.id', $question->id));
+        actingAs($user)->postJson('/answers', $reviewAnswer)->assertOk()
+            ->assertJson(['mastery_state' => $expectedBox === 5 ? 'mastered' : 'review']);
+        expect($progress->refresh()->box)->toBe($expectedBox);
+    }
+    $item = $user->reviewItems()->where('question_id', $question->id)->firstOrFail();
+    expect($item->due_date->isSameDay(today()->addDays(30)))->toBeTrue();
+});
+
 test('日次判定はフリーズを消費し、その後の未達でストリークを切る', function () {
     $user = User::factory()->create()->refresh();
     $user->statOrCreate()->update([

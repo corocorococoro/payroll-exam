@@ -3,7 +3,10 @@
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
 use App\Models\Question;
+use App\Models\ReferenceSheet;
 use App\Models\User;
+use App\Services\MockExamSnapshotService;
+use App\Services\PassReadinessService;
 use Database\Seeders\ContentSeeder;
 use Database\Seeders\GamificationSeeder;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +18,44 @@ beforeEach(function () {
     seed([ContentSeeder::class, GamificationSeeder::class]);
     $this->user = User::factory()->create(['onboarded' => true])->refresh();
     $this->exam = MockExam::where('slug', 'mogi-1')->firstOrFail();
+});
+
+test('開始後に資料集を書き換えても受験中は開始時の資料を表示する', function () {
+    actingAs($this->user)->post("/mock-exams/{$this->exam->id}/attempts", ['mode' => 'standard'])->assertRedirect();
+    $attempt = $this->user->mockExamAttempts()->firstOrFail();
+    $sheets = app(MockExamSnapshotService::class)->referenceSheets($attempt->review_snapshot);
+    expect($sheets)->not->toBeEmpty();
+    ReferenceSheet::where('slug', $sheets[0]['slug'])->update(['content' => ['type' => 'table', 'rows' => [['改訂後']]]]);
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}")->assertOk()
+        ->assertInertia(fn ($page) => $page->where('reference_sheets.0.content', $sheets[0]['content'])
+            ->where('reference_sheets_unavailable', false)->missing('questions.0.answer'));
+});
+
+test('資料を保存していない旧受験は現行資料で暗黙に補完しない', function () {
+    $snapshot = app(MockExamSnapshotService::class)->build($this->exam);
+    foreach ($snapshot as &$item) {
+        unset($item['reference_sheets']);
+    }
+    unset($item);
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id, 'started_at' => now(), 'time_limit_minutes' => 120,
+        'review_snapshot' => $snapshot,
+    ]);
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}")->assertOk()
+        ->assertInertia(fn ($page) => $page->has('reference_sheets', 0)->where('reference_sheets_unavailable', true));
+});
+
+test('全模試を圧縮モードで消化した後は未受験の模試を勧めない', function () {
+    foreach (MockExam::where('is_published', true)->get() as $exam) {
+        $this->user->mockExamAttempts()->create([
+            'mock_exam_id' => $exam->id, 'started_at' => now()->subHours(2),
+            'finished_at' => now(), 'time_limit_minutes' => 90,
+        ]);
+    }
+    $result = app(PassReadinessService::class)->evaluate($this->user, 169, 169);
+    expect($result['qualifying_mock_count'])->toBe(0)
+        ->and($result['detail'])->toContain('初見の模試が判定に必要な回数分残っていません')
+        ->not->toContain('まだ受けていない模試を');
 });
 
 test('模試一覧には分かりやすい名称と説明を表示する', function () {
@@ -114,7 +155,7 @@ test('開始後に問題が改訂されても開始時スナップショット�
             ->where('review.0.question_text', $first['question_text'])
             ->where('review.0.correct', true)
             ->missing('review.0.answer')
-            ->missing('review.0.choices'),
+            ->where('review.0.choices', $first['choices']),
         );
 });
 
@@ -260,3 +301,22 @@ function correctAnswers(MockExam $exam): array
         return [(string) $item->question_id => (string) ($answer['choice'] ?? $answer['value'])];
     })->all();
 }
+
+test('スナップショットなし・必要な参照表なしの高得点は初見診断から除く', function (string $missing) {
+    $snapshot = app(MockExamSnapshotService::class)->build($this->exam);
+    if ($missing === 'snapshot') {
+        $snapshot = null;
+    } else {
+        foreach ($snapshot as &$item) {
+            $item['reference_sheets'] = [];
+        }
+        unset($item);
+    }
+    $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id, 'started_at' => now()->subHours(2), 'finished_at' => now(),
+        'time_limit_minutes' => 120, 'review_snapshot' => $snapshot, 'score' => 100, 'knowledge_score' => 70, 'calculation_score' => 30,
+        'unit_scores' => array_fill_keys(['shikyu', 'roudou', 'shaho', 'zei', 'keisan'], ['earned' => 20, 'max' => 20, 'accuracy' => 100]),
+    ]);
+    actingAs($this->user)->get('/dashboard')->assertOk()
+        ->assertInertia(fn ($page) => $page->where('summary.qualifying_mock_count', 0));
+})->with(['snapshot', 'tables']);

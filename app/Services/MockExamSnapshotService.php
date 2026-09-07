@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\QuestionType;
 use App\Models\MockExam;
 use App\Models\Question;
+use App\Models\ReferenceSheet;
 
 class MockExamSnapshotService
 {
@@ -66,6 +67,10 @@ class MockExamSnapshotService
             'unit_slug' => $question->unit->slug,
             'unit_name' => $question->unit->name,
             'reference_sheet_slugs' => $question->reference_sheet_slugs ?? [],
+            'reference_sheets' => ReferenceSheet::query()
+                ->where('fiscal_year', $question->fiscal_year)
+                ->whereIn('slug', $question->reference_sheet_slugs ?? [])
+                ->orderBy('sort_order')->get(['slug', 'name', 'content'])->toArray(),
             'given_answer' => null,
             'correct' => false,
             'correct_answer' => null,
@@ -130,6 +135,24 @@ class MockExamSnapshotService
     }
 
     /**
+     * 旧スナップショットは当時の資料を復元できないため、現在の資料で補完しない。
+     *
+     * @param  array<int, array<string, mixed>>  $snapshot
+     * @return list<array<string, mixed>>
+     */
+    public function referenceSheets(array $snapshot): array
+    {
+        $sheets = [];
+        foreach ($snapshot as $item) {
+            foreach ($item['reference_sheets'] ?? [] as $sheet) {
+                $sheets[$sheet['slug']] = $sheet;
+            }
+        }
+
+        return array_values($sheets);
+    }
+
+    /**
      * @param  array<int, array<string, mixed>>  $snapshot
      * @return array<int, array<string, mixed>>
      */
@@ -138,7 +161,7 @@ class MockExamSnapshotService
         return collect($snapshot)->map(fn (array $item): array => collect($item)->only([
             'position', 'question_id', 'content_revision', 'question_text', 'unit_name',
             'given_answer', 'correct', 'correct_answer', 'explanation', 'official_sources',
-            'points', 'lesson_id', 'lesson_name',
+            'points', 'lesson_id', 'lesson_name', 'choices',
         ])->all())->values()->all();
     }
 }

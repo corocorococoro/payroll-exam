@@ -36,6 +36,7 @@ const props = defineProps<{
     };
     questions: ExamQuestion[];
     reference_sheets: ReferenceSheetData[];
+    reference_sheets_unavailable: boolean;
 }>();
 
 const index = ref(0);
@@ -46,6 +47,7 @@ const saving = ref(false);
 const saveError = ref<string | null>(null);
 const sheetsOpen = ref(false);
 const sheetOpen = ref(false);
+const navigationOpen = ref(false);
 const calculatorOpen = ref(false);
 const calcExpression = ref('');
 const calcResult = ref<string | null>(null);
@@ -113,6 +115,7 @@ function selectAnswer(value: string) {
 function go(position: number) {
     index.value = Math.max(0, Math.min(props.questions.length - 1, position));
     sheetOpen.value = false;
+    navigationOpen.value = false;
 }
 
 function calculate() {
@@ -224,6 +227,13 @@ onBeforeUnmount(() => {
             class="mx-auto grid w-full max-w-5xl flex-1 gap-4 p-4 pb-24 md:grid-cols-[1fr_260px]"
         >
             <div>
+                <p
+                    v-if="reference_sheets_unavailable"
+                    class="mb-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900"
+                    role="status"
+                >
+                    この受験では開始時の資料集が保存されていません。資料を必要とする問題を再現できないため、結果は初見の合格目安に含めません。
+                </p>
                 <div
                     class="mb-3 flex items-center justify-between text-xs font-bold text-gray-400"
                 >
@@ -359,18 +369,33 @@ onBeforeUnmount(() => {
                 </div>
             </div>
             <aside
-                class="hidden rounded-lg border border-gray-100 bg-white p-4 md:block dark:border-gray-800 dark:bg-gray-900"
+                :class="
+                    navigationOpen
+                        ? 'fixed inset-4 top-20 z-30 overflow-y-auto shadow-xl'
+                        : 'hidden'
+                "
+                class="rounded-lg border border-gray-100 bg-white p-4 md:static md:block md:shadow-none dark:border-gray-800 dark:bg-gray-900"
+                aria-label="問題一覧"
             >
                 <div class="mb-3 flex justify-between">
                     <h2 class="font-semibold">解答状況</h2>
                     <span class="text-xs text-gray-400"
                         >{{ answeredCount }}/{{ questions.length }}</span
                     >
+                    <button
+                        class="md:hidden"
+                        aria-label="問題一覧を閉じる"
+                        @click="navigationOpen = false"
+                    >
+                        <X class="size-5" />
+                    </button>
                 </div>
                 <div class="grid grid-cols-5 gap-2">
                     <button
                         v-for="(question, i) in questions"
                         :key="question.id"
+                        :aria-label="`問${question.position} ${answers[String(question.id)] ? '解答済み' : '未回答'}`"
+                        :aria-current="i === index ? 'step' : undefined"
                         :class="[
                             'aspect-square rounded-lg text-xs font-bold',
                             i === index ? 'ring-2 ring-[#2864f0]' : '',
@@ -385,7 +410,10 @@ onBeforeUnmount(() => {
                 </div>
                 <button
                     class="mt-5 w-full rounded-xl bg-rose-500 py-2.5 text-sm font-semibold text-white"
-                    @click="sheetOpen = true"
+                    @click="
+                        navigationOpen = false;
+                        sheetOpen = true;
+                    "
                 >
                     採点する
                 </button>
@@ -396,7 +424,8 @@ onBeforeUnmount(() => {
         >
             <button
                 class="mx-auto flex items-center gap-2 rounded-xl bg-[#2864f0] px-5 py-2.5 text-sm font-semibold text-white"
-                @click="sheetOpen = true"
+                :aria-expanded="navigationOpen"
+                @click="navigationOpen = !navigationOpen"
             >
                 <Grid3X3 class="size-4" />解答状況 {{ answeredCount }}/{{
                     questions.length

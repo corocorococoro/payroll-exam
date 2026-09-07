@@ -8,6 +8,8 @@ use App\Services\LessonRunService;
 use App\Services\MockExamService;
 use Database\Seeders\ContentSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Tests\Support\LegacyLessonRunService;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -16,6 +18,30 @@ beforeEach(function () {
     seed(ContentSeeder::class);
     // refresh: DBデフォルト値(daily_goal等)を属性に反映させる
     $this->user = User::factory()->create()->refresh();
+});
+
+test('誤答が10問滞留しても実際の解答更新を通して未出コアへ進める', function () {
+    $lesson = Lesson::where('slug', 'chingin-shiharai')->firstOrFail();
+    $questions = $lesson->questions()->practiceBank()->get();
+    $failed = $questions->take(10);
+    $service = app(LessonRunService::class);
+    foreach ($failed as $question) {
+        actingAs($this->user)->withSession(lessonRun($question))->postJson('/answers', [
+            'question_id' => $question->id, 'lesson_id' => $lesson->id,
+            'context' => 'lesson', 'answer' => incorrectChoice($question),
+        ])->assertOk();
+    }
+    $this->travel(1)->days();
+    $request = Request::create("/lessons/{$lesson->id}");
+    $request->setUserResolver(fn () => $this->user);
+    $request->setLaravelSession(app('session')->driver());
+    $service->clear($request, $lesson);
+    $run = $service->getOrStart($request, $lesson);
+    $newIds = collect($run['question_ids'])->diff($failed->pluck('id'));
+    expect($run['question_ids'])->toHaveCount(10)
+        ->and($newIds)->toHaveCount(2)
+        ->and(Question::whereIn('id', $newIds)->where('study_tier', 'core')->count())->toBe(2);
+    $this->travelBack();
 });
 
 test('スキルツリーが表示され、ユニットとレッスンが並ぶ', function () {
@@ -437,3 +463,48 @@ test('模試の弱点から戻れるよう全レッスンへ直接アクセス�
 
     actingAs($this->user)->get("/lessons/{$lesson->id}")->assertOk();
 });
+
+test('旧配信の復習滞留と改修後の新規学習を同じ4日間のHTTP経路で比較する', function (bool $legacy) {
+    if ($legacy) {
+        app()->instance(LessonRunService::class, new LegacyLessonRunService);
+    }
+    $lesson = Lesson::where('slug', 'chingin-shiharai')->firstOrFail();
+    $seen = collect();
+    $runs = [];
+    $lastSeen = [];
+    $firstRun = [];
+    for ($day = 0; $day < 4; $day++) {
+        $response = actingAs($this->user)->get("/lessons/{$lesson->id}")->assertOk();
+        $ids = collect($response->viewData('page')['props']['questions'])->pluck('id')->all();
+        expect($ids)->toHaveCount(10);
+        $new = collect($ids)->diff($seen);
+        expect($new->count())->toBe($day === 0 ? 10 : ($legacy ? 0 : 2));
+        if ($day === 0) {
+            $firstRun = $ids;
+        } elseif ($legacy) {
+            expect($ids)->toBe($firstRun);
+        } else {
+            asort($lastSeen);
+            expect(collect($ids)->intersect($seen)->values()->all())->toBe(array_slice(array_keys($lastSeen), 0, 8));
+        }
+        $runs[] = ['day' => $day, 'questions' => collect($ids)->map(fn ($id) => Question::findOrFail($id)->source_id)->all(), 'new_count' => $new->count()];
+        $seen = $seen->merge($ids)->unique();
+        foreach ($ids as $id) {
+            $question = Question::findOrFail($id);
+            actingAs($this->user)->postJson('/answers', [
+                'question_id' => $id, 'lesson_id' => $lesson->id, 'context' => 'lesson', 'answer' => incorrectChoice($question),
+            ])->assertOk();
+            $lastSeen[$id] = now()->getTimestamp();
+            $this->travel(2)->seconds();
+        }
+        actingAs($this->user)->postJson("/lessons/{$lesson->id}/complete")->assertOk();
+        $this->travel(1)->days();
+    }
+    expect($seen->count())->toBe($legacy ? 10 : 16);
+    if (getenv('EXPORT_CONTENT_PREVIEW') === '1') {
+        File::ensureDirectoryExists(storage_path('framework/testing/content-qa'));
+        $filename = $legacy ? 'recovery-runs-legacy.json' : 'recovery-runs.json';
+        File::put(storage_path("framework/testing/content-qa/{$filename}"), json_encode($runs, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+    }
+    $this->travelBack();
+})->with(['current' => false, 'legacy' => true]);

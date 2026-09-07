@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuestionReviewStatus;
 use App\Models\Question;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
@@ -68,6 +69,27 @@ test('同じ内容の再シードでは版と習熟状態を変えない', funct
         ->and($user->questionProgresses()->where('question_id', $question->id)->value('state'))->toBe('mastered');
 });
 
+test('依存資料の監査記録がない旧版の習熟は台帳導入時に一度再確認する', function () {
+    $user = User::factory()->create();
+    $question = Question::where('source_id', 'q-0032')->firstOrFail();
+    $question->update(['review_fingerprint' => null]);
+    $user->questionProgresses()->create([
+        'question_id' => $question->id,
+        'state' => 'mastered', 'box' => 5,
+        'due_at' => now()->addMonth(),
+        'content_revision_seen' => $question->content_revision,
+        'first_seen_at' => now()->subMonth(), 'last_seen_at' => now()->subDay(),
+    ]);
+
+    seed(ContentSeeder::class);
+    expect($question->refresh()->content_revision)->toBe(2)
+        ->and($question->review_fingerprint)->not->toBeNull()
+        ->and($user->questionProgresses()->where('question_id', $question->id)->value('state'))->toBe('learning');
+
+    seed(ContentSeeder::class);
+    expect($question->refresh()->content_revision)->toBe(2);
+});
+
 test('問題改訂後は新版の初回正解だけXPを再付与する', function () {
     $user = User::factory()->create(['onboarded' => true, 'daily_goal' => 50]);
     $question = Question::where('source_id', 'q-0032')->firstOrFail();
@@ -103,4 +125,23 @@ test('問題改訂後は新版の初回正解だけXPを再付与する', functi
         ->and($sameRevision->json('xp_earned'))->toBe(0)
         ->and($user->attempts()->where('question_id', $question->id)->pluck('content_revision')->all())
         ->toBe([1, 2, 2]);
+});
+
+test('統合退役では旧履歴を保持し統合先へ習熟を自動移行しない', function () {
+    $target = Question::where('source_id', 'q-0063')->firstOrFail();
+    $legacy = $target->replicate();
+    $legacy->source_id = 'q-0065';
+    $legacy->save();
+    $user = User::factory()->create()->refresh();
+    actingAs($user)->withSession(lessonRun($legacy))->postJson('/answers', [
+        'question_id' => $legacy->id, 'lesson_id' => $legacy->lesson_id,
+        'context' => 'lesson', 'answer' => correctChoice($legacy),
+    ])->assertOk();
+    seed(ContentSeeder::class);
+    expect($legacy->refresh()->is_active)->toBeFalse()
+        ->and($legacy->review_status)->toBe(QuestionReviewStatus::Retired)
+        ->and(Question::published()->whereKey($legacy->id)->exists())->toBeFalse()
+        ->and($user->attempts()->where('question_id', $legacy->id)->count())->toBe(1)
+        ->and($user->questionProgresses()->where('question_id', $legacy->id)->exists())->toBeTrue()
+        ->and($user->questionProgresses()->where('question_id', $target->id)->exists())->toBeFalse();
 });

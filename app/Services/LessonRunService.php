@@ -32,7 +32,7 @@ class LessonRunService
 
         $bank = $lesson->questions()
             ->practiceAvailableFor($request->user())
-            ->get(['id', 'study_tier']);
+            ->get(['id', 'study_tier', 'variant_role']);
 
         $lastAttempts = $request->user()->attempts()
             ->whereIn('question_id', $bank->pluck('id'))
@@ -45,8 +45,8 @@ class LessonRunService
             ->get()
             ->keyBy('question_id');
 
-        // 合格への近さを優先する。誤答・期限到来 → 未出の合格コア → 未出の補強 →
-        // 既出未定着 → 定着済みの順。各群では古いものから選び、全問へ有限回で到達する。
+        // 復習を優先しつつ、未出問題に最低2枠を確保する。
+        // 復習群は最終学習日の古い順にし、同じ誤答だけで滞留させない。
         $candidates = $bank
             ->sortBy(function ($question) use ($lastAttempts, $progresses): string {
                 $progress = $progresses->get($question->id);
@@ -65,18 +65,32 @@ class LessonRunService
                 };
 
                 return sprintf(
-                    '%d|%05d|%s|%010d',
+                    '%d|%s|%d|%05d|%010d',
                     $bucket,
-                    99999 - (int) ($progress->lapses ?? 0),
                     (string) ($progress->last_seen_at ?? $lastAttempts[$question->id] ?? ''),
+                    ! $seen ? $this->rolePriority($question->variant_role?->value) : 0,
+                    99999 - (int) ($progress->lapses ?? 0),
                     $question->id,
                 );
             })
             ->values();
 
+        $newQuestions = $candidates
+            ->filter(fn ($question): bool => ! $lastAttempts->has($question->id)
+                && $progresses->get($question->id)?->first_seen_at === null)
+            ->sortBy(fn ($question): string => sprintf('%d|%d|%010d',
+                $question->study_tier === 'core' ? 0 : 1,
+                $this->rolePriority($question->variant_role?->value),
+                $question->id,
+            ));
+        $reserved = $newQuestions->take(2);
+        $selected = $candidates->whereNotIn('id', $reserved->pluck('id'))
+            ->take(self::QUESTION_COUNT - $reserved->count());
+        $ranks = $candidates->pluck('id')->flip();
+
         /** @var list<int> $questionIds */
-        $questionIds = $candidates
-            ->take(self::QUESTION_COUNT)
+        $questionIds = $selected->concat($reserved)
+            ->sortBy(fn ($question): int => (int) $ranks[$question->id])
             ->pluck('id')
             ->map(fn ($id): int => (int) $id)
             ->values()
@@ -121,5 +135,15 @@ class LessonRunService
     private function key(Lesson $lesson): string
     {
         return "lesson_runs.{$lesson->id}";
+    }
+
+    private function rolePriority(?string $role): int
+    {
+        return match ($role) {
+            'recall' => 0,
+            'boundary', 'misconception' => 1,
+            'application', 'workflow' => 2,
+            default => 3,
+        };
     }
 }
