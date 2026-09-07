@@ -32,8 +32,7 @@ const stepMood: Record<number, KyuchanMood> = {
     2: 'point',
     3: 'wave',
 };
-const stepEffect: Record<number, KyuchanEffect> = {
-    1: 'focus',
+const stepEffect: Partial<Record<number, KyuchanEffect>> = {
     2: 'sparkle',
     3: 'heart',
 };

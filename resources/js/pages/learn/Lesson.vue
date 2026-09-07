@@ -312,7 +312,7 @@ const accuracy = computed(() =>
                 class="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
             >
                 <div class="flex items-start gap-3">
-                    <Kyuchan mood="study" effect="focus" :size="88" />
+                    <Kyuchan mood="study" :size="88" />
                     <div>
                         <p class="text-xs font-bold text-gray-400">
                             {{ lesson.unit_name }}

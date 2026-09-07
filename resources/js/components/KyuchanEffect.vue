@@ -11,9 +11,6 @@ defineProps<{ effect: KyuchanEffect }>();
         </template>
         <span v-else-if="effect === 'heart'" class="symbol">♥</span>
         <span v-else-if="effect === 'question'" class="bubble">?</span>
-        <template v-else-if="effect === 'focus'">
-            <i v-for="index in 4" :key="index" />
-        </template>
         <template v-else-if="effect === 'confetti'">
             <i v-for="index in 8" :key="index" />
         </template>
@@ -92,43 +89,6 @@ defineProps<{ effect: KyuchanEffect }>();
     left: 13%;
     scale: 0.4;
     animation-delay: 0.4s;
-}
-
-.kyuchan-effect--focus i {
-    width: 0.18em;
-    height: 0.18em;
-    border-color: #38bdf8;
-    border-style: solid;
-    border-width: 0;
-    animation: effect-focus 1.4s ease-in-out infinite alternate;
-}
-
-.kyuchan-effect--focus i:nth-child(1) {
-    top: 4%;
-    left: 4%;
-    border-top-width: 0.025em;
-    border-left-width: 0.025em;
-}
-
-.kyuchan-effect--focus i:nth-child(2) {
-    top: 4%;
-    right: 4%;
-    border-top-width: 0.025em;
-    border-right-width: 0.025em;
-}
-
-.kyuchan-effect--focus i:nth-child(3) {
-    right: 4%;
-    bottom: 4%;
-    border-right-width: 0.025em;
-    border-bottom-width: 0.025em;
-}
-
-.kyuchan-effect--focus i:nth-child(4) {
-    bottom: 4%;
-    left: 4%;
-    border-bottom-width: 0.025em;
-    border-left-width: 0.025em;
 }
 
 .kyuchan-effect--confetti i {
@@ -242,17 +202,6 @@ defineProps<{ effect: KyuchanEffect }>();
     }
     to {
         scale: 1;
-        opacity: 1;
-    }
-}
-
-@keyframes effect-focus {
-    from {
-        translate: 0 0;
-        opacity: 0.55;
-    }
-    to {
-        translate: 0.015em 0.015em;
         opacity: 1;
     }
 }

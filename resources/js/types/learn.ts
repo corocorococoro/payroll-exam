@@ -51,7 +51,7 @@ export type KyuchanMood =
     | 'write';
 
 export type KyuchanEffect =
-    'sparkle' | 'heart' | 'question' | 'focus' | 'confetti' | 'alert' | 'zzz';
+    'sparkle' | 'heart' | 'question' | 'confetti' | 'alert' | 'zzz';
 
 export type XpProgress = {
     total_xp: number;
