@@ -142,7 +142,14 @@
   },
   "publication_ci": {
     "checked_at": "2026-09-07",
-    "status": "running",
-    "environment_note": "PHPコンテナにはnpmがないためcomposer ci:checkは127。構成要素をコンテナのcomposer testとホストのnpm lint:check/format:check/types:checkに分けて実行。GitHub CIはPHP・Node同一環境で実行する。"
+    "status": "passed",
+    "environment_note": "PHPコンテナにはnpmがないためcomposer ci:checkは127。構成要素をコンテナのcomposer testとホストのnpm lint:check/format:check/types:checkに分けて実行。GitHub CIはPHP・Node同一環境で実行する。",
+    "php": "composer test：Pint・PHPStan・166テスト成功、3件スキップ、6343アサーション、97.13秒。",
+    "frontend": [
+      "npm run lint:check：成功",
+      "npm run format:check：成功",
+      "npm run types:check：成功"
+    ],
+    "php_log": "/tmp/payroll-publication-php-20260907.log"
   }
 }
