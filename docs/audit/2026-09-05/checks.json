@@ -1,7 +1,7 @@
 {
   "checked_at": "2026-09-06",
   "database": "phpunit.xmlのSQLite :memory:。既存DBを再構築・再シードしない。",
-  "bank_sha256": "e2c09390da6523149bc52dc79d4811b194c59d8f6e37308a518432f719f62cd5",
+  "bank_sha256": "064d098d610314cea92117f8e0d2be7d1cd7a14fd3168bdec339332706d8e8ff",
   "software_tests": {
     "command": "php artisan test",
     "passed": 166,
@@ -26,11 +26,12 @@
   "prettier": "変更Vueを整形。教材JSONは正本と同じ2スペースで保存しJSON解析を確認。",
   "review_ledger": {
     "command": "php artisan content:review-audit --json",
-    "exit_code": 1,
+    "checked_at": "2026-09-07",
+    "exit_code": 0,
     "questions": 567,
-    "pending_errors": 1,
+    "pending_errors": 0,
     "completed_individual_reviews": 567,
-    "status": "現行567件と退役270件の個別不一致0件。公式本文と必要技能の未検証によりリリースの承認を保留し、全体ゲート1件で同期拒否。"
+    "status": "個別確認済み現行内容の公開承認後、実台帳の全検査を通過。網羅性・実学習者効果は未検証。"
   },
   "visual_qa": {
     "previous": "PC 1280×900・モバイル390×844、隔離HTMLでレッスン・模試ナビゲーション・税額表・結果を確認。",
@@ -111,5 +112,37 @@
       "15レッスンの内容SHA256一致",
       "git diff --check"
     ]
+  },
+  "pre_publication_bank_sha256": "e2c09390da6523149bc52dc79d4811b194c59d8f6e37308a518432f719f62cd5",
+  "pre_publication_review_ledger": {
+    "command": "php artisan content:review-audit --json",
+    "exit_code": 1,
+    "questions": 567,
+    "pending_errors": 1,
+    "completed_individual_reviews": 567,
+    "status": "現行567件と退役270件の個別不一致0件。公式本文と必要技能の未検証によりリリースの承認を保留し、全体ゲート1件で同期拒否。"
+  },
+  "publication_sync": {
+    "checked_at": "2026-09-07",
+    "database": "新規SQLite /tmp/payroll-publication-20260907.sqlite（コンテナ内）。既存・本番DBを使用しない。",
+    "synthetic_approval": false,
+    "status": "passed",
+    "operations": [
+      "migrate --force",
+      "content:sync --no-interaction",
+      "content:audit --strict",
+      "content:sync --no-interaction"
+    ],
+    "published_questions": 567,
+    "core_questions": 302,
+    "published_mock_exams": 3,
+    "reviews_due": 0,
+    "idempotency": "再同期時に最新と判定しDBレビューを保持",
+    "log": "/tmp/payroll-publication-sync-20260907.log"
+  },
+  "publication_ci": {
+    "checked_at": "2026-09-07",
+    "status": "running",
+    "environment_note": "PHPコンテナにはnpmがないためcomposer ci:checkは127。構成要素をコンテナのcomposer testとホストのnpm lint:check/format:check/types:checkに分けて実行。GitHub CIはPHP・Node同一環境で実行する。"
   }
 }

@@ -6,9 +6,12 @@
     "question_count": 567,
     "retired_redundant_count": 313,
     "core_question_count": 302,
-    "editorial_status": "audit_in_progress",
+    "editorial_status": "approved",
     "retired_outdated_count": 1,
-    "retired_scope_count": 15
+    "retired_scope_count": 15,
+    "publication_approved_at": "2026-09-06",
+    "coverage_status": "unverified",
+    "learner_effectiveness_status": "not_measured"
   },
   "topics": {
     "attendance.break-minimum": "労働時間の境界に応じた最低休憩時間と自由利用原則を判断できる",
