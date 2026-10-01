@@ -10,9 +10,12 @@ import {
     X,
 } from '@lucide/vue';
 import { computed, ref } from 'vue';
+import AnimatedNumber from '@/components/AnimatedNumber.vue';
 import Kyuchan from '@/components/Kyuchan.vue';
+import LearningCelebration from '@/components/LearningCelebration.vue';
+import LearningCombo from '@/components/LearningCombo.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
-import { useSoundEffects } from '@/composables/useSoundEffects';
+import { useLearningRewards } from '@/composables/useLearningRewards';
 import { useXpProgress } from '@/composables/useXpProgress';
 import { postJson } from '@/lib/api';
 import { formatReviewDate } from '@/lib/date';
@@ -51,18 +54,23 @@ const numericInput = ref('');
 const result = ref<AnswerResult | null>(null);
 const checking = ref(false);
 const correctCount = ref(0);
-const earnedXp = ref(0);
 const sheetsOpen = ref(false);
 const completion = ref<LessonComplete | null>(null);
 const finishing = ref(false);
 const errorMessage = ref<string | null>(null);
-const sound = useSoundEffects();
+const rewards = useLearningRewards();
+const { combo, bestCombo, earnedXp, reward } = rewards;
 const { sync: syncXp } = useXpProgress();
 const levelUps = ref<XpLevelReward[]>([]);
 
 const current = computed(() => props.questions[index.value]);
 const isLast = computed(() => index.value >= props.questions.length - 1);
-const progress = computed(() => (index.value / props.questions.length) * 100);
+const progress = computed(() =>
+    props.questions.length > 0
+        ? ((index.value + (result.value ? 1 : 0)) / props.questions.length) *
+          100
+        : 0,
+);
 
 const canCheck = computed(() =>
     current.value?.type === 'choice'
@@ -71,10 +79,11 @@ const canCheck = computed(() =>
 );
 
 async function check() {
-    if (!current.value || checking.value) {
+    if (!current.value || checking.value || result.value || !canCheck.value) {
         return;
     }
 
+    rewards.unlock();
     checking.value = true;
     errorMessage.value = null;
 
@@ -91,19 +100,12 @@ async function check() {
         });
 
         result.value = res;
-        syncXp(res.xp_progress);
-        earnedXp.value += res.xp_total_earned;
+        rewards.answer(res);
 
         for (const level of res.level_ups) {
             if (!levelUps.value.some((item) => item.level === level.level)) {
                 levelUps.value.push(level);
             }
-        }
-
-        if (res.correct) {
-            sound.correct();
-        } else {
-            sound.incorrect();
         }
 
         if (res.correct) {
@@ -120,6 +122,10 @@ async function check() {
 }
 
 async function next() {
+    if (!result.value || finishing.value) {
+        return;
+    }
+
     if (isLast.value) {
         await finish();
 
@@ -153,7 +159,11 @@ async function finish() {
             }
         }
 
-        sound.complete();
+        rewards.complete(
+            completion.value.xp_total_earned,
+            correctCount.value === props.questions.length &&
+                props.questions.length > 0,
+        );
     } catch (e) {
         errorMessage.value =
             e instanceof Error
@@ -177,14 +187,20 @@ const accuracy = computed(() =>
 
 <template>
     <Head :title="lesson.name" />
+    <LearningCelebration :reward="reward" />
 
     <div class="flex min-h-dvh flex-col bg-blue-50/60 dark:bg-gray-950">
         <!-- 結果画面 -->
         <div
             v-if="completion"
-            class="flex flex-1 flex-col items-center justify-center gap-5 p-6 text-center"
+            class="learning-result-hero flex flex-1 flex-col items-center justify-center gap-5 p-6 text-center"
         >
-            <Kyuchan mood="clap" effect="confetti" :size="140" />
+            <div class="reward-mascot-halo">
+                <Kyuchan mood="clap" effect="confetti" :size="140" />
+            </div>
+            <span v-if="accuracy === 100" class="reward-perfect-badge"
+                >✦ PERFECT · 全問正解 ✦</span
+            >
             <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-100">
                 レッスン完了！🎉
             </h1>
@@ -212,8 +228,10 @@ const accuracy = computed(() =>
                     class="rounded-md border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-gray-900"
                 >
                     <p class="text-xs font-bold text-gray-400">獲得XP</p>
-                    <p class="text-2xl font-semibold text-amber-500">
-                        +{{ earnedXp + completion.xp_total_earned }}
+                    <p
+                        class="reward-result-number text-4xl font-black text-amber-500"
+                    >
+                        +<AnimatedNumber :value="earnedXp" />
                     </p>
                     <p class="text-[10px] text-gray-400">
                         <template v-if="completion.bonus_xp > 0">
@@ -228,14 +246,23 @@ const accuracy = computed(() =>
                     class="rounded-md border border-emerald-200 bg-white p-4 dark:border-emerald-900 dark:bg-gray-900"
                 >
                     <p class="text-xs font-bold text-gray-400">正解率</p>
-                    <p class="text-2xl font-semibold text-emerald-500">
-                        {{ accuracy }}%
+                    <p
+                        class="reward-result-number text-4xl font-black text-emerald-500"
+                    >
+                        <AnimatedNumber :value="accuracy" />%
                     </p>
                     <p class="text-[10px] text-gray-400">
                         {{ correctCount }} / {{ questions.length }} 問
                     </p>
                 </div>
             </div>
+
+            <p
+                v-if="bestCombo >= 2"
+                class="text-sm font-bold text-orange-600 dark:text-orange-300"
+            >
+                🔥 ベスト記録 {{ bestCombo }}連続正解
+            </p>
 
             <div
                 v-if="levelUps.length"
@@ -431,6 +458,7 @@ const accuracy = computed(() =>
                         >{{ index + 1 }}/{{ questions.length }}</span
                     >
                 </div>
+                <LearningCombo :combo="combo" class="pb-2" />
             </header>
 
             <main
@@ -471,7 +499,7 @@ const accuracy = computed(() =>
                         <button
                             v-for="choice in current.choices"
                             :key="choice.key"
-                            :disabled="result !== null"
+                            :disabled="result !== null || checking"
                             :class="[
                                 'flex items-start gap-3 rounded-md border bg-white p-3.5 text-left text-sm font-medium transition dark:bg-gray-900',
                                 selectedChoice === choice.key
@@ -479,7 +507,7 @@ const accuracy = computed(() =>
                                     : 'border-gray-200 hover:border-sky-200 dark:border-gray-700',
                                 result &&
                                     result.correct_answer === choice.key &&
-                                    'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
+                                    'answer-success border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
                                 result &&
                                     !result.correct &&
                                     selectedChoice === choice.key &&
@@ -520,7 +548,7 @@ const accuracy = computed(() =>
                             v-model="numericInput"
                             type="text"
                             inputmode="numeric"
-                            :disabled="result !== null"
+                            :disabled="result !== null || checking"
                             placeholder="例: 45000"
                             class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-bold text-gray-700 focus:border-sky-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
                             @keydown.enter="canCheck && !result && check()"
@@ -541,13 +569,15 @@ const accuracy = computed(() =>
                 <div
                     v-if="result"
                     :class="[
-                        'border-t-4',
+                        'learning-feedback border-t-4',
                         result.correct
                             ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950'
                             : 'border-rose-300 bg-rose-50 dark:bg-rose-950',
                     ]"
                 >
-                    <div class="mx-auto flex max-w-2xl flex-col gap-2 p-4">
+                    <div
+                        class="mx-auto flex max-w-2xl flex-col gap-2 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
+                    >
                         <div class="flex items-center gap-3">
                             <Kyuchan
                                 :mood="result.correct ? 'approve' : 'curious'"
@@ -571,7 +601,12 @@ const accuracy = computed(() =>
                                         class="ml-1 text-sm"
                                     >
                                         <template v-if="result.xp_earned > 0">
-                                            +{{ result.xp_earned }} XP
+                                            +<AnimatedNumber
+                                                :key="index"
+                                                :value="result.xp_earned"
+                                                :duration="450"
+                                            />
+                                            XP
                                         </template>
                                         <template v-else>XP獲得済み</template>
                                     </span>

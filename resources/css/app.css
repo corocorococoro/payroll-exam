@@ -191,3 +191,83 @@
         @apply text-lg font-semibold text-gray-800 dark:text-gray-100;
     }
 }
+
+/* 回答の手応えと、有限のセッション完了演出。 */
+.learning-feedback {
+    animation: learning-feedback-enter 0.28s ease-out both;
+}
+.answer-success {
+    animation: answer-success-pop 0.45s ease-out both;
+}
+.learning-result-hero {
+    background-image: radial-gradient(
+        ellipse at 50% 18%,
+        rgb(251 191 36 / 16%),
+        transparent 60%
+    );
+}
+.reward-mascot-halo {
+    position: relative;
+    isolation: isolate;
+}
+.reward-mascot-halo::before {
+    content: '';
+    position: absolute;
+    inset: -16px;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(251 191 36 / 32%), transparent 70%);
+    animation: reward-halo-enter 0.75s ease-out both;
+}
+.reward-perfect-badge {
+    border: 1px solid #fcd34d;
+    border-radius: 999px;
+    background: #fffbeb;
+    padding: 8px 16px;
+    color: #92400e;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    animation: reward-halo-enter 0.5s 0.2s ease-out both;
+}
+.reward-result-number {
+    animation: reward-halo-enter 0.5s 0.12s ease-out both;
+}
+@keyframes learning-feedback-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes answer-success-pop {
+    45% {
+        transform: scale(1.015);
+        box-shadow: 0 0 0 4px rgb(52 211 153 / 20%);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes reward-halo-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .learning-feedback,
+    .answer-success,
+    .reward-mascot-halo::before,
+    .reward-perfect-badge,
+    .reward-result-number {
+        animation: none;
+    }
+}

@@ -2,10 +2,12 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { BookOpen, CheckCircle2, RotateCcw } from '@lucide/vue';
 import { computed, ref } from 'vue';
+import AnimatedNumber from '@/components/AnimatedNumber.vue';
 import Kyuchan from '@/components/Kyuchan.vue';
+import LearningCelebration from '@/components/LearningCelebration.vue';
+import LearningCombo from '@/components/LearningCombo.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
-import { useSoundEffects } from '@/composables/useSoundEffects';
-import { useXpProgress } from '@/composables/useXpProgress';
+import { useLearningRewards } from '@/composables/useLearningRewards';
 import { postJson } from '@/lib/api';
 import { formatReviewDate } from '@/lib/date';
 import type { AnswerResult, PlayerQuestion, ReferenceSheetData } from '@/types';
@@ -27,8 +29,8 @@ const sheetsOpen = ref(false);
 const finished = ref(false);
 const correctCount = ref(0);
 const errorMessage = ref<string | null>(null);
-const sound = useSoundEffects();
-const { sync: syncXp } = useXpProgress();
+const rewards = useLearningRewards();
+const { combo, bestCombo, earnedXp, reward } = rewards;
 
 const current = computed(() => props.questions[index.value]);
 const remainingDue = computed(() =>
@@ -47,10 +49,11 @@ const canCheck = computed(() =>
 );
 
 async function check() {
-    if (!current.value || checking.value || !canCheck.value) {
+    if (!current.value || checking.value || result.value || !canCheck.value) {
         return;
     }
 
+    rewards.unlock();
     checking.value = true;
     errorMessage.value = null;
 
@@ -64,16 +67,10 @@ async function check() {
             context: 'review',
             lesson_id: null,
         });
-        syncXp(result.value.xp_progress);
+        rewards.answer(result.value);
 
         if (result.value.correct) {
             correctCount.value++;
-        }
-
-        if (result.value.correct) {
-            sound.correct();
-        } else {
-            sound.incorrect();
         }
     } catch (error) {
         errorMessage.value =
@@ -86,8 +83,17 @@ async function check() {
 }
 
 function next() {
+    if (!result.value || finished.value) {
+        return;
+    }
+
     if (index.value >= props.questions.length - 1) {
         finished.value = true;
+        rewards.complete(
+            0,
+            correctCount.value === props.questions.length &&
+                props.questions.length > 0,
+        );
 
         return;
     }
@@ -101,6 +107,7 @@ function next() {
 
 <template>
     <Head title="復習" />
+    <LearningCelebration :reward="reward" />
 
     <div
         v-if="questions.length === 0"
@@ -122,9 +129,16 @@ function next() {
 
     <div
         v-else-if="finished"
-        class="flex min-h-[65vh] flex-col items-center justify-center text-center"
+        class="learning-result-hero flex min-h-[65vh] flex-col items-center justify-center rounded-2xl p-6 text-center"
     >
-        <Kyuchan mood="clap" effect="sparkle" :size="140" />
+        <div class="reward-mascot-halo">
+            <Kyuchan mood="clap" effect="confetti" :size="140" />
+        </div>
+        <span
+            v-if="correctCount === questions.length"
+            class="reward-perfect-badge"
+            >✦ PERFECT · 全問正解 ✦</span
+        >
         <CheckCircle2 class="mt-2 size-9 text-emerald-500" />
         <h1
             class="mt-2 text-2xl font-semibold text-gray-700 dark:text-gray-100"
@@ -134,6 +148,30 @@ function next() {
         <p class="mt-1 text-sm font-bold text-gray-500">
             {{ correctCount }} / {{ questions.length }} 問正解
         </p>
+        <div class="mt-5 grid w-full max-w-sm grid-cols-2 gap-3">
+            <div
+                class="rounded-xl border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-gray-900"
+            >
+                <p class="text-xs font-bold text-gray-500">獲得XP</p>
+                <p
+                    class="reward-result-number mt-1 text-4xl font-black text-amber-500"
+                >
+                    +<AnimatedNumber :value="earnedXp" />
+                </p>
+            </div>
+            <div
+                class="rounded-xl border border-orange-200 bg-white p-4 dark:border-orange-900 dark:bg-gray-900"
+            >
+                <p class="text-xs font-bold text-gray-500">最大連続正解</p>
+                <p
+                    class="reward-result-number mt-1 text-4xl font-black text-orange-500"
+                >
+                    <AnimatedNumber :value="bestCombo" /><span class="text-sm"
+                        >問</span
+                    >
+                </p>
+            </div>
+        </div>
         <Link
             v-if="remainingDue > 0"
             href="/review"
@@ -182,6 +220,7 @@ function next() {
             </div>
         </div>
 
+        <LearningCombo :combo="combo" class="mb-4" />
         <div v-if="current" class="flex flex-col gap-4">
             <section
                 class="rounded-lg border border-blue-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
@@ -215,7 +254,7 @@ function next() {
                 <button
                     v-for="choice in current.choices"
                     :key="choice.key"
-                    :disabled="result !== null"
+                    :disabled="result !== null || checking"
                     :class="[
                         'flex items-start gap-3 rounded-md border bg-white p-3.5 text-left text-sm font-medium transition dark:bg-gray-900',
                         selectedChoice === choice.key
@@ -223,7 +262,7 @@ function next() {
                             : 'border-gray-200 dark:border-gray-700',
                         result &&
                             result.correct_answer === choice.key &&
-                            'border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
+                            'answer-success border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40',
                         result &&
                             !result.correct &&
                             selectedChoice === choice.key &&
@@ -256,7 +295,7 @@ function next() {
                 ><input
                     id="review-answer"
                     v-model="numericInput"
-                    :disabled="result !== null"
+                    :disabled="result !== null || checking"
                     inputmode="numeric"
                     class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-bold focus:border-[#2864f0] focus:outline-none dark:border-gray-700 dark:bg-gray-800"
                     @keydown.enter="canCheck && !result && check()"
@@ -266,7 +305,7 @@ function next() {
             <div
                 v-if="result"
                 :class="[
-                    'rounded-lg border p-4',
+                    'learning-feedback rounded-lg border p-4',
                     result.correct
                         ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-900 dark:bg-emerald-950'
                         : 'border-rose-200 bg-rose-50 dark:border-rose-900 dark:bg-rose-950',
