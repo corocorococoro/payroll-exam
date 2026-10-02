@@ -118,24 +118,46 @@ class StudyController extends Controller
             abort_if(DB::table('study_run_completions')->where('study_run_id', $run['id'])->exists(), 422, 'この学習はすでに完了しています。');
             $independent = $attempts->where('assisted', false)->where('is_correct', true)->count();
             $accuracy = (int) round($independent / count($run['question_ids']) * 100);
-            $passed = $run['phase'] !== 'guided' && $accuracy >= 80;
+            $questions = $module->questions()->whereIn('questions.id', $run['question_ids'])->get()->keyBy('id');
+            $concepts = $run['phase'] === 'spaced' ? ($progress->spaced_concepts ?? []) : ($progress->independent_concepts ?? []);
+            foreach ($attempts->groupBy(fn ($attempt): string => $questions[$attempt->question_id]->concept_key) as $concept => $items) {
+                // A wrong or assisted answer leaves this concept to be checked again.
+                $concepts = array_values(array_diff($concepts, [$concept]));
+                if ($items->every(fn ($attempt): bool => $attempt->is_correct && ! $attempt->assisted)) {
+                    $concepts[] = $concept;
+                }
+            }
+            $remaining = count(array_diff($curriculum->concepts($module), $concepts));
+            $needsMore = $run['phase'] !== 'guided' && $accuracy >= 80 && $remaining > 0;
+            $passed = $run['phase'] !== 'guided' && $accuracy >= 80 && $remaining === 0;
             $retained = $passed && $run['phase'] === 'spaced'
                 && $progress->independent_passed_at !== null
                 && $progress->independent_passed_at->toDateString() < today()->toDateString();
             $attributes = ['completed_count' => $progress->completed_count + 1];
             if ($run['phase'] === 'guided') {
-                $attributes += ['guided_completed_at' => now(), 'needs_support' => false];
+                $attributes += ['guided_completed_at' => now(), 'needs_support' => false,
+                    'independent_passed_at' => null, 'spaced_passed_at' => null,
+                    'review_due_at' => null, 'independent_concepts' => [], 'spaced_concepts' => []];
             } elseif ($passed) {
                 $attributes += [
                     'guided_completed_at' => $progress->guided_completed_at ?? now(),
                     'independent_passed_at' => $progress->independent_passed_at ?? now(),
-                    'review_due_at' => today()->addDays($retained ? 7 : 3), 'needs_support' => false,
+                    'review_due_at' => $retained ? today()->addDays(7) : ($progress->review_due_at ?? today()->addDays(3)),
+                    'independent_concepts' => $run['phase'] === 'spaced' ? $progress->independent_concepts : $concepts,
+                    'needs_support' => false,
                 ];
                 if ($retained) {
                     $attributes['spaced_passed_at'] = now();
+                    $attributes['spaced_concepts'] = [];
+                }
+            } elseif ($needsMore) {
+                $attributes += ['needs_support' => false, 'guided_completed_at' => $progress->guided_completed_at ?? now(),
+                    ($run['phase'] === 'spaced' ? 'spaced_concepts' : 'independent_concepts') => $concepts];
+                if ($run['phase'] === 'check') {
+                    $attributes += ['independent_passed_at' => null, 'spaced_passed_at' => null, 'review_due_at' => null];
                 }
             } else {
-                $attributes += ['needs_support' => true, 'independent_passed_at' => null,
+                $attributes += ['independent_concepts' => [], 'spaced_concepts' => [], 'needs_support' => true, 'independent_passed_at' => null,
                     'spaced_passed_at' => null, 'review_due_at' => today()->addDay()];
             }
             $progress->update($attributes);
@@ -155,7 +177,7 @@ class StudyController extends Controller
             $achievements->evaluate($user);
             $levels->syncRewardUnlocks($user);
 
-            return compact('beforeXp', 'independent', 'accuracy', 'passed', 'retained', 'bonus', 'awards');
+            return compact('beforeXp', 'independent', 'accuracy', 'passed', 'retained', 'needsMore', 'remaining', 'bonus', 'awards');
         });
         $runs->clear($request, $module);
         $overview = $curriculum->overview($user);
@@ -175,6 +197,7 @@ class StudyController extends Controller
             'xp_progress' => $levels->progress($user), 'level_ups' => $levels->crossedLevels($result['beforeXp'], $stat->total_xp),
             'study_result' => [
                 'phase' => $run['phase'], 'passed' => $result['passed'], 'retained' => $result['retained'],
+                'needs_more' => $result['needsMore'], 'remaining_concept_count' => $result['remaining'],
                 'independent_correct_count' => $result['independent'], 'independent_accuracy' => $result['accuracy'],
                 'question_count' => count($run['question_ids']), 'next_href' => $next['href'], 'next_name' => $next['name'],
                 'review_due_at' => $curriculum->progress($user, $module)->review_due_at?->toDateString(),

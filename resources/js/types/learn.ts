@@ -176,6 +176,8 @@ export type LessonComplete = {
         phase: 'guided' | 'check' | 'spaced';
         passed: boolean;
         retained: boolean;
+        needs_more: boolean;
+        remaining_concept_count: number;
         independent_correct_count: number;
         independent_accuracy: number;
         question_count: number;
@@ -211,6 +213,7 @@ export type StudyInfo = {
 };
 
 export type CurriculumModule = {
+    available: boolean;
     id: number;
     slug: string;
     name: string;
@@ -229,6 +232,7 @@ export type CurriculumModule = {
 };
 
 export type LearningCurriculum = {
+    unavailable_count: number;
     sections: { slug: string; name: string; description: string }[];
     modules: CurriculumModule[];
     next: CurriculumModule | null;

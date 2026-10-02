@@ -96,6 +96,14 @@ const unitClasses = {
                 <p class="mt-1 text-[11px] text-gray-500">今日の単元復習</p>
             </div>
         </div>
+        <p
+            v-if="curriculum.unavailable_count"
+            class="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950 dark:text-amber-200"
+        >
+            {{
+                curriculum.unavailable_count
+            }}単元の教材を確認中です。公開可能になってから再開できます。
+        </p>
         <Link
             v-if="curriculum.next"
             :href="curriculum.next.href"
@@ -153,7 +161,8 @@ const unitClasses = {
                             (item) => item.section === section.slug,
                         )"
                         :key="module.id"
-                        :href="module.href"
+                        :href="module.available ? module.href : '/learn'"
+                        :aria-disabled="!module.available"
                         class="flex items-start gap-3 rounded-lg border border-gray-100 p-3 hover:border-blue-300 hover:bg-blue-50/30 dark:border-gray-800 dark:hover:bg-blue-950/30"
                     >
                         <span
@@ -168,6 +177,11 @@ const unitClasses = {
                                 class="text-sm font-semibold text-gray-800 dark:text-gray-100"
                             >
                                 {{ module.name }}
+                                <span
+                                    v-if="!module.available"
+                                    class="text-xs text-amber-700"
+                                    >教材の確認中</span
+                                >
                             </p>
                             <p class="mt-1 text-[11px] text-gray-500">
                                 {{

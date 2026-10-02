@@ -44,6 +44,8 @@ return new class extends Migration
             $table->timestamp('independent_passed_at')->nullable();
             $table->timestamp('spaced_passed_at')->nullable();
             $table->timestamp('review_due_at')->nullable();
+            $table->json('independent_concepts')->nullable();
+            $table->json('spaced_concepts')->nullable();
             $table->boolean('needs_support')->default(false);
             $table->unsignedInteger('completed_count')->default(0);
             $table->timestamps();

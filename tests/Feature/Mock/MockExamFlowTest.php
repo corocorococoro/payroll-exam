@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LearningModule;
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
 use App\Models\Question;
@@ -320,3 +321,17 @@ test('スナップショットなし・必要な参照表なしの高得点は�
     actingAs($this->user)->get('/dashboard')->assertOk()
         ->assertInertia(fn ($page) => $page->where('summary.qualifying_mock_count', 0));
 })->with(['snapshot', 'tables']);
+
+test('模試の一問だけの誤答をその問題が属する短い単元へ正確に戻す', function () {
+    $question = $this->exam->examQuestions()->with('question')->firstOrFail()->question;
+    $module = LearningModule::whereHas('questions', fn ($query) => $query->where('questions.id', $question->id))->firstOrFail();
+    $answers = correctAnswers($this->exam);
+    $answers[$question->id] = incorrectChoice($question);
+    $attempt = $this->user->mockExamAttempts()->create([
+        'mock_exam_id' => $this->exam->id, 'time_limit_minutes' => 120, 'started_at' => now(), 'answers' => $answers,
+    ]);
+    actingAs($this->user)->post("/mock-attempts/{$attempt->id}/finish")->assertRedirect();
+    actingAs($this->user)->get("/mock-attempts/{$attempt->id}/result")->assertInertia(fn ($page) => $page
+        ->has('remediation', 1)->where('remediation.0.href', "/study/{$module->slug}?mode=guided")
+        ->where('remediation.0.lesson_name', $module->name)->where('remediation.0.missed_count', 1));
+});

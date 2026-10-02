@@ -162,9 +162,9 @@ class MockExamAttemptController extends Controller
         );
         $review = collect($snapshots->reviewItems($snapshot));
         $moduleByQuestion = LearningModule::where('is_active', true)->with('questions')->get()
-            ->flatMap(fn (LearningModule $module) => $module->questions->mapWithKeys(
+            ->mapWithKeys(fn (LearningModule $module) => $module->questions->mapWithKeys(
                 fn ($question): array => [$question->id => $module],
-            ));
+            )->all());
 
         $weakest = collect($attempt->unit_scores ?? [])
             ->sortBy('accuracy')

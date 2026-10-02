@@ -14,8 +14,10 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $review_due_at
  * @property bool $needs_support
  * @property int $completed_count
+ * @property array<int, string>|null $independent_concepts
+ * @property array<int, string>|null $spaced_concepts
  */
-#[Fillable(['user_id', 'learning_module_id', 'content_hash', 'guided_completed_at', 'independent_passed_at', 'spaced_passed_at', 'review_due_at', 'needs_support', 'completed_count'])]
+#[Fillable(['user_id', 'learning_module_id', 'content_hash', 'guided_completed_at', 'independent_passed_at', 'spaced_passed_at', 'review_due_at', 'independent_concepts', 'spaced_concepts', 'needs_support', 'completed_count'])]
 class LearningModuleProgress extends Model
 {
     protected $table = 'learning_module_progress';
@@ -25,6 +27,7 @@ class LearningModuleProgress extends Model
         return [
             'guided_completed_at' => 'datetime', 'independent_passed_at' => 'datetime',
             'spaced_passed_at' => 'datetime', 'review_due_at' => 'datetime', 'needs_support' => 'boolean',
+            'independent_concepts' => 'array', 'spaced_concepts' => 'array',
         ];
     }
 }

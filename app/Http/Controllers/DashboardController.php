@@ -190,14 +190,9 @@ class DashboardController extends Controller
                 'recommended_lesson_id' => $recommendedLesson?->id,
                 'recommended_lesson_name' => $recommendedLesson?->name,
                 'next_action_href' => $reviewDue > 0 ? '/review' : ($nextModule !== null ? $nextModule['href']
-                    : ($recommendedLesson === null ? '/mock-exams' : "/lessons/{$recommendedLesson->id}")),
-                'next_action_label' => $reviewDue > 0 ? "今日の復習{$reviewDue}問を始める" : ($nextModule !== null
-                    ? "「{$nextModule['name']}」を学ぶ" : match ($recommendationKind) {
-                        'recovery' => "「{$recommendedLesson->name}」の苦手な問題を復習する",
-                        'core' => "「{$recommendedLesson->name}」の重要問題を進める",
-                        'reinforcement' => "「{$recommendedLesson->name}」の追加問題を進める",
-                        default => '学習一覧を見る',
-                    }),
+                    : ($curriculum['unavailable_count'] > 0 ? '/learn' : '/mock-exams')),
+                'next_action_label' => $reviewDue > 0 ? "今日の復習{$reviewDue}問を始める" : ($nextModule !== null ? "「{$nextModule['name']}」を学ぶ"
+                    : ($curriculum['unavailable_count'] > 0 ? '教材の公開状況を見る' : '初見の模試で実力を確かめる')),
                 'xp_progress' => app(XpLevelService::class)->progress($user),
             ],
             'accuracy_by_unit' => $accuracyByUnit,

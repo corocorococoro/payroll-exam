@@ -266,7 +266,14 @@ const accuracy = computed(() =>
             <div class="reward-mascot-halo">
                 <Kyuchan mood="clap" effect="confetti" :size="140" />
             </div>
-            <span v-if="accuracy === 100" class="reward-perfect-badge"
+            <span
+                v-if="
+                    accuracy === 100 &&
+                    (!study ||
+                        guided ||
+                        completion.study_result?.independent_accuracy === 100)
+                "
+                class="reward-perfect-badge"
                 >✦
                 {{ guided ? '練習クリア · 全問正解' : 'PERFECT · 全問正解' }}
                 ✦</span
@@ -280,7 +287,9 @@ const accuracy = computed(() =>
                               ? '日を空けても解けた！'
                               : completion.study_result.passed
                                 ? '自力で確認できた！'
-                                : '例に戻って、理解を育てよう'
+                                : completion.study_result.needs_more
+                                  ? '残りの論点も確かめよう'
+                                  : '例に戻って、理解を育てよう'
                         : 'レッスン完了！🎉'
                 }}
             </h1>
@@ -308,13 +317,13 @@ const accuracy = computed(() =>
                 class="max-w-sm text-sm leading-6 text-gray-500"
             >
                 <template v-if="guided"
-                    >次は手助けを閉じて、別の問題で確かめます。</template
+                    >次は手助けを閉じて、思い出せるか確かめます。</template
                 >
                 <template v-else
                     >手助けなしで正解
                     {{ completion.study_result.independent_correct_count }} /
                     {{ completion.study_result.question_count }}
-                    問。自力確認の目安は80%以上です。</template
+                    問。80%以上の正解と、単元内の各論点の自力正解を確認します。</template
                 >
             </p>
             <div class="grid w-full max-w-sm grid-cols-2 gap-3">
@@ -413,7 +422,9 @@ const accuracy = computed(() =>
                         ? '自力で確かめる'
                         : completion.study_result.passed
                           ? `次へ：${completion.study_result.next_name}`
-                          : '例を見て、もう一度練習する'
+                          : completion.study_result.needs_more
+                            ? `残り${completion.study_result.remaining_concept_count}論点を確かめる`
+                            : '例を見て、もう一度練習する'
                 }}
                 →</Link
             >
@@ -679,7 +690,7 @@ const accuracy = computed(() =>
                         <p
                             class="rounded-lg bg-amber-50 p-3 text-xs leading-6 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
                         >
-                            手助けを使った問題は、自力確認の正解数に含めません。{{
+                            手助けを見た後の問題は、自力確認の正解数に含めません。{{
                                 support.memory_tip
                             }}
                         </p>

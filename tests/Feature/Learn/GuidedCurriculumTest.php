@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\Course;
 use App\Models\LearningModule;
 use App\Models\LearningModuleProgress;
 use App\Models\Question;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -29,7 +32,9 @@ function answerStudy(User $user, LearningModule $module, array $run, bool $corre
         $question = Question::findOrFail($id);
         actingAs($user)->postJson('/answers', [
             'study_run_id' => $run['id'], 'learning_module_id' => $module->id, 'question_id' => $id,
-            'context' => 'lesson', 'answer' => $correct ? correctChoice($question) : incorrectChoice($question),
+            'context' => 'lesson', 'answer' => $question->type->value === 'numeric'
+                ? (string) ($correct ? $question->answer['value'] : $question->answer['value'] + 1)
+                : ($correct ? correctChoice($question) : incorrectChoice($question)),
         ])->assertOk()->assertJson(['correct' => $correct]);
     }
 }
@@ -206,4 +211,132 @@ test('同じ完了要求が残ったセッションから届いても完了と�
         ->postJson('/study/payslip/complete', ['study_run_id' => $run['id']])->assertStatus(422);
     expect(LearningModuleProgress::first()->completed_count)->toBe(1)
         ->and($this->user->statOrCreate()->refresh()->total_xp)->toBe($xp);
+});
+
+test('57単元すべてで公開通常問題を自力確認し最後は初見模試へ進む', function () {
+    // Exercise the whole course at machine speed; normal request throttling remains enabled elsewhere.
+    $this->withoutMiddleware(ThrottleRequests::class);
+    foreach (LearningModule::orderBy('position')->get() as $module) {
+        [$module, $run] = openStudy($this->user, $module->slug, 'check');
+        expect(Question::query()->practiceBank()->whereIn('id', $run['question_ids'])->count())
+            ->toBe(count($run['question_ids']));
+        answerStudy($this->user, $module, $run);
+        actingAs($this->user)->postJson("/study/{$module->slug}/complete", ['study_run_id' => $run['id']])
+            ->assertOk()->assertJsonPath('study_result.passed', true);
+    }
+    actingAs($this->user)->get('/learn')->assertInertia(fn ($page) => $page
+        ->where('curriculum.passed_count', 57)->where('curriculum.next', null));
+    actingAs($this->user)->get('/dashboard')->assertInertia(fn ($page) => $page
+        ->where('summary.next_action_href', '/mock-exams'));
+});
+
+test('80パーセントでも未確認の論点を飛ばさず次の短い回で優先する', function () {
+    [$module, $run] = openStudy($this->user, 'commute-tax', 'check');
+    $questions = Question::whereIn('id', $run['question_ids'])->get();
+    $single = $questions->groupBy('concept_key')->first(fn ($group) => $group->count() === 1)->first();
+    foreach ($run['question_ids'] as $id) {
+        $question = Question::findOrFail($id);
+        actingAs($this->user)->postJson('/answers', [
+            'study_run_id' => $run['id'], 'learning_module_id' => $module->id, 'question_id' => $id,
+            'context' => 'lesson', 'answer' => $id === $single->id ? incorrectChoice($question) : correctChoice($question),
+        ])->assertOk();
+    }
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $run['id']])->assertOk()
+        ->assertJsonPath('study_result.independent_accuracy', 80)
+        ->assertJsonPath('study_result.passed', false)->assertJsonPath('study_result.needs_more', true)
+        ->assertJsonPath('study_result.remaining_concept_count', 1);
+    expect(LearningModuleProgress::first()->independent_passed_at)->toBeNull();
+    [$module, $next] = openStudy($this->user, 'commute-tax');
+    expect(Question::findOrFail($next['question_ids'][0])->concept_key)->toBe($single->concept_key);
+    answerStudy($this->user, $module, $next);
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $next['id']])
+        ->assertOk()->assertJsonPath('study_result.passed', true);
+});
+
+test('期限前の再練習をしても単元の復習期限を先送りしない', function () {
+    [$module, $run] = openStudy($this->user, mode: 'check');
+    answerStudy($this->user, $module, $run);
+    actingAs($this->user)->postJson('/study/payslip/complete', ['study_run_id' => $run['id']])->assertOk();
+    $due = LearningModuleProgress::first()->review_due_at->toDateString();
+    $this->travel(2)->days();
+    [$module, $repeat] = openStudy($this->user);
+    answerStudy($this->user, $module, $repeat);
+    actingAs($this->user)->postJson('/study/payslip/complete', ['study_run_id' => $repeat['id']])
+        ->assertOk()->assertJsonPath('study_result.retained', false)->assertJsonPath('study_result.review_due_at', $due);
+});
+
+test('配信外の問題の公開期限切れでも部分教材で達成扱いにしない', function () {
+    [$module, $run] = openStudy($this->user, 'resident-tax', 'check');
+    answerStudy($this->user, $module, $run);
+    actingAs($this->user)->postJson('/study/resident-tax/complete', ['study_run_id' => $run['id']])->assertOk();
+    [$module, $repeat] = openStudy($this->user, 'resident-tax');
+    $unselected = $module->questions()->whereNotIn('questions.id', $repeat['question_ids'])->firstOrFail();
+    $unselected->update(['review_due_at' => now()->subMinute()]);
+    actingAs($this->user)->get('/learn')->assertInertia(fn ($page) => $page
+        ->where('curriculum.passed_count', 0)->where('curriculum.unavailable_count', 1));
+    actingAs($this->user)->get('/study/resident-tax')->assertStatus(503);
+    actingAs($this->user)->postJson('/study/resident-tax/complete', ['study_run_id' => $repeat['id']])->assertStatus(422);
+    expect($this->user->attempts()->count())->toBe(count($run['question_ids']));
+});
+
+test('全体の手助けを見た後は残りの問題を自力の証拠にしない', function () {
+    [$module, $run] = openStudy($this->user, 'commute-tax', 'check');
+    $id = $run['question_ids'][0];
+    actingAs($this->user)->postJson('/study/commute-tax/support', ['study_run_id' => $run['id'], 'question_id' => $id])->assertOk();
+    expect(array_diff($run['question_ids'], session("study_runs.{$module->id}.hinted_ids")))->toBe([]);
+    answerStudy($this->user, $module, $run);
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $run['id']])->assertOk()
+        ->assertJsonPath('study_result.passed', false)->assertJsonPath('study_result.independent_accuracy', 0);
+});
+
+test('単元が不正なら同期途中の旧教材更新も履歴もロールバックする', function () {
+    $course = Course::where('slug', 'kyuyo-2kyu')->firstOrFail();
+    $course->update(['name' => '同期前の名前']);
+    $before = Question::pluck('content_hash', 'id')->all();
+    $curriculumPath = database_path('seeders/data/learning-curriculum.json');
+    File::shouldReceive('json')->andReturnUsing(function (string $path) use ($curriculumPath): array {
+        $data = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+        if ($path === $curriculumPath) {
+            $data['modules'][0]['approach'] = ['', '', ''];
+        }
+
+        return $data;
+    });
+    expect(fn () => seed(ContentSeeder::class))->toThrow(RuntimeException::class);
+    expect($course->refresh()->name)->toBe('同期前の名前')
+        ->and(Question::pluck('content_hash', 'id')->all())->toBe($before);
+});
+
+test('後日確認と再確認でも一度の達成を未確認論点の代わりにしない', function () {
+    [$module, $run] = openStudy($this->user, 'commute-tax', 'check');
+    answerStudy($this->user, $module, $run);
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $run['id']])->assertOk();
+    $this->travel(4)->days();
+    [$module, $spaced] = openStudy($this->user, 'commute-tax');
+    expect($spaced['phase'])->toBe('spaced');
+    $questions = Question::whereIn('id', $spaced['question_ids'])->get();
+    $single = $questions->groupBy('concept_key')->first(fn ($group) => $group->count() === 1)->first();
+    foreach ($spaced['question_ids'] as $id) {
+        $q = Question::findOrFail($id);
+        actingAs($this->user)->postJson('/answers', [
+            'study_run_id' => $spaced['id'], 'learning_module_id' => $module->id, 'question_id' => $id,
+            'context' => 'lesson', 'answer' => $id === $single->id ? incorrectChoice($q) : correctChoice($q),
+        ])->assertOk();
+    }
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $spaced['id']])->assertOk()
+        ->assertJsonPath('study_result.retained', false)->assertJsonPath('study_result.needs_more', true);
+    [$module, $remaining] = openStudy($this->user, 'commute-tax');
+    expect($remaining['phase'])->toBe('spaced')
+        ->and(Question::findOrFail($remaining['question_ids'][0])->concept_key)->toBe($single->concept_key);
+    answerStudy($this->user, $module, $remaining);
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $remaining['id']])->assertOk()
+        ->assertJsonPath('study_result.retained', true);
+    [$module, $again] = openStudy($this->user, 'commute-tax', 'check');
+    $q = Question::findOrFail($again['question_ids'][0]);
+    // A whole-guide hint invalidates the remaining independent evidence on a recheck.
+    actingAs($this->user)->postJson('/study/commute-tax/support', ['study_run_id' => $again['id'], 'question_id' => $q->id])->assertOk();
+    answerStudy($this->user, $module, $again);
+    actingAs($this->user)->postJson('/study/commute-tax/complete', ['study_run_id' => $again['id']])->assertOk()
+        ->assertJsonPath('study_result.passed', false);
+    expect(LearningModuleProgress::first()->independent_passed_at)->toBeNull();
 });

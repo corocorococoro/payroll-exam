@@ -20,11 +20,19 @@ class LearningCurriculumSeeder extends Seeder
         $practiceIds = Question::query()->published()->practiceBank()->pluck('source_id')->all();
         $sections = array_column($data['sections'], 'slug');
         $slugs = [];
+        $positions = [];
         $assigned = [];
 
         // Validate the entire route before replacing any module or pivot.
         foreach ($modules as $module) {
-            if (in_array($module['slug'], $slugs, true) || ! in_array($module['section'], $sections, true)
+            if (! preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $module['slug'])
+                || ! is_int($module['position']) || $module['position'] !== count($slugs) + 1
+                || in_array($module['position'], $positions, true)
+                || trim($module['name']) === ''
+                || count(array_filter($module['approach'], fn ($step): bool => is_string($step) && trim($step) !== '')) !== 3
+                || $module['question_source_ids'] === []
+                || count($module['prerequisites']) !== count(array_unique($module['prerequisites']))
+                || in_array($module['slug'], $slugs, true) || ! in_array($module['section'], $sections, true)
                 || array_diff($module['prerequisites'], $slugs) !== []
                 || ! in_array($module['method'], ['understand', 'remember', 'calculate'], true)
                 || count($module['approach']) !== 3
@@ -34,6 +42,7 @@ class LearningCurriculumSeeder extends Seeder
                 throw new RuntimeException("Invalid learning module {$module['slug']}");
             }
             $slugs[] = $module['slug'];
+            $positions[] = $module['position'];
             foreach ($module['question_source_ids'] as $id) {
                 if (! $questions->has($id) || in_array($id, $assigned, true)) {
                     throw new RuntimeException("Unknown or duplicate curriculum question {$id}");
