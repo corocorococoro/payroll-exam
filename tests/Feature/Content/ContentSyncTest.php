@@ -1,10 +1,13 @@
 <?php
 
+use App\Console\Commands\SyncQuestionContent;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\ReferenceSheet;
 use App\Services\QuestionReviewLedger;
 use Database\Seeders\ContentSeeder;
+use Illuminate\Support\Facades\DB;
+use Tests\Support\ReviewLedgerFixture;
 
 use function Pest\Laravel\artisan;
 
@@ -27,4 +30,16 @@ test('同じ正本リリースではDB上のレビュー結果を上書きしな
         ->assertSuccessful();
 
     expect($question->refresh()->review_notes)->toBe('管理画面で行った再レビュー');
+});
+
+test('同じリリースでも期限切れの監査台帳を同期成功として扱わない', function () {
+    artisan('content:sync')->assertSuccessful();
+    $hash = DB::table('content_releases')->value('bundle_hash');
+    $records = ReviewLedgerFixture::records();
+    $records['q-0001']['reviewed_at'] = today()->subDays(2)->toDateString();
+    $records['q-0001']['review_due_at'] = today()->subDay()->toDateString();
+    app()->instance(QuestionReviewLedger::class, new QuestionReviewLedger($records));
+    expect(fn () => app(SyncQuestionContent::class)->handle())->toThrow(RuntimeException::class);
+    expect(DB::table('content_releases')->value('bundle_hash'))->toBe($hash)
+        ->and(Question::count())->toBe(567);
 });

@@ -97,12 +97,14 @@ const unitClasses = {
             </div>
         </div>
         <p
-            v-if="curriculum.unavailable_count"
+            v-if="curriculum.unavailable_count || !curriculum.module_count"
             class="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950 dark:text-amber-200"
         >
             {{
                 curriculum.unavailable_count
-            }}単元の教材を確認中です。公開可能になってから再開できます。
+                    ? `${curriculum.unavailable_count}単元の教材を確認中です。`
+                    : '教材を確認中です。'
+            }}公開可能になってから再開できます。
         </p>
         <Link
             v-if="curriculum.next"

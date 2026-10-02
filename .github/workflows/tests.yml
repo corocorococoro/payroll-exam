@@ -59,8 +59,8 @@ jobs:
       - name: Audit PHP dependencies
         run: composer audit --locked --no-interaction
 
-      - name: Audit production frontend dependencies
-        run: npm audit --omit=dev --audit-level=high
+      - name: Audit frontend dependencies
+        run: npm audit --audit-level=high
 
       - name: Validate publication content
         if: always()

@@ -340,3 +340,11 @@ test('後日確認と再確認でも一度の達成を未確認論点の代わ�
         ->assertJsonPath('study_result.passed', false);
     expect(LearningModuleProgress::first()->independent_passed_at)->toBeNull();
 });
+
+test('同期前の空の単元一覧を学習完了や模試準備完了として扱わない', function () {
+    LearningModule::query()->delete();
+    actingAs($this->user)->get('/learn')->assertInertia(fn ($page) => $page
+        ->where('curriculum.module_count', 0)->where('curriculum.next', null));
+    actingAs($this->user)->get('/dashboard')->assertInertia(fn ($page) => $page
+        ->where('summary.next_action_href', '/learn')->where('summary.next_action_label', '教材の公開状況を見る'));
+});

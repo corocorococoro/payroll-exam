@@ -96,8 +96,8 @@ class LearningCurriculumService
                 'retained' => $current && $progress->spaced_passed_at !== null,
                 'due' => $due, 'needs_support' => $current && $progress->needs_support,
                 'question_count' => $count,
-                'session_question_count' => $phase === 'guided'
-                    ? min(3, max(1, $count - 2)) : min(5, $count),
+                'session_question_count' => ! $available ? 0 : ($phase === 'guided'
+                    ? min(3, max(1, $count - 2)) : min(5, $count)),
                 'prerequisite_names' => array_values(array_map(fn (string $slug): string => (string) $names[$slug],
                     array_diff($module->prerequisites, $passedSlugs))),
                 'href' => "/study/{$module->slug}",
