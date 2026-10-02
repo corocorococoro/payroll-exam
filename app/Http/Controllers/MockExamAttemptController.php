@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearningModule;
 use App\Models\MockExam;
 use App\Models\MockExamAttempt;
 use App\Models\User;
@@ -160,6 +161,10 @@ class MockExamAttemptController extends Controller
             $attempt->answers ?? [],
         );
         $review = collect($snapshots->reviewItems($snapshot));
+        $moduleByQuestion = LearningModule::where('is_active', true)->with('questions')->get()
+            ->flatMap(fn (LearningModule $module) => $module->questions->mapWithKeys(
+                fn ($question): array => [$question->id => $module],
+            ));
 
         $weakest = collect($attempt->unit_scores ?? [])
             ->sortBy('accuracy')
@@ -169,17 +174,19 @@ class MockExamAttemptController extends Controller
             ->values();
         $remediation = $review
             ->filter(fn (array $item): bool => ! $item['correct'] && $item['lesson_id'] !== null)
-            ->groupBy('lesson_id')
-            ->map(function ($items): array {
+            ->groupBy(fn (array $item): string => $moduleByQuestion->has($item['question_id'])
+                ? 'module:'.$moduleByQuestion[$item['question_id']]->id : 'lesson:'.$item['lesson_id'])
+            ->map(function ($items) use ($moduleByQuestion): array {
                 $first = $items->first();
+                $module = $moduleByQuestion->get($first['question_id']);
 
                 return [
                     'lesson_id' => $first['lesson_id'],
-                    'lesson_name' => $first['lesson_name'],
+                    'lesson_name' => $module->name ?? $first['lesson_name'],
                     'unit_name' => $first['unit_name'],
                     'missed_count' => $items->count(),
                     'missed_points' => $items->sum('points'),
-                    'href' => "/lessons/{$first['lesson_id']}",
+                    'href' => $module === null ? "/lessons/{$first['lesson_id']}" : "/study/{$module->slug}?mode=guided",
                 ];
             })
             ->sortByDesc('missed_points')

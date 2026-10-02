@@ -215,7 +215,7 @@ test('模試の誤答と無回答を即日復習と補強レッスンへつな�
             ->has('remediation', 2)
             ->where('remediation.0.missed_count', fn (int $count): bool => $count > 0)
             ->where('remediation.0.missed_points', fn (int $points): bool => $points > 0)
-            ->where('remediation.0.href', fn (string $href): bool => str_starts_with($href, '/lessons/')),
+            ->where('remediation.0.href', fn (string $href): bool => str_starts_with($href, '/study/')),
         );
 });
 

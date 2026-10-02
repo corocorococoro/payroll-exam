@@ -14,6 +14,7 @@ import AnimatedNumber from '@/components/AnimatedNumber.vue';
 import Kyuchan from '@/components/Kyuchan.vue';
 import LearningCelebration from '@/components/LearningCelebration.vue';
 import LearningCombo from '@/components/LearningCombo.vue';
+import LearningExample from '@/components/LearningExample.vue';
 import ReferenceSheetsModal from '@/components/ReferenceSheetsModal.vue';
 import { useLearningRewards } from '@/composables/useLearningRewards';
 import { useXpProgress } from '@/composables/useXpProgress';
@@ -25,6 +26,8 @@ import type {
     PlayerQuestion,
     ReferenceSheetData,
     XpLevelReward,
+    StudyInfo,
+    StudySupport,
 } from '@/types';
 
 const props = defineProps<{
@@ -45,29 +48,46 @@ const props = defineProps<{
     };
     questions: PlayerQuestion[];
     reference_sheets: ReferenceSheetData[];
+    study?: StudyInfo;
 }>();
 
-const index = ref(0);
-const started = ref(false);
+const answeredIds = ref(props.study?.answered_ids ?? []);
+const firstUnanswered = props.questions.findIndex(
+    (q) => !answeredIds.value.includes(q.id),
+);
+const index = ref(Math.max(0, firstUnanswered));
+const started = ref(answeredIds.value.length > 0);
 const selectedChoice = ref<string | null>(null);
 const numericInput = ref('');
 const result = ref<AnswerResult | null>(null);
 const checking = ref(false);
-const correctCount = ref(0);
+const correctCount = ref(props.study?.correct_count ?? 0);
+const support = ref<StudySupport | null>(null);
+const loadingSupport = ref(false);
 const sheetsOpen = ref(false);
 const completion = ref<LessonComplete | null>(null);
 const finishing = ref(false);
 const errorMessage = ref<string | null>(null);
 const rewards = useLearningRewards();
 const { combo, bestCombo, earnedXp, reward } = rewards;
+earnedXp.value = props.study?.earned_xp ?? 0;
 const { sync: syncXp } = useXpProgress();
 const levelUps = ref<XpLevelReward[]>([]);
 
 const current = computed(() => props.questions[index.value]);
-const isLast = computed(() => index.value >= props.questions.length - 1);
+const isLast = computed(() =>
+    props.study
+        ? props.questions.every((q) => answeredIds.value.includes(q.id))
+        : index.value >= props.questions.length - 1,
+);
+const allAnswered = computed(() => !!props.study && isLast.value);
+const guided = computed(() => props.study?.phase === 'guided');
 const progress = computed(() =>
     props.questions.length > 0
-        ? ((index.value + (result.value ? 1 : 0)) / props.questions.length) *
+        ? ((props.study
+              ? answeredIds.value.length
+              : index.value + (result.value ? 1 : 0)) /
+              props.questions.length) *
           100
         : 0,
 );
@@ -79,7 +99,13 @@ const canCheck = computed(() =>
 );
 
 async function check() {
-    if (!current.value || checking.value || result.value || !canCheck.value) {
+    if (
+        !current.value ||
+        checking.value ||
+        loadingSupport.value ||
+        result.value ||
+        !canCheck.value
+    ) {
         return;
     }
 
@@ -96,10 +122,20 @@ async function check() {
             question_id: current.value.id,
             answer,
             context: 'lesson',
-            lesson_id: props.lesson.id,
+            ...(props.study
+                ? {
+                      learning_module_id: props.lesson.id,
+                      study_run_id: props.study.run_id,
+                  }
+                : { lesson_id: props.lesson.id }),
         });
 
         result.value = res;
+
+        if (props.study) {
+            answeredIds.value.push(current.value.id);
+        }
+
         rewards.answer(res);
 
         for (const level of res.level_ups) {
@@ -132,10 +168,40 @@ async function next() {
         return;
     }
 
-    index.value++;
+    index.value = props.study
+        ? props.questions.findIndex((q) => !answeredIds.value.includes(q.id))
+        : index.value + 1;
     selectedChoice.value = null;
     numericInput.value = '';
     result.value = null;
+    support.value = null;
+}
+
+async function showSupport() {
+    if (
+        !props.study ||
+        !current.value ||
+        loadingSupport.value ||
+        checking.value ||
+        result.value
+    ) {
+        return;
+    }
+
+    loadingSupport.value = true;
+    errorMessage.value = null;
+
+    try {
+        support.value = await postJson<StudySupport>(
+            `/study/${props.study.slug}/support`,
+            { question_id: current.value.id, study_run_id: props.study.run_id },
+        );
+    } catch (e) {
+        errorMessage.value =
+            e instanceof Error ? e.message : '手助けを開けませんでした。';
+    } finally {
+        loadingSupport.value = false;
+    }
 }
 
 async function finish() {
@@ -148,8 +214,10 @@ async function finish() {
 
     try {
         completion.value = await postJson<LessonComplete>(
-            `/lessons/${props.lesson.id}/complete`,
-            {},
+            props.study
+                ? `/study/${props.study.slug}/complete`
+                : `/lessons/${props.lesson.id}/complete`,
+            props.study ? { study_run_id: props.study.run_id } : {},
         );
         syncXp(completion.value.xp_progress);
 
@@ -199,13 +267,25 @@ const accuracy = computed(() =>
                 <Kyuchan mood="clap" effect="confetti" :size="140" />
             </div>
             <span v-if="accuracy === 100" class="reward-perfect-badge"
-                >✦ PERFECT · 全問正解 ✦</span
+                >✦
+                {{ guided ? '練習クリア · 全問正解' : 'PERFECT · 全問正解' }}
+                ✦</span
             >
             <h1 class="text-2xl font-semibold text-gray-700 dark:text-gray-100">
-                レッスン完了！🎉
+                {{
+                    completion.study_result
+                        ? guided
+                            ? '例を使って練習できた！'
+                            : completion.study_result.retained
+                              ? '日を空けても解けた！'
+                              : completion.study_result.passed
+                                ? '自力で確認できた！'
+                                : '例に戻って、理解を育てよう'
+                        : 'レッスン完了！🎉'
+                }}
             </h1>
 
-            <div class="text-center">
+            <div v-if="!study" class="text-center">
                 <p class="mb-2 text-xs font-bold text-gray-500">
                     完了ボーナス {{ completion.crown_level }}/5回獲得
                 </p>
@@ -223,6 +303,20 @@ const accuracy = computed(() =>
                 </div>
             </div>
 
+            <p
+                v-if="completion.study_result"
+                class="max-w-sm text-sm leading-6 text-gray-500"
+            >
+                <template v-if="guided"
+                    >次は手助けを閉じて、別の問題で確かめます。</template
+                >
+                <template v-else
+                    >手助けなしで正解
+                    {{ completion.study_result.independent_correct_count }} /
+                    {{ completion.study_result.question_count }}
+                    問。自力確認の目安は80%以上です。</template
+                >
+            </p>
             <div class="grid w-full max-w-sm grid-cols-2 gap-3">
                 <div
                     class="rounded-md border border-amber-200 bg-white p-4 dark:border-amber-900 dark:bg-gray-900"
@@ -237,6 +331,9 @@ const accuracy = computed(() =>
                         <template v-if="completion.bonus_xp > 0">
                             今回の完了ボーナス +{{ completion.bonus_xp }}
                         </template>
+                        <template v-else-if="study"
+                            >この段階のボーナスは獲得済み</template
+                        >
                         <template v-else
                             >完了ボーナスは5回分すべて獲得済み</template
                         >
@@ -299,7 +396,7 @@ const accuracy = computed(() =>
             </p>
 
             <Link
-                v-if="correctCount < questions.length"
+                v-if="!study && correctCount < questions.length"
                 href="/review"
                 class="flex w-full max-w-sm items-center justify-center gap-2 rounded-md bg-rose-400 py-3 font-semibold text-white shadow-sm shadow-rose-500 transition hover:bg-rose-500 active:shadow-none"
             >
@@ -307,6 +404,30 @@ const accuracy = computed(() =>
                 間違えた{{ questions.length - correctCount }}問を今すぐ復習
             </Link>
 
+            <Link
+                v-if="completion.study_result"
+                :href="completion.study_result.next_href"
+                class="w-full max-w-sm rounded-lg bg-[#2864f0] px-4 py-3 font-semibold text-white hover:bg-[#285ac8]"
+                >{{
+                    guided
+                        ? '自力で確かめる'
+                        : completion.study_result.passed
+                          ? `次へ：${completion.study_result.next_name}`
+                          : '例を見て、もう一度練習する'
+                }}
+                →</Link
+            >
+            <p
+                v-if="
+                    completion.study_result?.review_due_at &&
+                    completion.study_result.passed
+                "
+                class="text-xs text-gray-500"
+            >
+                次の単元復習：{{
+                    formatReviewDate(completion.study_result.review_due_at)
+                }}
+            </p>
             <button
                 class="w-full max-w-sm rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm transition hover:bg-[#285ac8] active:shadow-none"
                 @click="backToTree"
@@ -370,11 +491,11 @@ const accuracy = computed(() =>
                     </p>
                 </div>
 
-                <div class="mt-5">
+                <div v-if="!study || guided" class="mt-5">
                     <h2
                         class="text-sm font-semibold text-gray-700 dark:text-gray-200"
                     >
-                        先に覚える3点
+                        {{ study ? '考える順番' : '先に覚える3点' }}
                     </h2>
                     <ol class="mt-2 space-y-2">
                         <li
@@ -395,6 +516,7 @@ const accuracy = computed(() =>
 
                 <div
                     class="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/40"
+                    v-if="lesson.study_guide.common_traps.length"
                 >
                     <p
                         class="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-300"
@@ -414,6 +536,55 @@ const accuracy = computed(() =>
                 </div>
 
                 <div
+                    v-if="guided && study?.slug === 'payslip'"
+                    class="my-4 rounded-xl border border-emerald-100 bg-emerald-50 p-4 dark:border-emerald-900 dark:bg-emerald-950/30"
+                >
+                    <p
+                        class="text-xs font-bold text-emerald-700 dark:text-emerald-300"
+                    >
+                        まずは、この関係だけ
+                    </p>
+                    <dl class="mt-3 grid grid-cols-3 gap-2 text-center text-sm">
+                        <div>
+                            <dt class="text-xs text-gray-500">支給</dt>
+                            <dd class="mt-1 font-bold">300,000円</dd>
+                        </div>
+                        <div>
+                            <dt class="text-xs text-gray-500">控除</dt>
+                            <dd class="mt-1 font-bold">50,000円</dd>
+                        </div>
+                        <div>
+                            <dt class="text-xs text-gray-500">差引支給</dt>
+                            <dd
+                                class="mt-1 font-bold text-emerald-700 dark:text-emerald-300"
+                            >
+                                250,000円
+                            </dd>
+                        </div>
+                    </dl>
+                    <p class="mt-3 text-center text-xs text-gray-500">
+                        支給 − 控除 ＝
+                        手取り。勤怠の日数・時間は計算の材料です。
+                    </p>
+                </div>
+                <p
+                    v-if="guided && study?.memory_tip"
+                    class="my-4 rounded-lg bg-amber-50 p-3 text-sm leading-6 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
+                >
+                    {{ study.memory_tip }}
+                </p>
+                <LearningExample
+                    v-if="guided && study?.example"
+                    :example="study.example"
+                    class="mt-4"
+                />
+                <p
+                    v-if="study && !guided"
+                    class="mt-5 text-sm leading-6 text-gray-500"
+                >
+                    今回は手助けを閉じて解きます。迷ったら「手助けを見る」で例に戻れます。資料集は自由に使えます。
+                </p>
+                <div
                     v-if="lesson.study_guide.worked_example"
                     class="mt-4 rounded-lg bg-blue-50 p-4 text-sm leading-7 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
                 >
@@ -426,7 +597,14 @@ const accuracy = computed(() =>
                     class="mt-6 flex w-full items-center justify-center gap-2 rounded-md bg-[#2864f0] py-3 font-semibold text-white shadow-sm hover:bg-[#285ac8]"
                     @click="started = true"
                 >
-                    このポイントを使って解く <ArrowRight class="size-4" />
+                    {{
+                        study
+                            ? guided
+                                ? '例を使って練習する'
+                                : '自力で確かめる'
+                            : 'このポイントを使って解く'
+                    }}
+                    <ArrowRight class="size-4" />
                 </button>
             </section>
         </main>
@@ -469,7 +647,58 @@ const accuracy = computed(() =>
                     {{ lesson.unit_name }} / {{ lesson.name }}
                 </p>
 
-                <div v-if="current" class="flex flex-col gap-4">
+                <div
+                    v-if="allAnswered && !result"
+                    class="rounded-xl bg-white p-5 text-center dark:bg-gray-900"
+                >
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                        すべて解答済みです。結果を確認しましょう。
+                    </p>
+                    <button
+                        :disabled="finishing"
+                        class="mt-4 rounded-lg bg-[#2864f0] px-5 py-3 font-bold text-white"
+                        @click="finish"
+                    >
+                        {{ finishing ? '確認中…' : '結果を見る' }}
+                    </button>
+                </div>
+                <div v-else-if="current" class="flex flex-col gap-4">
+                    <p v-if="study" class="text-xs font-bold text-[#285ac8]">
+                        {{ lesson.focus_label
+                        }}<span v-if="guided"> · 手助けつきの練習</span>
+                    </p>
+                    <button
+                        v-if="study && !support && !result"
+                        :disabled="loadingSupport || checking"
+                        class="self-start rounded-full border border-blue-200 bg-white px-3 py-2 text-xs font-bold text-[#285ac8] dark:border-blue-800 dark:bg-gray-900"
+                        @click="showSupport"
+                    >
+                        {{ loadingSupport ? '開いています…' : '手助けを見る' }}
+                    </button>
+                    <section v-if="support" class="space-y-3">
+                        <p
+                            class="rounded-lg bg-amber-50 p-3 text-xs leading-6 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
+                        >
+                            手助けを使った問題は、自力確認の正解数に含めません。{{
+                                support.memory_tip
+                            }}
+                        </p>
+                        <ol
+                            class="space-y-1 text-xs leading-6 text-gray-600 dark:text-gray-300"
+                        >
+                            <li
+                                v-for="(step, i) in support.approach"
+                                :key="step"
+                            >
+                                {{ i + 1 }}. {{ step }}
+                            </li>
+                        </ol>
+                        <LearningExample
+                            v-if="support.example"
+                            :example="support.example"
+                            :key="current.id"
+                        />
+                    </section>
                     <div
                         class="rounded-lg border border-blue-100 bg-white p-5 dark:border-gray-800 dark:bg-gray-900"
                     >
@@ -565,7 +794,10 @@ const accuracy = computed(() =>
             </main>
 
             <!-- 下部バー: チェック / フィードバック -->
-            <div class="fixed inset-x-0 bottom-0 z-10">
+            <div
+                v-if="!allAnswered || result"
+                class="fixed inset-x-0 bottom-0 z-10"
+            >
                 <div
                     v-if="result"
                     :class="[
@@ -616,6 +848,12 @@ const accuracy = computed(() =>
                                     class="text-sm font-bold text-gray-600 dark:text-gray-300"
                                 >
                                     答え：{{ result.correct_answer }}
+                                </p>
+                                <p
+                                    v-if="result.assisted && result.correct"
+                                    class="mt-1 text-xs font-bold text-blue-600 dark:text-blue-300"
+                                >
+                                    手助けを使って解けました。後日、自力でも確かめます。
                                 </p>
                                 <p
                                     v-if="!result.correct"
@@ -715,7 +953,7 @@ const accuracy = computed(() =>
                     <div class="mx-auto max-w-2xl p-4">
                         <button
                             class="w-full rounded-md bg-sky-400 py-3 font-semibold text-white shadow-sm shadow-sky-500 transition hover:bg-sky-500 active:shadow-none disabled:opacity-40 disabled:shadow-none"
-                            :disabled="!canCheck || checking"
+                            :disabled="!canCheck || checking || loadingSupport"
                             @click="check"
                         >
                             {{ checking ? '確認中…' : '答え合わせ' }}

@@ -38,6 +38,7 @@ class ContentSeeder extends Seeder
         ReferenceSheet::withoutEvents(fn () => $this->seedReferenceSheets());
         $this->seedQuestions();
         $this->seedMockExams();
+        $this->call(LearningCurriculumSeeder::class);
     }
 
     private function dataPath(string $file): string

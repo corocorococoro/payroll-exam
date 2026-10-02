@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\Unit;
+use App\Services\LearningCurriculumService;
 use App\Services\LessonRunService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -78,6 +79,7 @@ class LearnController extends Controller
         })->values();
 
         return Inertia::render('learn/Index', [
+            'curriculum' => app(LearningCurriculumService::class)->overview($request->user()),
             'course' => ['name' => $course->name],
             'units' => $units,
         ]);

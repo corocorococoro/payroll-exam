@@ -93,6 +93,7 @@ export type PlayerQuestion = {
 
 export type AnswerResult = {
     correct: boolean;
+    assisted?: boolean;
     correct_answer: string;
     explanation: string;
     official_sources: OfficialSource[];
@@ -171,4 +172,69 @@ export type LessonComplete = {
     daily_goal: number;
     xp_progress: XpProgress;
     level_ups: XpLevelReward[];
+    study_result?: {
+        phase: 'guided' | 'check' | 'spaced';
+        passed: boolean;
+        retained: boolean;
+        independent_correct_count: number;
+        independent_accuracy: number;
+        question_count: number;
+        next_href: string;
+        next_name: string;
+        review_due_at: string | null;
+    };
+};
+
+export type StudyExample = {
+    question_text: string;
+    answer_text: string;
+    explanation: string;
+    official_sources: OfficialSource[];
+};
+
+export type StudySupport = {
+    approach: string[];
+    memory_tip: string | null;
+    example: StudyExample | null;
+};
+
+export type StudyInfo = {
+    run_id: string;
+    slug: string;
+    phase: 'guided' | 'check' | 'spaced';
+    method: 'understand' | 'remember' | 'calculate';
+    memory_tip: string | null;
+    example: StudyExample | null;
+    answered_ids: number[];
+    correct_count: number;
+    earned_xp: number;
+};
+
+export type CurriculumModule = {
+    id: number;
+    slug: string;
+    name: string;
+    section: string;
+    goal: string;
+    method: 'understand' | 'remember' | 'calculate';
+    phase: 'guided' | 'check' | 'spaced';
+    passed: boolean;
+    retained: boolean;
+    due: boolean;
+    needs_support: boolean;
+    question_count: number;
+    session_question_count: number;
+    prerequisite_names: string[];
+    href: string;
+};
+
+export type LearningCurriculum = {
+    sections: { slug: string; name: string; description: string }[];
+    modules: CurriculumModule[];
+    next: CurriculumModule | null;
+    review: CurriculumModule | null;
+    passed_count: number;
+    retained_count: number;
+    module_count: number;
+    due_count: number;
 };

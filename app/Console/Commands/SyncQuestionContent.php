@@ -52,6 +52,7 @@ class SyncQuestionContent extends Command
         $files = collect(File::allFiles(database_path('seeders/data')))
             ->map(fn (\SplFileInfo $file): string => $file->getPathname())
             ->push(database_path('seeders/ContentSeeder.php'))
+            ->push(database_path('seeders/LearningCurriculumSeeder.php'))
             ->push(app_path('Services/QuestionReviewLedger.php'))
             ->push(app_path('Services/QuestionChoiceOrder.php'))
             ->sort();

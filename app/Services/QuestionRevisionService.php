@@ -15,6 +15,10 @@ class QuestionRevisionService
     public function invalidate(Question $question): void
     {
         DB::transaction(function () use ($question): void {
+            DB::table('learning_module_progress')
+                ->whereIn('learning_module_id', DB::table('learning_module_question')
+                    ->where('question_id', $question->id)->select('learning_module_id'))
+                ->update(['content_hash' => '', 'updated_at' => now()]);
             $progresses = UserQuestionProgress::query()
                 ->where('question_id', $question->id)
                 ->where('content_revision_seen', '<>', $question->content_revision)

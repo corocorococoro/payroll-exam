@@ -10,8 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $content_revision
  * @property bool $is_correct
+ * @property bool $assisted
+ * @property string|null $study_run_id
  */
-#[Fillable(['user_id', 'question_id', 'content_revision', 'lesson_id', 'context', 'is_correct', 'given_answer', 'xp_earned'])]
+#[Fillable(['user_id', 'question_id', 'content_revision', 'lesson_id', 'learning_module_id', 'study_run_id', 'assisted', 'context', 'is_correct', 'given_answer', 'xp_earned'])]
 class QuestionAttempt extends Model
 {
     protected function casts(): array
@@ -20,6 +22,7 @@ class QuestionAttempt extends Model
             'context' => AttemptContext::class,
             'content_revision' => 'integer',
             'is_correct' => 'boolean',
+            'assisted' => 'boolean',
             'given_answer' => 'array',
         ];
     }

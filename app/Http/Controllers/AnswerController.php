@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\AttemptContext;
+use App\Models\LearningModule;
 use App\Models\Lesson;
 use App\Models\Question;
 use App\Services\AnswerService;
 use App\Services\LessonRunService;
+use App\Services\StudyRunService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,18 +23,35 @@ class AnswerController extends Controller
         Request $request,
         AnswerService $answerService,
         LessonRunService $runs,
+        StudyRunService $studyRuns,
     ): JsonResponse {
         $validated = $request->validate([
             'question_id' => ['required', 'integer', 'exists:questions,id'],
             'answer' => ['required', 'string', 'max:100'],
             'context' => ['required', Rule::in([AttemptContext::Lesson->value, AttemptContext::Review->value])],
             'lesson_id' => ['nullable', 'integer', 'exists:lessons,id'],
+            'learning_module_id' => ['nullable', 'integer', 'exists:learning_modules,id'],
+            'study_run_id' => ['nullable', 'uuid'],
         ]);
 
         $question = Question::query()->published()->findOrFail((int) $validated['question_id']);
         $context = AttemptContext::from($validated['context']);
         $lessonId = isset($validated['lesson_id']) ? (int) $validated['lesson_id'] : null;
         $runStartedAt = null;
+        $moduleId = isset($validated['learning_module_id']) ? (int) $validated['learning_module_id'] : null;
+        if ($moduleId !== null) {
+            abort_unless($context === AttemptContext::Lesson && $lessonId === null, 422);
+            $module = LearningModule::findOrFail($moduleId);
+            $run = $studyRuns->current($request, $module);
+            abort_if($run === null || ($validated['study_run_id'] ?? null) !== $run['id']
+                || ! in_array($question->id, $run['question_ids'], true), 422, '学習一覧から開き直してください。');
+            $assisted = $run['phase'] === 'guided' || in_array($question->id, $run['hinted_ids'], true);
+
+            return response()->json($answerService->answer(
+                $request->user(), $question, $validated['answer'], $context,
+                moduleId: $moduleId, studyRunId: $run['id'], assisted: $assisted,
+            ));
+        }
 
         if ($context === AttemptContext::Lesson) {
             abort_if($lessonId === null, 422, 'このレッスンを続けられません。学習一覧から開き直してください。');
