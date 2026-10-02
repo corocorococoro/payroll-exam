@@ -86,7 +86,7 @@ class DashboardTest extends TestCase
                 ->where('summary.daily_new_target', 10)
                 ->where('summary.daily_new_label', '今日の新しい問題')
                 ->where('summary.readiness_label', '重要問題を学習中')
-                ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '重要問題')),
+                ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '給与明細の3つの欄')),
             );
     }
 
@@ -107,7 +107,7 @@ class DashboardTest extends TestCase
                     ->assertOk()
                     ->assertInertia(fn ($page) => $page
                         ->where('summary.readiness_label', '重要問題を学習中')
-                        ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '重要問題'))
+                        ->where('summary.next_action_label', fn (string $label): bool => str_contains($label, '給与明細の3つの欄'))
                         ->missing('season'),
                     );
             }

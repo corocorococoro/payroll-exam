@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\QuestionAttempt;
 use App\Models\Unit;
 use App\Services\DailyQuestService;
+use App\Services\LearningCurriculumService;
 use App\Services\PassReadinessService;
 use App\Services\XpLevelService;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,6 +45,7 @@ class DashboardController extends Controller
 
         $attempts = QuestionAttempt::query()
             ->where('user_id', $user->id)
+            ->where('assisted', false)
             ->with('question:id,unit_id,category')
             ->get();
 
@@ -135,6 +137,8 @@ class DashboardController extends Controller
             ->latest('finished_at')
             ->value('score');
         $readiness = app(PassReadinessService::class)->evaluate($user, $coreSeenQuestions, $coreQuestionCount);
+        $curriculum = app(LearningCurriculumService::class)->overview($user);
+        $nextModule = $curriculum['review'] ?? $curriculum['next'];
 
         /** @var Collection<string, DailyActivity> $activities */
         $activities = $user->dailyActivities()
@@ -185,17 +189,10 @@ class DashboardController extends Controller
                 'new_completed_today' => $newCompletedToday,
                 'recommended_lesson_id' => $recommendedLesson?->id,
                 'recommended_lesson_name' => $recommendedLesson?->name,
-                'next_action_href' => $reviewDue > 0
-                    ? '/review'
-                    : ($recommendedLesson === null ? '/learn' : "/lessons/{$recommendedLesson->id}"),
-                'next_action_label' => $reviewDue > 0
-                    ? "今日の復習{$reviewDue}問を始める"
-                    : match ($recommendationKind) {
-                        'recovery' => "「{$recommendedLesson->name}」の苦手な問題を復習する",
-                        'core' => "「{$recommendedLesson->name}」の重要問題を進める",
-                        'reinforcement' => "「{$recommendedLesson->name}」の追加問題を進める",
-                        default => '学習一覧を見る',
-                    },
+                'next_action_href' => $reviewDue > 0 ? '/review' : ($nextModule !== null ? $nextModule['href']
+                    : (($curriculum['unavailable_count'] > 0 || $curriculum['module_count'] === 0) ? '/learn' : '/mock-exams')),
+                'next_action_label' => $reviewDue > 0 ? "今日の復習{$reviewDue}問を始める" : ($nextModule !== null ? "「{$nextModule['name']}」を学ぶ"
+                    : (($curriculum['unavailable_count'] > 0 || $curriculum['module_count'] === 0) ? '教材の公開状況を見る' : '初見の模試で実力を確かめる')),
                 'xp_progress' => app(XpLevelService::class)->progress($user),
             ],
             'accuracy_by_unit' => $accuracyByUnit,

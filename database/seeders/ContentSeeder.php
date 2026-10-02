@@ -14,6 +14,7 @@ use App\Models\Unit;
 use App\Services\QuestionChoiceOrder;
 use App\Services\QuestionReviewLedger;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 
@@ -34,10 +35,13 @@ class ContentSeeder extends Seeder
         $this->reviews = app(QuestionReviewLedger::class)->approvedRecords();
         // Approved canonical synchronization handles revisions once per subject
         // below; interactive dependency edits use model events instead.
-        Lesson::withoutEvents(fn () => $this->seedCourse());
-        ReferenceSheet::withoutEvents(fn () => $this->seedReferenceSheets());
-        $this->seedQuestions();
-        $this->seedMockExams();
+        DB::transaction(function (): void {
+            Lesson::withoutEvents(fn () => $this->seedCourse());
+            ReferenceSheet::withoutEvents(fn () => $this->seedReferenceSheets());
+            $this->seedQuestions();
+            $this->seedMockExams();
+            $this->call(LearningCurriculumSeeder::class);
+        });
     }
 
     private function dataPath(string $file): string

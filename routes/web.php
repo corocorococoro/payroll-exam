@@ -13,6 +13,7 @@ use App\Http\Controllers\MockExamAttemptController;
 use App\Http\Controllers\MockExamController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\StudyController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
@@ -35,6 +36,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('onboarding', [OnboardingController::class, 'update'])->name('onboarding.update');
 
     Route::get('learn', [LearnController::class, 'index'])->name('learn');
+    Route::get('study/{module:slug}', [StudyController::class, 'show'])->block(10, 10)->name('study.show');
+    Route::post('study/{module:slug}/support', [StudyController::class, 'support'])->middleware('throttle:60,1')->block(10, 10)->name('study.support');
+    Route::post('study/{module:slug}/complete', [StudyController::class, 'complete'])->middleware('throttle:20,1')->block(10, 10)->name('study.complete');
     Route::get('review', ReviewController::class)->name('review');
     Route::get('league', LeagueController::class)->name('league');
     Route::patch('rewards/mascot-style', [MascotStyleController::class, 'update'])->name('rewards.mascot-style.update');
@@ -46,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('mock-attempts/{attempt}/result', [MockExamAttemptController::class, 'result'])->name('mock-attempts.result');
     Route::get('lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('lessons/{lesson}/complete', [LessonController::class, 'complete'])->middleware('throttle:20,1')->name('lessons.complete');
-    Route::post('answers', [AnswerController::class, 'store'])->middleware('throttle:60,1')->name('answers.store');
+    Route::post('answers', [AnswerController::class, 'store'])->middleware('throttle:60,1')->block(10, 10)->name('answers.store');
 });
 
 require __DIR__.'/settings.php';

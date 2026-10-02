@@ -27,14 +27,18 @@ class AnswerService
         AttemptContext $context,
         ?int $lessonId = null,
         ?CarbonImmutable $runStartedAt = null,
+        ?int $moduleId = null,
+        ?string $studyRunId = null,
+        bool $assisted = false,
     ): array {
-        return DB::transaction(function () use ($user, $question, $given, $context, $lessonId, $runStartedAt) {
+        return DB::transaction(function () use ($user, $question, $given, $context, $lessonId, $runStartedAt, $moduleId, $studyRunId, $assisted) {
             // 同一ユーザーの採点処理を直列化し、二重クリックや通信再送でも
             // XP・クエスト・復習状態を二重更新しない。
             $user = User::query()->lockForUpdate()->findOrFail($user->id);
 
             if ($context === AttemptContext::Lesson) {
-                if ($lessonId === null || $runStartedAt === null) {
+                if (($studyRunId === null && ($lessonId === null || $runStartedAt === null))
+                    || ($studyRunId !== null && $moduleId === null)) {
                     throw ValidationException::withMessages([
                         'question_id' => 'このレッスンを続けられません。学習一覧から開き直してください。',
                     ]);
@@ -42,9 +46,10 @@ class AnswerService
 
                 $alreadyAnswered = $user->attempts()
                     ->where('question_id', $question->id)
-                    ->where('lesson_id', $lessonId)
                     ->where('context', AttemptContext::Lesson)
-                    ->where('created_at', '>=', $runStartedAt)
+                    ->when($studyRunId !== null,
+                        fn ($query) => $query->where('study_run_id', $studyRunId),
+                        fn ($query) => $query->where('lesson_id', $lessonId)->where('created_at', '>=', $runStartedAt))
                     ->exists();
 
                 if ($alreadyAnswered) {
@@ -72,15 +77,19 @@ class AnswerService
                 ->where('question_id', $question->id)
                 ->where('content_revision', $question->content_revision)
                 ->where('is_correct', true)
+                ->where('assisted', $assisted)
                 ->exists();
             $xp = $correct && ($context === AttemptContext::Review || ! $hasPriorCorrect)
-                ? $question->difficulty->xp()
+                ? ($assisted ? 5 : $question->difficulty->xp())
                 : 0;
 
             $attempt = $user->attempts()->create([
                 'question_id' => $question->id,
                 'content_revision' => $question->content_revision,
                 'lesson_id' => $lessonId,
+                'learning_module_id' => $moduleId,
+                'study_run_id' => $studyRunId,
+                'assisted' => $assisted,
                 'context' => $context,
                 'is_correct' => $correct,
                 'given_answer' => ['given' => $given],
@@ -111,7 +120,9 @@ class AnswerService
                 $awards = [...$awards, ...app(DailyQuestService::class)->recordXp($user, $directAward['amount'])];
             }
 
-            $progress = $this->updateLearningProgress($user, $question, $correct, $context);
+            $progress = $correct && $assisted
+                ? $this->updateAssistedProgress($user, $question)
+                : $this->updateLearningProgress($user, $question, $correct, $context);
             $awards = [...$awards, ...app(DailyQuestService::class)->recordAnswer($user, $context)];
             app(AchievementService::class)->evaluate($user);
             app(XpLevelService::class)->syncRewardUnlocks($user);
@@ -123,6 +134,7 @@ class AnswerService
 
             return [
                 'correct' => $correct,
+                'assisted' => $assisted,
                 'correct_answer' => $question->type === QuestionType::Choice
                     ? (string) $question->answer['choice']
                     : number_format((float) $question->answer['value']),
@@ -142,6 +154,25 @@ class AnswerService
                 'level_ups' => app(XpLevelService::class)->crossedLevels($beforeXp, $afterXp),
             ];
         });
+    }
+
+    /** Supported success is practice, never an independent recall success.
+     * @return array{state: string, due_at: string}
+     */
+    private function updateAssistedProgress(User $user, Question $question): array
+    {
+        $due = today()->addDay();
+        $user->reviewItems()->updateOrCreate(['question_id' => $question->id], [
+            'box' => 1, 'due_date' => $due,
+        ]);
+        $progress = $user->questionProgresses()->firstOrCreate(['question_id' => $question->id]);
+        $progress->update([
+            'state' => 'learning', 'box' => 1, 'due_at' => $due,
+            'content_revision_seen' => $question->content_revision,
+            'first_seen_at' => $progress->first_seen_at ?? now(), 'last_seen_at' => now(),
+        ]);
+
+        return ['state' => 'learning', 'due_at' => $due->toDateString()];
     }
 
     /**

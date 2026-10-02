@@ -40,7 +40,9 @@ export function useLearningRewards() {
         let detail =
             combo.value > 1
                 ? `${combo.value}問連続で正解`
-                : 'ひとつ、身についた！';
+                : result.assisted
+                  ? '例を使って解けた！'
+                  : 'ひとつ、身についた！';
 
         if (level) {
             kind = 'level';

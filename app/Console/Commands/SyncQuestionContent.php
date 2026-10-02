@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\QuestionReviewLedger;
 use Database\Seeders\ContentSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,8 @@ class SyncQuestionContent extends Command
 
     public function handle(): int
     {
+        // Review expiry is time-dependent, even when the canonical files have not changed.
+        app(QuestionReviewLedger::class)->approvedRecords();
         $bundleHash = $this->bundleHash();
         $currentHash = DB::table('content_releases')
             ->where('name', 'question-bank')
@@ -52,6 +55,7 @@ class SyncQuestionContent extends Command
         $files = collect(File::allFiles(database_path('seeders/data')))
             ->map(fn (\SplFileInfo $file): string => $file->getPathname())
             ->push(database_path('seeders/ContentSeeder.php'))
+            ->push(database_path('seeders/LearningCurriculumSeeder.php'))
             ->push(app_path('Services/QuestionReviewLedger.php'))
             ->push(app_path('Services/QuestionChoiceOrder.php'))
             ->sort();

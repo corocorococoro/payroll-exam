@@ -140,7 +140,7 @@ function toggle(position: number) {
         <div v-if="remediation.length" class="mt-3 grid gap-2 sm:grid-cols-2">
             <Link
                 v-for="item in remediation"
-                :key="item.lesson_id"
+                :key="item.href"
                 :href="item.href"
                 class="rounded-md border border-blue-200 bg-white p-3 text-left transition hover:border-[#2864f0] dark:border-blue-900 dark:bg-gray-900"
             >
