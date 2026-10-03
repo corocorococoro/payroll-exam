@@ -17,8 +17,13 @@ class SyncQuestionContent extends Command
 
     public function handle(): int
     {
-        // Review expiry is time-dependent, even when the canonical files have not changed.
-        app(QuestionReviewLedger::class)->approvedRecords();
+        // Revalidate approval and content identity even for an unchanged release.
+        $ledger = app(QuestionReviewLedger::class);
+        $ledger->approvedRecords();
+        $reminders = $ledger->reminders();
+        if ($reminders !== []) {
+            $this->warn('教材の再確認待ち'.count($reminders).'件。承認済みの内容を保持して同期します。');
+        }
         $bundleHash = $this->bundleHash();
         $currentHash = DB::table('content_releases')
             ->where('name', 'question-bank')

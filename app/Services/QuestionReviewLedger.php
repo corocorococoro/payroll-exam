@@ -152,11 +152,11 @@ class QuestionReviewLedger
                 if ($reviewed === null || $due === null
                     || $reviewed->toDateString() !== $record['reviewed_at']
                     || $due->toDateString() !== $record['review_due_at']
-                    || $reviewed->isFuture() || $due->endOfDay()->isPast() || $due->lessThan($reviewed)) {
+                    || $reviewed->isFuture() || $due->lessThan($reviewed)) {
                     throw new RuntimeException('Invalid review dates');
                 }
             } catch (\Throwable) {
-                $errors[] = "{$id}: 監査日・監査期限が不正または期限切れです。";
+                $errors[] = "{$id}: 監査日・再確認日が不正です。";
             }
         }
         foreach (array_diff(array_keys($records), array_keys($subjects)) as $id) {
@@ -188,6 +188,30 @@ class QuestionReviewLedger
         }
 
         return array_values(array_unique($errors));
+    }
+
+    /**
+     * Scheduled rechecks remind editors; they do not revoke an unchanged approval.
+     *
+     * @return list<string>
+     */
+    public function reminders(): array
+    {
+        $records = $this->records();
+        $reminders = [];
+        foreach ($this->subjects() as $id => $subject) {
+            $date = $records[$id]['review_due_at'] ?? null;
+            try {
+                $due = CarbonImmutable::createFromFormat('!Y-m-d', (string) $date);
+                if ($due !== null && $due->toDateString() === $date && $due->endOfDay()->isPast()) {
+                    $reminders[] = "{$id}: 再確認予定日（{$date}）を過ぎています。承認済みの教材は引き続き利用できます。";
+                }
+            } catch (\Throwable) {
+                // Invalid or missing dates are blocking errors, reported by errors().
+            }
+        }
+
+        return $reminders;
     }
 
     /** @return array<string, array<string, mixed>> */

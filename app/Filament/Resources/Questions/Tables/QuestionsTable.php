@@ -83,7 +83,7 @@ class QuestionsTable
                     ]),
                 TernaryFilter::make('is_active'),
                 Filter::make('review_due')
-                    ->label('レビュー期限切れ')
+                    ->label('教材の再確認待ち')
                     ->query(fn (Builder $query): Builder => $query
                         ->whereNotNull('review_due_at')
                         ->where('review_due_at', '<=', now())),

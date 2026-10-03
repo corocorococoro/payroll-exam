@@ -104,7 +104,7 @@ class Question extends Model
             ->whereNotNull('variant_role')
             ->whereNotNull('source_urls')
             ->whereNotNull('reviewed_at')
-            ->where('review_due_at', '>=', now());
+            ->whereNotNull('review_due_at');
     }
 
     /**

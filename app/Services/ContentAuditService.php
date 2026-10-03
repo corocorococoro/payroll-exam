@@ -25,11 +25,12 @@ class ContentAuditService
     ) {}
 
     /**
-     * @return array{errors: list<string>, warnings: list<string>, stats: array<string, int>}
+     * @return array{errors: list<string>, warnings: list<string>, reminders: list<string>, stats: array<string, int>}
      */
     public function audit(): array
     {
         $errors = app(QuestionReviewLedger::class)->errors();
+        $reminders = app(QuestionReviewLedger::class)->reminders();
         $reviews = app(QuestionReviewLedger::class)->records();
         $subjects = app(QuestionReviewLedger::class)->subjects();
         $choiceOrder = app(QuestionChoiceOrder::class);
@@ -150,7 +151,7 @@ class ContentAuditService
             }
 
             if ($question->review_due_at?->isPast()) {
-                $errors[] = "{$id}: レビュー期限（{$question->review_due_at->toDateString()}）を過ぎています。";
+                $reminders[] = "{$id}: 再確認予定日（{$question->review_due_at->toDateString()}）を過ぎています。承認済みの教材は引き続き利用できます。";
             }
 
             if ($question->calc_params !== null) {
@@ -187,6 +188,7 @@ class ContentAuditService
         return [
             'errors' => array_values(array_unique($errors)),
             'warnings' => [],
+            'reminders' => array_values(array_unique($reminders)),
             'stats' => [
                 'published_questions' => $questions->count(),
                 'learning_objectives' => $questions->pluck('concept_key')->unique()->count(),
@@ -383,8 +385,7 @@ class ContentAuditService
             ->where('reviewed_content_hash', '!=', '')
             ->whereColumn('reviewed_content_hash', 'content_hash')
             ->whereNotNull('reviewed_at')
-            ->whereNotNull('review_due_at')
-            ->where('review_due_at', '>=', now());
+            ->whereNotNull('review_due_at');
     }
 
     /**

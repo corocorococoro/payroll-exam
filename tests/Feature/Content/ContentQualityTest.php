@@ -288,14 +288,17 @@ test('問題内容ハッシュは正解と解説の変更も検知する', funct
     expect(Question::contentHash($content))->not->toBe($question->content_hash);
 });
 
-test('レビュー期限切れの問題はレッスンと新規模試から自動的に除外される', function () {
+test('再確認日超過は通知のみで学習・模試・strict監査を止めない', function () {
     $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $question->update(['review_due_at' => now()->subMinute()]);
 
-    expect(Question::query()->published()->whereKey($question->id)->exists())->toBeFalse()
-        ->and(MockExam::where('slug', 'mogi-1')->firstOrFail()->isAvailableForNewAttempt())->toBeFalse()
-        ->and(app(ContentAuditService::class)->audit()['errors'])
-        ->toContain("q-0032: レビュー期限（{$question->review_due_at->toDateString()}）を過ぎています。");
+    expect(Question::query()->published()->whereKey($question->id)->exists())->toBeTrue()
+        ->and(MockExam::where('slug', 'mogi-1')->firstOrFail()->isAvailableForNewAttempt())->toBeTrue();
+    $result = app(ContentAuditService::class)->audit();
+    expect($result['errors'])->toBe([])
+        ->and($result['stats']['reviews_due'])->toBe(1)
+        ->and($result['reminders'])->toContain("q-0032: 再確認予定日（{$question->review_due_at->toDateString()}）を過ぎています。承認済みの教材は引き続き利用できます。");
+    $this->artisan('content:audit --strict')->assertSuccessful();
 });
 
 test('監査は計算問題の登録正答と再計算値の不一致を検出する', function () {
