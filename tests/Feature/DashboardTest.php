@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\AttemptContext;
+use App\Enums\QuestionReviewStatus;
 use App\Models\MockExam;
 use App\Models\Question;
 use App\Models\User;
@@ -37,11 +38,11 @@ class DashboardTest extends TestCase
         $this->seed(ContentSeeder::class);
         $user = User::factory()->create(['onboarded' => true])->refresh();
         $published = Question::where('source_id', 'q-0032')->firstOrFail();
-        $expired = Question::where('source_id', 'q-0030')->firstOrFail();
+        $unapproved = Question::where('source_id', 'q-0030')->firstOrFail();
 
         $user->reviewItems()->create(['question_id' => $published->id, 'box' => 1, 'due_date' => today(), 'lapses' => 1]);
-        $user->reviewItems()->create(['question_id' => $expired->id, 'box' => 1, 'due_date' => today(), 'lapses' => 1]);
-        $expired->update(['review_due_at' => now()->subMinute()]);
+        $user->reviewItems()->create(['question_id' => $unapproved->id, 'box' => 1, 'due_date' => today(), 'lapses' => 1]);
+        $unapproved->update(['review_status' => QuestionReviewStatus::InReview]);
 
         $this->actingAs($user)
             ->get(route('dashboard'))

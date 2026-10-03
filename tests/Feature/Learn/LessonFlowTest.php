@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuestionReviewStatus;
 use App\Models\Lesson;
 use App\Models\MockExam;
 use App\Models\Question;
@@ -408,10 +409,10 @@ test('同じ出題への二重解答ではXPを再獲得できない', function 
     expect($this->user->statOrCreate()->refresh()->total_xp)->toBe(10);
 });
 
-test('レビュー期限切れの問題は古いレッスンセッションからも解答できない', function () {
+test('承認を取り下げた問題は古いレッスンセッションからも解答できない', function () {
     $question = Question::where('source_id', 'q-0032')->firstOrFail();
     $run = lessonRun($question);
-    $question->update(['review_due_at' => now()->subMinute()]);
+    $question->update(['review_status' => QuestionReviewStatus::InReview]);
 
     actingAs($this->user)->withSession($run)->postJson('/answers', [
         'question_id' => $question->id,

@@ -111,7 +111,7 @@ class QuestionForm
                 DateTimePicker::make('reviewed_at')
                     ->label('最終レビュー日時'),
                 DateTimePicker::make('review_due_at')
-                    ->label('次回レビュー期限'),
+                    ->label('次回の再確認予定日'),
                 Toggle::make('is_active')
                     ->required(),
             ]);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuestionReviewStatus;
 use App\Models\Course;
 use App\Models\LearningModule;
 use App\Models\LearningModuleProgress;
@@ -265,13 +266,13 @@ test('期限前の再練習をしても単元の復習期限を先送りしな�
         ->assertOk()->assertJsonPath('study_result.retained', false)->assertJsonPath('study_result.review_due_at', $due);
 });
 
-test('配信外の問題の公開期限切れでも部分教材で達成扱いにしない', function () {
+test('配信外の問題が未承認でも部分教材で達成扱いにしない', function () {
     [$module, $run] = openStudy($this->user, 'resident-tax', 'check');
     answerStudy($this->user, $module, $run);
     actingAs($this->user)->postJson('/study/resident-tax/complete', ['study_run_id' => $run['id']])->assertOk();
     [$module, $repeat] = openStudy($this->user, 'resident-tax');
     $unselected = $module->questions()->whereNotIn('questions.id', $repeat['question_ids'])->firstOrFail();
-    $unselected->update(['review_due_at' => now()->subMinute()]);
+    $unselected->update(['review_status' => QuestionReviewStatus::InReview]);
     actingAs($this->user)->get('/learn')->assertInertia(fn ($page) => $page
         ->where('curriculum.passed_count', 0)->where('curriculum.unavailable_count', 1));
     actingAs($this->user)->get('/study/resident-tax')->assertStatus(503);

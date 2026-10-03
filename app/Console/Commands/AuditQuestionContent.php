@@ -27,6 +27,13 @@ class AuditQuestionContent extends Command
             $this->warn($warning);
         }
 
+        if ($result['reminders'] !== []) {
+            $this->warn('再確認待ち'.count($result['reminders']).'件（再確認日の超過では公開を停止しません）。');
+            foreach (array_slice($result['reminders'], 0, 5) as $reminder) {
+                $this->warn($reminder);
+            }
+        }
+
         if ($result['errors'] !== [] || ($this->option('strict') && $result['warnings'] !== [])) {
             return self::FAILURE;
         }

@@ -27,12 +27,15 @@ test('監査対象は問題以外の学習目標・根拠・参照表・説明�
     expect(QuestionReviewLedger::fingerprint(array_reverse($subject, true)))->toBe($before);
 });
 
-test('監査期限切れ・別URL・理由のない退役を検出する', function () {
+test('別URL・理由のない退役は再確認待ちと区別して拒否する', function () {
     $records = ReviewLedgerFixture::records();
+    $records['q-0001']['reviewed_at'] = today()->subDays(2)->toDateString();
     $records['q-0001']['review_due_at'] = today()->subDay()->toDateString();
     $records['q-0002']['evidence'][0]['url'] = 'https://example.com';
     $records['removed'] = ['decision' => 'retire', 'notes' => ''];
-    expect(implode('\n', (new QuestionReviewLedger($records))->errors()))->toContain('q-0001:', 'q-0002:', 'removed:');
+    $ledger = new QuestionReviewLedger($records);
+    expect(implode('\n', $ledger->errors()))->toContain('q-0002:', 'removed:')->not->toContain('q-0001:');
+    expect(implode('\n', $ledger->reminders()))->toContain('q-0001:');
 });
 
 test('別資料キーで同じURLの表示名を上書きしても公開承認を通さない', function () {
