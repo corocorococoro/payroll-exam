@@ -64,6 +64,10 @@ jobs:
 
       - name: Validate publication content
         if: always()
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+          DB_URL: ''
         run: |
           php artisan content:sync
           php artisan content:audit --strict
