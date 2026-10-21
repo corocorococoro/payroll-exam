@@ -1,6 +1,12 @@
 # syntax=docker/dockerfile:1
 
-FROM dunglas/frankenphp:1-php8.4 AS base
+# PHP 8.4.27 security release; pin the multi-platform image to avoid stale tags.
+FROM dunglas/frankenphp:1-php8.4@sha256:0de5a32944f72c13b45d183e8e6c53546b8172cec21cc8599e24b12e0661506d AS base
+
+COPY docker/verify-php-runtime.php /usr/local/lib/verify-php-runtime.php
+RUN printf "session.upload_progress.enabled = 0\n" > "$PHP_INI_DIR/conf.d/security.ini" \
+    && php /usr/local/lib/verify-php-runtime.php \
+    && frankenphp php-cli /usr/local/lib/verify-php-runtime.php
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends unzip \
@@ -29,7 +35,9 @@ FROM base AS dev
 # ---- php-deps: 本番依存とWayfinder型生成 ----
 FROM base AS php-deps
 COPY . /app
-RUN composer install --no-dev --optimize-autoloader --no-interaction \
+RUN composer validate --strict \
+    && composer install --no-dev --optimize-autoloader --no-interaction \
+    && composer check-platform-reqs --no-dev \
     && php artisan wayfinder:generate --with-form
 
 
