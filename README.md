@@ -81,3 +81,11 @@ Googleログインには `GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`GOOGLE_R
 - PostgreSQL / Redis
 - Filament 5
 - Pest / PHPStan / Pint / ESLint / Prettier / vue-tsc
+
+### PHPセキュリティ更新（2026-10-22）
+
+CVE-2026-109618 / CVE-2026-109619対策として、PHP 8.4.27入りのFrankenPHP公式イメージをdigestで固定しています。CLIとFrankenPHP双方の実バージョンをビルド時・起動前に検査し、未修正PHPでは起動しません。`session.upload_progress.enabled=0` は補助対策です。
+
+ローカルのapp・queue・schedulerも `docker compose build --pull` と `docker compose up -d --force-recreate app queue scheduler` で更新してください。本番はmainのデプロイがSUCCESSになり、起動ログに両方の `Verified PHP 8.4.27` が出ることを確認してください。古いイメージの再起動では修正されません。将来の更新ではdigestとCIのPHPバージョンも更新します。
+
+公式情報: https://www.php.net/archive/2026.php

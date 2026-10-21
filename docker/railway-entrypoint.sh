@@ -2,6 +2,10 @@
 
 set -Eeuo pipefail
 
+php /usr/local/lib/verify-php-runtime.php
+frankenphp php-cli /usr/local/lib/verify-php-runtime.php
+composer check-platform-reqs --no-dev
+
 export SERVER_NAME=":${PORT:-8080}"
 
 php artisan migrate --force
